@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="ASCII"?>
+<plan xmlns="urn:fabric3.org:core"
+      xmlns:tutorials="urn:fabric3.org:tutorials"
+      name="IntegrationPlan">
+    <mappings>
+        <mapping deployable="tutorials:LoanComposite" zone="zone1"/>
+    </mappings>
+</plan>

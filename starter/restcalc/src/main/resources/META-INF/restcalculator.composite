@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+           xmlns:f3-impl="urn:fabric3.org:implementation"
+           name="RESTCalculatorComposite"
+           targetNamespace="org.codehaus.fabric3">
+
+    <component name="CalculatorService">
+        <f3-impl:implementation.rs class="org.fabric3.tutorials.rs.calculator.CalculatorServiceImpl" uri="/calculator"/>
+        <reference name="addService" target="AddService"/>
+        <reference name="subtractService" target="SubtractService"/>
+        <reference name="multiplyService" target="MultiplyService"/>
+        <reference name="divideService" target="DivideService"/>
+    </component>
+
+    <component name="AddService">
+        <implementation.java class="org.fabric3.tutorials.rs.calculator.AddServiceImpl"/>
+    </component>
+
+    <component name="SubtractService">
+        <implementation.java class="org.fabric3.tutorials.rs.calculator.SubtractServiceImpl"/>
+    </component>
+
+    <component name="MultiplyService">
+        <implementation.java class="org.fabric3.tutorials.rs.calculator.MultiplyServiceImpl"/>
+    </component>
+
+    <component name="DivideService">
+        <implementation.java class="org.fabric3.tutorials.rs.calculator.DivideServiceImpl"/>
+    </component>
+
+
+</composite>

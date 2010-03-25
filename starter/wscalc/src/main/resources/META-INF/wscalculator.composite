@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+           name="WsCalculatorComposite"
+           targetNamespace="org.codehaus.fabric3">
+
+    <component name="CalculatorService">
+        <implementation.java class="org.fabric3.tutorials.ws.calculator.CalculatorServiceImpl"/>
+        <service name="CalculatorService">
+            <binding.ws uri="/calculator"/>
+        </service>
+        <reference name="addService" target="AddService"/>
+        <reference name="subtractService" target="SubtractService"/>
+        <reference name="multiplyService" target="MultiplyService"/>
+        <reference name="divideService" target="DivideService"/>
+    </component>
+
+    <component name="AddService">
+        <implementation.java class="org.fabric3.tutorials.ws.calculator.AddServiceImpl"/>
+    </component>
+
+    <component name="SubtractService">
+        <implementation.java class="org.fabric3.tutorials.ws.calculator.SubtractServiceImpl"/>
+    </component>
+
+    <component name="MultiplyService">
+        <implementation.java class="org.fabric3.tutorials.ws.calculator.MultiplyServiceImpl"/>
+    </component>
+
+    <component name="DivideService">
+        <implementation.java class="org.fabric3.tutorials.ws.calculator.DivideServiceImpl"/>
+    </component>
+
+
+</composite>
