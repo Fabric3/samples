@@ -22,13 +22,15 @@ import org.oasisopen.sca.annotation.Reference;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 
 /**
  * Implementaton of the CalculatorService.
  */
-@Path("calculator/")
+@Path("/")
+@Produces("text/plain")
 public class CalculatorServiceImpl implements CalculatorService {
     private AddService addService;
     private SubtractService subtractService;
@@ -57,18 +59,27 @@ public class CalculatorServiceImpl implements CalculatorService {
 
 
     @GET
-    @Path("{formula}/")
-    @Produces("text/plain")
-    public double calculate(String formula) {
+    @Path("/{formula}")
+    public String calculate(@PathParam("formula") String formula) {
         formula = formula.replaceAll("\\s+", "");
-        if (formula.indexOf("+") > 0) {
-
-        }
-        String[] tokens = formula.replaceAll("\\s+", "").split("[\\+\\-\\*\\\\]");
-
+        String[] tokens = formula.split("[\\+\\-\\*\\\\]");
         if (tokens.length != 2) {
             throw new IllegalArgumentException("Invalid formula: " + formula);
         }
-        return 0;
+        double operand1 = Double.parseDouble(tokens[0]);
+        double operand2 = Double.parseDouble(tokens[1]);
+        double result;
+        if (formula.indexOf("+") > 0) {
+            result = addService.add(operand1, operand2);
+        } else if (formula.indexOf("-") > 0) {
+            result = subtractService.subtract(operand1, operand2);
+        } else if (formula.indexOf("*") > 0) {
+            result = multiplyService.multiply(operand1, operand2);
+        } else if (formula.indexOf("/") > 0) {
+            result = divideService.divide(operand1, operand2);
+        } else {
+            throw new IllegalArgumentException("Invalid formula: " + formula);
+        }
+        return String.valueOf(result);
     }
 }

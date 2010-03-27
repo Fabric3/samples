@@ -24,7 +24,7 @@ import org.oasisopen.sca.annotation.Remotable;
 @Remotable
 public interface CalculatorService {
 
-    double calculate(String formula);
+    String calculate(String formula);
 
 
 }
