@@ -16,10 +16,12 @@
  * specific language governing permissions and limitations
  * under the License.    
  */
-package org.fabric3.tutorials.ws.calculator;
+package org.fabric3.samples.ws.calculator;
 
 /**
  * An implementation of the subtract service.
+ *
+ * @version $Rev$ $Date$
  */
 public class SubtractServiceImpl implements SubtractService {
 

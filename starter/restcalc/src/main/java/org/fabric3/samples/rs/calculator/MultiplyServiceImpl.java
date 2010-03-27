@@ -16,13 +16,17 @@
  * specific language governing permissions and limitations
  * under the License.    
  */
-package org.fabric3.tutorials.rs.calculator;
+package org.fabric3.samples.rs.calculator;
 
 /**
- * Service that multiplies two operands
+ * An implementation of the Multiply service.
+ *
+ * @version $Rev$ $Date$
  */
-public interface MultiplyService {
+public class MultiplyServiceImpl implements MultiplyService {
 
-    double multiply(double n1, double n2);
+    public double multiply(double n1, double n2) {
+        return n1 * n2;
+    }
 
 }

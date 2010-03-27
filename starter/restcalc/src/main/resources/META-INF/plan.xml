@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
 <plan xmlns="urn:fabric3.org:core"
-      xmlns:ns="org.codehaus.fabric3"
+      xmlns:ns="org.codehaus.fabric3.samples"
       name="RESTCalcPlan">
     <mappings>
         <mapping deployable="ns:RESTCalculatorComposite" zone="zone1"/>

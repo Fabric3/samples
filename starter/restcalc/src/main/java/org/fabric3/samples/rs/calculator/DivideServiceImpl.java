@@ -16,13 +16,17 @@
  * specific language governing permissions and limitations
  * under the License.    
  */
-package org.fabric3.tutorials.ws.calculator;
+package org.fabric3.samples.rs.calculator;
 
 /**
- * Service that divides two operands
+ * An implementation of the Divide service.
+ *
+ * @version $Rev$ $Date$
  */
-public interface DivideService {
+public class DivideServiceImpl implements DivideService {
 
-    double divide(double n1, double n2);
+    public double divide(double n1, double n2) {
+        return n1 / n2;
+    }
 
 }

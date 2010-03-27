@@ -30,7 +30,8 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>wscalc</module>
         <module>restcalc</module>
+        <module>wscalc</module>
+        <module>wscalc-client</module>
     </modules>
 </project>

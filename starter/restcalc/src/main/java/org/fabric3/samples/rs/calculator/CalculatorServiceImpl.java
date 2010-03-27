@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.fabric3.tutorials.rs.calculator;
+package org.fabric3.samples.rs.calculator;
 
 import org.oasisopen.sca.annotation.Reference;
 
@@ -28,6 +28,8 @@ import javax.ws.rs.Produces;
 
 /**
  * Implementaton of the CalculatorService.
+ *
+ * @version $Rev$ $Date$
  */
 @Path("/")
 @Produces("text/plain")

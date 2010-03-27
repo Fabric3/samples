@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <contribution xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
               xmlns:f3-core="urn:fabric3.org:core"
-              xmlns:calc="org.codehaus.fabric3">
+              xmlns:calc="org.codehaus.fabric3.samples">
     <import.java package="javax.ws.rs" version="1.0"/>
     <deployable composite="calc:RESTCalculatorComposite"/>
 </contribution>

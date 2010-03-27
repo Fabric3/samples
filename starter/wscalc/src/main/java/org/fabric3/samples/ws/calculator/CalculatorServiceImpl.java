@@ -16,13 +16,15 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.fabric3.tutorials.ws.calculator;
+package org.fabric3.samples.ws.calculator;
 
 import org.oasisopen.sca.annotation.Reference;
 
 
 /**
  * Implementaton of the CalculatorService.
+ *
+ * @version $Rev$ $Date$
  */
 public class CalculatorServiceImpl implements CalculatorService {
     private AddService addService;

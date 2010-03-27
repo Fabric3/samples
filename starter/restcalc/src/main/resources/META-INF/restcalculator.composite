@@ -2,10 +2,10 @@
 <composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
            xmlns:f3-impl="urn:fabric3.org:implementation"
            name="RESTCalculatorComposite"
-           targetNamespace="org.codehaus.fabric3">
+           targetNamespace="org.codehaus.fabric3.samples">
 
     <component name="CalculatorService">
-        <f3-impl:implementation.rs class="org.fabric3.tutorials.rs.calculator.CalculatorServiceImpl" uri="/calculator"/>
+        <f3-impl:implementation.rs class="org.fabric3.samples.rs.calculator.CalculatorServiceImpl" uri="/calculator"/>
         <reference name="addService" target="AddService"/>
         <reference name="subtractService" target="SubtractService"/>
         <reference name="multiplyService" target="MultiplyService"/>
@@ -13,19 +13,19 @@
     </component>
 
     <component name="AddService">
-        <implementation.java class="org.fabric3.tutorials.rs.calculator.AddServiceImpl"/>
+        <implementation.java class="org.fabric3.samples.rs.calculator.AddServiceImpl"/>
     </component>
 
     <component name="SubtractService">
-        <implementation.java class="org.fabric3.tutorials.rs.calculator.SubtractServiceImpl"/>
+        <implementation.java class="org.fabric3.samples.rs.calculator.SubtractServiceImpl"/>
     </component>
 
     <component name="MultiplyService">
-        <implementation.java class="org.fabric3.tutorials.rs.calculator.MultiplyServiceImpl"/>
+        <implementation.java class="org.fabric3.samples.rs.calculator.MultiplyServiceImpl"/>
     </component>
 
     <component name="DivideService">
-        <implementation.java class="org.fabric3.tutorials.rs.calculator.DivideServiceImpl"/>
+        <implementation.java class="org.fabric3.samples.rs.calculator.DivideServiceImpl"/>
     </component>
 
 

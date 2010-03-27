@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
 <plan xmlns="urn:fabric3.org:core"
-      xmlns:ns="org.codehaus.fabric3"
+      xmlns:ns="org.codehaus.fabric3.samples"
       name="WsCalcPlan">
     <mappings>
         <mapping deployable="ns:WsCalculatorComposite" zone="zone1"/>

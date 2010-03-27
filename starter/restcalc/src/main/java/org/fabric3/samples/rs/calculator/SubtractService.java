@@ -16,13 +16,15 @@
  * specific language governing permissions and limitations
  * under the License.    
  */
-package org.fabric3.tutorials.ws.calculator;
+package org.fabric3.samples.rs.calculator;
 
 /**
- * Service that multiplies two operands
+ * Service that subtracts two operands
+ *
+ * @version $Rev$ $Date$
  */
-public interface MultiplyService {
+public interface SubtractService {
 
-    double multiply(double n1, double n2);
+    double subtract(double n1, double n2);
 
 }
