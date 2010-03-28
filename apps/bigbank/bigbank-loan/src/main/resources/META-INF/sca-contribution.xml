@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <contribution xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
-              xmlns:tutorials="urn:fabric3.org:tutorials">
-    <deployable composite="tutorials:LoanComposite"/>
+              xmlns:samples="urn:fabric3.org:samples">
+    <deployable composite="samples:LoanComposite"/>
     <import.java package="javax.persistence" version="1.0.0"/>
     <import.java package="loanapp.api.loan"/>
     <import.java package="loanapp.api.message"/>

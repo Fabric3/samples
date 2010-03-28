@@ -18,8 +18,8 @@
 
 <composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
            xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912"
-           xmlns:tutorials="urn:fabric3.org:tutorials"
-           targetNamespace="urn:fabric3.org:tutorials"
+           xmlns:samples="urn:fabric3.org:samples"
+           targetNamespace="urn:fabric3.org:samples"
            name="LoanComposite">
     <service name="LoanService" promote="LoanComponent">
         <!--<binding.ws uri="/loanService"/>-->
