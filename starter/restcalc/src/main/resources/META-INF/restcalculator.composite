@@ -4,27 +4,27 @@
            name="RESTCalculatorComposite"
            targetNamespace="org.codehaus.fabric3.samples">
 
-    <component name="CalculatorService">
+    <component name="RSCalculatorService">
         <f3-impl:implementation.rs class="org.fabric3.samples.rs.calculator.CalculatorServiceImpl" uri="/calculator"/>
-        <reference name="addService" target="AddService"/>
-        <reference name="subtractService" target="SubtractService"/>
-        <reference name="multiplyService" target="MultiplyService"/>
-        <reference name="divideService" target="DivideService"/>
+        <reference name="addService" target="RSAddService"/>
+        <reference name="subtractService" target="RSSubtractService"/>
+        <reference name="multiplyService" target="RSMultiplyService"/>
+        <reference name="divideService" target="RSDivideService"/>
     </component>
 
-    <component name="AddService">
+    <component name="RSAddService">
         <implementation.java class="org.fabric3.samples.rs.calculator.AddServiceImpl"/>
     </component>
 
-    <component name="SubtractService">
+    <component name="RSSubtractService">
         <implementation.java class="org.fabric3.samples.rs.calculator.SubtractServiceImpl"/>
     </component>
 
-    <component name="MultiplyService">
+    <component name="RSMultiplyService">
         <implementation.java class="org.fabric3.samples.rs.calculator.MultiplyServiceImpl"/>
     </component>
 
-    <component name="DivideService">
+    <component name="RSDivideService">
         <implementation.java class="org.fabric3.samples.rs.calculator.DivideServiceImpl"/>
     </component>
 
