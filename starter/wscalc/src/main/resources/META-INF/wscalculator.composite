@@ -3,30 +3,30 @@
            name="WsCalculatorComposite"
            targetNamespace="org.codehaus.fabric3.samples">
 
-    <component name="CalculatorService">
+    <component name="WSCalculatorService">
         <implementation.java class="org.fabric3.samples.ws.calculator.CalculatorServiceImpl"/>
         <service name="CalculatorService">
             <binding.ws uri="/calculator"/>
         </service>
-        <reference name="addService" target="AddService"/>
-        <reference name="subtractService" target="SubtractService"/>
-        <reference name="multiplyService" target="MultiplyService"/>
-        <reference name="divideService" target="DivideService"/>
+        <reference name="addService" target="WSAddService"/>
+        <reference name="subtractService" target="WSSubtractService"/>
+        <reference name="multiplyService" target="WSMultiplyService"/>
+        <reference name="divideService" target="WSDivideService"/>
     </component>
 
-    <component name="AddService">
+    <component name="WSAddService">
         <implementation.java class="org.fabric3.samples.ws.calculator.AddServiceImpl"/>
     </component>
 
-    <component name="SubtractService">
+    <component name="WSSubtractService">
         <implementation.java class="org.fabric3.samples.ws.calculator.SubtractServiceImpl"/>
     </component>
 
-    <component name="MultiplyService">
+    <component name="WSMultiplyService">
         <implementation.java class="org.fabric3.samples.ws.calculator.MultiplyServiceImpl"/>
     </component>
 
-    <component name="DivideService">
+    <component name="WSDivideService">
         <implementation.java class="org.fabric3.samples.ws.calculator.DivideServiceImpl"/>
     </component>
 
