@@ -19,18 +19,32 @@
 package org.fabric3.samples.ws.calculator;
 
 import org.oasisopen.sca.annotation.Reference;
+import org.oasisopen.sca.annotation.Scope;
+import org.oasisopen.sca.annotation.Service;
+
+import java.util.concurrent.atomic.AtomicBoolean;
 
 
 /**
  * Implementaton of the CalculatorService.
+ * <p/>
+ * This implementation also demonstrates the use of Fabric3 management extensions. To turn on auditing, use a JMX client such as JConsole
+ * and connect to the runtime hosting the component:
+ * <p/>
+ * service:jmx:rmi:///jndi/rmi://<ip address of server>:<JMX port>/server
+ * <p/>
+ * Navigate to fabric3/domain/component/CalculatorService and invoke the audit operation.
  *
  * @version $Rev$ $Date$
  */
-public class CalculatorServiceImpl implements CalculatorService {
+@Service(names = {CalculatorService.class, CalculatorMBean.class})
+@Scope("COMPOSITE")
+public class CalculatorServiceImpl implements CalculatorService, CalculatorMBean {
     private AddService addService;
     private SubtractService subtractService;
     private MultiplyService multiplyService;
     private DivideService divideService;
+    private AtomicBoolean audit = new AtomicBoolean(false);
 
     /**
      * Creates a calculator component, taking references to dependent services.
@@ -51,20 +65,39 @@ public class CalculatorServiceImpl implements CalculatorService {
     }
 
     public double add(double n1, double n2) {
+        if (audit.get()) {
+            System.out.println("<<Auditing>> " + n1 + " + " + n2);
+        }
         return addService.add(n1, n2);
     }
 
     public double subtract(double n1, double n2) {
+        if (audit.get()) {
+            System.out.println("<<Auditing>> " + n1 + " - " + n2);
+        }
         return subtractService.subtract(n1, n2);
     }
 
     public double multiply(double n1, double n2) {
+        if (audit.get()) {
+            System.out.println("<<Auditing>> " + n1 + " * " + n2);
+        }
         return multiplyService.multiply(n1, n2);
     }
 
     public double divide(double n1, double n2) {
+        if (audit.get()) {
+            System.out.println("<<Auditing>> " + n1 + " / " + n2);
+        }
         return divideService.divide(n1, n2);
     }
 
 
+    public void startAudit() {
+        audit.set(true);
+    }
+
+    public void stopAudit() {
+        audit.set(false);
+    }
 }

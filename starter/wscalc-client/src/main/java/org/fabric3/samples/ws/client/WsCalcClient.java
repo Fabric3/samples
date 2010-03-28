@@ -33,7 +33,7 @@ public class WsCalcClient {
         // URL when the calculator is deployed to the single-VM runtime
         // URL url = new URL("http://localhost:8080/calculator?wsdl");
         // URL when calculator deployed in the cluster without a load-balancer
-         URL url = new URL("http://localhost:8181/calculator?wsdl");
+        URL url = new URL("http://localhost:8181/calculator?wsdl");
         QName name = new QName("http://calculator.ws.samples.fabric3.org/", "CalculatorServiceService");
         CalculatorServiceService service = new CalculatorServiceService(url, name);
         CalculatorService calculator = service.getCalculatorServicePort();
