@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="ASCII"?>
+<definitions xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+             xmlns:f3-policy="urn:fabric3.org:policy"
+             targetNamespace="org.codehaus.fabric3.samples">
+    <policySet name="CountingPolicy" attachTo="//component">
+        <f3-policy:interceptor class="org.fabric3.samples.policy.counter.CounterInterceptor"/>
+    </policySet>
+</definitions>
