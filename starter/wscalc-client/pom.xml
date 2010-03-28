@@ -23,7 +23,7 @@
        <version>1.5-SNAPSHOT</version>
     </parent>
     <groupId>org.codehaus.fabric3.samples</groupId>
-    <artifactId>fabric3-samples-wscalc-client</artifactId>
+    <artifactId>fabric3-samples-starter-wscalc-client</artifactId>
     <packaging>jar</packaging>
     <name>Fabric3 Web Services Calculator Client</name>
     <description>JAX-WS Client for invoking the Sample Web Services Calculator.</description>
