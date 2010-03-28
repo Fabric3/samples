@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
            name="WsCalculatorComposite"
-           targetNamespace="org.codehaus.fabric3.samples">
+           targetNamespace="urn:fabric3.org:samples">
 
     <component name="WSCalculatorService">
         <implementation.java class="org.fabric3.samples.ws.calculator.CalculatorServiceImpl"/>
