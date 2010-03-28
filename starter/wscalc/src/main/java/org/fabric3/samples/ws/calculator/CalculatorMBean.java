@@ -20,7 +20,7 @@ import org.fabric3.api.annotation.Management;
 
 
 /**
- * The Calculator service interface.
+ * The Calculator management interface.
  *
  * @version $Rev$ $Date$
  */
