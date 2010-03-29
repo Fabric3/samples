@@ -41,7 +41,7 @@
     </component>
 
     <component name="AcceptanceCoordinator">
-        <implementation.java class=" org.fabric3.samples.bigbank.loan.acceptance.AcceptanceCoordinatorImpl"/>
+        <implementation.java class="org.fabric3.samples.bigbank.loan.acceptance.AcceptanceCoordinatorImpl"/>
         <reference name="appraisalService" target="AppraisalComponent"/>
         <reference name="notificationService" target="NotificationComponent"/>
         <reference name="storeService" target="StoreComponent"/>
