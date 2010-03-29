@@ -19,9 +19,9 @@ package loanapp.loan;
 import loanapp.acceptance.AcceptanceCoordinator;
 import org.fabric3.samples.bigbank.api.loan.LoanException;
 import org.fabric3.samples.bigbank.api.loan.LoanService;
-import loanapp.api.message.LoanApplication;
-import loanapp.api.message.LoanRequest;
-import loanapp.api.message.OptionSelection;
+import org.fabric3.samples.bigbank.api.message.LoanApplication;
+import org.fabric3.samples.bigbank.api.message.LoanRequest;
+import org.fabric3.samples.bigbank.api.message.OptionSelection;
 import loanapp.request.RequestCoordinator;
 import org.oasisopen.sca.annotation.Reference;
 

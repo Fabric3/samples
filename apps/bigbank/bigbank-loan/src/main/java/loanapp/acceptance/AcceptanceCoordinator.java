@@ -19,7 +19,7 @@
 package loanapp.acceptance;
 
 import org.fabric3.samples.bigbank.api.loan.LoanException;
-import loanapp.api.message.LoanApplication;
+import org.fabric3.samples.bigbank.api.message.LoanApplication;
 
 /**
  * Coordinator that handles processing for loan terms that have been accepted by applicants. If a loan is accepted, an

@@ -14,7 +14,9 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package loanapp.api.message;
+package org.fabric3.samples.bigbank.api.message;
+
+import org.fabric3.samples.bigbank.api.message.LoanOption;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
@@ -22,7 +24,7 @@ import java.io.Serializable;
 /**
  * Represents a loan application submitted by a borrower.
  *
- * @version $Rev$ $Date$
+ * @version $Rev: 8744 $ $Date: 2010-03-25 19:43:45 +0100 (Thu, 25 Mar 2010) $
  */
 @XmlRootElement
 public class LoanApplication implements Serializable {

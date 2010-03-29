@@ -18,7 +18,7 @@
  */
 package loanapp.domain;
 
-import loanapp.api.message.Address;
+import org.fabric3.samples.bigbank.api.message.Address;
 
 import javax.persistence.*;
 import java.io.Serializable;

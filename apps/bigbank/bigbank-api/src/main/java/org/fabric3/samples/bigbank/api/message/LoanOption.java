@@ -14,12 +14,12 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package loanapp.api.message;
+package org.fabric3.samples.bigbank.api.message;
 
 import java.io.Serializable;
 
 /**
- * @version $Rev$ $Date$
+ * @version $Rev: 8744 $ $Date: 2010-03-25 19:43:45 +0100 (Thu, 25 Mar 2010) $
  */
 public class LoanOption implements Serializable {
     private static final long serialVersionUID = -969237495348560552L;

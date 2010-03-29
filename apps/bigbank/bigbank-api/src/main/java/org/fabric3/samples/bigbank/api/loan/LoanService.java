@@ -16,9 +16,9 @@
  */
 package org.fabric3.samples.bigbank.api.loan;
 
-import loanapp.api.message.LoanApplication;
-import loanapp.api.message.LoanRequest;
-import loanapp.api.message.OptionSelection;
+import org.fabric3.samples.bigbank.api.message.LoanApplication;
+import org.fabric3.samples.bigbank.api.message.LoanRequest;
+import org.fabric3.samples.bigbank.api.message.OptionSelection;
 import org.fabric3.samples.bigbank.api.loan.LoanException;
 import org.oasisopen.sca.annotation.Remotable;
 

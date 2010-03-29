@@ -16,20 +16,41 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package loanapp.api.message;
+package org.fabric3.samples.bigbank.api.message;
+
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * Defines the loan application states
+ * Represents a loan option selected by a borrower.
  *
- * @version $Revision$ $Date$
+ * @version $Revision: 8744 $ $Date: 2010-03-25 19:43:45 +0100 (Thu, 25 Mar 2010) $
  */
-public interface LoanStatus {
-    int NOT_SUBMITTED = 0;
-    int SUBMITTED = 1;
-    int AWAITING_ACCEPTANCE = 2;
-    int AWAITING_APPRAISAL = 3;
-    int SCHEDULED_FOR_FUNDING = 4;
-    int FUNDED = 5;
-    int REJECTED = -1;
-    int DECLINED = -2;
+@XmlRootElement
+public class OptionSelection {
+    private long id;
+    private String type;
+
+    public OptionSelection() {
+    }
+
+    public OptionSelection(long id, String type) {
+        this.id = id;
+        this.type = type;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 }

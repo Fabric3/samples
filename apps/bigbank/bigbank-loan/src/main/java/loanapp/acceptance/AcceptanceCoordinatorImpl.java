@@ -20,9 +20,9 @@ package loanapp.acceptance;
 
 import org.fabric3.samples.bigbank.api.loan.LoanApplicationNotFoundException;
 import org.fabric3.samples.bigbank.api.loan.LoanException;
-import loanapp.api.message.LoanApplication;
-import loanapp.api.message.LoanOption;
-import loanapp.api.message.LoanStatus;
+import org.fabric3.samples.bigbank.api.message.LoanApplication;
+import org.fabric3.samples.bigbank.api.message.LoanOption;
+import org.fabric3.samples.bigbank.api.message.LoanStatus;
 import loanapp.appraisal.AppraisalCallback;
 import loanapp.appraisal.AppraisalRequest;
 import loanapp.appraisal.AppraisalResult;
