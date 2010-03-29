@@ -23,11 +23,11 @@
              version="1.0">
     <persistence-unit name="loanApplication" transaction-type="JTA">
         <jta-data-source>LoanApplicationDS</jta-data-source>
-        <class>loanapp.domain.LoanRecord</class>
-        <class>loanapp.domain.PropertyInfo</class>
-        <class>loanapp.domain.RiskInfo</class>
-        <class>loanapp.domain.RiskReasonInfo</class>
-        <class>loanapp.domain.TermInfo</class>
+        <class>org.fabric3.samples.bigbank.loan.domain.LoanRecord</class>
+        <class>org.fabric3.samples.bigbank.loan.domain.PropertyInfo</class>
+        <class>org.fabric3.samples.bigbank.loan.domain.RiskInfo</class>
+        <class>org.fabric3.samples.bigbank.loan.domain.RiskReasonInfo</class>
+        <class>org.fabric3.samples.bigbank.loan.domain.TermInfo</class>
         <class>org.fabric3.samples.bigbank.api.message.Address</class>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>

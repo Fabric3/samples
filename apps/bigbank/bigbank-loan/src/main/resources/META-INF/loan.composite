@@ -26,13 +26,13 @@
     </service>
 
     <component name="LoanComponent">
-        <implementation.java class="loanapp.loan.LoanComponent"/>
+        <implementation.java class="org.fabric3.samples.bigbank.loan.loan.LoanComponent"/>
         <reference name="requestCoordinator" target="RequestCoordinator/RequestCoordinator"/>
         <reference name="acceptanceCoordinator" target="AcceptanceCoordinator/AcceptanceCoordinator"/>
     </component>
 
     <component name="RequestCoordinator">
-        <implementation.java class="loanapp.request.RequestCoordinatorImpl"/>
+        <implementation.java class="org.fabric3.samples.bigbank.loan.request.RequestCoordinatorImpl"/>
         <reference name="creditService" target="CreditComponent/CreditService"/>
         <reference name="riskService" target="RiskAssessmentComponent"/>
         <reference name="pricingService" target="PricingComponent"/>
@@ -41,7 +41,7 @@
     </component>
 
     <component name="AcceptanceCoordinator">
-        <implementation.java class="loanapp.acceptance.AcceptanceCoordinatorImpl"/>
+        <implementation.java class=" org.fabric3.samples.bigbank.loan.acceptance.AcceptanceCoordinatorImpl"/>
         <reference name="appraisalService" target="AppraisalComponent"/>
         <reference name="notificationService" target="NotificationComponent"/>
         <reference name="storeService" target="StoreComponent"/>
@@ -49,11 +49,11 @@
 
 
     <component name="NotificationComponent">
-        <implementation.java class="loanapp.notification.NotificationComponent"/>
+        <implementation.java class="org.fabric3.samples.bigbank.loan.notification.NotificationComponent"/>
     </component>
 
     <component name="StoreComponent">
-        <implementation.java class="loanapp.store.persistent.JPAStoreComponent"/>
+        <implementation.java class="org.fabric3.samples.bigbank.loan.store.persistent.JPAStoreComponent"/>
     </component>
 
     <!-- Alternative in-memory store implementation -->
