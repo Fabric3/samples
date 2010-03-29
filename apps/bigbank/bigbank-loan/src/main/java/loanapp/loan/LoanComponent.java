@@ -17,8 +17,8 @@
 package loanapp.loan;
 
 import loanapp.acceptance.AcceptanceCoordinator;
-import loanapp.api.loan.LoanException;
-import loanapp.api.loan.LoanService;
+import org.fabric3.samples.bigbank.api.loan.LoanException;
+import org.fabric3.samples.bigbank.api.loan.LoanService;
 import loanapp.api.message.LoanApplication;
 import loanapp.api.message.LoanRequest;
 import loanapp.api.message.OptionSelection;

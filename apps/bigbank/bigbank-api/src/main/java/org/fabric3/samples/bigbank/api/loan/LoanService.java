@@ -14,17 +14,18 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package loanapp.api.loan;
+package org.fabric3.samples.bigbank.api.loan;
 
 import loanapp.api.message.LoanApplication;
 import loanapp.api.message.LoanRequest;
 import loanapp.api.message.OptionSelection;
+import org.fabric3.samples.bigbank.api.loan.LoanException;
 import org.oasisopen.sca.annotation.Remotable;
 
 /**
  * Service responsible for processing a loan application.
  *
- * @version $Rev$ $Date$
+ * @version $Rev: 8744 $ $Date: 2010-03-25 19:43:45 +0100 (Thu, 25 Mar 2010) $
  */
 @Remotable
 public interface LoanService {
@@ -34,7 +35,7 @@ public interface LoanService {
      *
      * @param request the loan data
      * @return the loan tracking number
-     * @throws LoanException if an error initiating the application occurs
+     * @throws org.fabric3.samples.bigbank.api.loan.LoanException if an error initiating the application occurs
      */
     long apply(LoanRequest request) throws LoanException;
 
@@ -43,7 +44,7 @@ public interface LoanService {
      *
      * @param id the loan tracking number
      * @return the loan application
-     * @throws LoanException if a retrieval exception was encountered. For example, LoanApplicationNotFoundException.
+     * @throws org.fabric3.samples.bigbank.api.loan.LoanException if a retrieval exception was encountered. For example, LoanApplicationNotFoundException.
      */
     LoanApplication retrieve(long id) throws LoanException;
 
@@ -51,7 +52,7 @@ public interface LoanService {
      * Declines the terms of a loan application.
      *
      * @param id the loan tracking number
-     * @throws LoanException if an error declining the loan occurs
+     * @throws org.fabric3.samples.bigbank.api.loan.LoanException if an error declining the loan occurs
      */
     void decline(long id) throws LoanException;
 
@@ -59,7 +60,7 @@ public interface LoanService {
      * Accepts the terms of a loan application.
      *
      * @param selection contains the loan tracking number and selected terms
-     * @throws LoanException if an error accepting the loan occurs
+     * @throws org.fabric3.samples.bigbank.api.loan.LoanException if an error accepting the loan occurs
      */
     void accept(OptionSelection selection) throws LoanException;
 

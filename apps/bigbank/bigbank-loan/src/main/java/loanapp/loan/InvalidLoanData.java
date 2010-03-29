@@ -1,6 +1,6 @@
 package loanapp.loan;
 
-import loanapp.api.loan.LoanException;
+import org.fabric3.samples.bigbank.api.loan.LoanException;
 
 /**
  * @version $Revision$ $Date$

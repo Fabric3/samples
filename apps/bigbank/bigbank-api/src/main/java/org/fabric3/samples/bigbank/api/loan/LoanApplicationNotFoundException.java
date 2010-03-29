@@ -16,7 +16,9 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package loanapp.api.loan;
+package org.fabric3.samples.bigbank.api.loan;
+
+import org.fabric3.samples.bigbank.api.loan.LoanException;
 
 /**
  * Raised when an attempt is made to access a non-existant loan application.

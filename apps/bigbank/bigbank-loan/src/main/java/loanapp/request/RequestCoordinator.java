@@ -18,7 +18,7 @@
  */
 package loanapp.request;
 
-import loanapp.api.loan.LoanException;
+import org.fabric3.samples.bigbank.api.loan.LoanException;
 import loanapp.api.message.LoanRequest;
 import org.osoa.sca.annotations.Conversational;
 

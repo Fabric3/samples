@@ -16,10 +16,10 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package loanapp.api.loan;
+package org.fabric3.samples.bigbank.api.loan;
 
 /**
- * @version $Revision$ $Date$
+ * @version $Revision: 8744 $ $Date: 2010-03-25 19:43:45 +0100 (Thu, 25 Mar 2010) $
  */
 public class LoanException extends Exception {
     private static final long serialVersionUID = 7596067031743965923L;
