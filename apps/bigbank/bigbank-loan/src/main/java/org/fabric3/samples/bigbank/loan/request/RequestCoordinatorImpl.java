@@ -37,18 +37,18 @@ import org.oasisopen.sca.annotation.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-import loanapp.pricing.PricingServiceCallback;
-import loanapp.pricing.PricingService;
-import loanapp.pricing.PricingOption;
-import loanapp.pricing.PriceResponse;
-import loanapp.pricing.PricingRequest;
-import loanapp.risk.RiskAssessmentCallback;
-import loanapp.risk.RiskAssessmentService;
-import loanapp.risk.RiskRequest;
-import loanapp.risk.RiskResponse;
-import loanapp.credit.CreditServiceCallback;
-import loanapp.credit.CreditService;
-import loanapp.credit.CreditScore;
+import org.fabric3.samples.bigbank.services.pricing.PricingServiceCallback;
+import org.fabric3.samples.bigbank.services.pricing.PricingService;
+import org.fabric3.samples.bigbank.services.pricing.PricingOption;
+import org.fabric3.samples.bigbank.services.pricing.PriceResponse;
+import org.fabric3.samples.bigbank.services.pricing.PricingRequest;
+import org.fabric3.samples.bigbank.services.risk.RiskAssessmentCallback;
+import org.fabric3.samples.bigbank.services.risk.RiskAssessmentService;
+import org.fabric3.samples.bigbank.services.risk.RiskRequest;
+import org.fabric3.samples.bigbank.services.risk.RiskResponse;
+import org.fabric3.samples.bigbank.services.credit.CreditServiceCallback;
+import org.fabric3.samples.bigbank.services.credit.CreditService;
+import org.fabric3.samples.bigbank.services.credit.CreditScore;
 
 /**
  * Default implementation of the RequestCoordinator service.

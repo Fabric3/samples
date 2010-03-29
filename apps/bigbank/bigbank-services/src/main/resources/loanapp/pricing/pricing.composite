@@ -23,7 +23,7 @@
     <service name="PricingService" promote="PricingComponent"/>
 
     <component name="PricingComponent">
-        <implementation.java class="loanapp.pricing.impl.RiskBasedPricingComponent"/>
+        <implementation.java class="org.fabric3.samples.bigbank.services.pricing.impl.RiskBasedPricingComponent"/>
     </component>
 
     <reference name="rateService" promote="PricingComponent/rateService"/>

@@ -58,7 +58,7 @@
 
     <!-- Alternative in-memory store implementation -->
     <!--<component name="StoreComponent">-->
-    <!--<implementation.java class="loanapp.store.memory.MemoryStoreComponent"/>-->
+    <!--<implementation.java class="org.fabric3.samples.bigbank.services.store.memory.MemoryStoreComponent"/>-->
     <!--</component>-->
 
 </composite>

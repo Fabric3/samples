@@ -37,11 +37,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import loanapp.appraisal.AppraisalCallback;
-import loanapp.appraisal.AppraisalService;
-import loanapp.appraisal.AppraisalSchedule;
-import loanapp.appraisal.AppraisalRequest;
-import loanapp.appraisal.AppraisalResult;
+import org.fabric3.samples.bigbank.services.appraisal.AppraisalCallback;
+import org.fabric3.samples.bigbank.services.appraisal.AppraisalService;
+import org.fabric3.samples.bigbank.services.appraisal.AppraisalSchedule;
+import org.fabric3.samples.bigbank.services.appraisal.AppraisalRequest;
+import org.fabric3.samples.bigbank.services.appraisal.AppraisalResult;
 
 /**
  * Default implementation of the AcceptanceCoordinator.

@@ -4,11 +4,11 @@
     <deployable composite="samples:ServicesComposite"/>
     <import.java package="org.fabric3.samples.bigbank.api.loan"/>
     <import.java package="org.fabric3.samples.bigbank.api.message"/>
-    <export.java package="loanapp.credit"/>
-    <export.java package="loanapp.pricing"/>
-    <export.java package="loanapp.rate"/>
-    <export.java package="loanapp.risk"/>
-    <export.java package="loanapp.appraisal"/>
+    <export.java package="org.fabric3.samples.bigbank.services.credit"/>
+    <export.java package="org.fabric3.samples.bigbank.services.pricing"/>
+    <export.java package="org.fabric3.samples.bigbank.services.rate"/>
+    <export.java package="org.fabric3.samples.bigbank.services.risk"/>
+    <export.java package="org.fabric3.samples.bigbank.services.appraisal"/>
 </contribution>
 
 

@@ -23,30 +23,30 @@
            name="ServicesComposite">
 
     <component name="CreditComponent">
-        <implementation.java class="loanapp.credit.impl.CreditComponent"/>
+        <implementation.java class="org.fabric3.samples.bigbank.services.credit.impl.CreditComponent"/>
         <reference name="auditService" target="AuditComponent"/>
     </component>
 
     <component name="AuditComponent">
-        <implementation.java class="loanapp.credit.impl.AuditServiceImpl"/>
+        <implementation.java class="org.fabric3.samples.bigbank.services.credit.impl.AuditServiceImpl"/>
     </component>
     
     <component name="PricingComponent">
-        <implementation.java class="loanapp.pricing.impl.RiskBasedPricingComponent"/>
+        <implementation.java class="org.fabric3.samples.bigbank.services.pricing.impl.RiskBasedPricingComponent"/>
         <reference name="rateService" target="RateComponent"/>
     </component>
 
     <component name="RiskAssessmentComponent">
-        <implementation.java class="loanapp.risk.impl.RiskAssessmentComponent"/>
+        <implementation.java class="org.fabric3.samples.bigbank.services.risk.impl.RiskAssessmentComponent"/>
         <property name="ratioMinimum">.10</property>
     </component>
 
     <component name="RateComponent">
-        <implementation.java class="loanapp.rate.impl.RateComponent"/>
+        <implementation.java class="org.fabric3.samples.bigbank.services.rate.impl.RateComponent"/>
     </component>
 
     <component name="AppraisalComponent">
-        <implementation.java class="loanapp.appraisal.impl.AppraisalComponent"/>
+        <implementation.java class="org.fabric3.samples.bigbank.services.appraisal.impl.AppraisalComponent"/>
     </component>
 
 </composite>

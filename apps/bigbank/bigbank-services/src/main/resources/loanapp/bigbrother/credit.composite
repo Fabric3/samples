@@ -23,12 +23,12 @@ to perform credit scoring -->
     <service name="CreditService" promote="CreditComponent/CreditService"/>
 
     <component name="CreditComponent">
-        <implementation.java class="loanapp.credit.impl.CreditComponent"/>
+        <implementation.java class="org.fabric3.samples.bigbank.services.credit.impl.CreditComponent"/>
         <reference name="auditService" target="AuditComponent"/>
     </component>
 
     <component name="AuditComponent">
-        <implementation.java class="loanapp.credit.impl.AuditServiceImpl"/>
+        <implementation.java class="org.fabric3.samples.bigbank.services.credit.impl.AuditServiceImpl"/>
     </component>
 
 </composite>
