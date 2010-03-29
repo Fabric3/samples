@@ -28,6 +28,8 @@ import java.net.URL;
 import java.util.UUID;
 
 /**
+ * Demonstrates interacting with the BigBank Loan Service via web services.
+ *
  * @version $Rev$ $Date$
  */
 public class LoanServiceClient {
@@ -54,6 +56,7 @@ public class LoanServiceClient {
         address.setZip(94110);
         request.setPropertyAddress(address);
         long id = loanService.apply(request);
+
 
     }
 }

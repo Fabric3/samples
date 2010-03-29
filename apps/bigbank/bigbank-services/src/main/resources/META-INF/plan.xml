@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <plan xmlns="urn:fabric3.org:core"
       xmlns:samples="urn:fabric3.org:samples"
-      name="IntegrationPlan">
+      name="ServicesPlan">
     <mappings>
         <mapping deployable="samples:ServicesComposite" zone="zone2"/>
     </mappings>
