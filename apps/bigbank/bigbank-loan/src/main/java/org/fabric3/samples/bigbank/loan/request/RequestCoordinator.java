@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package loanapp.request;
+package org.fabric3.samples.bigbank.loan.request;
 
 import org.fabric3.samples.bigbank.api.loan.LoanException;
 import org.fabric3.samples.bigbank.api.message.LoanRequest;

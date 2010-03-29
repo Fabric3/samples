@@ -23,17 +23,12 @@ import org.fabric3.samples.bigbank.api.loan.LoanException;
 import org.fabric3.samples.bigbank.api.message.LoanApplication;
 import org.fabric3.samples.bigbank.api.message.LoanOption;
 import org.fabric3.samples.bigbank.api.message.LoanStatus;
-import loanapp.appraisal.AppraisalCallback;
-import loanapp.appraisal.AppraisalRequest;
-import loanapp.appraisal.AppraisalResult;
-import loanapp.appraisal.AppraisalSchedule;
-import loanapp.appraisal.AppraisalService;
-import loanapp.domain.LoanRecord;
-import loanapp.domain.TermInfo;
-import loanapp.monitor.ErrorMonitor;
-import loanapp.notification.NotificationService;
-import loanapp.store.StoreException;
-import loanapp.store.StoreService;
+import org.fabric3.samples.bigbank.loan.domain.LoanRecord;
+import org.fabric3.samples.bigbank.loan.domain.TermInfo;
+import org.fabric3.samples.bigbank.loan.monitor.ErrorMonitor;
+import org.fabric3.samples.bigbank.loan.notification.NotificationService;
+import org.fabric3.samples.bigbank.loan.store.StoreException;
+import org.fabric3.samples.bigbank.loan.store.StoreService;
 import org.fabric3.api.annotation.Monitor;
 import org.oasisopen.sca.annotation.Reference;
 import org.oasisopen.sca.annotation.Service;
@@ -41,6 +36,12 @@ import org.oasisopen.sca.annotation.Service;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+import loanapp.appraisal.AppraisalCallback;
+import loanapp.appraisal.AppraisalService;
+import loanapp.appraisal.AppraisalSchedule;
+import loanapp.appraisal.AppraisalRequest;
+import loanapp.appraisal.AppraisalResult;
 
 /**
  * Default implementation of the AcceptanceCoordinator.

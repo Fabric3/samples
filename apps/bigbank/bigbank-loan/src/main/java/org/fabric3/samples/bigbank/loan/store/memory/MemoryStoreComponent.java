@@ -16,11 +16,11 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package loanapp.store.memory;
+package org.fabric3.samples.bigbank.loan.store.memory;
 
-import loanapp.domain.LoanRecord;
-import loanapp.store.StoreException;
-import loanapp.store.StoreService;
+import org.fabric3.samples.bigbank.loan.domain.LoanRecord;
+import org.fabric3.samples.bigbank.loan.store.StoreException;
+import org.fabric3.samples.bigbank.loan.store.StoreService;
 import org.oasisopen.sca.annotation.Scope;
 
 import java.util.Map;

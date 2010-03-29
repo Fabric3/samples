@@ -14,7 +14,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package loanapp.loan;
+package org.fabric3.samples.bigbank.loan.loan;
 
 import  org.fabric3.samples.bigbank.loan.acceptance.AcceptanceCoordinator;
 import org.fabric3.samples.bigbank.api.loan.LoanException;
@@ -22,7 +22,7 @@ import org.fabric3.samples.bigbank.api.loan.LoanService;
 import org.fabric3.samples.bigbank.api.message.LoanApplication;
 import org.fabric3.samples.bigbank.api.message.LoanRequest;
 import org.fabric3.samples.bigbank.api.message.OptionSelection;
-import loanapp.request.RequestCoordinator;
+import org.fabric3.samples.bigbank.loan.request.RequestCoordinator;
 import org.oasisopen.sca.annotation.Reference;
 
 /**

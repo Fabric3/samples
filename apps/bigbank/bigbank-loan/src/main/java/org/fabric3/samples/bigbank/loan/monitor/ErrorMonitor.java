@@ -14,7 +14,7 @@
  * distribution for the permitted and restricted uses of such software.
  *
  */
-package loanapp.monitor;
+package org.fabric3.samples.bigbank.loan.monitor;
 
 import org.fabric3.api.annotation.logging.Severe;
 

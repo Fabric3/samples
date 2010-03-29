@@ -16,9 +16,9 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package loanapp.store;
+package org.fabric3.samples.bigbank.loan.store;
 
-import loanapp.domain.LoanRecord;
+import org.fabric3.samples.bigbank.loan.domain.LoanRecord;
 
 /**
  * Persists and retrieves loan application data.

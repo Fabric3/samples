@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package loanapp.notification;
+package org.fabric3.samples.bigbank.loan.notification;
 
 import org.oasisopen.sca.annotation.Scope;
 

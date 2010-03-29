@@ -16,31 +16,19 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package loanapp.request;
+package org.fabric3.samples.bigbank.loan.request;
 
 import org.fabric3.samples.bigbank.api.loan.LoanApplicationNotFoundException;
 import org.fabric3.samples.bigbank.api.loan.LoanException;
 import org.fabric3.samples.bigbank.api.message.LoanRequest;
 import org.fabric3.samples.bigbank.api.message.LoanStatus;
-import loanapp.credit.CreditScore;
-import loanapp.credit.CreditService;
-import loanapp.credit.CreditServiceCallback;
-import loanapp.domain.LoanRecord;
-import loanapp.domain.PropertyInfo;
-import loanapp.domain.TermInfo;
-import loanapp.monitor.ErrorMonitor;
-import loanapp.notification.NotificationService;
-import loanapp.pricing.PriceResponse;
-import loanapp.pricing.PricingOption;
-import loanapp.pricing.PricingRequest;
-import loanapp.pricing.PricingService;
-import loanapp.pricing.PricingServiceCallback;
-import loanapp.risk.RiskAssessmentCallback;
-import loanapp.risk.RiskAssessmentService;
-import loanapp.risk.RiskRequest;
-import loanapp.risk.RiskResponse;
-import loanapp.store.StoreException;
-import loanapp.store.StoreService;
+import org.fabric3.samples.bigbank.loan.domain.LoanRecord;
+import org.fabric3.samples.bigbank.loan.domain.PropertyInfo;
+import org.fabric3.samples.bigbank.loan.domain.TermInfo;
+import org.fabric3.samples.bigbank.loan.monitor.ErrorMonitor;
+import org.fabric3.samples.bigbank.loan.notification.NotificationService;
+import org.fabric3.samples.bigbank.loan.store.StoreException;
+import org.fabric3.samples.bigbank.loan.store.StoreService;
 import org.fabric3.api.annotation.Monitor;
 import org.fabric3.api.annotation.transaction.ManagedTransaction;
 import org.oasisopen.sca.annotation.Reference;
@@ -48,6 +36,19 @@ import org.oasisopen.sca.annotation.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import loanapp.pricing.PricingServiceCallback;
+import loanapp.pricing.PricingService;
+import loanapp.pricing.PricingOption;
+import loanapp.pricing.PriceResponse;
+import loanapp.pricing.PricingRequest;
+import loanapp.risk.RiskAssessmentCallback;
+import loanapp.risk.RiskAssessmentService;
+import loanapp.risk.RiskRequest;
+import loanapp.risk.RiskResponse;
+import loanapp.credit.CreditServiceCallback;
+import loanapp.credit.CreditService;
+import loanapp.credit.CreditScore;
 
 /**
  * Default implementation of the RequestCoordinator service.

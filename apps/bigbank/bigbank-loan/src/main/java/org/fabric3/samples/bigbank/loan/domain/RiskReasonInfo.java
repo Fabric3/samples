@@ -1,4 +1,4 @@
-package loanapp.domain;
+package org.fabric3.samples.bigbank.loan.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;

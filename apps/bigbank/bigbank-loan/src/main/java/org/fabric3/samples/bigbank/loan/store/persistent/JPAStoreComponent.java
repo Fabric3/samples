@@ -16,12 +16,12 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package loanapp.store.persistent;
+package org.fabric3.samples.bigbank.loan.store.persistent;
 
-import loanapp.domain.LoanRecord;
-import loanapp.store.ApplicationNotFoundException;
-import loanapp.store.StoreException;
-import loanapp.store.StoreService;
+import org.fabric3.samples.bigbank.loan.domain.LoanRecord;
+import org.fabric3.samples.bigbank.loan.store.ApplicationNotFoundException;
+import org.fabric3.samples.bigbank.loan.store.StoreException;
+import org.fabric3.samples.bigbank.loan.store.StoreService;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

@@ -1,4 +1,4 @@
-package loanapp.store;
+package org.fabric3.samples.bigbank.loan.store;
 
 /**
  * @version $Revision: 8744 $ $Date: 2010-03-25 19:43:45 +0100 (Thu, 25 Mar 2010) $

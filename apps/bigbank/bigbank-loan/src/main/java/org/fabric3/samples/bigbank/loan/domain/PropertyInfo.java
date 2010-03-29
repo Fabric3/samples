@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package loanapp.domain;
+package org.fabric3.samples.bigbank.loan.domain;
 
 import org.fabric3.samples.bigbank.api.message.Address;
 
