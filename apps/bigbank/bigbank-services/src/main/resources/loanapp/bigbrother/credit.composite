@@ -18,7 +18,7 @@
 <!-- Demonstrates composition. This credit service implementation uses the fictitious Credit Bureau
 to perform credit scoring -->
 <composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
-           targetNamespace="urn:fabric3.org:tutorials"
+           targetNamespace="urn:fabric3.org:samples"
            name="CreditComposite">
     <service name="CreditService" promote="CreditComponent/CreditService"/>
 

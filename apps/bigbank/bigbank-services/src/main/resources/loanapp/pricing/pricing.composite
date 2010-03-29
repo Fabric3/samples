@@ -17,8 +17,8 @@
 -->
 
 <composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
-           xmlns:tutorials="urn:fabric3.org:tutorials"
-           targetNamespace="urn:fabric3.org:tutorials"
+           xmlns:samples="urn:fabric3.org:samples"
+           targetNamespace="urn:fabric3.org:samples"
            name="PricingComposite">
     <service name="PricingService" promote="PricingComponent"/>
 

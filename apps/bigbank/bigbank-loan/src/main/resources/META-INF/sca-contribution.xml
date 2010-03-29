@@ -3,8 +3,8 @@
               xmlns:samples="urn:fabric3.org:samples">
     <deployable composite="samples:LoanComposite"/>
     <import.java package="javax.persistence" version="1.0.0"/>
-    <import.java package="loanapp.api.loan"/>
-    <import.java package="loanapp.api.message"/>
+    <import.java package="org.fabric3.samples.bigbank.api.loan"/>
+    <import.java package="org.fabric3.samples.bigbank.api.message"/>
     <import.java package="loanapp.credit"/>
     <import.java package="loanapp.pricing"/>
     <import.java package="loanapp.rate"/>

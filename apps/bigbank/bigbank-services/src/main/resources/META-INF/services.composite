@@ -18,13 +18,9 @@
 
 <composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
            xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912"
-           xmlns:tutorials="urn:fabric3.org:tutorials"
-           targetNamespace="urn:fabric3.org:tutorials"
+           xmlns:samples="urn:fabric3.org:samples"
+           targetNamespace="urn:fabric3.org:samples"
            name="ServicesComposite">
-
-    <!--<component name="CreditComponent">-->
-        <!--<implementation.composite name="tutorials:CreditComposite"/>-->
-    <!--</component>-->
 
     <component name="CreditComponent">
         <implementation.java class="loanapp.credit.impl.CreditComponent"/>
@@ -39,11 +35,6 @@
         <implementation.java class="loanapp.pricing.impl.RiskBasedPricingComponent"/>
         <reference name="rateService" target="RateComponent"/>
     </component>
-
-    <!--<component name="PricingComponent">-->
-        <!--<implementation.composite name="tutorials:PricingComposite"/>-->
-        <!--<reference name="rateService" target="RateComponent"/>-->
-    <!--</component>-->
 
     <component name="RiskAssessmentComponent">
         <implementation.java class="loanapp.risk.impl.RiskAssessmentComponent"/>
