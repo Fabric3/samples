@@ -59,7 +59,6 @@ import org.fabric3.samples.bigbank.services.credit.CreditScore;
         CreditServiceCallback.class,
         RiskAssessmentCallback.class,
         PricingServiceCallback.class})
-@ManagedTransaction
 public class RequestCoordinatorImpl
         implements RequestCoordinator, CreditServiceCallback, RiskAssessmentCallback, PricingServiceCallback {
     // simple counter
