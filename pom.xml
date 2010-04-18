@@ -33,7 +33,7 @@
 
     <properties>
         <sca.api.version>1.1</sca.api.version>
-        <fabric3.version>1.5-SNAPSHOT</fabric3.version>
+        <fabric3.version>1.5</fabric3.version>
         <jaxb.version>2.2-promoted-b50</jaxb.version>
         <web.services.api.version>2.0-b24</web.services.api.version>
         <servlet.api.version>2.5</servlet.api.version>
@@ -46,6 +46,24 @@
         <module>policy</module>
         <!-- <module>extensions</module> -->
     </modules>
+    <build>
+        <defaultGoal>install</defaultGoal>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>2.0</version>
+                    <configuration>
+                        <tagBase>https://svn.codehaus.org/fabric3/samples/tags</tagBase>
+                        <remoteTagging>true</remoteTagging>
+                        <preparationGoals>clean install</preparationGoals>
+                        <autoVersionSubmodules>true</autoVersionSubmodules>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
     <repositories>
         <repository>
             <id>repository.codehaus.org</id>
@@ -69,7 +87,7 @@
                 <enabled>true</enabled>
             </snapshots>
         </repository>
-<!--
+        <!--
         <repository>
             <id>ci.repository.codehaus.org</id>
             <name>Fabric3 Nightly Snapshots</name>

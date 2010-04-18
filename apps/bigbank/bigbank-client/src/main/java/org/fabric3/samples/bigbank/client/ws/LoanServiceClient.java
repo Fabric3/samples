@@ -18,30 +18,41 @@
  */
 package org.fabric3.samples.bigbank.client.ws;
 
+import java.net.URL;
+import java.util.UUID;
+import javax.xml.namespace.QName;
+
 import org.fabric3.samples.bigbank.client.ws.loan.Address;
+import org.fabric3.samples.bigbank.client.ws.loan.LoanApplication;
+import org.fabric3.samples.bigbank.client.ws.loan.LoanOption;
 import org.fabric3.samples.bigbank.client.ws.loan.LoanRequest;
 import org.fabric3.samples.bigbank.client.ws.loan.LoanService;
 import org.fabric3.samples.bigbank.client.ws.loan.LoanServiceService;
-
-import javax.xml.namespace.QName;
-import java.net.URL;
-import java.util.UUID;
+import org.fabric3.samples.bigbank.client.ws.loan.OptionSelection;
 
 /**
- * Demonstrates interacting with the BigBank Loan Service via web services.
+ * Demonstrates interacting with the BigBank Loan Service via web services. This client would typically be a part of a third-party system which
+ * interacted with BigBank.
+ * <p/>
+ * Note the URL needs to be changed dependening on the runtime the application is deployed to.
  *
  * @version $Rev$ $Date$
  */
 public class LoanServiceClient {
 
     public static void main(String[] args) throws Exception {
-        // URL when the loan service is deployed to the single-VM runtime
+        // URL when the loan service is deployed to the single-VM runtime on localhost
         // URL url = new URL("http://localhost:8080/loanService?wsdl");
-        // URL when loan service deployed in the cluster without a load-balancer
+
+        // URL when loan service deployed in the cluster without a load-balancer on localhost
         URL url = new URL("http://localhost:8181/loanService?wsdl");
+
+        // URL when loan service deployed to WebLogic without a load-balancer and a Managed server set to port 7003 on localhost
+        // URL url = new URL("http://localhost:7003/loanService?wsdl");
+
         QName name = new QName("http://loan.api.bigbank.samples.fabric3.org/", "LoanServiceService");
-        LoanServiceService service = new LoanServiceService(url, name);
-        LoanService loanService = service.getLoanServicePort();
+        LoanServiceService endpoint = new LoanServiceService(url, name);
+        LoanService loanService = endpoint.getLoanServicePort();
 
         // apply for a loan
         LoanRequest request = new LoanRequest();
@@ -55,8 +66,28 @@ public class LoanServiceClient {
         address.setStreet("123 Kearney");
         address.setZip(94110);
         request.setPropertyAddress(address);
-        long id = loanService.apply(request);
 
+        System.out.println("Submitting loan application...");
+        long id = loanService.apply(request);
+        System.out.println("\nLoan application id is: " + id);
+
+        System.out.println("\nSimulating wait period as loan is processed by BigBank asynchronously...");
+        Thread.sleep(3000);
+
+        LoanApplication application = loanService.retrieve(id);
+        System.out.println("\nLoan options are: ");
+
+        for (LoanOption option : application.getOptions()) {
+            System.out.println(option.getType() + " " + option.getRate() + "% " + option.getApr() + " apr");
+        }
+        OptionSelection selection = new OptionSelection();
+
+        String selectedType = application.getOptions().get(0).getType();
+        System.out.println("\nSelecting " + selectedType + "...");
+        selection.setId(id);
+        selection.setType(selectedType);
+        loanService.accept(selection);
+        System.out.println("\nLoan accepted and processed.");
 
     }
 }
