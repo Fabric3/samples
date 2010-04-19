@@ -42,10 +42,10 @@ public class LoanServiceClient {
 
     public static void main(String[] args) throws Exception {
         // URL when the loan service is deployed to the single-VM runtime on localhost
-        // URL url = new URL("http://localhost:8080/loanService?wsdl");
+        URL url = new URL("http://localhost:8080/loanService?wsdl");
 
         // URL when loan service deployed in the cluster without a load-balancer on localhost
-        URL url = new URL("http://localhost:8181/loanService?wsdl");
+        // URL url = new URL("http://localhost:8181/loanService?wsdl");
 
         // URL when loan service deployed to WebLogic without a load-balancer and a Managed server set to port 7003 on localhost
         // URL url = new URL("http://localhost:7003/loanService?wsdl");
