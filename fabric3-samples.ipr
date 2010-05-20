@@ -255,17 +255,6 @@
         <root url="jar://$M2_REPO$/javax/ws/rs/jsr311-api/1.0/jsr311-api-1.0-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: org.codehaus.fabric3:fabric3-api:1.5">
-      <CLASSES>
-        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-api/1.5/fabric3-api-1.5.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-api/1.5/fabric3-api-1.5-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-api/1.5/fabric3-api-1.5-sources.jar!/" />
-      </SOURCES>
-    </library>
     <library name="Maven: javax.servlet:servlet-api:2.5">
       <CLASSES>
         <root url="jar://$M2_REPO$/javax/servlet/servlet-api/2.5/servlet-api-2.5.jar!/" />
@@ -277,48 +266,59 @@
         <root url="jar://$M2_REPO$/javax/servlet/servlet-api/2.5/servlet-api-2.5-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: org.codehaus.fabric3:fabric3-spi:1.5">
+    <library name="Maven: org.codehaus.fabric3:fabric3-api:1.6-SNAPSHOT">
       <CLASSES>
-        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-spi/1.5/fabric3-spi-1.5.jar!/" />
+        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-api/1.6-SNAPSHOT/fabric3-api-1.6-SNAPSHOT.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-spi/1.5/fabric3-spi-1.5-javadoc.jar!/" />
+        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-api/1.6-SNAPSHOT/fabric3-api-1.6-SNAPSHOT-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-spi/1.5/fabric3-spi-1.5-sources.jar!/" />
+        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-api/1.6-SNAPSHOT/fabric3-api-1.6-SNAPSHOT-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: org.codehaus.fabric3:fabric3-host-api:1.5">
+    <library name="Maven: org.codehaus.fabric3:fabric3-spi:1.6-SNAPSHOT">
       <CLASSES>
-        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-host-api/1.5/fabric3-host-api-1.5.jar!/" />
+        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-spi/1.6-SNAPSHOT/fabric3-spi-1.6-SNAPSHOT.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-host-api/1.5/fabric3-host-api-1.5-javadoc.jar!/" />
+        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-spi/1.6-SNAPSHOT/fabric3-spi-1.6-SNAPSHOT-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-host-api/1.5/fabric3-host-api-1.5-sources.jar!/" />
+        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-spi/1.6-SNAPSHOT/fabric3-spi-1.6-SNAPSHOT-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: org.codehaus.fabric3:fabric3-model:1.5">
+    <library name="Maven: org.codehaus.fabric3:fabric3-host-api:1.6-SNAPSHOT">
       <CLASSES>
-        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-model/1.5/fabric3-model-1.5.jar!/" />
+        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-host-api/1.6-SNAPSHOT/fabric3-host-api-1.6-SNAPSHOT.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-model/1.5/fabric3-model-1.5-javadoc.jar!/" />
+        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-host-api/1.6-SNAPSHOT/fabric3-host-api-1.6-SNAPSHOT-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-model/1.5/fabric3-model-1.5-sources.jar!/" />
+        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-host-api/1.6-SNAPSHOT/fabric3-host-api-1.6-SNAPSHOT-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: org.codehaus.fabric3:fabric3-management-api:1.5">
+    <library name="Maven: org.codehaus.fabric3:fabric3-model:1.6-SNAPSHOT">
       <CLASSES>
-        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-management-api/1.5/fabric3-management-api-1.5.jar!/" />
+        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-model/1.6-SNAPSHOT/fabric3-model-1.6-SNAPSHOT.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-management-api/1.5/fabric3-management-api-1.5-javadoc.jar!/" />
+        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-model/1.6-SNAPSHOT/fabric3-model-1.6-SNAPSHOT-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-management-api/1.5/fabric3-management-api-1.5-sources.jar!/" />
+        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-model/1.6-SNAPSHOT/fabric3-model-1.6-SNAPSHOT-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.codehaus.fabric3:fabric3-management-api:1.6-SNAPSHOT">
+      <CLASSES>
+        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-management-api/1.6-SNAPSHOT/fabric3-management-api-1.6-SNAPSHOT.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-management-api/1.6-SNAPSHOT/fabric3-management-api-1.6-SNAPSHOT-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-management-api/1.6-SNAPSHOT/fabric3-management-api-1.6-SNAPSHOT-sources.jar!/" />
       </SOURCES>
     </library>
   </component>
