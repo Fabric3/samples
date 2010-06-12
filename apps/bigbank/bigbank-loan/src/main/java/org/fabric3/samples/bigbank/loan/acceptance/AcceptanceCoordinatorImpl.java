@@ -16,8 +16,16 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package  org.fabric3.samples.bigbank.loan.acceptance;
+package org.fabric3.samples.bigbank.loan.acceptance;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
+import org.oasisopen.sca.annotation.Reference;
+import org.oasisopen.sca.annotation.Service;
+
+import org.fabric3.api.annotation.monitor.Monitor;
 import org.fabric3.samples.bigbank.api.loan.LoanApplicationNotFoundException;
 import org.fabric3.samples.bigbank.api.loan.LoanException;
 import org.fabric3.samples.bigbank.api.message.LoanApplication;
@@ -29,19 +37,11 @@ import org.fabric3.samples.bigbank.loan.monitor.ErrorMonitor;
 import org.fabric3.samples.bigbank.loan.notification.NotificationService;
 import org.fabric3.samples.bigbank.loan.store.StoreException;
 import org.fabric3.samples.bigbank.loan.store.StoreService;
-import org.fabric3.api.annotation.Monitor;
-import org.oasisopen.sca.annotation.Reference;
-import org.oasisopen.sca.annotation.Service;
-
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-
 import org.fabric3.samples.bigbank.services.appraisal.AppraisalCallback;
-import org.fabric3.samples.bigbank.services.appraisal.AppraisalService;
-import org.fabric3.samples.bigbank.services.appraisal.AppraisalSchedule;
 import org.fabric3.samples.bigbank.services.appraisal.AppraisalRequest;
 import org.fabric3.samples.bigbank.services.appraisal.AppraisalResult;
+import org.fabric3.samples.bigbank.services.appraisal.AppraisalSchedule;
+import org.fabric3.samples.bigbank.services.appraisal.AppraisalService;
 
 /**
  * Default implementation of the AcceptanceCoordinator.

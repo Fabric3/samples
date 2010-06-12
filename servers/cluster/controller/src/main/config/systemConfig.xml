@@ -2,6 +2,7 @@
     <web.server>
         <http port="8180"/>
     </web.server>
+    <runtime mode="controller"/>
     <federation>
         <runtimeName>Controller</runtimeName>
     </federation>

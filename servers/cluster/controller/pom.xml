@@ -75,6 +75,12 @@
                             <artifactId>profile-rs</artifactId>
                             <version>${fabric3.version}</version>
                         </profile>
+                        <!-- Timer support -->
+                        <profile>
+                            <groupId>org.codehaus.fabric3</groupId>
+                            <artifactId>profile-timer</artifactId>
+                            <version>${fabric3.version}</version>
+                        </profile>
                         <!-- HTTP and TCP binding support 
                         <profile>
                             <groupId>org.codehaus.fabric3</groupId>
@@ -86,7 +92,7 @@
                     <configurationFiles>
                         <copy>
                             <source>config/systemConfig.xml</source>
-                            <destination>config/controller</destination>
+                            <destination>runtimes/controller/config</destination>
                         </copy>
                      </configurationFiles> 
                   </configuration>

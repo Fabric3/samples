@@ -18,6 +18,7 @@
  */
 package org.fabric3.samples.bigbank.loan.request;
 
+import org.fabric3.api.annotation.monitor.Monitor;
 import org.fabric3.samples.bigbank.api.loan.LoanApplicationNotFoundException;
 import org.fabric3.samples.bigbank.api.loan.LoanException;
 import org.fabric3.samples.bigbank.api.message.LoanRequest;
@@ -29,8 +30,6 @@ import org.fabric3.samples.bigbank.loan.monitor.ErrorMonitor;
 import org.fabric3.samples.bigbank.loan.notification.NotificationService;
 import org.fabric3.samples.bigbank.loan.store.StoreException;
 import org.fabric3.samples.bigbank.loan.store.StoreService;
-import org.fabric3.api.annotation.Monitor;
-import org.fabric3.api.annotation.transaction.ManagedTransaction;
 import org.oasisopen.sca.annotation.Reference;
 import org.oasisopen.sca.annotation.Service;
 

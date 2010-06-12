@@ -75,7 +75,12 @@
                             <artifactId>profile-rs</artifactId>
                             <version>${fabric3.version}</version>
                         </profile>
-                        <!-- HTTP and TCP binding support 
+                         <profile>
+                            <groupId>org.codehaus.fabric3</groupId>
+                            <artifactId>profile-timer</artifactId>
+                            <version>${fabric3.version}</version>
+                        </profile>
+                       <!-- HTTP and TCP binding support 
                         <profile>
                             <groupId>org.codehaus.fabric3</groupId>
                             <artifactId>profile-net</artifactId>
@@ -86,15 +91,15 @@
                     <configurationFiles>
                         <copy>
                             <source>../../../../config/security.xml</source>
-                            <destination>config</destination>
+                            <destination>runtimes/participant/config</destination>
                         </copy>
                         <copy>
                             <source>../../../../datasource/h2-1.0.71.jar</source>
-                            <destination>repository/datasource</destination>
+                            <destination>extensions/datasource</destination>
                         </copy>
                         <copy>
                             <source>config/systemConfig.xml</source>
-                            <destination>config/participant</destination>
+                            <destination>runtimes/participant/config</destination>
                         </copy>
                      </configurationFiles> 
                 </configuration>

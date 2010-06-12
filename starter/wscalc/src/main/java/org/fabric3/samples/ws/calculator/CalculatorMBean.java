@@ -16,7 +16,7 @@
  */
 package org.fabric3.samples.ws.calculator;
 
-import org.fabric3.api.annotation.Management;
+import org.fabric3.api.annotation.management.Management;
 
 
 /**

@@ -16,7 +16,7 @@
  */
 package org.fabric3.samples.bigbank.loan.monitor;
 
-import org.fabric3.api.annotation.logging.Severe;
+import org.fabric3.api.annotation.monitor.Severe;
 
 /**
  * @version $Revision: 8744 $ $Date: 2010-03-25 19:43:45 +0100 (Thu, 25 Mar 2010) $

@@ -43,6 +43,7 @@
     <modules>
         <module>starter</module>
         <module>apps</module>
+        <module>features</module>
         <module>policy</module>
         <!-- <module>extensions</module> -->
     </modules>
