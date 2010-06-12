@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+           xmlns:f3-impl="urn:fabric3.org:implementation"
+           name="TimerComposite"
+           targetNamespace="urn:fabric3.org:samples">
+
+    <component name="RecurringTimerComponent">
+        <f3-impl:implementation.timer class="org.fabric3.samples.timer.TimerComponent" intervalClass="org.fabric3.samples.timer.TimerInterval"/>
+    </component>
+
+    <component name="SingletonTimerComponent">
+        <f3-impl:implementation.timer class="org.fabric3.samples.timer.SingletonTimerComponent" repeatInterval="10000"/>
+    </component>
+
+</composite>
