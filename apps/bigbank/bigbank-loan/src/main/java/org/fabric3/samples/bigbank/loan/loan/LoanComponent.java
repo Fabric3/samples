@@ -26,7 +26,7 @@ import org.fabric3.samples.bigbank.loan.request.RequestCoordinator;
 import org.oasisopen.sca.annotation.Reference;
 
 /**
- * Default implementation of the LoanService. This implementation elegates to a series of coordinators that process the
+ * Default implementation of the LoanService. This implementation delegates to a series of coordinators that process the
  * loan application.
  *
  * @version $Rev: 8764 $ $Date: 2010-03-29 12:00:55 +0200 (Mon, 29 Mar 2010) $

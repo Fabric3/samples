@@ -22,7 +22,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.oasisopen.sca.annotation.Reference;
 import org.oasisopen.sca.annotation.Scope;
-import org.oasisopen.sca.annotation.Service;
+
+import org.fabric3.api.annotation.management.Management;
+import org.fabric3.api.annotation.management.ManagementOperation;
 
 
 /**
@@ -37,9 +39,9 @@ import org.oasisopen.sca.annotation.Service;
  *
  * @version $Rev$ $Date$
  */
-@Service(names = {CalculatorService.class, CalculatorMBean.class})
 @Scope("COMPOSITE")
-public class CalculatorServiceImpl implements CalculatorService, CalculatorMBean {
+@Management(description = "A calculator component")
+public class CalculatorServiceImpl implements CalculatorService {
     private AddService addService;
     private SubtractService subtractService;
     private MultiplyService multiplyService;
@@ -93,10 +95,12 @@ public class CalculatorServiceImpl implements CalculatorService, CalculatorMBean
     }
 
 
+    @ManagementOperation(description = "Start auditing")
     public void startAudit() {
         audit.set(true);
     }
 
+    @ManagementOperation(description = "Stop auditing")
     public void stopAudit() {
         audit.set(false);
     }

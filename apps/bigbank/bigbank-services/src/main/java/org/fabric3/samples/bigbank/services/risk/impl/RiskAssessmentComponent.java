@@ -61,7 +61,7 @@ public class RiskAssessmentComponent implements RiskAssessmentService {
         if (ratio < ratioMinimum) {
             // less than a minimum percentage down, so assign it the highest risk
             factor += 15;
-            reasons.add(new RiskReason("Downpayment was too little"));
+            reasons.add(new RiskReason("Down payment was too little"));
             reasons.add(new RiskReason("Suspect credit history"));
         }
         if (factor > 24) {

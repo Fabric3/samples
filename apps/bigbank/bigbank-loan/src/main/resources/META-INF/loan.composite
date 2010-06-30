@@ -46,7 +46,6 @@
         <reference name="storeService" target="StoreComponent"/>
     </component>
 
-
     <component name="NotificationComponent">
         <implementation.java class="org.fabric3.samples.bigbank.loan.notification.NotificationComponent"/>
     </component>

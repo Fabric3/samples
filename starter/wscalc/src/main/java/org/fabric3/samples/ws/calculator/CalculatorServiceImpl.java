@@ -18,18 +18,20 @@
  */
 package org.fabric3.samples.ws.calculator;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import org.oasisopen.sca.annotation.Reference;
 import org.oasisopen.sca.annotation.Scope;
-import org.oasisopen.sca.annotation.Service;
 
-import java.util.concurrent.atomic.AtomicBoolean;
+import org.fabric3.api.annotation.management.Management;
+import org.fabric3.api.annotation.management.ManagementOperation;
 
 
 /**
  * Implementaton of the CalculatorService.
  * <p/>
- * This implementation also demonstrates the use of Fabric3 management extensions. To turn on auditing, use a JMX client such as JConsole
- * and connect to the runtime hosting the component:
+ * This implementation also demonstrates the use of Fabric3 management extensions. To turn on auditing, use a JMX client such as JConsole and connect
+ * to the runtime hosting the component:
  * <p/>
  * service:jmx:rmi:///jndi/rmi://<ip address of server>:<JMX port>/server
  * <p/>
@@ -37,9 +39,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
  *
  * @version $Rev$ $Date$
  */
-@Service(names = {CalculatorService.class, CalculatorMBean.class})
 @Scope("COMPOSITE")
-public class CalculatorServiceImpl implements CalculatorService, CalculatorMBean {
+@Management(description = "A calculator component")
+public class CalculatorServiceImpl implements CalculatorService {
     private AddService addService;
     private SubtractService subtractService;
     private MultiplyService multiplyService;
@@ -93,10 +95,12 @@ public class CalculatorServiceImpl implements CalculatorService, CalculatorMBean
     }
 
 
+    @ManagementOperation(description = "Start auditing")
     public void startAudit() {
         audit.set(true);
     }
 
+    @ManagementOperation(description = "Stop auditing")
     public void stopAudit() {
         audit.set(false);
     }
