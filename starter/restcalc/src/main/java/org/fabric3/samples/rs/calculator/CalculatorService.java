@@ -1,6 +1,8 @@
 /*
- * See the NOTICE file distributed with this work for information
- * regarding copyright ownership.  This file is licensed
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
  * to you under the Apache License, Version 2.0 (the
  * "License"); you may not use this file except in compliance
  * with the License.  You may obtain a copy of the License at
@@ -16,16 +18,73 @@
  */
 package org.fabric3.samples.rs.calculator;
 
-import org.oasisopen.sca.annotation.Remotable;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+import org.oasisopen.sca.annotation.Reference;
+
 
 /**
- * The Calculator service interface.
+ * A REST calculator.
  *
  * @version $Rev$ $Date$
  */
-@Remotable
-public interface CalculatorService {
+@Path("/")
+@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+public class CalculatorService {
+    private AddService addService;
+    private SubtractService subtractService;
+    private MultiplyService multiplyService;
+    private DivideService divideService;
 
-    String calculate(String formula);
+    @Reference
+    public void setAddService(AddService addService) {
+        this.addService = addService;
+    }
 
+    @Reference
+    public void setSubtractService(SubtractService subtractService) {
+        this.subtractService = subtractService;
+    }
+
+    @Reference
+    public void setMultiplyService(MultiplyService multiplyService) {
+        this.multiplyService = multiplyService;
+    }
+
+    @Reference
+    public void setDivideService(DivideService divideService) {
+        this.divideService = divideService;
+    }
+
+
+    @GET
+    @Path("/{formula}")
+    public String calculate(@PathParam("formula") String formula) {
+        formula = formula.replaceAll("\\s+", "");
+        String[] tokens = formula.split("[\\+\\-\\*\\\\]");
+        if (tokens.length != 2) {
+            throw new IllegalArgumentException("Invalid formula: " + formula);
+        }
+        double operand1 = Double.parseDouble(tokens[0]);
+        double operand2 = Double.parseDouble(tokens[1]);
+        double result;
+        if (formula.indexOf("+") > 0) {
+            result = addService.add(operand1, operand2);
+        } else if (formula.indexOf("-") > 0) {
+            result = subtractService.subtract(operand1, operand2);
+        } else if (formula.indexOf("*") > 0) {
+            result = multiplyService.multiply(operand1, operand2);
+        } else if (formula.indexOf("/") > 0) {
+            result = divideService.divide(operand1, operand2);
+        } else {
+            throw new IllegalArgumentException("Invalid formula: " + formula);
+        }
+        return String.valueOf(result);
+    }
 }
