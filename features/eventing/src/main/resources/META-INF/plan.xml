@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ASCII"?>
+<plan xmlns="urn:fabric3.org:core"
+      xmlns:ns="urn:fabric3.org:samples"
+      name="EventingPlan">
+    <mappings>
+        <mapping deployable="ns:SellComposite" zone="zone1"/>
+        <mapping deployable="ns:ChannelsComposite" zone="zone2"/>
+        <mapping deployable="ns:BuyComposite" zone="zone2"/>
+    </mappings>
+</plan>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+           xmlns:f3-binding="urn:org.fabric3:binding"
+           xmlns:f3-impl="urn:fabric3.org:implementation"
+           name="BuyComposite"
+           targetNamespace="urn:fabric3.org:samples">
+
+    <component name="BuyTimer">
+        <f3-impl:implementation.timer class="org.fabric3.samples.eventing.BuyTimer" intervalClass="org.fabric3.samples.eventing.TimerInterval"/>
+        <producer name="buyChannel" target="BuyChannel"/>
+    </component>
+
+    <component name="OrderComponent">
+        <implementation.java class="org.fabric3.samples.eventing.OrderComponent"/>
+        <consumer name="sellChannel" source="SellChannel"/>
+        <consumer name="buyChannel" source="BuyChannel"/>
+    </component>
+
+    <component name="Observer">
+        <implementation.java class="org.fabric3.samples.eventing.Observer"/>
+        <consumer name="sellChannel" source="SellChannel"/>
+        <consumer name="buyChannel" source="BuyChannel"/>
+    </component>
+
+
+</composite>
