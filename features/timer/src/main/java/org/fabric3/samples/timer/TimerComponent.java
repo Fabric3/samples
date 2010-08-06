@@ -38,12 +38,14 @@
 package org.fabric3.samples.timer;
 
 /**
+ * A simple stateless timer component.
+ *
  * @version $Rev$ $Date$
  */
-public class TimerComponent implements Runnable{
+public class TimerComponent implements Runnable {
 
     public void run() {
         System.out.println("Timer fired...");
     }
-    
+
 }
