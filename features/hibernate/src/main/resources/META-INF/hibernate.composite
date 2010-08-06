@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+           xmlns:f3-binding="urn:org.fabric3:binding"
+           xmlns:f3-other="urn:fabric3.org:other"
+           name="HibernateComposite"
+           targetNamespace="urn:fabric3.org:samples">
+
+    <component name="MessageService">
+        <implementation.java class="org.fabric3.samples.hibernate.MessageService"/>
+        <service name="MessageService">
+            <f3-binding:binding.rs uri="/messages"/>
+        </service>
+    </component>
+
+    <f3-other:datasources>
+        <datasource name="MessageDS" driver="org.h2.jdbcx.JdbcDataSource" type="xa">
+            <URL>jdbc:h2:mem:MessageDS;DB_CLOSE_DELAY=-1</URL>
+            <minPoolSize>5</minPoolSize>
+            <maxPoolSize>10</maxPoolSize>
+        </datasource>
+    </f3-other:datasources>
+
+</composite>
