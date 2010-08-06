@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <plan xmlns="urn:fabric3.org:core"
       xmlns:ns="urn:fabric3.org:samples"
-      name="EventingPlan">
+      name="HibernatePlan">
     <mappings>
         <mapping deployable="ns:HibernateComposite" zone="zone1"/>
     </mappings>
