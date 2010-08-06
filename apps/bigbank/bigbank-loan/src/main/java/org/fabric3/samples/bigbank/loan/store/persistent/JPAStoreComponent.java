@@ -18,22 +18,23 @@
  */
 package org.fabric3.samples.bigbank.loan.store.persistent;
 
-import org.fabric3.samples.bigbank.loan.domain.LoanRecord;
-import org.fabric3.samples.bigbank.loan.store.ApplicationNotFoundException;
-import org.fabric3.samples.bigbank.loan.store.StoreException;
-import org.fabric3.samples.bigbank.loan.store.StoreService;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 
-import org.fabric3.api.annotation.transaction.ManagedTransaction;
+import org.oasisopen.sca.annotation.ManagedTransaction;
+
+import org.fabric3.samples.bigbank.loan.domain.LoanRecord;
+import org.fabric3.samples.bigbank.loan.store.ApplicationNotFoundException;
+import org.fabric3.samples.bigbank.loan.store.StoreException;
+import org.fabric3.samples.bigbank.loan.store.StoreService;
+
 
 /**
- * Demonstrates using JPA persistence. By default, the persistence context is transaction-scoped. As this component
- * implementation requires managed transactions, operations will be invoked in the context of a transaction resulting
- * in persistence context changes being written to the database when the transaction completes.
+ * Demonstrates using JPA persistence. By default, the persistence context is transaction-scoped. As this component implementation requires managed
+ * transactions, operations will be invoked in the context of a transaction resulting in persistence context changes being written to the database
+ * when the transaction completes.
  *
  * @version $Revision: 8744 $ $Date: 2010-03-25 19:43:45 +0100 (Thu, 25 Mar 2010) $
  */

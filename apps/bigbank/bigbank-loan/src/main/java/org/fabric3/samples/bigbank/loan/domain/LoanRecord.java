@@ -179,9 +179,9 @@ public class LoanRecord implements Serializable {
     }
 
     /**
-     * Returns the applicant's risk assesment.
+     * Returns the applicant's risk assessment.
      *
-     * @return the applicant's risk assesment
+     * @return the applicant's risk assessment
      */
     @OneToOne(cascade = CascadeType.ALL)
     public RiskInfo getRiskInfo() {
@@ -189,9 +189,9 @@ public class LoanRecord implements Serializable {
     }
 
     /**
-     * Sets the applicant's risk assesment.
+     * Sets the applicant's risk assessment.
      *
-     * @param assessment the applicant's risk assesment
+     * @param assessment the applicant's risk assessment
      */
     public void setRiskInfo(RiskInfo assessment) {
         this.riskInfo = assessment;
