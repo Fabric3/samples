@@ -78,7 +78,7 @@ public class OrderComponent {
     }
 
     /**
-     * Receives offers as they arrive in the sell channel.
+     * Receives sell orders as they arrive in the sell channel.
      *
      * @param sellOrder a received offer
      */
@@ -95,7 +95,7 @@ public class OrderComponent {
     }
 
     /**
-     * Receives buy requests as they arrive in the order channel.
+     * Receives buy orders as they arrive in the order channel.
      *
      * @param buyOrder a received buy request
      */
