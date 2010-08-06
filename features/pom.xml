@@ -31,5 +31,8 @@
 
     <modules>
         <module>timer</module>
+        <module>hibernate</module>
+        <module>hibernate-client</module>
+        <module>eventing</module>
     </modules>
 </project>
