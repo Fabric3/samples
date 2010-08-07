@@ -37,6 +37,9 @@
 */
 package org.fabric3.samples.eventing;
 
+import java.math.BigDecimal;
+import java.util.Random;
+
 import org.fabric3.api.annotation.Producer;
 
 /**
@@ -46,16 +49,23 @@ import org.fabric3.api.annotation.Producer;
  */
 public class BuyTimer implements Runnable {
     private BuyChannel buyChannel;
+    private Random generator;
 
     public BuyTimer(@Producer("buyChannel") BuyChannel buyChannel) {
         this.buyChannel = buyChannel;
+        generator = new Random();
     }
 
     public void run() {
-        BuyOrder buyOrder = new BuyOrder(System.currentTimeMillis(), "FOO", 12.50d, System.currentTimeMillis() + 10000);
+        double price = generatePrice();
+        BuyOrder buyOrder = new BuyOrder(System.currentTimeMillis(), "FOO", price, System.currentTimeMillis() + 10000);
         buyChannel.buy(buyOrder);
-        buyOrder = new BuyOrder(System.currentTimeMillis(), "BAR", 12.50d, System.currentTimeMillis() + 1000);
-        buyChannel.buy(buyOrder);
+    }
+
+    private double generatePrice() {
+        double val = generator.nextDouble() * 5 + 70.0;
+        BigDecimal bd = new BigDecimal(Double.toString(val));
+        return bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
     }
 
 }

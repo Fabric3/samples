@@ -37,6 +37,11 @@
 */
 package org.fabric3.samples.eventing;
 
+import java.math.BigDecimal;
+import java.util.Random;
+
+import org.oasisopen.sca.annotation.Scope;
+
 import org.fabric3.api.annotation.Producer;
 
 /**
@@ -44,17 +49,27 @@ import org.fabric3.api.annotation.Producer;
  *
  * @version $Rev: 9129 $ $Date: 2010-06-12 23:08:48 +0200 (Sat, 12 Jun 2010) $
  */
+@Scope("COMPOSITE")
 public class SellTimer implements Runnable {
     private SellChannel sellChannel;
+    private Random generator;
 
     public SellTimer(@Producer("sellChannel") SellChannel sellChannel) {
         this.sellChannel = sellChannel;
+        generator = new Random();
     }
 
     public void run() {
-        SellOrder sellOrder = new SellOrder(System.currentTimeMillis(), "FOO", 12.50);
+        double price = generatePrice();
+        SellOrder sellOrder = new SellOrder(System.currentTimeMillis(), "FOO", price);
         System.out.println("Sending sell order: " + sellOrder.getSymbol() + " @ " + sellOrder.getPrice());
         sellChannel.sell(sellOrder);
     }
 
+    private double generatePrice() {
+        double val = generator.nextDouble() * 5 + 70.0;
+        BigDecimal bd = new BigDecimal(Double.toString(val));
+        return bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+    }
+    
 }

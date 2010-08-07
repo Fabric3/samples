@@ -61,7 +61,8 @@ public class OrderComponent {
     private ScheduledExecutorService executorService;
 
     /**
-     * Constructor that injects the runtime <code>ScheduledExecutorService</code>.
+     * Constructor that injects the runtime <code>ScheduledExecutorService</code>, which is used to schedule recurring tasks against the default
+     * runtime timer pool.
      *
      * @param executorService the <code>ScheduledExecutorService</code> provided by the runtime
      */
@@ -84,12 +85,13 @@ public class OrderComponent {
      */
     @Consumer("sellChannel")
     public void onSell(SellOrder sellOrder) {
-        System.out.println("Received an sell order:" + sellOrder.getSymbol() + " @ " + sellOrder.getPrice() + "[" + sellOrder.getId() + "]");
+        System.out.println("Received an sell order:" + sellOrder.getSymbol() + " @ " + sellOrder.getPrice() + " [" + sellOrder.getId() + "]");
         for (Iterator<BuyOrder> iterator = buyOrders.iterator(); iterator.hasNext();) {
             BuyOrder buyOrder = iterator.next();
             if (match(sellOrder, buyOrder)) {
-                System.out.println("Matched orders: " + buyOrder.getSymbol() + " @ " + sellOrder.getPrice() + "[" + sellOrder.getId() + "]");
+                System.out.println("Matched orders: " + buyOrder.getSymbol() + " @ " + sellOrder.getPrice() + " [" + sellOrder.getId() + "]");
                 iterator.remove();
+                break;
             }
         }
     }
@@ -101,7 +103,7 @@ public class OrderComponent {
      */
     @Consumer("buyChannel")
     public void onbuy(BuyOrder buyOrder) {
-        System.out.println("Received an buy order:" + buyOrder.getSymbol() + " @ " + buyOrder.getMaxPrice() + "[" + buyOrder.getId() + "]");
+        System.out.println("Received an buy order:" + buyOrder.getSymbol() + " @ " + buyOrder.getMaxPrice() + " [" + buyOrder.getId() + "]");
         buyOrders.add(buyOrder);
     }
 
@@ -116,7 +118,7 @@ public class OrderComponent {
             for (Iterator<BuyOrder> iterator = buyOrders.iterator(); iterator.hasNext();) {
                 BuyOrder buyOrder = iterator.next();
                 if (buyOrder.getExpireTime() <= now) {
-                    System.out.println("Expired buy order: " + buyOrder.getSymbol() + " @ " + buyOrder.getMaxPrice() + "[" + buyOrder.getId() + "]");
+                    System.out.println("Expired buy order: " + buyOrder.getSymbol() + " @ " + buyOrder.getMaxPrice() + " [" + buyOrder.getId() + "]");
                     iterator.remove();
                 }
             }

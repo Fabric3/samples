@@ -51,12 +51,12 @@ public class Observer {
 
     @Consumer("sellChannel")
     public void onOffer(SellOrder sellOrder) {
-        System.out.println("Observed an sell request:" + sellOrder.getSymbol() + " @ " + sellOrder.getPrice() + sellOrder.getId() + "]");
+        System.out.println("Observed a sell request:" + sellOrder.getSymbol() + " @ " + sellOrder.getPrice() + " ["+sellOrder.getId() + "]");
     }
 
     @Consumer("buyChannel")
     public void onOrder(BuyOrder buyOrder) {
-        System.out.println("Observed an buy request:" + buyOrder.getSymbol() + " @ " + buyOrder.getMaxPrice() + "[" + buyOrder.getId() + "]");
+        System.out.println("Observed a buy request:" + buyOrder.getSymbol() + " @ " + buyOrder.getMaxPrice() + " [" + buyOrder.getId() + "]");
     }
 
 
