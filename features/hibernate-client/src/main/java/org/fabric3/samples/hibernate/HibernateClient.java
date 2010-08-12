@@ -36,7 +36,7 @@ public class HibernateClient {
         WebResource messagesResource = client.resource(BASE_URI);
         MessageList messages = messagesResource.accept(MediaType.APPLICATION_JSON).type(MediaType.APPLICATION_JSON).get(MessageList.class);
         for (Message entry : messages.getMessages()) {
-            System.out.println("The message text is: " + entry.getText());
+            System.out.println("The message text for id " + entry.getId() + " is: " + entry.getText());
         }
 
 
