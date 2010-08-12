@@ -23,7 +23,7 @@
         <version>1.6</version>
     </parent>
     <groupId>org.codehaus.fabric3.samples</groupId>
-    <artifactId>fabric3-samples--starter-restcalc</artifactId>
+    <artifactId>fabric3-samples-starter-restcalc</artifactId>
     <packaging>jar</packaging>
     <name>Fabric3 REST Calculator</name>
     <description>Demonstrates configuring an SCA service as a REST resource endpoint.</description>
