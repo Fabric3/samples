@@ -34,8 +34,8 @@ import org.oasisopen.sca.annotation.Reference;
  * @version $Rev$ $Date$
  */
 @Path("/")
-@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+@Consumes(MediaType.TEXT_PLAIN)
+@Produces(MediaType.TEXT_PLAIN)
 public class CalculatorService {
     private AddService addService;
     private SubtractService subtractService;
