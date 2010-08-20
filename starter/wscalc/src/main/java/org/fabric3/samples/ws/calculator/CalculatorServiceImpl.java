@@ -28,7 +28,7 @@ import org.fabric3.api.annotation.management.ManagementOperation;
 
 
 /**
- * Implementaton of the CalculatorService.
+ * Implementation of the CalculatorService.
  * <p/>
  * This implementation also demonstrates the use of Fabric3 management extensions. To turn on auditing, use a JMX client such as JConsole and connect
  * to the runtime hosting the component:

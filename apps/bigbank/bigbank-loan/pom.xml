@@ -58,20 +58,6 @@
         </dependency>
 
         <dependency>
-            <groupId>org.codehaus.fabric3.samples</groupId>
-            <artifactId>bigbank-api</artifactId>
-            <version>${project.version}</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.codehaus.fabric3.samples</groupId>
-            <artifactId>bigbank-services</artifactId>
-            <version>${project.version}</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>

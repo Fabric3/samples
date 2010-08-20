@@ -85,7 +85,7 @@ public class OrderComponent {
      */
     @Consumer("sellChannel")
     public void onSell(SellOrder sellOrder) {
-        System.out.println("Received an sell order:" + sellOrder.getSymbol() + " @ " + sellOrder.getPrice() + " [" + sellOrder.getId() + "]");
+        System.out.println("Received a sell order:" + sellOrder.getSymbol() + " @ " + sellOrder.getPrice() + " [" + sellOrder.getId() + "]");
         for (Iterator<BuyOrder> iterator = buyOrders.iterator(); iterator.hasNext();) {
             BuyOrder buyOrder = iterator.next();
             if (match(sellOrder, buyOrder)) {
@@ -102,7 +102,7 @@ public class OrderComponent {
      * @param buyOrder a received buy request
      */
     @Consumer("buyChannel")
-    public void onbuy(BuyOrder buyOrder) {
+    public void onBuy(BuyOrder buyOrder) {
         System.out.println("Received an buy order:" + buyOrder.getSymbol() + " @ " + buyOrder.getMaxPrice() + " [" + buyOrder.getId() + "]");
         buyOrders.add(buyOrder);
     }
