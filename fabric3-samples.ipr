@@ -177,10 +177,8 @@
   </component>
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/apps/bigbank/bigbank-api/bigbank-api.iml" filepath="$PROJECT_DIR$/apps/bigbank/bigbank-api/bigbank-api.iml" group="bigbank" />
       <module fileurl="file://$PROJECT_DIR$/apps/bigbank/bigbank-client/bigbank-client.iml" filepath="$PROJECT_DIR$/apps/bigbank/bigbank-client/bigbank-client.iml" group="bigbank" />
       <module fileurl="file://$PROJECT_DIR$/apps/bigbank/bigbank-loan/bigbank-loan.iml" filepath="$PROJECT_DIR$/apps/bigbank/bigbank-loan/bigbank-loan.iml" group="bigbank" />
-      <module fileurl="file://$PROJECT_DIR$/apps/bigbank/bigbank-services/bigbank-services.iml" filepath="$PROJECT_DIR$/apps/bigbank/bigbank-services/bigbank-services.iml" group="bigbank" />
       <module fileurl="file://$PROJECT_DIR$/policy/counter/fabric3-samples-counter.iml" filepath="$PROJECT_DIR$/policy/counter/fabric3-samples-counter.iml" group="policy" />
       <module fileurl="file://$PROJECT_DIR$/features/eventing/fabric3-samples-eventing.iml" filepath="$PROJECT_DIR$/features/eventing/fabric3-samples-eventing.iml" group="features" />
       <module fileurl="file://$PROJECT_DIR$/features/hibernate/fabric3-samples-hibernate.iml" filepath="$PROJECT_DIR$/features/hibernate/fabric3-samples-hibernate.iml" group="features" />
