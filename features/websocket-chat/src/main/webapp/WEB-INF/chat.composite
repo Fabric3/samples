@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912" name="ChatComposite"
+           targetNamespace="urn:fabric3.org:samples"
+           xmlns:f3="urn:org.fabric3:binding">
+
+    <component name="chat">
+        <implementation.web/>
+    </component>
+
+    <channel name="ChatChannel">
+        <f3:binding.web/>
+    </channel>
+
+    <component name="ChatListener">
+        <implementation.java class="org.fabric3.samples.chat.ChatListener"/>
+        <consumer name="chatChannel" source="ChatChannel"/>
+    </component>
+
+</composite>
