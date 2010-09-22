@@ -3,5 +3,8 @@
    <user>
       <username>foo</username>
       <password>bar</password>
+      <roles>
+            <role>role1</role>
+      </roles>
    </user>
 </users>
