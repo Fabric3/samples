@@ -17,6 +17,7 @@ public class Message {
     private Long id;
     private int version;
     private String text;
+    private String creator;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -44,5 +45,14 @@ public class Message {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    @XmlElement
+    public String getCreator() {
+        return creator;
+    }
+
+    public void setCreator(String creator) {
+        this.creator = creator;
     }
 }

@@ -21,6 +21,7 @@ package org.fabric3.samples.hibernate;
 import java.net.URI;
 import java.util.List;
 import javax.persistence.PersistenceContext;
+import javax.security.auth.Subject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -33,8 +34,12 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.hibernate.Session;
+import org.oasisopen.sca.RequestContext;
+import org.oasisopen.sca.annotation.Context;
 import org.oasisopen.sca.annotation.ManagedTransaction;
 
+import org.fabric3.api.Fabric3RequestContext;
+import org.fabric3.api.SecuritySubject;
 import org.fabric3.api.annotation.security.RolesAllowed;
 
 /**
@@ -49,6 +54,12 @@ import org.fabric3.api.annotation.security.RolesAllowed;
 @RolesAllowed("role1")
 public class MessageService {
     private Session session;
+    private Fabric3RequestContext context;
+
+    @Context
+    public void setContext(Fabric3RequestContext context) {
+        this.context = context;
+    }
 
     @PersistenceContext(name = "messageEmf", unitName = "message")
     public void setSession(Session session) {
@@ -59,6 +70,8 @@ public class MessageService {
     @Path("/message")
     public Response create(Message message) {
         System.out.println("Saving message");
+        SecuritySubject subject = context.getCurrentSubject();
+        message.setCreator(subject.getUsername());
         session.save(message);
         return Response.created(URI.create(message.getId().toString())).build();
     }

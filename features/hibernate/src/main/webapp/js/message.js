@@ -93,7 +93,7 @@ $(document).ready(function() {
                     var td1 = document.createElement("td");
                     td1.width = 110;
                     td1.id = messages[i].id;  // set the cell id to the unique message id
-                    td1.innerHTML = "foo";
+                    td1.innerHTML =  messages[i].creator;
                     var td2 = document.createElement("td");
                     td2.width = 190;
                     td2.innerHTML = messages[i].text;
