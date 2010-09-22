@@ -23,6 +23,7 @@
       <entry name="?*.dtd" />
       <entry name="?*.tld" />
       <entry name="?*.ftl" />
+      <entry name="?*.composite" />
     </wildcardResourcePatterns>
     <annotationProcessing enabled="false" useClasspath="true" />
   </component>
@@ -33,11 +34,8 @@
     <option name="SKIP_IMPORT_STATEMENTS" value="false" />
   </component>
   <component name="EclipseCompilerSettings">
-    <option name="DEBUGGING_INFO" value="true" />
     <option name="GENERATE_NO_WARNINGS" value="true" />
     <option name="DEPRECATION" value="false" />
-    <option name="ADDITIONAL_OPTIONS_STRING" value="" />
-    <option name="MAXIMUM_HEAP_SIZE" value="128" />
   </component>
   <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" />
   <component name="InspectionProjectProfileManager">
@@ -127,14 +125,6 @@
     <option name="LOCALE" />
     <option name="OPEN_IN_BROWSER" value="true" />
   </component>
-  <component name="JikesSettings">
-    <option name="JIKES_PATH" value="" />
-    <option name="DEBUGGING_INFO" value="true" />
-    <option name="DEPRECATION" value="true" />
-    <option name="GENERATE_NO_WARNINGS" value="false" />
-    <option name="IS_EMACS_ERRORS_MODE" value="true" />
-    <option name="ADDITIONAL_OPTIONS_STRING" value="" />
-  </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
@@ -159,6 +149,7 @@
         <option value="$PROJECT_DIR$/features/hibernate/pom.xml" />
         <option value="$PROJECT_DIR$/features/hibernate-client/pom.xml" />
         <option value="$PROJECT_DIR$/features/eventing/pom.xml" />
+        <option value="$PROJECT_DIR$/features/websocket-chat/pom.xml" />
       </list>
     </option>
   </component>
@@ -186,6 +177,7 @@
       <module fileurl="file://$PROJECT_DIR$/starter/restcalc/fabric3-samples-restcalc.iml" filepath="$PROJECT_DIR$/starter/restcalc/fabric3-samples-restcalc.iml" group="starter" />
       <module fileurl="file://$PROJECT_DIR$/features/timer/fabric3-samples-timer.iml" filepath="$PROJECT_DIR$/features/timer/fabric3-samples-timer.iml" group="features" />
       <module fileurl="file://$PROJECT_DIR$/starter/webcalc/fabric3-samples-webcalc.iml" filepath="$PROJECT_DIR$/starter/webcalc/fabric3-samples-webcalc.iml" group="starter" />
+      <module fileurl="file://$PROJECT_DIR$/features/websocket-chat/fabric3-samples-websocket.iml" filepath="$PROJECT_DIR$/features/websocket-chat/fabric3-samples-websocket.iml" group="features" />
       <module fileurl="file://$PROJECT_DIR$/starter/wscalc/fabric3-samples-wscalc.iml" filepath="$PROJECT_DIR$/starter/wscalc/fabric3-samples-wscalc.iml" group="starter" />
       <module fileurl="file://$PROJECT_DIR$/starter/wscalc-client/fabric3-samples-wscalc-client.iml" filepath="$PROJECT_DIR$/starter/wscalc-client/fabric3-samples-wscalc-client.iml" group="starter" />
     </modules>
@@ -212,17 +204,6 @@
         <root url="jar://$M2_REPO$/org/codehaus/fabric3/spec/sca-api/1.1/sca-api-1.1-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: org.codehaus.fabric3:fabric3-api:1.6-SNAPSHOT">
-      <CLASSES>
-        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-api/1.6-SNAPSHOT/fabric3-api-1.6-SNAPSHOT.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-api/1.6-SNAPSHOT/fabric3-api-1.6-SNAPSHOT-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-api/1.6-SNAPSHOT/fabric3-api-1.6-SNAPSHOT-sources.jar!/" />
-      </SOURCES>
-    </library>
     <library name="Maven: javax.xml.bind:jaxb-api-osgi:2.2-promoted-b50">
       <CLASSES>
         <root url="jar://$M2_REPO$/javax/xml/bind/jaxb-api-osgi/2.2-promoted-b50/jaxb-api-osgi-2.2-promoted-b50.jar!/" />
@@ -232,17 +213,6 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://$M2_REPO$/javax/xml/bind/jaxb-api-osgi/2.2-promoted-b50/jaxb-api-osgi-2.2-promoted-b50-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: javax.xml:webservices-api-osgi:2.0-b24">
-      <CLASSES>
-        <root url="jar://$M2_REPO$/javax/xml/webservices-api-osgi/2.0-b24/webservices-api-osgi-2.0-b24.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$M2_REPO$/javax/xml/webservices-api-osgi/2.0-b24/webservices-api-osgi-2.0-b24-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$M2_REPO$/javax/xml/webservices-api-osgi/2.0-b24/webservices-api-osgi-2.0-b24-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: junit:junit:3.8.2">
@@ -265,50 +235,6 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://$M2_REPO$/javax/persistence/persistence-api/1.0/persistence-api-1.0-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: org.codehaus.fabric3:fabric3-spi:1.6-SNAPSHOT">
-      <CLASSES>
-        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-spi/1.6-SNAPSHOT/fabric3-spi-1.6-SNAPSHOT.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-spi/1.6-SNAPSHOT/fabric3-spi-1.6-SNAPSHOT-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-spi/1.6-SNAPSHOT/fabric3-spi-1.6-SNAPSHOT-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: org.codehaus.fabric3:fabric3-host-api:1.6-SNAPSHOT">
-      <CLASSES>
-        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-host-api/1.6-SNAPSHOT/fabric3-host-api-1.6-SNAPSHOT.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-host-api/1.6-SNAPSHOT/fabric3-host-api-1.6-SNAPSHOT-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-host-api/1.6-SNAPSHOT/fabric3-host-api-1.6-SNAPSHOT-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: org.codehaus.fabric3:fabric3-model:1.6-SNAPSHOT">
-      <CLASSES>
-        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-model/1.6-SNAPSHOT/fabric3-model-1.6-SNAPSHOT.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-model/1.6-SNAPSHOT/fabric3-model-1.6-SNAPSHOT-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-model/1.6-SNAPSHOT/fabric3-model-1.6-SNAPSHOT-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: org.codehaus.fabric3:fabric3-management-api:1.6-SNAPSHOT">
-      <CLASSES>
-        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-management-api/1.6-SNAPSHOT/fabric3-management-api-1.6-SNAPSHOT.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-management-api/1.6-SNAPSHOT/fabric3-management-api-1.6-SNAPSHOT-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-management-api/1.6-SNAPSHOT/fabric3-management-api-1.6-SNAPSHOT-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: javax.servlet:servlet-api:2.5">
@@ -485,6 +411,61 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://$M2_REPO$/org/codehaus/jackson/jackson-xc/1.5.5/jackson-xc-1.5.5-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.codehaus.fabric3:fabric3-api:1.7-SNAPSHOT">
+      <CLASSES>
+        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-api/1.7-SNAPSHOT/fabric3-api-1.7-SNAPSHOT.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-api/1.7-SNAPSHOT/fabric3-api-1.7-SNAPSHOT-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-api/1.7-SNAPSHOT/fabric3-api-1.7-SNAPSHOT-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.codehaus.fabric3:fabric3-spi:1.7-SNAPSHOT">
+      <CLASSES>
+        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-spi/1.7-SNAPSHOT/fabric3-spi-1.7-SNAPSHOT.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-spi/1.7-SNAPSHOT/fabric3-spi-1.7-SNAPSHOT-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-spi/1.7-SNAPSHOT/fabric3-spi-1.7-SNAPSHOT-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.codehaus.fabric3:fabric3-host-api:1.7-SNAPSHOT">
+      <CLASSES>
+        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-host-api/1.7-SNAPSHOT/fabric3-host-api-1.7-SNAPSHOT.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-host-api/1.7-SNAPSHOT/fabric3-host-api-1.7-SNAPSHOT-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-host-api/1.7-SNAPSHOT/fabric3-host-api-1.7-SNAPSHOT-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.codehaus.fabric3:fabric3-model:1.7-SNAPSHOT">
+      <CLASSES>
+        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-model/1.7-SNAPSHOT/fabric3-model-1.7-SNAPSHOT.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-model/1.7-SNAPSHOT/fabric3-model-1.7-SNAPSHOT-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-model/1.7-SNAPSHOT/fabric3-model-1.7-SNAPSHOT-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.codehaus.fabric3:fabric3-management-api:1.7-SNAPSHOT">
+      <CLASSES>
+        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-management-api/1.7-SNAPSHOT/fabric3-management-api-1.7-SNAPSHOT.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-management-api/1.7-SNAPSHOT/fabric3-management-api-1.7-SNAPSHOT-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$M2_REPO$/org/codehaus/fabric3/fabric3-management-api/1.7-SNAPSHOT/fabric3-management-api-1.7-SNAPSHOT-sources.jar!/" />
       </SOURCES>
     </library>
   </component>
