@@ -36,7 +36,7 @@ $(document).ready(function() {
                     var nd = document.createElement('div');
                     nd.setAttribute('class', 'messbody');
                     var message = JSON.parse(data);
-                    nd.innerHTML = message.name +": " + message.message; // decodeURIComponent(data);
+                    nd.innerHTML = message.name +": " + message.message;
                     document.getElementById('board').insertBefore(nd, document.getElementById('board').firstChild);
                     response.responseBody = "";
                 }
