@@ -7,4 +7,11 @@
             <role>role1</role>
       </roles>
    </user>
+   <user>
+      <username>fred</username>
+      <password>baz</password>
+      <roles>
+            <role>role1</role>
+      </roles>
+   </user>
 </users>
