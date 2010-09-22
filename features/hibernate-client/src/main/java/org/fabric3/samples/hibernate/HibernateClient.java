@@ -8,6 +8,7 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
+import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
 import org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider;
 
 /**
@@ -21,8 +22,13 @@ public class HibernateClient {
         message.setText("Test message " + System.currentTimeMillis());
 
         ClientConfig cc = new DefaultClientConfig();
+
         cc.getClasses().add(JacksonJaxbJsonProvider.class);
         Client client = Client.create(cc);
+
+        // set basic auth filter
+        HTTPBasicAuthFilter filter = new HTTPBasicAuthFilter("foo", "bar");
+        client.addFilter(filter);
         UriBuilder uri = UriBuilder.fromUri(BASE_URI);
         WebResource resource = client.resource(uri.path("message").build());
 
