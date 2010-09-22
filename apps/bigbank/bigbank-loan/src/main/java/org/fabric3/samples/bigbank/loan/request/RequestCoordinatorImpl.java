@@ -183,15 +183,15 @@ public class RequestCoordinatorImpl
             monitor.onError(e);
             return;
         }
-        List<TermInfo> termImfos = new ArrayList<TermInfo>();
+        List<TermInfo> termInfos = new ArrayList<TermInfo>();
         for (PricingOption pricingOption : response.getOptions()) {
             TermInfo termInfo = new TermInfo();
             termInfo.setApr(pricingOption.getApr());
             termInfo.setRate(pricingOption.getRate());
             termInfo.setType(pricingOption.getType());
-            termImfos.add(termInfo);
+            termInfos.add(termInfo);
         }
-        record.setTerms(termImfos);
+        record.setTerms(termInfos);
         try {
             record.setStatus(LoanStatus.AWAITING_ACCEPTANCE);
             storeService.update(record);

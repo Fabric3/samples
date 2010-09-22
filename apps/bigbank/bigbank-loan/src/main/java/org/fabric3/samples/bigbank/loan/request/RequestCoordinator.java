@@ -20,10 +20,9 @@ package org.fabric3.samples.bigbank.loan.request;
 
 import org.fabric3.samples.bigbank.api.loan.LoanException;
 import org.fabric3.samples.bigbank.api.message.LoanRequest;
-import org.osoa.sca.annotations.Conversational;
 
 /**
- * Coordinator that proccesses new loan requests.
+ * Coordinator that processes new loan requests.
  *
  * @version $Revision: 8764 $ $Date: 2010-03-29 12:00:55 +0200 (Mon, 29 Mar 2010) $
  */
