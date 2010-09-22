@@ -1,0 +1,111 @@
+<!DOCTYPE HTML>
+<html>
+<script type="text/javascript" src="jquery/jquery-1.4.2.js"></script>
+<script type="text/javascript" src="jquery/jquery.form.js"></script>
+<script type="text/javascript" src="jquery/flexigrid.js"></script>
+<script type="text/javascript" src="js/message.js"></script>
+<link rel="stylesheet" type="text/css" href="css/flexigrid/flexigrid.css">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Fabric3 Message Sample</title>
+</head>
+<body>
+<style type="text/css">
+    * {
+        font-size: 10pt;
+    }
+
+    #content {
+        width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+        border: 1px solid gray;
+        border-radius: 5px;
+        padding: 10px;
+    }
+
+    #board {
+        border-radius: 10px; 
+        width: 680px;
+        height: 650px;
+        overflow: auto;
+        color:gray;
+    }
+
+    h1 {
+        font-size: 14pt;
+		font-family: Arial, Helvetica, sans-serif;
+    }
+
+    label {
+        font-size: 11pt;
+        color: gray;
+    }
+
+    .flexigrid div.fbutton .add {
+        background: url(css/images/add.png) no-repeat center left;
+    }
+
+    .flexigrid div.fbutton .delete {
+        background: url(css/images/close.png) no-repeat center left;
+    }
+
+</style>
+<div id="content">
+    <img src="images/fabric3.jpg">
+    <div id="loginbox">
+        <table>
+            <tr>
+                <td>
+                    <label>Username</label>
+                </td>
+                <td>
+                    <input type="text" size="25" id="username" value="foo">&nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Password</label>
+                </td>
+                <td>
+                    <input type="password" size="25" id="password" value="bar">&nbsp;
+                </td>
+                <td>
+                    <input type="button" id="login" value="Login">
+                </td>
+            </tr>
+
+        </table>
+    </div>
+    <div id="messagebox">
+        <table id="dataentrytable">
+            <tr>
+                <td>
+                    <label>Message</label>
+                </td>
+                <td>
+                    <input type="text" size="55" id="message">&nbsp;
+                </td>
+                <td>
+                    <input type="button" id="send" value="Create">
+                </td>
+                <td>
+                    <input type="button" id="logout" value="Logout">
+                </td>
+            </tr>
+            <p></p>
+        </table>
+        <p/>
+
+        <p/>
+
+        <div id="board">
+            <table id="messagetable">
+                <tbody id="messagetablebody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

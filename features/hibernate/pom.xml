@@ -24,7 +24,7 @@
     </parent>
     <groupId>org.codehaus.fabric3.samples</groupId>
     <artifactId>fabric3-samples-hibernate</artifactId>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
     <name>Fabric3 Hibernate Sample</name>
     <description>Demonstrates persisting a REST resource using Hibernate ORM.</description>
 

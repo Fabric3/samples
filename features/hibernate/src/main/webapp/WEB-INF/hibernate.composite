@@ -5,6 +5,10 @@
            name="HibernateComposite"
            targetNamespace="urn:fabric3.org:samples">
 
+    <component name="MessageWebComponent">
+        <implementation.web uri="messageUI"/>
+    </component>
+
     <component name="MessageService">
         <implementation.java class="org.fabric3.samples.hibernate.MessageService"/>
         <service name="MessageService">

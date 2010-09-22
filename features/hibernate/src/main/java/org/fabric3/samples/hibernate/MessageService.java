@@ -35,6 +35,7 @@ import javax.ws.rs.core.Response;
 import org.hibernate.Session;
 import org.oasisopen.sca.annotation.ManagedTransaction;
 
+import org.fabric3.api.annotation.security.RolesAllowed;
 
 /**
  * Receives resource representations as JSON or XML and persists them as part of a global transaction using Hibernate.
@@ -45,6 +46,7 @@ import org.oasisopen.sca.annotation.ManagedTransaction;
 @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 @ManagedTransaction
+@RolesAllowed("role1")
 public class MessageService {
     private Session session;
 
@@ -56,7 +58,7 @@ public class MessageService {
     @POST
     @Path("/message")
     public Response create(Message message) {
-        System.out.println("Saving....");
+        System.out.println("Saving message");
         session.save(message);
         return Response.created(URI.create(message.getId().toString())).build();
     }
@@ -75,6 +77,7 @@ public class MessageService {
     @GET
     @SuppressWarnings({"unchecked"})
     public MessageList retrieveMessages() {
+        System.out.println("Getting messages");
         List<Message> messages = session.createCriteria(Message.class).list();
         return new MessageList(messages);
     }
@@ -82,6 +85,7 @@ public class MessageService {
     @DELETE
     @Path("message/{id}")
     public Response delete(@PathParam("id") Long id) {
+        System.out.println("Deleting message");
         int num = session.createQuery("delete Message message where id=" + id).executeUpdate();
         if (num == 0) {
             Response response = Response.status(Response.Status.NOT_FOUND).entity(new Reason("Not found")).build();
