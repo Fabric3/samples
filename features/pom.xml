@@ -34,6 +34,6 @@
         <module>web-hibernate</module>
         <module>web-hibernate-client</module>
         <module>eventing</module>
-        <module>fabric3-samples-websocket</module>
+        <module>websocket-chat</module>
     </modules>
 </project>

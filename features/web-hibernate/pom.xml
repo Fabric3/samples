@@ -23,10 +23,10 @@
         <version>1.6</version>
     </parent>
     <groupId>org.codehaus.fabric3.samples</groupId>
-    <artifactId>fabric3-samples-hibernate</artifactId>
+    <artifactId>fabric3-samples-web-hibernate</artifactId>
     <packaging>war</packaging>
-    <name>Fabric3 Hibernate Sample</name>
-    <description>Demonstrates persisting a REST resource using Hibernate ORM.</description>
+    <name>Fabric3 Web Application and Hibernate Sample</name>
+    <description>Demonstrates using JQuery to connect to a REST resource and persisting data using Hibernate ORM.</description>
 
     <dependencies>
         <dependency>

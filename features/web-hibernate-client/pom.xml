@@ -23,9 +23,9 @@
         <version>1.6</version>
     </parent>
     <groupId>org.codehaus.fabric3.samples</groupId>
-    <artifactId>fabric3-samples-hibernate-client</artifactId>
+    <artifactId>fabric3-samples-web-hibernate-client</artifactId>
     <packaging>jar</packaging>
-    <name>Fabric3 Hibernate Client Sample</name>
+    <name>Fabric3 Web Application and Hibernate Client Sample</name>
     <description>Provides a REST Client for the Hibernate ORM Sample.</description>
 
     <dependencies>
