@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html>
+<script type="text/javascript" src="jquery/jquery-1.4.2.js"></script>
+<script type="text/javascript" src="jquery/jquery.atmosphere.js"></script>
+<script type="text/javascript" src="jquery/jquery.form.js"></script>
+<script type="text/javascript" src="js/monitor.js"></script>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Fabric3 Websocket Chat Sample</title>
+</head>
+<body>
+<style type="text/css">
+    * {
+        font-size: 11pt;
+    }
+
+    #content {
+        width: 730px;
+        margin-left: auto;
+        margin-right: auto;
+        border: 1px solid gray;
+        border-radius: 5px;
+        padding: 10px;
+    }
+
+    #board {
+        border: 1px solid gray;
+        color: gray;
+        background: #E0E0E0;
+        border-radius: 10px;
+        padding: 10px;
+        width: 610px;
+        height: 150px;
+        overflow: auto;
+    }
+
+    label {
+        font-size: 11pt;
+        color: gray;
+    }
+
+    .messbody {
+        font-size: 10pt;
+    }
+
+    .messerror {
+        font-size: 10pt;
+        color: #dc143c;
+    }
+
+</style>
+<div id="content">
+    <img src="images/fabric3.jpg">
+    <table>
+        <tr>
+            <td>
+                <label>Channel</label>
+            </td>
+            <td>
+                <input type="input" id="address" size="62" value="http://localhost:8181/channels/MonitorApplicationChannel">&nbsp;
+            </td>
+            <td>
+                <input type="button" id="connect" value="Connect">&nbsp;
+            </td>
+        </tr>
+        <p></p>
+    </table>
+    <p/>
+    <p/>
+    <div id="board"></div>
+</div>
+</body>
+</html>
