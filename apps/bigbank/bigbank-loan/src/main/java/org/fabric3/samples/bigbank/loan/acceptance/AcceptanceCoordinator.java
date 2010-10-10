@@ -1,8 +1,8 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
+ * Copyright (c) 2010 Metaform Systems
+ *
+ * See the NOTICE file distributed with this work for information
+ * regarding copyright ownership.  This file is licensed
  * to you under the Apache License, Version 2.0 (the
  * "License"); you may not use this file except in compliance
  * with the License.  You may obtain a copy of the License at
@@ -18,14 +18,17 @@
  */
 package org.fabric3.samples.bigbank.loan.acceptance;
 
+import java.util.List;
+
 import org.fabric3.samples.bigbank.api.loan.LoanException;
 import org.fabric3.samples.bigbank.api.message.LoanApplication;
+import org.fabric3.samples.bigbank.api.message.LoanStatus;
 
 /**
  * Coordinator that handles processing for loan terms that have been accepted by applicants. If a loan is accepted, an
  * appraisal will be ordered and a funding date scheduled once the appraisal has been received and approved.
  *
- * @version $Revision: 8764 $ $Date: 2010-03-29 12:00:55 +0200 (Mon, 29 Mar 2010) $
+ * @version $Revision$ $Date$
  */
 public interface AcceptanceCoordinator {
     /**
@@ -55,4 +58,20 @@ public interface AcceptanceCoordinator {
      *                       LoanNotFoundException and LoanNotApprovedException may be thrown.
      */
     void decline(long id) throws LoanException;
+
+    /**
+     * Returns active loan applications for the current user with the given status.
+     *
+     * @param status the loan status
+     * @return all active loan applications for the user
+     */
+    List<LoanApplication> retrieveApplications(int status);
+
+    /**
+     * Returns the status of all active loan applications for the current user.
+     *
+     * @return the status of all active loan applications for the user
+     */
+    List<LoanStatus> getLoanStatus();
+
 }

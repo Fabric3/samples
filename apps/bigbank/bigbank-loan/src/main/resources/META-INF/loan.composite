@@ -18,40 +18,38 @@
 
 <composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
            xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+           xmlns:f3-binding="urn:org.fabric3:binding"
+           xmlns:f3-impl="urn:fabric3.org:implementation"
            xmlns:samples="urn:fabric3.org:samples"
            targetNamespace="urn:fabric3.org:samples"
-           name="LoanComposite">
+           name="LoanComposite"
+           autowire="true">
+    
     <component name="LoanComponent">
         <implementation.java class="org.fabric3.samples.bigbank.loan.loan.LoanComponent"/>
         <service name="LoanService">
-            <binding.ws uri="/loanService"/>
+            <binding.ws name="wsBinding" uri="/loanService"/>
+            <f3-binding:binding.rs name="rsBinding" uri="/loans"/>
         </service>
-        <reference name="requestCoordinator" target="RequestCoordinator/RequestCoordinator"/>
-        <reference name="acceptanceCoordinator" target="AcceptanceCoordinator/AcceptanceCoordinator"/>
     </component>
 
     <component name="RequestCoordinator">
         <implementation.java class="org.fabric3.samples.bigbank.loan.request.RequestCoordinatorImpl"/>
-        <reference name="creditService" target="CreditComponent/CreditService"/>
-        <reference name="riskService" target="RiskAssessmentComponent"/>
-        <reference name="pricingService" target="PricingComponent"/>
-        <reference name="notificationService" target="NotificationComponent"/>
-        <reference name="storeService" target="StoreComponent"/>
+        <producer name="loanChannel" target="LoanChannel"/>
+        <consumer name="loanChannel" source="LoanChannel"/>
     </component>
 
     <component name="AcceptanceCoordinator">
         <implementation.java class="org.fabric3.samples.bigbank.loan.acceptance.AcceptanceCoordinatorImpl"/>
-        <reference name="appraisalService" target="AppraisalComponent"/>
-        <reference name="notificationService" target="NotificationComponent"/>
-        <reference name="storeService" target="StoreComponent"/>
+        <consumer name="loanChannel" source="LoanChannel"/>
+    </component>
+
+    <component name="ExpirationTimer">
+        <f3-impl:implementation.timer class="org.fabric3.samples.bigbank.loan.expiration.ExpirationTimer" repeatInterval='60' unit='seconds'/>
     </component>
 
     <component name="NotificationComponent">
         <implementation.java class="org.fabric3.samples.bigbank.loan.notification.NotificationComponent"/>
-    </component>
-
-    <component name="StoreComponent">
-        <implementation.java class="org.fabric3.samples.bigbank.loan.store.persistent.JPAStoreComponent"/>
     </component>
 
 </composite>

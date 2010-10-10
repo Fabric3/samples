@@ -1,4 +1,6 @@
 /*
+ * Copyright (c) 2010 Metaform Systems
+ *
  * See the NOTICE file distributed with this work for information
  * regarding copyright ownership.  This file is licensed
  * to you under the Apache License, Version 2.0 (the
@@ -25,16 +27,34 @@ import javax.xml.bind.annotation.XmlRootElement;
 /**
  * Encapsulates information for a new loan application.
  *
- * @version $Rev: 8744 $ $Date: 2010-03-25 19:43:45 +0100 (Thu, 25 Mar 2010) $
+ * @version $Rev$ $Date$
  */
 @XmlRootElement
 public class LoanRequest implements Serializable {
     private static final long serialVersionUID = -6182280155050660264L;
+    private String firstName;
+    private String lastName;
     private String ssn;
     private String email;
     private double amount;
     private double downPayment;
     private Address propertyLocation;
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
     public String getSSN() {
         return ssn;

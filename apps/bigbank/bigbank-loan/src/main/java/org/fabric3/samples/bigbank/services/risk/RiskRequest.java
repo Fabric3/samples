@@ -1,4 +1,6 @@
 /*
+ * Copyright (c) 2010 Metaform Systems
+ *
  * See the NOTICE file distributed with this work for information
  * regarding copyright ownership.  This file is licensed
  * to you under the Apache License, Version 2.0 (the

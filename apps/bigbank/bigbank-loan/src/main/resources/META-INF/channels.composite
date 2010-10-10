@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ See the NOTICE file distributed with this work for information
+ regarding copyright ownership.  This file is licensed
+ to you under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance
+ with the License.  You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied.  See the License for the
+ specific language governing permissions and limitations
+ under the License.
+-->
+
+<composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+           xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+           xmlns:f3="urn:fabric3.org:core"
+           xmlns:samples="urn:fabric3.org:samples"
+           targetNamespace="urn:fabric3.org:samples"
+           xmlns:f3-binding="urn:org.fabric3:binding"
+           name="ChannelsComposite">
+
+    <channel name="LoanChannel"/>
+
+    <channel name="LoanWebChannel">
+        <f3-binding:binding.web allowed="subscribe"/>
+    </channel>
+
+    <channel name="LoanMonitorChannel" requires="f3:synchronous">
+        <f3-binding:binding.web allowed="subscribe"/>
+    </channel>
+
+    <component name="ApplicationMonitor">
+        <implementation.monitor>
+            <configuration>
+                <appender name="CUSTOM" class="ch.qos.logback.core.RollingFileAppender">
+                    <file>bigbank.loan.log</file>
+                </appender>
+                <appender name="CUSTOM" class="ch.qos.logback.core.ConsoleAppender"/>
+            </configuration>
+        </implementation.monitor>
+        <consumer name="monitor" source="LoanMonitorChannel"/>
+    </component>
+
+</composite>

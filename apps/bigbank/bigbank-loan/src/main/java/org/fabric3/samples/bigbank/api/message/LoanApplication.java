@@ -1,4 +1,6 @@
 /*
+ * Copyright (c) 2010 Metaform Systems
+ *
  * See the NOTICE file distributed with this work for information
  * regarding copyright ownership.  This file is licensed
  * to you under the Apache License, Version 2.0 (the
@@ -16,22 +18,30 @@
  */
 package org.fabric3.samples.bigbank.api.message;
 
-import org.fabric3.samples.bigbank.api.message.LoanOption;
-
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Represents a loan application submitted by a borrower.
  *
- * @version $Rev: 8744 $ $Date: 2010-03-25 19:43:45 +0100 (Thu, 25 Mar 2010) $
+ * @version $Rev$ $Date$
  */
 @XmlRootElement
 public class LoanApplication implements Serializable {
     private static final long serialVersionUID = 8045590944866727036L;
+    private long id;
     private int status;
+    private double amount;
 
     private LoanOption[] options;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public int getStatus() {
         return status;
@@ -39,6 +49,14 @@ public class LoanApplication implements Serializable {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
 
     public LoanOption[] getOptions() {

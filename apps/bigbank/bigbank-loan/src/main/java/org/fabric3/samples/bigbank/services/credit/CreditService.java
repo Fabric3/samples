@@ -1,4 +1,6 @@
 /*
+ * Copyright (c) 2010 Metaform Systems
+ *
  * See the NOTICE file distributed with this work for information
  * regarding copyright ownership.  This file is licensed
  * to you under the Apache License, Version 2.0 (the
@@ -16,8 +18,6 @@
  */
 package org.fabric3.samples.bigbank.services.credit;
 
-import org.oasisopen.sca.annotation.Callback;
-import org.oasisopen.sca.annotation.OneWay;
 import org.oasisopen.sca.annotation.Remotable;
 
 /**
@@ -26,15 +26,14 @@ import org.oasisopen.sca.annotation.Remotable;
  * @version $Rev$ $Date$
  */
 @Remotable
-@Callback(CreditServiceCallback.class)
 public interface CreditService {
 
     /**
      * Performs the credit check.
      *
      * @param ssn the applicant's social security number
+     * @return the credit score
      */
-    @OneWay
-    void score(String ssn);
+    CreditScore score(String ssn);
 
 }

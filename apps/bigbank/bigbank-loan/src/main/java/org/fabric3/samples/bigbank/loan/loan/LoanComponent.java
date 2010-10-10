@@ -1,4 +1,6 @@
 /*
+ * Copyright (c) 2010 Metaform Systems
+ *
  * See the NOTICE file distributed with this work for information
  * regarding copyright ownership.  This file is licensed
  * to you under the Apache License, Version 2.0 (the
@@ -16,21 +18,26 @@
  */
 package org.fabric3.samples.bigbank.loan.loan;
 
-import  org.fabric3.samples.bigbank.loan.acceptance.AcceptanceCoordinator;
+import java.util.List;
+
+import org.oasisopen.sca.annotation.Reference;
+
+import org.fabric3.api.annotation.security.RolesAllowed;
 import org.fabric3.samples.bigbank.api.loan.LoanException;
 import org.fabric3.samples.bigbank.api.loan.LoanService;
 import org.fabric3.samples.bigbank.api.message.LoanApplication;
 import org.fabric3.samples.bigbank.api.message.LoanRequest;
+import org.fabric3.samples.bigbank.api.message.LoanStatus;
 import org.fabric3.samples.bigbank.api.message.OptionSelection;
+import org.fabric3.samples.bigbank.loan.acceptance.AcceptanceCoordinator;
 import org.fabric3.samples.bigbank.loan.request.RequestCoordinator;
-import org.oasisopen.sca.annotation.Reference;
 
 /**
- * Default implementation of the LoanService. This implementation delegates to a series of coordinators that process the
- * loan application.
+ * Default implementation of the LoanService. This implementation delegates to a series of coordinators that process the loan application.
  *
- * @version $Rev: 8764 $ $Date: 2010-03-29 12:00:55 +0200 (Mon, 29 Mar 2010) $
+ * @version $Rev$ $Date$
  */
+@RolesAllowed("role1")
 public class LoanComponent implements LoanService {
     private RequestCoordinator requestCoordinator;
     private AcceptanceCoordinator acceptanceCoordinator;
@@ -41,18 +48,25 @@ public class LoanComponent implements LoanService {
      * @param requestCoordinator    coordinator that handles new request processing
      * @param acceptanceCoordinator coordinator that handles acceptance and rejection processing
      */
-    public LoanComponent(@Reference(name = "requestCoordinator") RequestCoordinator requestCoordinator,
-                         @Reference(name = "acceptanceCoordinator") AcceptanceCoordinator acceptanceCoordinator) {
+    public LoanComponent(@Reference RequestCoordinator requestCoordinator, @Reference AcceptanceCoordinator acceptanceCoordinator) {
         this.requestCoordinator = requestCoordinator;
         this.acceptanceCoordinator = acceptanceCoordinator;
     }
 
     public long apply(LoanRequest request) throws LoanException {
-        return requestCoordinator.start(request);
+        return requestCoordinator.apply(request);
     }
 
     public LoanApplication retrieve(long id) throws LoanException {
         return acceptanceCoordinator.retrieve(id);
+    }
+
+    public List<LoanApplication> retrieveApplications(int status) throws LoanException {
+        return acceptanceCoordinator.retrieveApplications(status);
+    }
+
+    public List<LoanStatus> getLoanStatus() throws LoanException {
+        return acceptanceCoordinator.getLoanStatus();
     }
 
     public void decline(long id) throws LoanException {

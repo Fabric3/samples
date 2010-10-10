@@ -1,8 +1,8 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
+ * Copyright (c) 2010 Metaform Systems
+ *
+ * See the NOTICE file distributed with this work for information
+ * regarding copyright ownership.  This file is licensed
  * to you under the Apache License, Version 2.0 (the
  * "License"); you may not use this file except in compliance
  * with the License.  You may obtain a copy of the License at
@@ -16,24 +16,25 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.fabric3.samples.bigbank.services.credit.impl;
+package org.fabric3.samples.bigbank.services.audit;
 
-import org.fabric3.samples.bigbank.services.credit.CreditScore;
 import org.oasisopen.sca.annotation.Scope;
 
+import org.fabric3.samples.bigbank.services.credit.CreditScore;
+
 /**
- * Audits credit scoring operations for compliance reasons.
+ * Audits credit scoring operations for legal compliance.
  *
  * @version $Revision$ $Date$
  */
 @Scope("COMPOSITE")
-public class AuditServiceImpl implements AuditService {
+public class AuditComponent {
 
     public void recordCheck(String ssn) {
         System.out.println("AuditService: Credit check for " + ssn);
     }
 
     public void recordResult(String ssn, CreditScore score) {
-        System.out.println("AuditService: Credit result received for " + ssn + ". Score was " + score.getScore() + ".");
+        System.out.println("Credit result received for " + ssn + ". Score was " + score.getScore() + ".");
     }
 }

@@ -1,8 +1,8 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
+ * Copyright (c) 2010 Metaform Systems
+ *
+ * See the NOTICE file distributed with this work for information
+ * regarding copyright ownership.  This file is licensed
  * to you under the Apache License, Version 2.0 (the
  * "License"); you may not use this file except in compliance
  * with the License.  You may obtain a copy of the License at
@@ -18,69 +18,104 @@
  */
 package org.fabric3.samples.bigbank.loan.acceptance;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
+import org.oasisopen.sca.annotation.Context;
+import org.oasisopen.sca.annotation.ManagedTransaction;
 import org.oasisopen.sca.annotation.Reference;
 import org.oasisopen.sca.annotation.Service;
 
+import org.fabric3.api.Fabric3RequestContext;
+import org.fabric3.api.annotation.Consumer;
 import org.fabric3.api.annotation.monitor.Monitor;
+import org.fabric3.samples.bigbank.api.event.AppraisalResult;
+import org.fabric3.samples.bigbank.api.event.AppraisalSchedule;
 import org.fabric3.samples.bigbank.api.loan.LoanApplicationNotFoundException;
 import org.fabric3.samples.bigbank.api.loan.LoanException;
+import org.fabric3.samples.bigbank.api.loan.LoanService;
 import org.fabric3.samples.bigbank.api.message.LoanApplication;
 import org.fabric3.samples.bigbank.api.message.LoanOption;
 import org.fabric3.samples.bigbank.api.message.LoanStatus;
 import org.fabric3.samples.bigbank.loan.domain.LoanRecord;
 import org.fabric3.samples.bigbank.loan.domain.TermInfo;
 import org.fabric3.samples.bigbank.loan.monitor.ErrorMonitor;
-import org.fabric3.samples.bigbank.loan.notification.NotificationService;
-import org.fabric3.samples.bigbank.loan.store.StoreException;
-import org.fabric3.samples.bigbank.loan.store.StoreService;
-import org.fabric3.samples.bigbank.services.appraisal.AppraisalCallback;
 import org.fabric3.samples.bigbank.services.appraisal.AppraisalRequest;
-import org.fabric3.samples.bigbank.services.appraisal.AppraisalResult;
-import org.fabric3.samples.bigbank.services.appraisal.AppraisalSchedule;
 import org.fabric3.samples.bigbank.services.appraisal.AppraisalService;
 
 /**
  * Default implementation of the AcceptanceCoordinator.
  *
- * @version $Revision: 8764 $ $Date: 2010-03-29 12:00:55 +0200 (Mon, 29 Mar 2010) $
+ * @version $Revision$ $Date$
  */
-@Service(names = {AcceptanceCoordinator.class, AppraisalCallback.class})
-public class AcceptanceCoordinatorImpl implements AcceptanceCoordinator, AppraisalCallback {
+@Service(names = {AcceptanceCoordinator.class})
+@ManagedTransaction
+public class AcceptanceCoordinatorImpl implements AcceptanceCoordinator {
     private AppraisalService appraisalService;
-    private NotificationService notificationService;
-    private StoreService storeService;
     private ErrorMonitor monitor;
+    private EntityManager em;
+    private Fabric3RequestContext context;
 
-    public AcceptanceCoordinatorImpl(@Reference(name = "appraisalService") AppraisalService appraisalService,
-                                     @Reference(name = "notificationService") NotificationService notificationService,
-                                     @Reference(name = "storeService") StoreService storeService,
-                                     @Monitor ErrorMonitor monitor) {
+    public AcceptanceCoordinatorImpl(@Reference(name = "appraisalService") AppraisalService appraisalService, @Monitor ErrorMonitor monitor) {
         this.appraisalService = appraisalService;
-        this.notificationService = notificationService;
-        this.storeService = storeService;
         this.monitor = monitor;
     }
 
+    @PersistenceContext(name = "loanApplicationEmf", unitName = "loanApplication")
+    public void setEntityManager(EntityManager em) {
+        this.em = em;
+    }
+
+    @Context
+    public void setContext(Fabric3RequestContext context) {
+        this.context = context;
+    }
 
     public LoanApplication retrieve(long loanId) throws LoanException {
-        LoanRecord record = findRecord(loanId);
-        LoanApplication application = new LoanApplication();
-        LoanOption[] options = new LoanOption[record.getTerms().size()];
-        for (int i = 0; i < record.getTerms().size(); i++) {
-            TermInfo term = record.getTerms().get(i);
-            LoanOption loanOption = new LoanOption(term.getType(), term.getRate(), term.getApr());
-            options[i] = loanOption;
+        LoanRecord record = em.find(LoanRecord.class, loanId);
+        if (record == null) {
+            throw new LoanApplicationNotFoundException("Loan record not found");
         }
-        application.setOptions(options);
-        return application;
+        return createApplication(record);
+    }
+
+    public List<LoanApplication> retrieveApplications(int status) {
+        String username = context.getCurrentSubject().getUsername();
+        Query query = em.createQuery("SELECT l FROM LoanRecord l WHERE l.username = :username AND l.status = :status");
+        query.setParameter("username", username);
+        query.setParameter("status", status);
+        List<LoanRecord> records = cast(query.getResultList());
+        List<LoanApplication> list = new ArrayList<LoanApplication>(records.size());
+        for (LoanRecord record : records) {
+            LoanApplication application = createApplication(record);
+            list.add(application);
+        }
+        return list;
+    }
+
+    public List<LoanStatus> getLoanStatus() {
+        String username = context.getCurrentSubject().getUsername();
+        Query query = em.createQuery("SELECT l FROM LoanRecord l WHERE l.username = :username");
+        query.setParameter("username", username);
+        List<LoanRecord> records = cast(query.getResultList());
+        List<LoanStatus> list = new ArrayList<LoanStatus>(records.size());
+        for (LoanRecord record : records) {
+            double total = record.getAmount() - record.getDownPayment();
+            list.add(new LoanStatus(record.getId(), total, record.getStatus()));
+        }
+        return list;
     }
 
     public void accept(long id, String type) throws LoanException {
-        LoanRecord record = findRecord(id);
+        LoanRecord record = em.find(LoanRecord.class, id);
+        if (record == null) {
+            throw new LoanApplicationNotFoundException("Loan record not found");
+        }
         List<TermInfo> terms = record.getTerms();
         boolean found = false;
         for (TermInfo term : terms) {
@@ -93,65 +128,72 @@ public class AcceptanceCoordinatorImpl implements AcceptanceCoordinator, Apprais
             throw new InvalidLoanOptionException("Invalid loan option selected for loan " + id);
         }
         record.setTypeSelected(type);
-        record.setStatus(LoanStatus.AWAITING_APPRAISAL);
-        try {
-            storeService.update(record);
-        } catch (StoreException e) {
-            throw new LoanException(e);
-        }
+        record.setStatus(LoanService.AWAITING_APPRAISAL);
+        em.merge(record);
         AppraisalRequest request = new AppraisalRequest(id, record.getPropertyInfo().getAddress());
         appraisalService.appraise(request);
     }
 
     public void decline(long id) throws LoanException {
-        LoanRecord record = findRecord(id);
-        record.setStatus(LoanStatus.DECLINED);
-        try {
-            storeService.update(record);
-        } catch (StoreException e) {
-            throw new LoanException(e);
+        LoanRecord record = em.find(LoanRecord.class, id);
+        if (record == null) {
+            throw new LoanApplicationNotFoundException("Loan record not found");
         }
+        record.setStatus(LoanService.DECLINED);
+        em.merge(record);
     }
 
     public void schedule(AppraisalSchedule schedule) {
         try {
             long id = schedule.getId();
-            LoanRecord record = findRecord(id);
+            LoanRecord record = em.find(LoanRecord.class, id);
+            if (record == null) {
+                throw new LoanApplicationNotFoundException("Loan record not found");
+            }
             String email = record.getEmail();
             Date date = schedule.getDate();
-            notificationService.appraisalScheduled(email, id, date);
+            // FIXME notificationService.appraisalScheduled(email, id, date);
         } catch (LoanException e) {
             monitor.onError(e);
         }
     }
 
+    @Consumer("loanChannel")
     public void appraisalCompleted(AppraisalResult result) {
         if (AppraisalResult.DECLINED == result.getResult()) {
             // just return
             return;
         }
         try {
-            LoanRecord record = findRecord(result.getId());
+            LoanRecord record = em.find(LoanRecord.class, result.getId());
+            if (record == null) {
+                throw new LoanApplicationNotFoundException("Loan record not found");
+            }
             Calendar calendar = Calendar.getInstance();
             calendar.add(Calendar.MONTH, 1);
-            notificationService.fundingDateScheduled(record.getEmail(), record.getId(), calendar.getTime());
+            // FIXME notificationService.fundingDateScheduled(record.getEmail(), record.getId(), calendar.getTime());
         } catch (LoanException e) {
             monitor.onError(e);
         }
     }
 
-    private LoanRecord findRecord(long id) throws LoanException {
-        LoanRecord record;
-        try {
-            record = storeService.find(id);
-        } catch (StoreException e) {
-            throw new LoanException(e);
+    private LoanApplication createApplication(LoanRecord record) {
+        LoanApplication application = new LoanApplication();
+        application.setId(record.getId());
+        application.setAmount(record.getAmount());
+        LoanOption[] options = new LoanOption[record.getTerms().size()];
+        for (int i = 0; i < record.getTerms().size(); i++) {
+            TermInfo term = record.getTerms().get(i);
+            LoanOption loanOption = new LoanOption(term.getType(), term.getRate(), term.getApr());
+            options[i] = loanOption;
         }
-        if (record == null) {
-            throw new LoanApplicationNotFoundException("No loan application on file with id " + id);
-        }
-        return record;
+        application.setOptions(options);
+        return application;
     }
 
+    @SuppressWarnings({"unchecked"})
+    private <T> T cast(Object object) {
+        return (T) object;
+    }
 
 }

@@ -1,8 +1,8 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
+ * Copyright (c) 2010 Metaform Systems
+ *
+ * See the NOTICE file distributed with this work for information
+ * regarding copyright ownership.  This file is licensed
  * to you under the Apache License, Version 2.0 (the
  * "License"); you may not use this file except in compliance
  * with the License.  You may obtain a copy of the License at
@@ -18,97 +18,109 @@
  */
 package org.fabric3.samples.bigbank.loan.request;
 
-import org.fabric3.api.annotation.monitor.Monitor;
-import org.fabric3.samples.bigbank.api.loan.LoanApplicationNotFoundException;
-import org.fabric3.samples.bigbank.api.loan.LoanException;
-import org.fabric3.samples.bigbank.api.message.LoanRequest;
-import org.fabric3.samples.bigbank.api.message.LoanStatus;
-import org.fabric3.samples.bigbank.loan.domain.LoanRecord;
-import org.fabric3.samples.bigbank.loan.domain.PropertyInfo;
-import org.fabric3.samples.bigbank.loan.domain.TermInfo;
-import org.fabric3.samples.bigbank.loan.monitor.ErrorMonitor;
-import org.fabric3.samples.bigbank.loan.notification.NotificationService;
-import org.fabric3.samples.bigbank.loan.store.StoreException;
-import org.fabric3.samples.bigbank.loan.store.StoreService;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import org.oasisopen.sca.annotation.Context;
+import org.oasisopen.sca.annotation.ManagedTransaction;
 import org.oasisopen.sca.annotation.Reference;
 import org.oasisopen.sca.annotation.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.fabric3.samples.bigbank.services.pricing.PricingServiceCallback;
-import org.fabric3.samples.bigbank.services.pricing.PricingService;
-import org.fabric3.samples.bigbank.services.pricing.PricingOption;
+import org.fabric3.api.Fabric3RequestContext;
+import org.fabric3.api.annotation.Consumer;
+import org.fabric3.api.annotation.Producer;
+import org.fabric3.api.annotation.monitor.Monitor;
+import org.fabric3.samples.bigbank.api.channel.LoanChannel;
+import org.fabric3.samples.bigbank.api.event.ApplicationReady;
+import org.fabric3.samples.bigbank.api.event.ApplicationReceived;
+import org.fabric3.samples.bigbank.api.event.ApplicationRejected;
+import org.fabric3.samples.bigbank.api.event.RiskAssessmentComplete;
+import org.fabric3.samples.bigbank.api.loan.LoanException;
+import org.fabric3.samples.bigbank.api.loan.LoanService;
+import org.fabric3.samples.bigbank.api.message.LoanRequest;
+import org.fabric3.samples.bigbank.loan.domain.LoanRecord;
+import org.fabric3.samples.bigbank.loan.domain.PropertyInfo;
+import org.fabric3.samples.bigbank.loan.domain.TermInfo;
+import org.fabric3.samples.bigbank.services.credit.CreditScore;
+import org.fabric3.samples.bigbank.services.credit.CreditService;
 import org.fabric3.samples.bigbank.services.pricing.PriceResponse;
+import org.fabric3.samples.bigbank.services.pricing.PricingOption;
 import org.fabric3.samples.bigbank.services.pricing.PricingRequest;
-import org.fabric3.samples.bigbank.services.risk.RiskAssessmentCallback;
+import org.fabric3.samples.bigbank.services.pricing.PricingService;
+import org.fabric3.samples.bigbank.services.pricing.PricingServiceCallback;
 import org.fabric3.samples.bigbank.services.risk.RiskAssessmentService;
 import org.fabric3.samples.bigbank.services.risk.RiskRequest;
 import org.fabric3.samples.bigbank.services.risk.RiskResponse;
-import org.fabric3.samples.bigbank.services.credit.CreditServiceCallback;
-import org.fabric3.samples.bigbank.services.credit.CreditService;
-import org.fabric3.samples.bigbank.services.credit.CreditScore;
 
 /**
  * Default implementation of the RequestCoordinator service.
  *
- * @version $Revision: 8764 $ $Date: 2010-03-29 12:00:55 +0200 (Mon, 29 Mar 2010) $
+ * @version $Revision$ $Date$
  */
-@Service(names = {RequestCoordinator.class,
-        CreditServiceCallback.class,
-        RiskAssessmentCallback.class,
-        PricingServiceCallback.class})
-public class RequestCoordinatorImpl
-        implements RequestCoordinator, CreditServiceCallback, RiskAssessmentCallback, PricingServiceCallback {
-    // simple counter
+@Service(names = {RequestCoordinator.class, PricingServiceCallback.class})
+@ManagedTransaction
+public class RequestCoordinatorImpl implements RequestCoordinator, PricingServiceCallback {
     private CreditService creditService;
     private RiskAssessmentService riskService;
     private PricingService pricingService;
-    private NotificationService notificationService;
-    private StoreService storeService;
-    private ErrorMonitor monitor;
+    private LoanChannel loanChannel;
+    private RequestMonitor monitor;
+    private EntityManager em;
+    private Fabric3RequestContext context;
 
     /**
      * Creates a new instance.
      *
-     * @param creditService       returns the applicant's credit score from a credit bureau
-     * @param riskService         scores the loan risk
-     * @param pricingService      calculates loan options
-     * @param notificationService notifies the loan applicant of loan events
-     * @param storeService        stores an application after it has been processed
-     * @param monitor             the monitor for recording errors
+     * @param creditService  returns the applicant's credit score from a credit bureau
+     * @param riskService    scores the loan risk
+     * @param pricingService calculates loan options
+     * @param loanChannel    the channel to publish loan events to
+     * @param monitor        the monitor for recording errors
      */
-    public RequestCoordinatorImpl(@Reference(name = "creditService") CreditService creditService,
-                                  @Reference(name = "riskService") RiskAssessmentService riskService,
-                                  @Reference(name = "pricingService") PricingService pricingService,
-                                  @Reference(name = "notificationService") NotificationService notificationService,
-                                  @Reference(name = "storeService") StoreService storeService,
-                                  @Monitor ErrorMonitor monitor) {
+    public RequestCoordinatorImpl(@Reference CreditService creditService,
+                                  @Reference RiskAssessmentService riskService,
+                                  @Reference PricingService pricingService,
+                                  @Producer("loanChannel") LoanChannel loanChannel,
+                                  @Monitor("LoanMonitorChannel") RequestMonitor monitor) {
         this.creditService = creditService;
         this.riskService = riskService;
         this.pricingService = pricingService;
-        this.notificationService = notificationService;
-        this.storeService = storeService;
+        this.loanChannel = loanChannel;
         this.monitor = monitor;
     }
 
-    public long start(LoanRequest request) throws LoanException {
+    @PersistenceContext(name = "loanApplicationEmf", unitName = "loanApplication")
+    public void setEntityManager(EntityManager em) {
+        this.em = em;
+    }
+
+    @Context
+    public void setContext(Fabric3RequestContext context) {
+        this.context = context;
+    }
+
+    public long apply(LoanRequest request) throws LoanException {
         // create a loan application and process it
-        LoanRecord record = new LoanRecord();
-        record.setSsn(request.getSSN());
-        record.setEmail(request.getEmail());
-        record.setAmount(request.getAmount());
-        record.setDownPayment(request.getDownPayment());
-        PropertyInfo info = new PropertyInfo(request.getPropertyAddress());
-        record.setPropertyInfo(info);
-        record.setStatus(LoanStatus.SUBMITTED);
-        try {
-            storeService.save(record);
-        } catch (StoreException e) {
-            throw new LoanException(e);
-        }
-        // pull the applicant's credit score
-        creditService.score(record.getSsn());
+        LoanRecord record = createLoanRecord(request);
+
+        // pull the applicant's credit score and update the loan record
+        CreditScore score = creditService.score(record.getSsn());
+        record.setCreditScore(score.getScore());
+        em.persist(record);
+
+        // synchronize to avoid race conditions with non-blocking risk assessment
+        em.flush();
+        monitor.received(record.getId());
+
+        // publish an event that the loan application was received
+        ApplicationReceived event = new ApplicationReceived();
+        loanChannel.publish(event);
+
+        // assess the risk
+        RiskRequest riskRequest = new RiskRequest(record.getId(), record.getCreditScore(), record.getAmount(), record.getDownPayment());
+        riskService.assessRisk(riskRequest);
         return record.getId();
     }
 
@@ -116,71 +128,38 @@ public class RequestCoordinatorImpl
         throw new UnsupportedOperationException();
     }
 
-    public void onCreditScore(CreditScore result) {
-        // assess the loan risk
-        System.out.println("CreditServiceCallback: Received credit score");
-
-        String ssn = result.getSsn();
+    @Consumer("loanChannel")
+    public void onRiskAssessment(RiskAssessmentComplete event) {
         LoanRecord record;
-        try {
-            record = storeService.findBySSN(ssn);
-        } catch (StoreException e) {
-            monitor.onError(e);
-            return;
-        }
+        long id = event.getId();
+
+        // record that the risk assessment was received
+        monitor.riskAssessmentReceived(id);
+
+        record = em.find(LoanRecord.class, id);
         if (record == null) {
-            monitor.onErrorMessage("No record found for SSN: " + ssn);
+            monitor.loanRecordNotFound(id);
             return;
         }
-        record.setCreditScore(result.getScore());
-        try {
-            storeService.update(record);
-        } catch (StoreException e) {
-            monitor.onError(e);
-        }
-        RiskRequest request = new RiskRequest(record.getId(), record.getCreditScore(), record.getAmount(), record.getDownPayment());
-        riskService.assessRisk(request);
-    }
 
-    public void creditScoreError(Exception exception) {
-        monitor.onError(exception);
-    }
-
-    public void onAssessment(RiskResponse response) {
-        System.out.println("RiskAssessmentCallback: received risk assessment");
-        LoanRecord record;
-        long id = response.getId();
-        try {
-            record = findRecord(id);
-        } catch (LoanException e) {
-            monitor.onError(e);
-            return;
-        }
-        PricingRequest pricingRequest = new PricingRequest(id, response.getRiskFactor());
-        if (RiskResponse.APPROVE == response.getDecision()) {
-            // calculate the terms
+        if (RiskResponse.APPROVE == event.getDecision()) {
+            // loan approved, price it
+            record.setStatus(LoanService.PRICING);
+            PricingRequest pricingRequest = new PricingRequest(id, event.getRiskFactor());
             pricingService.price(pricingRequest);
         } else {
-            // declined
-            try {
-                record.setStatus(LoanStatus.REJECTED);
-                storeService.save(record);
-                // notify the client
-                notificationService.rejected(record.getEmail(), record.getId());
-            } catch (StoreException e) {
-                monitor.onError(e);
-            }
-
+            // loan declined
+            record.setStatus(LoanService.REJECTED);
+            loanChannel.publish(new ApplicationRejected());
         }
+        em.merge(record);
     }
 
     public void onPrice(PriceResponse response) {
-        System.out.println("PricingServiceCallback: received pricing response");
-        LoanRecord record;
-        try {
-            record = findRecord(response.getId());
-        } catch (LoanException e) {
-            monitor.onError(e);
+        long id = response.getId();
+        LoanRecord record = em.find(LoanRecord.class, id);
+        if (record == null) {
+            monitor.loanRecordNotFound(id);
             return;
         }
         List<TermInfo> termInfos = new ArrayList<TermInfo>();
@@ -192,32 +171,23 @@ public class RequestCoordinatorImpl
             termInfos.add(termInfo);
         }
         record.setTerms(termInfos);
-        try {
-            record.setStatus(LoanStatus.AWAITING_ACCEPTANCE);
-            storeService.update(record);
-            // notify the client
-            notificationService.approved(record.getEmail(), record.getId());
-        } catch (StoreException e) {
-            monitor.onError(e);
-        }
-
-    }
-
-    public void riskAssessmentError(Exception exception) {
-        monitor.onError(exception);
+        record.setStatus(LoanService.AWAITING_ACCEPTANCE);
+        em.merge(record);
+        loanChannel.publish(new ApplicationReady());
     }
 
 
-    private LoanRecord findRecord(long id) throws LoanException {
-        LoanRecord record;
-        try {
-            record = storeService.find(id);
-        } catch (StoreException e) {
-            throw new LoanException(e);
-        }
-        if (record == null) {
-            throw new LoanApplicationNotFoundException("No loan application on file with id " + id);
-        }
+    private LoanRecord createLoanRecord(LoanRequest request) {
+        LoanRecord record = new LoanRecord();
+        record.setSsn(request.getSSN());
+        record.setEmail(request.getEmail());
+        record.setAmount(request.getAmount());
+        record.setDownPayment(request.getDownPayment());
+        PropertyInfo info = new PropertyInfo(request.getPropertyAddress());
+        record.setPropertyInfo(info);
+        record.setStatus(LoanService.SUBMITTED);
+        String username = context.getCurrentSubject().getUsername();
+        record.setUsername(username);
         return record;
     }
 

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <contribution xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
               xmlns:samples="urn:fabric3.org:samples">
+    <deployable composite="samples:ChannelsComposite"/>
     <deployable composite="samples:ServicesComposite"/>
     <deployable composite="samples:LoanComposite"/>
     <import.java package="javax.persistence" version="1.0.0"/>

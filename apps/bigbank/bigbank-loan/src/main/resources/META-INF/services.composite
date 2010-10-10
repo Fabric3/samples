@@ -20,25 +20,22 @@
            xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912"
            xmlns:samples="urn:fabric3.org:samples"
            targetNamespace="urn:fabric3.org:samples"
-           name="ServicesComposite">
+           name="ServicesComposite"
+           autowire="true">
 
     <component name="CreditComponent">
-        <implementation.java class="org.fabric3.samples.bigbank.services.credit.impl.CreditComponent"/>
-        <reference name="auditService" target="AuditComponent"/>
-    </component>
-
-    <component name="AuditComponent">
-        <implementation.java class="org.fabric3.samples.bigbank.services.credit.impl.AuditServiceImpl"/>
-    </component>
-    
-    <component name="PricingComponent">
-        <implementation.java class="org.fabric3.samples.bigbank.services.pricing.impl.RiskBasedPricingComponent"/>
-        <reference name="rateService" target="RateComponent"/>
+        <implementation.composite name="samples:CreditComposite"/>
     </component>
 
     <component name="RiskAssessmentComponent">
         <implementation.java class="org.fabric3.samples.bigbank.services.risk.impl.RiskAssessmentComponent"/>
+        <producer name="LoanChannel" target="LoanChannel"/>
         <property name="ratioMinimum">.10</property>
+    </component>
+
+    <component name="PricingComponent">
+        <implementation.java class="org.fabric3.samples.bigbank.services.pricing.impl.RiskBasedPricingComponent"/>
+        <reference name="rateService" target="RateComponent"/>
     </component>
 
     <component name="RateComponent">
@@ -47,6 +44,12 @@
 
     <component name="AppraisalComponent">
         <implementation.java class="org.fabric3.samples.bigbank.services.appraisal.impl.AppraisalComponent"/>
+        <producer name="loanChannel" target="LoanChannel"/>
     </component>
 
+    <component name="AuditComponent">
+        <implementation.java class="org.fabric3.samples.bigbank.services.audit.AuditComponent"/>
+    </component>
+
+    
 </composite>

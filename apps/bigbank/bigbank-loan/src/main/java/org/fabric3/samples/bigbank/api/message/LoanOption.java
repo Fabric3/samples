@@ -1,4 +1,6 @@
 /*
+ * Copyright (c) 2010 Metaform Systems
+ *
  * See the NOTICE file distributed with this work for information
  * regarding copyright ownership.  This file is licensed
  * to you under the Apache License, Version 2.0 (the
@@ -19,7 +21,7 @@ package org.fabric3.samples.bigbank.api.message;
 import java.io.Serializable;
 
 /**
- * @version $Rev: 8744 $ $Date: 2010-03-25 19:43:45 +0100 (Thu, 25 Mar 2010) $
+ * @version $Rev$ $Date$
  */
 public class LoanOption implements Serializable {
     private static final long serialVersionUID = -969237495348560552L;

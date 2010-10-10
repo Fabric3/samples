@@ -3,6 +3,7 @@
       xmlns:samples="urn:fabric3.org:samples"
       name="LoanPlan">
     <mappings>
+        <mapping deployable="samples:ChannelsComposite" zone="zone1"/>
         <mapping deployable="samples:LoanComposite" zone="zone1"/>
         <mapping deployable="samples:ServicesComposite" zone="zone2"/>
     </mappings>

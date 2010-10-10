@@ -1,8 +1,8 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
+ * Copyright (c) 2010 Metaform Systems
+ *
+ * See the NOTICE file distributed with this work for information
+ * regarding copyright ownership.  This file is licensed
  * to you under the Apache License, Version 2.0 (the
  * "License"); you may not use this file except in compliance
  * with the License.  You may obtain a copy of the License at
@@ -18,18 +18,49 @@
  */
 package org.fabric3.samples.bigbank.api.message;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
- * Defines the loan application states
  *
- * @version $Revision: 8744 $ $Date: 2010-03-25 19:43:45 +0100 (Thu, 25 Mar 2010) $
+ *
+ * @version $Revision$ $Date$
  */
-public interface LoanStatus {
-    int NOT_SUBMITTED = 0;
-    int SUBMITTED = 1;
-    int AWAITING_ACCEPTANCE = 2;
-    int AWAITING_APPRAISAL = 3;
-    int SCHEDULED_FOR_FUNDING = 4;
-    int FUNDED = 5;
-    int REJECTED = -1;
-    int DECLINED = -2;
+@XmlRootElement
+public class LoanStatus {
+    private long id;
+    private int status;
+    private double amount;
+
+    public LoanStatus() {
+    }
+
+    public LoanStatus(long id, double amount, int status) {
+        this.id = id;
+        this.amount = amount;
+        this.status = status;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
 }

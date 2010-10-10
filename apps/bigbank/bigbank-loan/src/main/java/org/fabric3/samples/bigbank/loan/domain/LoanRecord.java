@@ -1,8 +1,8 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
+ * Copyright (c) 2010 Metaform Systems
+ *
+ * See the NOTICE file distributed with this work for information
+ * regarding copyright ownership.  This file is licensed
  * to you under the Apache License, Version 2.0 (the
  * "License"); you may not use this file except in compliance
  * with the License.  You may obtain a copy of the License at
@@ -18,25 +18,24 @@
  */
 package org.fabric3.samples.bigbank.loan.domain;
 
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Version;
-import java.io.Serializable;
-import java.util.List;
+
+import org.fabric3.samples.bigbank.api.Versionable;
 
 /**
- * @version $Revision: 8764 $ $Date: 2010-03-29 12:00:55 +0200 (Mon, 29 Mar 2010) $
+ * A persistent loan application.
+ *
+ * @version $Revision$ $Date$
  */
 @Entity
-public class LoanRecord implements Serializable {
+public class LoanRecord extends Versionable {
     private static final long serialVersionUID = -5710340587799398147L;
-    private long id;
-    private long version;
+
+    private String username;
     private long loanNumber;
     private long expiration;
     private int status;
@@ -53,21 +52,6 @@ public class LoanRecord implements Serializable {
     public LoanRecord() {
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    @Version
-    public long getVersion() {
-        return version;
-    }
-
     public long getLoanNumber() {
         return loanNumber;
     }
@@ -76,16 +60,20 @@ public class LoanRecord implements Serializable {
         this.loanNumber = loanNumber;
     }
 
-    public void setVersion(long version) {
-        this.version = version;
-    }
-
     public String getSsn() {
         return ssn;
     }
 
     public void setSsn(String ssn) {
         this.ssn = ssn;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     /**
@@ -134,18 +122,18 @@ public class LoanRecord implements Serializable {
     }
 
     /**
-     * Returns the loan downpayment amount.
+     * Returns the loan down payment amount.
      *
-     * @return the loan downpayment amount
+     * @return the loan down payment amount
      */
     public double getDownPayment() {
         return downPayment;
     }
 
     /**
-     * Sets the loan downpayment amount.
+     * Sets the loan down payment amount.
      *
-     * @param downPayment loan downpayment amount
+     * @param downPayment loan down payment amount
      */
     public void setDownPayment(double downPayment) {
         this.downPayment = downPayment;

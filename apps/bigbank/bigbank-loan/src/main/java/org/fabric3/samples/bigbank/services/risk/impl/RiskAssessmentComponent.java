@@ -1,4 +1,6 @@
 /*
+ * Copyright (c) 2010 Metaform Systems
+ *
  * See the NOTICE file distributed with this work for information
  * regarding copyright ownership.  This file is licensed
  * to you under the Apache License, Version 2.0 (the
@@ -16,35 +18,33 @@
  */
 package org.fabric3.samples.bigbank.services.risk.impl;
 
-import org.fabric3.samples.bigbank.services.risk.RiskAssessmentCallback;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.oasisopen.sca.annotation.Property;
+import org.oasisopen.sca.annotation.Scope;
+
+import org.fabric3.api.annotation.Producer;
+import org.fabric3.samples.bigbank.api.channel.LoanChannel;
+import org.fabric3.samples.bigbank.api.event.RiskAssessmentComplete;
 import org.fabric3.samples.bigbank.services.risk.RiskAssessmentService;
 import org.fabric3.samples.bigbank.services.risk.RiskReason;
 import org.fabric3.samples.bigbank.services.risk.RiskRequest;
 import org.fabric3.samples.bigbank.services.risk.RiskResponse;
-import org.oasisopen.sca.annotation.Callback;
-import org.oasisopen.sca.annotation.Property;
-import org.oasisopen.sca.annotation.Scope;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
- * Implementation that performs risk assesment based on an applicant's credit score and loan amount.
+ * Implementation that performs risk assessment based on an applicant's credit score and loan amount.
  *
  * @version $Rev$ $Date$
  */
 @Scope("COMPOSITE")
 public class RiskAssessmentComponent implements RiskAssessmentService {
-    private RiskAssessmentCallback callback;
+    private LoanChannel channel;
     private double ratioMinimum;
 
-    public RiskAssessmentComponent(@Property(name = "ratioMinimum", required = true) Double ratioMinimum) {
-        this.ratioMinimum = ratioMinimum;
-    }
-
-    @Callback
-    public void setCallback(RiskAssessmentCallback callback) {
-        this.callback = callback;
+    public RiskAssessmentComponent(@Producer("LoanChannel") LoanChannel channel, @Property(name = "ratioMinimum") Double minimum) {
+        this.channel = channel;
+        this.ratioMinimum = minimum;
     }
 
     public void assessRisk(RiskRequest request) {
@@ -69,8 +69,9 @@ public class RiskAssessmentComponent implements RiskAssessmentService {
         } else {
             decision = RiskResponse.APPROVE;
         }
-        RiskResponse result = new RiskResponse(request.getId(), decision, factor, reasons.toArray(new RiskReason[reasons.size()]));
-
-        callback.onAssessment(result);
+        long id = request.getId();
+        RiskReason[] riskReasons = reasons.toArray(new RiskReason[reasons.size()]);
+        RiskAssessmentComplete event = new RiskAssessmentComplete(id, decision, factor, riskReasons);
+        channel.publish(event);
     }
 }

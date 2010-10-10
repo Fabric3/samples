@@ -1,8 +1,8 @@
 /*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
+ * Copyright (c) 2010 Metaform Systems
+ *
+ * See the NOTICE file distributed with this work for information
+ * regarding copyright ownership.  This file is licensed
  * to you under the Apache License, Version 2.0 (the
  * "License"); you may not use this file except in compliance
  * with the License.  You may obtain a copy of the License at
@@ -21,7 +21,7 @@ package  org.fabric3.samples.bigbank.loan.acceptance;
 import org.fabric3.samples.bigbank.api.loan.LoanException;
 
 /**
- * @version $Revision: 8763 $ $Date: 2010-03-29 11:52:36 +0200 (Mon, 29 Mar 2010) $
+ * @version $Revision$ $Date$
  */
 public class InvalidLoanOptionException extends LoanException {
     private static final long serialVersionUID = 3716049418234821586L;
