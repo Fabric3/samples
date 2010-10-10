@@ -18,15 +18,23 @@
  */
 package org.fabric3.samples.bigbank.api.event;
 
-/**
- * Denotes a loan application has been rejected based on underwriting rules.
- *
- * @version $Rev$ $Date$
- */
-public class ApplicationRejected extends ApplicationEvent {
-    private static final long serialVersionUID = -3179786299288877078L;
+import java.util.Date;
 
-    public ApplicationRejected(long loanId) {
+/**
+ * Issued when a property appraisal has been scheduled.
+ *
+ * @version $Revision$ $Date$
+ */
+public class AppraisalScheduled extends ApplicationEvent {
+    private static final long serialVersionUID = -1913119919081097742L;
+    private Date date;
+
+    public AppraisalScheduled(long loanId, Date date) {
         super(loanId);
+        this.date = date;
+    }
+
+    public Date getDate() {
+        return date;
     }
 }

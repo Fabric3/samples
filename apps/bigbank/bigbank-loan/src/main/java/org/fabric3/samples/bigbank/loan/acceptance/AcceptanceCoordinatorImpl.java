@@ -35,7 +35,7 @@ import org.fabric3.api.Fabric3RequestContext;
 import org.fabric3.api.annotation.Consumer;
 import org.fabric3.api.annotation.monitor.Monitor;
 import org.fabric3.samples.bigbank.api.event.AppraisalResult;
-import org.fabric3.samples.bigbank.api.event.AppraisalSchedule;
+import org.fabric3.samples.bigbank.api.event.AppraisalScheduled;
 import org.fabric3.samples.bigbank.api.loan.LoanApplicationNotFoundException;
 import org.fabric3.samples.bigbank.api.loan.LoanException;
 import org.fabric3.samples.bigbank.api.loan.LoanService;
@@ -143,15 +143,15 @@ public class AcceptanceCoordinatorImpl implements AcceptanceCoordinator {
         em.merge(record);
     }
 
-    public void schedule(AppraisalSchedule schedule) {
+    public void schedule(AppraisalScheduled scheduled) {
         try {
-            long id = schedule.getLoanId();
+            long id = scheduled.getLoanId();
             LoanRecord record = em.find(LoanRecord.class, id);
             if (record == null) {
                 throw new LoanApplicationNotFoundException("Loan record not found");
             }
             String email = record.getEmail();
-            Date date = schedule.getDate();
+            Date date = scheduled.getDate();
             // FIXME notificationService.appraisalScheduled(email, id, date);
         } catch (LoanException e) {
             monitor.onError(e);

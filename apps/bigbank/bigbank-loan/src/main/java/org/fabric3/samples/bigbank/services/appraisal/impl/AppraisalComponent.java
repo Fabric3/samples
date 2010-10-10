@@ -26,7 +26,7 @@ import org.oasisopen.sca.annotation.Scope;
 import org.fabric3.api.annotation.Producer;
 import org.fabric3.samples.bigbank.api.channel.LoanChannel;
 import org.fabric3.samples.bigbank.api.event.AppraisalResult;
-import org.fabric3.samples.bigbank.api.event.AppraisalSchedule;
+import org.fabric3.samples.bigbank.api.event.AppraisalScheduled;
 import org.fabric3.samples.bigbank.services.appraisal.AppraisalRequest;
 import org.fabric3.samples.bigbank.services.appraisal.AppraisalService;
 
@@ -44,8 +44,8 @@ public class AppraisalComponent implements AppraisalService {
     @OneWay
     public void appraise(AppraisalRequest request) {
         Date date = new Date(System.currentTimeMillis() + 1000);
-        AppraisalSchedule schedule = new AppraisalSchedule(request.getId(), date);
-        loanChannel.publish(schedule);
+        AppraisalScheduled scheduled = new AppraisalScheduled(request.getId(), date);
+        loanChannel.publish(scheduled);
         AppraisalResult result = new AppraisalResult(request.getId(), AppraisalResult.APPROVED, new String[0]);
         loanChannel.publish(result);
     }

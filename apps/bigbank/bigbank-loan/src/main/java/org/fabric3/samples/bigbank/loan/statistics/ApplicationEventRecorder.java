@@ -28,7 +28,9 @@ import org.fabric3.api.annotation.Consumer;
 import org.fabric3.api.annotation.monitor.Monitor;
 import org.fabric3.samples.bigbank.api.event.ApplicationEvent;
 import org.fabric3.samples.bigbank.api.event.ApplicationExpired;
+import org.fabric3.samples.bigbank.api.event.ApplicationReady;
 import org.fabric3.samples.bigbank.api.event.ApplicationReceived;
+import org.fabric3.samples.bigbank.api.event.AppraisalScheduled;
 import org.fabric3.samples.bigbank.api.event.RiskAssessmentComplete;
 import org.fabric3.samples.bigbank.loan.domain.ApplicationStatistics;
 
@@ -55,10 +57,25 @@ public abstract class ApplicationEventRecorder {
         if (event instanceof ApplicationReceived) {
             onReceived((ApplicationReceived) event);
         } else if (event instanceof RiskAssessmentComplete) {
-            onAppraisalComplete((RiskAssessmentComplete) event);
+            onAssessmentComplete((RiskAssessmentComplete) event);
+        } else if (event instanceof ApplicationReady) {
+            onApplicationReady((ApplicationReady) event);
+        } else if (event instanceof AppraisalScheduled) {
+            onAppraisalScheduled((AppraisalScheduled) event);
         } else if (event instanceof ApplicationExpired) {
             onExpired((ApplicationExpired) event);
         }
+    }
+
+    private void onAppraisalScheduled(AppraisalScheduled event) {
+        long id = event.getLoanId();
+        ApplicationStatistics statistics = em.find(ApplicationStatistics.class, id);
+        if (statistics == null) {
+            monitor.statisticsNotFound(id);
+            return;
+        }
+        statistics.setAppraisalScheduledTimestamp(System.currentTimeMillis());
+        em.persist(statistics);
     }
 
     private void onReceived(ApplicationReceived event) {
@@ -68,7 +85,7 @@ public abstract class ApplicationEventRecorder {
         em.persist(statistics);
     }
 
-    private void onAppraisalComplete(RiskAssessmentComplete event) {
+    private void onAssessmentComplete(RiskAssessmentComplete event) {
         long id = event.getLoanId();
         ApplicationStatistics statistics = em.find(ApplicationStatistics.class, id);
         if (statistics == null) {
@@ -80,6 +97,17 @@ public abstract class ApplicationEventRecorder {
         } else {
             statistics.setRejectedTimestamp(System.currentTimeMillis());
         }
+        em.persist(statistics);
+    }
+
+    private void onApplicationReady(ApplicationReady event) {
+        long id = event.getLoanId();
+        ApplicationStatistics statistics = em.find(ApplicationStatistics.class, id);
+        if (statistics == null) {
+            monitor.statisticsNotFound(id);
+            return;
+        }
+        statistics.setReadyTimestamp(System.currentTimeMillis());
         em.persist(statistics);
     }
 

@@ -35,7 +35,6 @@ import org.fabric3.api.annotation.monitor.Monitor;
 import org.fabric3.samples.bigbank.api.channel.LoanChannel;
 import org.fabric3.samples.bigbank.api.event.ApplicationReady;
 import org.fabric3.samples.bigbank.api.event.ApplicationReceived;
-import org.fabric3.samples.bigbank.api.event.ApplicationRejected;
 import org.fabric3.samples.bigbank.api.event.RiskAssessmentComplete;
 import org.fabric3.samples.bigbank.api.loan.LoanException;
 import org.fabric3.samples.bigbank.api.loan.LoanService;
@@ -52,7 +51,6 @@ import org.fabric3.samples.bigbank.services.pricing.PricingService;
 import org.fabric3.samples.bigbank.services.pricing.PricingServiceCallback;
 import org.fabric3.samples.bigbank.services.risk.RiskAssessmentService;
 import org.fabric3.samples.bigbank.services.risk.RiskRequest;
-import org.fabric3.samples.bigbank.services.risk.RiskResponse;
 
 /**
  * Default implementation of the RequestCoordinator service.
@@ -151,7 +149,6 @@ public class RequestCoordinatorImpl implements RequestCoordinator, PricingServic
         } else {
             // loan declined
             record.setStatus(LoanService.REJECTED);
-            loanChannel.publish(new ApplicationRejected(id));
         }
         em.merge(record);
     }

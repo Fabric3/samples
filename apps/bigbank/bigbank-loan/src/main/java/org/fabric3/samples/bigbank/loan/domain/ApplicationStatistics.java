@@ -38,7 +38,7 @@ public class ApplicationStatistics extends Versionable {
     private long expiredTimestamp = -1;
     private long readyTimestamp = -1;
     private long optionSelectedTimestamp = -1;
-    private long appraisalTimestamp = -1;
+    private long appraisalScheduledTimestamp = -1;
     private long fundedTimestamp = -1;
 
 
@@ -98,12 +98,12 @@ public class ApplicationStatistics extends Versionable {
         this.optionSelectedTimestamp = optionSelectedTimestamp;
     }
 
-    public long getAppraisalTimestamp() {
-        return appraisalTimestamp;
+    public long getAppraisalScheduledTimestamp() {
+        return appraisalScheduledTimestamp;
     }
 
-    public void setAppraisalTimestamp(long appraisalTimestamp) {
-        this.appraisalTimestamp = appraisalTimestamp;
+    public void setAppraisalScheduledTimestamp(long appraisalScheduledTimestamp) {
+        this.appraisalScheduledTimestamp = appraisalScheduledTimestamp;
     }
 
     public long getFundedTimestamp() {
