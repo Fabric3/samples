@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<script type="text/javascript" src="jquery/json2.js"></script>
+<script type="text/javascript" src="jquery/jquery-1.4.2.js"></script>
+<script type="text/javascript" src="jquery/jquery-ui-1.8.5.custom.min.js"></script>
+<script type="text/javascript" src="jquery/jquery.atmosphere.js"></script>
+<script type="text/javascript" src="jquery/jquery.form.js"></script>
+<script type="text/javascript" src="jquery/binder-0.3.js"></script>
+<script type="text/javascript" src="js/loan.js"></script>
+<link rel="stylesheet" href="css/style.css" type="text/css" media="all">
+<link rel="stylesheet" href="css/cupertino/jquery-ui-1.8.5.custom.css" type="text/css" media="all">
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Content-Script-Type" content="text/javascript">
+    <meta http-equiv="Content-Style-Type" content="text/css">
+    <title>Welcome to BigBank</title>
+    <link rel="icon" type="image/vnd.microsoft.icon" href="./images/favicon.ico">
+
+</head>
+<body>
+
+<div id="container">
+    <div id="header">
+        <div class="shell">
+            <h1 id="logo"><img src="./images/logo.jpg"/> <a href=".">Metaform</a></h1>
+        </div>
+    </div>
+    <div id="tabs">
+        <ul>
+            <li><a href="#inbox_tab"><span>InBox</span></a></li>
+            <li><a href="#request_tab"><span>New Loan Application</span></a></li>
+            <li><a href="#loans_tab"><span>Loan Review</span></a></li>
+        </ul>
+        <div id="inbox_tab" class="tabContent">
+            <p>No new messages</p>
+        </div>
+        <div id="request_tab" class="tabContent">
+            <form name="request_form" id="request_form" action="" method="post">
+                <table cellspacing="10">
+                    <tr>
+                        <td colspan="2"><span class="form_heading">Borrower Information</span>
+                    </tr>
+                    <tr>
+                        <td>First Name</td>
+                        <td><input id="firstName" name="firstName" type="text"></td>
+                        <td>Last Name</td>
+                        <td><input id="lastName" name="lastName" type="text"></td>
+                    </tr>
+                    <tr>
+                        <td>SSN</td>
+                        <td><input id="ssn" name="ssn" type="text"></td>
+                    </tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr>
+                        <td colspan="2"><span class="form_heading">Property Details</span>
+                    </tr>
+                    <tr>
+                        <td>Address</td>
+                        <td><input id="propertyAddress.street" name="propertyAddress.street" type="text"></td>
+                    </tr>
+                    <tr>
+                        <td>City</td>
+                        <td><input id="propertyAddress.city" name="propertyAddress.city" type="text"></td>
+                    </tr>
+                    <tr>
+                        <td>State</td>
+                        <td><input id="propertyAddress.state" name="propertyAddress.state" type="text"></td>
+                        <td>Zip Code</td>
+                        <td><input id="propertyAddress.zip" name="propertyAddress.zip" type="text"></td>
+                    </tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr>
+                        <td colspan="2"><span class="form_heading">Loan Details</span>
+                    </tr>
+                    <tr>
+                        <td>Amount</td>
+                        <td><input id="amount" name="amount" type="text"></td>
+                    </tr>
+                    <tr>
+                        <td>Down Payment</td>
+                        <td><input id="downPayment" name="downPayment" type="text"></td>
+                    </tr>
+                    <tr>
+                        <td/>
+                        <td/>
+                        <td/>
+                        <td>
+                            <input type="submit" id="request_btn" title="Apply"/>
+                        </td>
+
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div id="loans_tab" class="tabContent">
+            <span class="form_heading">Loan Details</span>
+            <span class="tabContent"><br>Add loan details....</span>
+            <span class="form_heading"><br><br>Select a Loan Option<br></span>
+            <span class="tabContent">
+                <form action="" id="options_form">
+                    <br><br>
+                    <span id="loans_tab_options" class="tabContent"></span>
+                    <br>
+                    <input type="submit" id="options_btn" title="Select"/>
+                </form>
+            </span>
+        </div>
+    </div>
+    <div id="content">
+        <br><br><br><br><br><br>
+        <div id="login">
+            <form name="login_form" action="">
+                <br>
+                <table cellspacing="10">
+                    <tr>
+                        <td><h4>Username</h4></td>
+                        <td><input id="username" type="text"></td>
+                    </tr>
+                    <tr>
+                        <td><h4>Password</h4></td>
+                        <td><input id="password" type="password"></td>
+                        <td>
+                            <input type="submit" name="loginButton" id="login_btn" value="Send"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <div id="login_message" class="message"></div>
+                        </td>
+                    </tr>
+                </table>
+                <br>
+                <br>
+            </form>
+        </div>
+    </div>
+    <div id="footer">
+        <div class="shell">
+            <div class="column">
+                <h2><a href="http://www.fabric3.org" target="_blank">powered by Fabric3</a></h2>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

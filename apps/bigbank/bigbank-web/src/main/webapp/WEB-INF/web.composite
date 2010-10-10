@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+           xmlns:f3-binding="urn:org.fabric3:binding"
+           xmlns:f3-other="urn:fabric3.org:other"
+           name="ConsumerWebComposite"
+           targetNamespace="urn:fabric3.org:samples">
+
+    <component name="ConsumerWebComponent">
+        <implementation.web uri="consumer"/>
+    </component>
+
+</composite>

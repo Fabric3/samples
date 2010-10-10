@@ -1,0 +1,191 @@
+* {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+}
+
+body {
+    font: 11px/15px Arial, sans-serif;
+    color: #292929;
+    text-align: left;
+    background: #292929;
+    overflow-x: hidden;
+}
+
+#container {
+    background: #fff repeat-x 0 0;
+}
+
+a {
+    color: #c02e1b;
+    text-decoration: none;
+}
+
+a:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+a img {
+    border: 0;
+}
+
+.shell {
+    width: 875px;
+    margin: 0 auto;
+}
+
+.tabContent {
+    /*width: 875px;*/
+    height: 400px;
+}
+
+p {
+    padding-bottom: 15px;
+}
+
+h3 {
+    font: bold 15px Arial, sans-serif;
+    margin-bottom: 5px;
+}
+
+h4 {
+    font: 13px Arial, sans-serif;
+    margin-bottom: 2px;
+}
+
+h1#logo {
+    height: 76px;
+    width: 202px;
+    font-size: 0;
+    line-height: 0;
+}
+
+h1#logo a {
+    display: block;
+    height: 76px;
+    background: url(/static/images/logo.gif);
+    text-indent: -4000px;
+}
+
+#header {
+    height: 114px;
+}
+
+#header p {
+    float: right;
+    display: inline;
+    margin-top: 30px;
+    padding-bottom: 0;
+}
+
+#header .shell {
+    position: relative;
+}
+
+#header a.notext {
+    float: left;
+    height: 16px;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+}
+
+#header a.notext:hover {
+    background-position: 0 bottom;
+}
+
+#footer {
+    background: #292929;
+    height: 30px;
+    padding-top: 30px;
+}
+
+#footer .column {
+    float: left;
+    display: inline;
+    width: 140px;
+}
+
+#footer h2 {
+    margin-bottom: 3px;
+    font: 14px Arial, sans-serif;
+    text-transform: lowercase;
+    color: #fff;
+}
+
+#footer ul {
+    list-style: none outside;
+    font-size: 13px;
+}
+
+#footer a {
+    color: #a09b8b;
+    line-height: 20px;
+}
+
+#footer a:hover {
+    color: #c02e1b;
+    line-height: 20px;
+    text-decoration: none;
+}
+
+#content {
+    background: #fff;
+    height: 520px;
+
+}
+
+#content .shell {
+    position: relative;
+}
+
+.image-hover a img {
+    border: 0;
+}
+
+.image-hover h3 {
+    font: 12px/14px Arial, sans-serif;
+    color: #292929;
+    margin: 5px 0;
+}
+
+.image-hover p {
+    font: 11px/14px Arial, sans-serif;
+    color: #8c8d8e;
+    padding-bottom: 10px;
+}
+
+.image-hover a img.hovered-img {
+    border: 1px solid #a1a1a1;
+}
+
+#login {
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 10px;
+    background: #deedf7
+}
+
+#tabs {
+    position: absolute;
+    top: 100px;
+    right:100px;
+    width: 950px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.message {
+    color: #c02e1b;
+    font-size: 13px;
+}
+
+.form_heading {
+    color: #999999;
+    font-size: 16px;
+}
+
+

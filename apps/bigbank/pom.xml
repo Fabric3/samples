@@ -31,6 +31,7 @@
 
     <modules>
       <module>bigbank-loan</module>  
+      <module>bigbank-web</module>  
       <module>bigbank-client</module>  
     </modules>
 	
