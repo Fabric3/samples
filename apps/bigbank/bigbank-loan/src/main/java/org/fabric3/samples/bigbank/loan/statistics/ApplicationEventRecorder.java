@@ -54,17 +54,31 @@ public abstract class ApplicationEventRecorder {
     public void onEvent(ApplicationEvent event) {
         long loanId = event.getLoanId();
         if (event instanceof ApplicationReceived) {
-            ApplicationStatistics statistics = new ApplicationStatistics();
-            statistics.setLoanNumber(loanId);
-            statistics.setReceivedTimestamp(System.currentTimeMillis());
-            em.persist(statistics);
+            onReceived(loanId);
         } else if (event instanceof RiskAssessmentComplete) {
-            ApplicationStatistics statistics = em.find(ApplicationStatistics.class, event.getLoanId());
-            if (statistics == null) {
-                monitor.statisticsNotFound(loanId);
-                return;
-            }
+            onAppraisalComplete((RiskAssessmentComplete) event, loanId);
         }
+    }
+
+    private void onReceived(long loanId) {
+        ApplicationStatistics statistics = new ApplicationStatistics();
+        statistics.setLoanNumber(loanId);
+        statistics.setReceivedTimestamp(System.currentTimeMillis());
+        em.persist(statistics);
+    }
+
+    private void onAppraisalComplete(RiskAssessmentComplete event, long loanId) {
+        ApplicationStatistics statistics = em.find(ApplicationStatistics.class, event.getLoanId());
+        if (statistics == null) {
+            monitor.statisticsNotFound(loanId);
+            return;
+        }
+        if (event.isApproved()) {
+            statistics.setApprovedTimestamp(System.currentTimeMillis());
+        } else {
+            statistics.setRejectedTimestamp(System.currentTimeMillis());
+        }
+        em.persist(statistics);
     }
 
 }

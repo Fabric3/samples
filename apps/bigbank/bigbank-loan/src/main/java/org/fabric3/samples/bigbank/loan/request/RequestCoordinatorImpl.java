@@ -143,7 +143,7 @@ public class RequestCoordinatorImpl implements RequestCoordinator, PricingServic
             return;
         }
 
-        if (RiskResponse.APPROVE == event.getDecision()) {
+        if (event.isApproved()) {
             // loan approved, price it
             record.setStatus(LoanService.PRICING);
             PricingRequest pricingRequest = new PricingRequest(id, event.getRiskFactor());

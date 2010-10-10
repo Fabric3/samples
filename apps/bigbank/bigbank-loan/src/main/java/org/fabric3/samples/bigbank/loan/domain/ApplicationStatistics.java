@@ -33,7 +33,6 @@ public class ApplicationStatistics extends Versionable {
 
     private long loanNumber;
     private long receivedTimestamp = -1;
-    private long riskAssessmentTimestamp = -1;
     private long approvedTimestamp = -1;
     private long rejectedTimestamp = -1;
     private long expiredTimestamp = -1;
@@ -57,14 +56,6 @@ public class ApplicationStatistics extends Versionable {
 
     public void setReceivedTimestamp(long receivedTimestamp) {
         this.receivedTimestamp = receivedTimestamp;
-    }
-
-    public long getRiskAssessmentTimestamp() {
-        return riskAssessmentTimestamp;
-    }
-
-    public void setRiskAssessmentTimestamp(long riskAssessmentTimestamp) {
-        this.riskAssessmentTimestamp = riskAssessmentTimestamp;
     }
 
     public long getApprovedTimestamp() {

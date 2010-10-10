@@ -45,23 +45,12 @@ public class RiskAssessmentComplete extends ApplicationEvent {
         return factor;
     }
 
-    public void setRiskFactor(int factor) {
-        this.factor = factor;
-    }
-
-    public int getDecision() {
-        return decision;
-    }
-
-    public void setDecision(int decision) {
-        this.decision = decision;
+    public boolean isApproved() {
+        return decision == APPROVE;
     }
 
     public RiskReason[] getReasons() {
         return reasons;
     }
 
-    public void setReasons(RiskReason[] reasons) {
-        this.reasons = reasons;
-    }
 }
