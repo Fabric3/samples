@@ -27,6 +27,7 @@ import org.oasisopen.sca.annotation.Scope;
 import org.fabric3.api.annotation.Consumer;
 import org.fabric3.api.annotation.monitor.Monitor;
 import org.fabric3.samples.bigbank.api.event.ApplicationEvent;
+import org.fabric3.samples.bigbank.api.event.ApplicationExpired;
 import org.fabric3.samples.bigbank.api.event.ApplicationReceived;
 import org.fabric3.samples.bigbank.api.event.RiskAssessmentComplete;
 import org.fabric3.samples.bigbank.loan.domain.ApplicationStatistics;
@@ -49,28 +50,29 @@ public abstract class ApplicationEventRecorder {
         this.em = em;
     }
 
-
     @Consumer("loanChannel")
     public void onEvent(ApplicationEvent event) {
-        long loanId = event.getLoanId();
         if (event instanceof ApplicationReceived) {
-            onReceived(loanId);
+            onReceived((ApplicationReceived) event);
         } else if (event instanceof RiskAssessmentComplete) {
-            onAppraisalComplete((RiskAssessmentComplete) event, loanId);
+            onAppraisalComplete((RiskAssessmentComplete) event);
+        } else if (event instanceof ApplicationExpired) {
+            onExpired((ApplicationExpired) event);
         }
     }
 
-    private void onReceived(long loanId) {
+    private void onReceived(ApplicationReceived event) {
         ApplicationStatistics statistics = new ApplicationStatistics();
-        statistics.setLoanNumber(loanId);
+        statistics.setLoanNumber(event.getLoanId());
         statistics.setReceivedTimestamp(System.currentTimeMillis());
         em.persist(statistics);
     }
 
-    private void onAppraisalComplete(RiskAssessmentComplete event, long loanId) {
-        ApplicationStatistics statistics = em.find(ApplicationStatistics.class, event.getLoanId());
+    private void onAppraisalComplete(RiskAssessmentComplete event) {
+        long id = event.getLoanId();
+        ApplicationStatistics statistics = em.find(ApplicationStatistics.class, id);
         if (statistics == null) {
-            monitor.statisticsNotFound(loanId);
+            monitor.statisticsNotFound(id);
             return;
         }
         if (event.isApproved()) {
@@ -78,6 +80,17 @@ public abstract class ApplicationEventRecorder {
         } else {
             statistics.setRejectedTimestamp(System.currentTimeMillis());
         }
+        em.persist(statistics);
+    }
+
+    private void onExpired(ApplicationExpired event) {
+        long id = event.getLoanId();
+        ApplicationStatistics statistics = em.find(ApplicationStatistics.class, id);
+        if (statistics == null) {
+            monitor.statisticsNotFound(id);
+            return;
+        }
+        statistics.setExpiredTimestamp(System.currentTimeMillis());
         em.persist(statistics);
     }
 
