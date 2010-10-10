@@ -16,7 +16,9 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.fabric3.samples.bigbank.loan.domain;
+package org.fabric3.samples.bigbank.api.domain;
+
+import org.fabric3.samples.bigbank.api.message.Address;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -25,17 +27,18 @@ import java.io.Serializable;
  * @version $Revision$ $Date$
  */
 @Entity
-public class RiskReasonInfo implements Serializable {
-    private static final long serialVersionUID = -1781028701570454727L;
+public class PropertyInfo implements Serializable {
+    private static final long serialVersionUID = -372091544226598099L;
     private long id;
     private long version;
-    private String description;
+    private Address address;
+    private double value;
 
-    public RiskReasonInfo() {
+    public PropertyInfo(Address address) {
+        this.address = address;
     }
 
-    public RiskReasonInfo(String description) {
-        this.description = description;
+    public PropertyInfo() {
     }
 
     @Id
@@ -58,11 +61,19 @@ public class RiskReasonInfo implements Serializable {
     }
 
 
-    public String getDescription() {
-        return description;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public double getValue() {
+        return value;
+    }
+
+    public void setValue(double value) {
+        this.value = value;
     }
 }

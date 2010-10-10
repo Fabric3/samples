@@ -18,13 +18,13 @@
  */
 package org.fabric3.samples.bigbank.api.event;
 
-import org.fabric3.samples.bigbank.api.Versionable;
+import java.io.Serializable;
 
 /**
  * Root application event type.
  *
  * @version $Rev$ $Date$
  */
-public abstract class ManagementEvent extends Versionable {
-    
+public abstract class ManagementEvent implements Serializable {
+
 }

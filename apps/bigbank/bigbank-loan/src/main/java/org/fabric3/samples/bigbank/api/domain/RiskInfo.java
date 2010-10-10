@@ -16,29 +16,33 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.fabric3.samples.bigbank.loan.domain;
-
-import org.fabric3.samples.bigbank.api.message.Address;
+package org.fabric3.samples.bigbank.api.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @version $Revision$ $Date$
  */
 @Entity
-public class PropertyInfo implements Serializable {
-    private static final long serialVersionUID = -372091544226598099L;
+public class RiskInfo implements Serializable {
+    private static final long serialVersionUID = 1427555176373119897L;
+    public static final int APPROVE = 1;
+    public static final int REJECT = -1;
     private long id;
     private long version;
-    private Address address;
-    private double value;
+    private int decision;
+    private int factor;
+    private List<RiskReasonInfo> reasons;
 
-    public PropertyInfo(Address address) {
-        this.address = address;
+    public RiskInfo(int decision, int factor, List<RiskReasonInfo> reasons) {
+        this.decision = decision;
+        this.factor = factor;
+        this.reasons = reasons;
     }
 
-    public PropertyInfo() {
+    public RiskInfo() {
     }
 
     @Id
@@ -60,20 +64,29 @@ public class PropertyInfo implements Serializable {
         this.version = version;
     }
 
-
-    public Address getAddress() {
-        return address;
+    public int getRiskFactor() {
+        return factor;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setRiskFactor(int factor) {
+        this.factor = factor;
     }
 
-    public double getValue() {
-        return value;
+    public int getDecision() {
+        return decision;
     }
 
-    public void setValue(double value) {
-        this.value = value;
+    public void setDecision(int decision) {
+        this.decision = decision;
     }
+
+    @OneToMany(cascade = CascadeType.ALL)
+    public List<RiskReasonInfo> getReasons() {
+        return reasons;
+    }
+
+    public void setReasons(List<RiskReasonInfo> reasons) {
+        this.reasons = reasons;
+    }
+
 }

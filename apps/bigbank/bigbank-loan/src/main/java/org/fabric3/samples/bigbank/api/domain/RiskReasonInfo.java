@@ -16,33 +16,26 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.fabric3.samples.bigbank.loan.domain;
+package org.fabric3.samples.bigbank.api.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * @version $Revision$ $Date$
  */
 @Entity
-public class RiskInfo implements Serializable {
-    private static final long serialVersionUID = 1427555176373119897L;
-    public static final int APPROVE = 1;
-    public static final int REJECT = -1;
+public class RiskReasonInfo implements Serializable {
+    private static final long serialVersionUID = -1781028701570454727L;
     private long id;
     private long version;
-    private int decision;
-    private int factor;
-    private List<RiskReasonInfo> reasons;
+    private String description;
 
-    public RiskInfo(int decision, int factor, List<RiskReasonInfo> reasons) {
-        this.decision = decision;
-        this.factor = factor;
-        this.reasons = reasons;
+    public RiskReasonInfo() {
     }
 
-    public RiskInfo() {
+    public RiskReasonInfo(String description) {
+        this.description = description;
     }
 
     @Id
@@ -64,29 +57,12 @@ public class RiskInfo implements Serializable {
         this.version = version;
     }
 
-    public int getRiskFactor() {
-        return factor;
+
+    public String getDescription() {
+        return description;
     }
 
-    public void setRiskFactor(int factor) {
-        this.factor = factor;
+    public void setDescription(String description) {
+        this.description = description;
     }
-
-    public int getDecision() {
-        return decision;
-    }
-
-    public void setDecision(int decision) {
-        this.decision = decision;
-    }
-
-    @OneToMany(cascade = CascadeType.ALL)
-    public List<RiskReasonInfo> getReasons() {
-        return reasons;
-    }
-
-    public void setReasons(List<RiskReasonInfo> reasons) {
-        this.reasons = reasons;
-    }
-
 }

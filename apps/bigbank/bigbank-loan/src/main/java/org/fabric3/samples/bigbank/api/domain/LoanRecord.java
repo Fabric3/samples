@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.fabric3.samples.bigbank.loan.domain;
+package org.fabric3.samples.bigbank.api.domain;
 
 import java.util.List;
 import javax.persistence.CascadeType;

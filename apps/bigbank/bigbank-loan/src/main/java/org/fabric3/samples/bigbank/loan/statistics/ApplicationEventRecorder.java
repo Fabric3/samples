@@ -32,7 +32,7 @@ import org.fabric3.samples.bigbank.api.event.ApplicationReady;
 import org.fabric3.samples.bigbank.api.event.ApplicationReceived;
 import org.fabric3.samples.bigbank.api.event.AppraisalScheduled;
 import org.fabric3.samples.bigbank.api.event.RiskAssessmentComplete;
-import org.fabric3.samples.bigbank.loan.domain.ApplicationStatistics;
+import org.fabric3.samples.bigbank.api.domain.ApplicationStatistics;
 
 /**
  * @version $Rev: 9526 $ $Date: 2010-10-10 15:32:06 +0200 (Sun, 10 Oct 2010) $
