@@ -28,7 +28,4 @@ public interface ErrorMonitor {
     @Severe("The following error occurred")
     void onError(Throwable e);
 
-    @Severe
-    void onErrorMessage(String msg);
-
 }

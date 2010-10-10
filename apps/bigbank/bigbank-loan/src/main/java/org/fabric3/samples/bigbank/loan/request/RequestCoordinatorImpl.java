@@ -105,6 +105,10 @@ public class RequestCoordinatorImpl implements RequestCoordinator, PricingServic
         // create a loan application and process it
         LoanRecord record = createLoanRecord(request);
 
+        // publish an event that the loan application was received
+        ApplicationReceived event = new ApplicationReceived(record.getId());
+        loanChannel.publish(event);
+
         // pull the applicant's credit score and update the loan record
         CreditScore score = creditService.score(record.getSsn());
         record.setCreditScore(score.getScore());
@@ -112,11 +116,8 @@ public class RequestCoordinatorImpl implements RequestCoordinator, PricingServic
 
         // synchronize to avoid race conditions with non-blocking risk assessment
         em.flush();
-        monitor.received(record.getId());
 
-        // publish an event that the loan application was received
-        ApplicationReceived event = new ApplicationReceived();
-        loanChannel.publish(event);
+        monitor.received(record.getId());
 
         // assess the risk
         RiskRequest riskRequest = new RiskRequest(record.getId(), record.getCreditScore(), record.getAmount(), record.getDownPayment());
@@ -131,7 +132,7 @@ public class RequestCoordinatorImpl implements RequestCoordinator, PricingServic
     @Consumer("loanChannel")
     public void onRiskAssessment(RiskAssessmentComplete event) {
         LoanRecord record;
-        long id = event.getId();
+        long id = event.getLoanId();
 
         // record that the risk assessment was received
         monitor.riskAssessmentReceived(id);
@@ -150,7 +151,7 @@ public class RequestCoordinatorImpl implements RequestCoordinator, PricingServic
         } else {
             // loan declined
             record.setStatus(LoanService.REJECTED);
-            loanChannel.publish(new ApplicationRejected());
+            loanChannel.publish(new ApplicationRejected(id));
         }
         em.merge(record);
     }
@@ -173,7 +174,7 @@ public class RequestCoordinatorImpl implements RequestCoordinator, PricingServic
         record.setTerms(termInfos);
         record.setStatus(LoanService.AWAITING_ACCEPTANCE);
         em.merge(record);
-        loanChannel.publish(new ApplicationReady());
+        loanChannel.publish(new ApplicationReady(id));
     }
 
 

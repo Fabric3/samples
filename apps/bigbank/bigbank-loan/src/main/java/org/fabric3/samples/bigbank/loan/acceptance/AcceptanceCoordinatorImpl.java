@@ -145,7 +145,7 @@ public class AcceptanceCoordinatorImpl implements AcceptanceCoordinator {
 
     public void schedule(AppraisalSchedule schedule) {
         try {
-            long id = schedule.getId();
+            long id = schedule.getLoanId();
             LoanRecord record = em.find(LoanRecord.class, id);
             if (record == null) {
                 throw new LoanApplicationNotFoundException("Loan record not found");
@@ -165,7 +165,7 @@ public class AcceptanceCoordinatorImpl implements AcceptanceCoordinator {
             return;
         }
         try {
-            LoanRecord record = em.find(LoanRecord.class, result.getId());
+            LoanRecord record = em.find(LoanRecord.class, result.getLoanId());
             if (record == null) {
                 throw new LoanApplicationNotFoundException("Loan record not found");
             }

@@ -25,28 +25,20 @@ import org.fabric3.samples.bigbank.services.risk.RiskReason;
  *
  * @version $Rev$ $Date$
  */
-public class RiskAssessmentComplete extends LoanEvent {
+public class RiskAssessmentComplete extends ApplicationEvent {
     private static final long serialVersionUID = 1427555176373119897L;
     public static final RiskReason[] EMPTY = new RiskReason[0];
     public static final int APPROVE = 1;
     public static final int REJECT = -1;
-    private long id;
     private int decision;
     private int factor;
     private RiskReason[] reasons = EMPTY;
 
-    public RiskAssessmentComplete(long id, int decision, int factor, RiskReason[] reasons) {
-        this.id = id;
+    public RiskAssessmentComplete(long loanId, int decision, int factor, RiskReason[] reasons) {
+        super(loanId);
         this.decision = decision;
         this.factor = factor;
         this.reasons = reasons;
-    }
-
-    public RiskAssessmentComplete() {
-    }
-
-    public long getId() {
-        return id;
     }
 
     public int getRiskFactor() {

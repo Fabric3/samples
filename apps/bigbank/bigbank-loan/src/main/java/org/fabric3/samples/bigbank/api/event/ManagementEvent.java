@@ -21,10 +21,10 @@ package org.fabric3.samples.bigbank.api.event;
 import org.fabric3.samples.bigbank.api.Versionable;
 
 /**
- * The root event type.
+ * Root application event type.
  *
  * @version $Rev$ $Date$
  */
-public abstract class LoanEvent extends Versionable {
-
+public abstract class ManagementEvent extends Versionable {
+    
 }

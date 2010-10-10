@@ -23,25 +23,17 @@ package org.fabric3.samples.bigbank.api.event;
  *
  * @version $Revision$ $Date$
  */
-public class AppraisalResult extends LoanEvent {
+public class AppraisalResult extends ApplicationEvent {
     private static final long serialVersionUID = 1094048646709453908L;
     public static int APPROVED = 1;
     public static int DECLINED = -1;
-    private long id;
     private int result;
     private String[] comments;
 
-    public AppraisalResult() {
-    }
-
-    public AppraisalResult(long id, int result, String[] comments) {
-        this.id = id;
+    public AppraisalResult(long loanId, int result, String[] comments) {
+        super(loanId);
         this.result = result;
         this.comments = comments;
-    }
-
-    public long getId() {
-        return id;
     }
 
     public int getResult() {

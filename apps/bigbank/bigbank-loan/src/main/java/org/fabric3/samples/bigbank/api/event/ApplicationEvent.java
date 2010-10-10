@@ -18,13 +18,33 @@
  */
 package org.fabric3.samples.bigbank.api.event;
 
-import org.fabric3.samples.bigbank.api.Versionable;
+import java.io.Serializable;
 
 /**
- * Root application event type.
+ * The root event type.
  *
  * @version $Rev$ $Date$
  */
-public abstract class ApplicationEvent extends Versionable {
-    
+public abstract class ApplicationEvent implements Serializable {
+    private long loanId;
+    private long timestamp;
+
+    public ApplicationEvent(long loanId) {
+        this(loanId, System.currentTimeMillis());
+    }
+
+    public ApplicationEvent(long loanId, long timestamp) {
+        this.loanId = loanId;
+        this.timestamp = timestamp;
+    }
+
+    public long getLoanId() {
+        return loanId;
+    }
+
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
 }

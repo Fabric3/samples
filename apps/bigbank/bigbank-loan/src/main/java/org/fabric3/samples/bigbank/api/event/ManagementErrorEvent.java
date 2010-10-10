@@ -19,14 +19,10 @@
 package org.fabric3.samples.bigbank.api.event;
 
 /**
- * Denotes a loan application that has been approved, priced and as ready for the applicant to accept.
+ * Denotes an error raised by the loan application.
  *
  * @version $Rev$ $Date$
  */
-public class ApplicationReady extends ApplicationEvent {
-    private static final long serialVersionUID = 6913418948989296728L;
+public abstract class ManagementErrorEvent extends ManagementEvent {
 
-    public ApplicationReady(long loanId) {
-        super(loanId);
-    }
 }

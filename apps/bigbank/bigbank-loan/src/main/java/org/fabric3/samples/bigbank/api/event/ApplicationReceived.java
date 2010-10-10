@@ -23,7 +23,10 @@ package org.fabric3.samples.bigbank.api.event;
  *
  * @version $Rev$ $Date$
  */
-public class ApplicationReceived extends LoanEvent {
+public class ApplicationReceived extends ApplicationEvent {
     private static final long serialVersionUID = -3179786299288877078L;
 
+    public ApplicationReceived(long loanId) {
+        super(loanId);
+    }
 }

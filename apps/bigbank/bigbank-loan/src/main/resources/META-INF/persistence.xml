@@ -29,6 +29,7 @@
         <class>org.fabric3.samples.bigbank.loan.domain.RiskReasonInfo</class>
         <class>org.fabric3.samples.bigbank.loan.domain.TermInfo</class>
         <class>org.fabric3.samples.bigbank.api.message.Address</class>
+        <class>org.fabric3.samples.bigbank.loan.domain.ApplicationStatistics</class>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
             <property name="hibernate.hbm2ddl.auto" value="create-drop"/>

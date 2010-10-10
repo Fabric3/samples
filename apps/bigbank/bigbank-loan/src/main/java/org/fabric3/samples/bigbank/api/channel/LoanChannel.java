@@ -18,7 +18,7 @@
  */
 package org.fabric3.samples.bigbank.api.channel;
 
-import org.fabric3.samples.bigbank.api.event.LoanEvent;
+import org.fabric3.samples.bigbank.api.event.ApplicationEvent;
 
 /**
  * A typed interface to the channel where loan events are published.
@@ -32,6 +32,6 @@ public interface LoanChannel {
      *
      * @param event the event
      */
-    void publish(LoanEvent event);
+    void publish(ApplicationEvent event);
 
 }

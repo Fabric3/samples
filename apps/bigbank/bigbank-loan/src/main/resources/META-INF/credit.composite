@@ -29,8 +29,8 @@
         <implementation.java class="org.fabric3.samples.bigbank.services.credit.impl.ConsolidatedCreditComponent"/>
     </component>
 
-    <component name="ThirdPartyCreditComponent">
-        <implementation.java class="org.fabric3.samples.bigbank.services.credit.impl.ThirdPartyCreditComponent"/>
+    <component name="ThirdPartyCreditBureau">
+        <implementation.java class="org.fabric3.samples.bigbank.services.credit.impl.ThirdPartyCreditBureau"/>
     </component>
 
 

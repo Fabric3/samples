@@ -36,8 +36,6 @@ public class ConsolidatedCreditComponent implements CreditService {
     }
 
     public CreditScore score(String ssn) {
-        System.out.println("CreditService: Calculating credit score");
-
         int size = bureaus.size();
         int total = 0;
         for (CreditBureau bureau : bureaus) {

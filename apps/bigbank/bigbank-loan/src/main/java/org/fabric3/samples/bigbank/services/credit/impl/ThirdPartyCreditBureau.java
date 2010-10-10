@@ -21,7 +21,7 @@ import org.fabric3.samples.bigbank.services.credit.CreditBureau;
 /**
  * @version $Rev$ $Date$
  */
-public class ThirdPartyCreditComponent implements CreditBureau {
+public class ThirdPartyCreditBureau implements CreditBureau {
 
     public String getBureauCode() {
         return "1234";
