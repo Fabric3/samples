@@ -31,6 +31,7 @@
         <implementation.java class="org.fabric3.samples.bigbank.services.risk.impl.RiskAssessmentComponent"/>
         <producer name="LoanChannel" target="LoanChannel"/>
         <property name="ratioMinimum">.10</property>
+        <property name="ratioFavorableMinimum">.05</property>
     </component>
 
     <component name="PricingComponent">

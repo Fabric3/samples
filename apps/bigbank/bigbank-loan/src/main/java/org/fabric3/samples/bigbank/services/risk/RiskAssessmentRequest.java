@@ -23,14 +23,14 @@ import java.io.Serializable;
 /**
  * @version $Revision$ $Date$
  */
-public class RiskRequest implements Serializable {
+public class RiskAssessmentRequest implements Serializable {
     private static final long serialVersionUID = -5185791927524383209L;
     private long id;
     private int creditScore;
     private double downPayment;
     private double amount;
 
-    public RiskRequest(long id, int creditScore, double amount, double downPayment) {
+    public RiskAssessmentRequest(long id, int creditScore, double amount, double downPayment) {
         this.id = id;
         this.creditScore = creditScore;
         this.amount = amount;

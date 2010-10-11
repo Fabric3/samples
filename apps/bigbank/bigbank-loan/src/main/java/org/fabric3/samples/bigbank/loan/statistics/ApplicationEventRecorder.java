@@ -31,7 +31,7 @@ import org.fabric3.samples.bigbank.api.event.ApplicationExpired;
 import org.fabric3.samples.bigbank.api.event.ApplicationReady;
 import org.fabric3.samples.bigbank.api.event.ApplicationReceived;
 import org.fabric3.samples.bigbank.api.event.AppraisalScheduled;
-import org.fabric3.samples.bigbank.api.event.RiskAssessmentComplete;
+import org.fabric3.samples.bigbank.api.event.ManualRiskAssessmentComplete;
 import org.fabric3.samples.bigbank.api.domain.ApplicationStatistics;
 
 /**
@@ -56,8 +56,8 @@ public abstract class ApplicationEventRecorder {
     public void onEvent(ApplicationEvent event) {
         if (event instanceof ApplicationReceived) {
             onReceived((ApplicationReceived) event);
-        } else if (event instanceof RiskAssessmentComplete) {
-            onAssessmentComplete((RiskAssessmentComplete) event);
+        } else if (event instanceof ManualRiskAssessmentComplete) {
+            onAssessmentComplete((ManualRiskAssessmentComplete) event);
         } else if (event instanceof ApplicationReady) {
             onApplicationReady((ApplicationReady) event);
         } else if (event instanceof AppraisalScheduled) {
@@ -85,7 +85,7 @@ public abstract class ApplicationEventRecorder {
         em.persist(statistics);
     }
 
-    private void onAssessmentComplete(RiskAssessmentComplete event) {
+    private void onAssessmentComplete(ManualRiskAssessmentComplete event) {
         long id = event.getLoanId();
         ApplicationStatistics statistics = em.find(ApplicationStatistics.class, id);
         if (statistics == null) {

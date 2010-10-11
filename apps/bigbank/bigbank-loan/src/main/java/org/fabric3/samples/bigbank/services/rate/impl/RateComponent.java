@@ -30,7 +30,6 @@ import org.oasisopen.sca.annotation.Scope;
 public class RateComponent implements RateService {
 
     public RateResults calculateRates(int score) {
-        System.out.println("RateService: Returning rates");
         RateResults results = new RateResults();
         if (score <= 1) {
             Rate fixed30 = new Rate("30 Year FIXED", 5.5f, 1f);

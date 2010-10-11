@@ -33,15 +33,16 @@ import org.fabric3.api.annotation.Consumer;
 import org.fabric3.api.annotation.Producer;
 import org.fabric3.api.annotation.monitor.Monitor;
 import org.fabric3.samples.bigbank.api.channel.LoanChannel;
-import org.fabric3.samples.bigbank.api.event.ApplicationReady;
-import org.fabric3.samples.bigbank.api.event.ApplicationReceived;
-import org.fabric3.samples.bigbank.api.event.RiskAssessmentComplete;
-import org.fabric3.samples.bigbank.api.loan.LoanException;
-import org.fabric3.samples.bigbank.api.loan.LoanService;
-import org.fabric3.samples.bigbank.api.message.LoanRequest;
 import org.fabric3.samples.bigbank.api.domain.LoanRecord;
 import org.fabric3.samples.bigbank.api.domain.PropertyInfo;
 import org.fabric3.samples.bigbank.api.domain.TermInfo;
+import org.fabric3.samples.bigbank.api.event.ApplicationReady;
+import org.fabric3.samples.bigbank.api.event.ApplicationReceived;
+import org.fabric3.samples.bigbank.api.event.ManualRiskAssessment;
+import org.fabric3.samples.bigbank.api.event.ManualRiskAssessmentComplete;
+import org.fabric3.samples.bigbank.api.loan.LoanException;
+import org.fabric3.samples.bigbank.api.loan.LoanService;
+import org.fabric3.samples.bigbank.api.message.LoanRequest;
 import org.fabric3.samples.bigbank.services.credit.CreditScore;
 import org.fabric3.samples.bigbank.services.credit.CreditService;
 import org.fabric3.samples.bigbank.services.pricing.PriceResponse;
@@ -49,8 +50,9 @@ import org.fabric3.samples.bigbank.services.pricing.PricingOption;
 import org.fabric3.samples.bigbank.services.pricing.PricingRequest;
 import org.fabric3.samples.bigbank.services.pricing.PricingService;
 import org.fabric3.samples.bigbank.services.pricing.PricingServiceCallback;
+import org.fabric3.samples.bigbank.services.risk.RiskAssessmentRequest;
+import org.fabric3.samples.bigbank.services.risk.RiskAssessmentResponse;
 import org.fabric3.samples.bigbank.services.risk.RiskAssessmentService;
-import org.fabric3.samples.bigbank.services.risk.RiskRequest;
 
 /**
  * Default implementation of the RequestCoordinator service.
@@ -108,19 +110,38 @@ public class RequestCoordinatorImpl implements RequestCoordinator, PricingServic
         loanChannel.publish(event);
 
         // pull the applicant's credit score and update the loan record
-        CreditScore score = creditService.score(record.getSsn());
-        record.setCreditScore(score.getScore());
+        CreditScore creditScore = creditService.score(record.getSsn());
+        int score = creditScore.getScore();
+        record.setCreditScore(score);
         em.persist(record);
 
         // synchronize to avoid race conditions with non-blocking risk assessment
         em.flush();
 
-        monitor.received(record.getId());
+        long id = record.getId();
+        monitor.received(id);
 
         // assess the risk
-        RiskRequest riskRequest = new RiskRequest(record.getId(), record.getCreditScore(), record.getAmount(), record.getDownPayment());
-        riskService.assessRisk(riskRequest);
-        return record.getId();
+        double amount = record.getAmount();
+        double down = record.getDownPayment();
+        RiskAssessmentRequest riskRequest = new RiskAssessmentRequest(id, score, amount, down);
+        RiskAssessmentResponse response = riskService.assessRisk(riskRequest);
+
+        if (RiskAssessmentResponse.APPROVED == response.getDecision()) {
+            // approved immediately, price the loan
+            record.setStatus(LoanService.PRICING);
+            PricingRequest pricingRequest = new PricingRequest(id, response.getRiskFactor());
+            pricingService.price(pricingRequest);
+        } else if (RiskAssessmentResponse.REJECTED == response.getDecision()) {
+            // loan not approved
+            record.setStatus(LoanService.REJECTED);
+        } else {
+            // manual approval
+            record.setStatus(LoanService.AWAITING_ASSESSMENT);
+            ManualRiskAssessment manualAssessment = new ManualRiskAssessment(id);
+            loanChannel.publish(manualAssessment);
+        }
+        return id;
     }
 
     public void cancel() {
@@ -128,7 +149,7 @@ public class RequestCoordinatorImpl implements RequestCoordinator, PricingServic
     }
 
     @Consumer("loanChannel")
-    public void onRiskAssessment(RiskAssessmentComplete event) {
+    public void onRiskAssessment(ManualRiskAssessmentComplete event) {
         LoanRecord record;
         long id = event.getLoanId();
 

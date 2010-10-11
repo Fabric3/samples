@@ -18,39 +18,28 @@
  */
 package org.fabric3.samples.bigbank.api.event;
 
-import org.fabric3.samples.bigbank.services.risk.RiskReason;
-
 /**
  * Issued when risk assessment on an application is complete.
  *
  * @version $Rev$ $Date$
  */
-public class RiskAssessmentComplete extends ApplicationEvent {
+public class ManualRiskAssessmentComplete extends ApplicationEvent {
     private static final long serialVersionUID = 1427555176373119897L;
-    public static final RiskReason[] EMPTY = new RiskReason[0];
-    public static final int APPROVE = 1;
-    public static final int REJECT = -1;
-    private int decision;
+    private boolean approved;
     private int factor;
-    private RiskReason[] reasons = EMPTY;
 
-    public RiskAssessmentComplete(long loanId, int decision, int factor, RiskReason[] reasons) {
+    public ManualRiskAssessmentComplete(long loanId, boolean approved, int factor) {
         super(loanId);
-        this.decision = decision;
+        this.approved = approved;
         this.factor = factor;
-        this.reasons = reasons;
     }
+
+    public boolean isApproved() {
+        return approved;
+    }
+
 
     public int getRiskFactor() {
         return factor;
     }
-
-    public boolean isApproved() {
-        return decision == APPROVE;
-    }
-
-    public RiskReason[] getReasons() {
-        return reasons;
-    }
-
 }

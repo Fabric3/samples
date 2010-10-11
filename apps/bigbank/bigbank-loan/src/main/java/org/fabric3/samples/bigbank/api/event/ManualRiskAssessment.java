@@ -16,23 +16,17 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.fabric3.samples.bigbank.services.risk;
-
-import org.oasisopen.sca.annotation.Remotable;
+package org.fabric3.samples.bigbank.api.event;
 
 /**
- * Performs risk assessment against a loan application.
- *
  * @version $Rev$ $Date$
  */
-@Remotable
-public interface RiskAssessmentService {
+public class ManualRiskAssessment extends ApplicationEvent {
+    private static final long serialVersionUID = -703746281387169217L;
 
-    /**
-     * Perform the risk assessment.
-     *
-     * @param request the request data
-     * @return the risk assessment
-     */
-    RiskAssessmentResponse assessRisk(RiskAssessmentRequest request);
+    public ManualRiskAssessment(long loanId) {
+        super(loanId);
+    }
+
+
 }

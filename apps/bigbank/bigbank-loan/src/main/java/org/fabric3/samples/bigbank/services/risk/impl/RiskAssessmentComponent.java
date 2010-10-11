@@ -26,11 +26,10 @@ import org.oasisopen.sca.annotation.Scope;
 
 import org.fabric3.api.annotation.Producer;
 import org.fabric3.samples.bigbank.api.channel.LoanChannel;
-import org.fabric3.samples.bigbank.api.event.RiskAssessmentComplete;
+import org.fabric3.samples.bigbank.services.risk.RiskAssessmentRequest;
+import org.fabric3.samples.bigbank.services.risk.RiskAssessmentResponse;
 import org.fabric3.samples.bigbank.services.risk.RiskAssessmentService;
 import org.fabric3.samples.bigbank.services.risk.RiskReason;
-import org.fabric3.samples.bigbank.services.risk.RiskRequest;
-import org.fabric3.samples.bigbank.services.risk.RiskResponse;
 
 /**
  * Implementation that performs risk assessment based on an applicant's credit score and loan amount.
@@ -40,38 +39,71 @@ import org.fabric3.samples.bigbank.services.risk.RiskResponse;
 @Scope("COMPOSITE")
 public class RiskAssessmentComponent implements RiskAssessmentService {
     private LoanChannel channel;
-    private double ratioMinimum;
+    private double ratioMinimum = .10;
+    private double ratioFavorableMinimum = .05;
 
-    public RiskAssessmentComponent(@Producer("LoanChannel") LoanChannel channel, @Property(name = "ratioMinimum") Double minimum) {
+    public RiskAssessmentComponent(@Producer("LoanChannel") LoanChannel channel) {
         this.channel = channel;
-        this.ratioMinimum = minimum;
     }
 
-    public void assessRisk(RiskRequest request) {
-        System.out.println("RiskAssessmentService: Calculating risk");
+    @Property(required = false)
+    public void setRatioMinimum(double ratioMinimum) {
+        this.ratioMinimum = ratioMinimum;
+    }
+
+    @Property(required = false)
+    public void setRatioFavorableMinimum(double ratioFavorableMinimum) {
+        this.ratioFavorableMinimum = ratioFavorableMinimum;
+    }
+
+    public RiskAssessmentResponse assessRisk(RiskAssessmentRequest request) {
         int score = request.getCreditScore();
-        int factor = 0;
+        int factor = 100;
         int decision;
         List<RiskReason> reasons = new ArrayList<RiskReason>();
-        if (score < 700) {
-            factor += 10;
-            reasons.add(new RiskReason("Poor credit history"));
-        }
-        double ratio = request.getDownPayment() / request.getAmount();
-        if (ratio < ratioMinimum) {
-            // less than a minimum percentage down, so assign it the highest risk
-            factor += 15;
-            reasons.add(new RiskReason("Down payment was too little"));
-            reasons.add(new RiskReason("Suspect credit history"));
-        }
-        if (factor > 24) {
-            decision = RiskResponse.REJECT;
+        if (score < 580) {
+            // reject outright
+            decision = RiskAssessmentResponse.REJECTED;
+            RiskReason reason = new RiskReason("Poor credit history");
+            reasons.add(reason);
+        } else if (score >= 580 && score < 620) {
+            // send for manual approval
+            // TODO fire manual approval event
+            factor = 50;
+            decision = RiskAssessmentResponse.MANUAL_APPROVAL;
+        } else if (score >= 620 && score < 720) {
+            if (!checkAcceptableRatio(request, ratioMinimum)) {
+                reasons.add(new RiskReason("Down payment was too little"));
+                decision = RiskAssessmentResponse.REJECTED;
+            } else {
+                factor = 50;
+                decision = RiskAssessmentResponse.APPROVED;
+            }
+        } else if (score >= 620 && score < 720) {
+            // favorable terms
+            if (!checkAcceptableRatio(request, ratioFavorableMinimum)) {
+                reasons.add(new RiskReason("Down payment was too little"));
+                decision = RiskAssessmentResponse.REJECTED;
+            } else {
+                factor = 0;
+                decision = RiskAssessmentResponse.APPROVED;
+            }
         } else {
-            decision = RiskResponse.APPROVE;
+            // favorable terms
+            if (!checkAcceptableRatio(request, ratioFavorableMinimum)) {
+                reasons.add(new RiskReason("Down payment was too little"));
+                decision = RiskAssessmentResponse.REJECTED;
+            } else {
+                factor = 0;
+                decision = RiskAssessmentResponse.APPROVED;
+            }
         }
         long id = request.getId();
-        RiskReason[] riskReasons = reasons.toArray(new RiskReason[reasons.size()]);
-        RiskAssessmentComplete event = new RiskAssessmentComplete(id, decision, factor, riskReasons);
-        channel.publish(event);
+        return new RiskAssessmentResponse(id, decision, factor, reasons);
+    }
+
+    private boolean checkAcceptableRatio(RiskAssessmentRequest request, double floor) {
+        double ratio = request.getDownPayment() / request.getAmount();
+        return ratio >= floor;
     }
 }

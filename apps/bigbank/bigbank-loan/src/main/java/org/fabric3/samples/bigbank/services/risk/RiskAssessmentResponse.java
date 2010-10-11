@@ -19,30 +19,28 @@
 package org.fabric3.samples.bigbank.services.risk;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Represents the risk associated with a loan calculated by a RiskAssessmentService.
  *
  * @version $Revision$ $Date$
  */
-public class RiskResponse implements Serializable {
+public class RiskAssessmentResponse implements Serializable {
     private static final long serialVersionUID = 1427555176373119897L;
-    public static final RiskReason[] EMPTY = new RiskReason[0];
-    public static final int APPROVE = 1;
-    public static final int REJECT = -1;
+    public static final int APPROVED = 1;
+    public static final int MANUAL_APPROVAL = 2;
+    public static final int REJECTED = -1;
     private long id;
     private int decision;
     private int factor;
-    private RiskReason[] reasons = EMPTY;
+    private List<RiskReason> reasons;
 
-    public RiskResponse(long id, int decision, int factor, RiskReason[] reasons) {
+    public RiskAssessmentResponse(long id, int decision, int factor, List<RiskReason> reasons) {
         this.id = id;
         this.decision = decision;
         this.factor = factor;
         this.reasons = reasons;
-    }
-
-    public RiskResponse() {
     }
 
     public long getId() {
@@ -53,24 +51,13 @@ public class RiskResponse implements Serializable {
         return factor;
     }
 
-    public void setRiskFactor(int factor) {
-        this.factor = factor;
-    }
-
     public int getDecision() {
         return decision;
     }
 
-    public void setDecision(int decision) {
-        this.decision = decision;
-    }
-
-    public RiskReason[] getReasons() {
+    public List<RiskReason> getReasons() {
         return reasons;
     }
 
-    public void setReasons(RiskReason[] reasons) {
-        this.reasons = reasons;
-    }
 
 }

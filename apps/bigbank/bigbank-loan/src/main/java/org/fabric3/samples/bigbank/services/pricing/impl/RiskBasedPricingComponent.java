@@ -50,7 +50,6 @@ public class RiskBasedPricingComponent implements PricingService {
     }
 
     public void price(PricingRequest request) {
-        System.out.println("PricingService: Pricing application");
         PriceResponse response = new PriceResponse(request.getId());
         RateResults rateResults = rateService.calculateRates(request.getRiskFactor());
         for (Rate rate : rateResults.getRates()) {

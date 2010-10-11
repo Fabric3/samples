@@ -45,11 +45,12 @@ import org.fabric3.samples.bigbank.api.message.OptionSelection;
 @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 public interface LoanService {
     int SUBMITTED = 1;
-    int PRICING = 2;
-    int AWAITING_ACCEPTANCE = 3;
-    int AWAITING_APPRAISAL = 4;
-    int SCHEDULED_FOR_FUNDING = 5;
-    int FUNDED = 6;
+    int AWAITING_ASSESSMENT = 2;
+    int PRICING = 3;
+    int AWAITING_ACCEPTANCE = 4;
+    int AWAITING_APPRAISAL = 5;
+    int SCHEDULED_FOR_FUNDING = 6;
+    int FUNDED = 7;
     int REJECTED = -1;
     int DECLINED = -2;
 
