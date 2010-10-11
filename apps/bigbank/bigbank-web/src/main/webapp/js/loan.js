@@ -79,7 +79,7 @@ $(document).ready(function() {
         $.ajax({
             type: "GET",
             contentType: "application/json",
-            url: baseUrl + "/applications/3",
+            url: baseUrl + "/applications/4",
             dataType: "json",
             success: function (applications) {
                 var content = $('#loans_tab_options');
