@@ -132,7 +132,7 @@ $(document).ready(function() {
         $.ajax({
             type: "POST",
             contentType: "application/json",
-            url: "http://localhost:8181/fabric/security/token",
+            url:  window.location.protocol + "//" + window.location.host + "/fabric/security/token",
             dataType: "json",
             data: '{"username":"' + getElementByIdValue("username") + '", "password":"' + getElementByIdValue("password") + '"}',
             success: function () {
