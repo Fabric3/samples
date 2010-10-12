@@ -24,8 +24,6 @@ import java.util.List;
 import org.oasisopen.sca.annotation.Property;
 import org.oasisopen.sca.annotation.Scope;
 
-import org.fabric3.api.annotation.Producer;
-import org.fabric3.samples.bigbank.api.channel.LoanChannel;
 import org.fabric3.samples.bigbank.services.risk.RiskAssessmentRequest;
 import org.fabric3.samples.bigbank.services.risk.RiskAssessmentResponse;
 import org.fabric3.samples.bigbank.services.risk.RiskAssessmentService;
@@ -38,13 +36,8 @@ import org.fabric3.samples.bigbank.services.risk.RiskReason;
  */
 @Scope("COMPOSITE")
 public class RiskAssessmentComponent implements RiskAssessmentService {
-    private LoanChannel channel;
     private double ratioMinimum = .10;
     private double ratioFavorableMinimum = .05;
-
-    public RiskAssessmentComponent(@Producer("LoanChannel") LoanChannel channel) {
-        this.channel = channel;
-    }
 
     @Property(required = false)
     public void setRatioMinimum(double ratioMinimum) {
@@ -99,6 +92,9 @@ public class RiskAssessmentComponent implements RiskAssessmentService {
             }
         }
         long id = request.getId();
+        if (request.getDownPayment() == 3333){
+           return new RiskAssessmentResponse(id, RiskAssessmentResponse.MANUAL_APPROVAL, factor, reasons);
+        }
         return new RiskAssessmentResponse(id, decision, factor, reasons);
     }
 

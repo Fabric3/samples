@@ -4,6 +4,7 @@
     <deployable composite="samples:ChannelsComposite"/>
     <deployable composite="samples:ServicesComposite"/>
     <deployable composite="samples:LoanComposite"/>
+    <deployable composite="samples:BackOfficeComposite"/>
     <import.java package="javax.persistence" version="1.0.0"/>
     <export.java package="org.fabric3.samples.bigbank.api.loan" version="1.6"/>
     <export.java package="org.fabric3.samples.bigbank.api.message" version="1.6"/>

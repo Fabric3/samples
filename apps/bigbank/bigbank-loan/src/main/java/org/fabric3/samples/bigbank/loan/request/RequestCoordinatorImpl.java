@@ -71,7 +71,7 @@ public class RequestCoordinatorImpl implements RequestCoordinator, PricingServic
     private Fabric3RequestContext context;
 
     /**
-     * Creates a new instance.
+     * Constructor.
      *
      * @param creditService  returns the applicant's credit score from a credit bureau
      * @param riskService    scores the loan risk
@@ -115,9 +115,6 @@ public class RequestCoordinatorImpl implements RequestCoordinator, PricingServic
         record.setCreditScore(score);
         em.persist(record);
 
-        // synchronize to avoid race conditions with non-blocking risk assessment
-        em.flush();
-
         long id = record.getId();
         monitor.received(id);
 
@@ -138,6 +135,8 @@ public class RequestCoordinatorImpl implements RequestCoordinator, PricingServic
         } else {
             // manual approval
             record.setStatus(LoanService.AWAITING_ASSESSMENT);
+            // synchronize to avoid race conditions with non-blocking risk assessment
+            em.flush();
             ManualRiskAssessment manualAssessment = new ManualRiskAssessment(id);
             loanChannel.publish(manualAssessment);
         }
@@ -192,9 +191,9 @@ public class RequestCoordinatorImpl implements RequestCoordinator, PricingServic
         record.setTerms(termInfos);
         record.setStatus(LoanService.AWAITING_ACCEPTANCE);
         em.merge(record);
-        loanChannel.publish(new ApplicationReady(id));
+        ApplicationReady ready = new ApplicationReady(id);
+        loanChannel.publish(ready);
     }
-
 
     private LoanRecord createLoanRecord(LoanRequest request) {
         LoanRecord record = new LoanRecord();

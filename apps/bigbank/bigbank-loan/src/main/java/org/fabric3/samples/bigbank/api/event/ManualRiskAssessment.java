@@ -28,5 +28,4 @@ public class ManualRiskAssessment extends ApplicationEvent {
         super(loanId);
     }
 
-
 }

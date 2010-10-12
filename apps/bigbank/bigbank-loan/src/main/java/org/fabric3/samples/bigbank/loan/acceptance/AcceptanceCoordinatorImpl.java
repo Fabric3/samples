@@ -29,11 +29,12 @@ import javax.persistence.Query;
 import org.oasisopen.sca.annotation.Context;
 import org.oasisopen.sca.annotation.ManagedTransaction;
 import org.oasisopen.sca.annotation.Reference;
-import org.oasisopen.sca.annotation.Service;
 
 import org.fabric3.api.Fabric3RequestContext;
 import org.fabric3.api.annotation.Consumer;
 import org.fabric3.api.annotation.monitor.Monitor;
+import org.fabric3.samples.bigbank.api.domain.LoanRecord;
+import org.fabric3.samples.bigbank.api.domain.TermInfo;
 import org.fabric3.samples.bigbank.api.event.AppraisalResult;
 import org.fabric3.samples.bigbank.api.event.AppraisalScheduled;
 import org.fabric3.samples.bigbank.api.loan.LoanApplicationNotFoundException;
@@ -42,8 +43,6 @@ import org.fabric3.samples.bigbank.api.loan.LoanService;
 import org.fabric3.samples.bigbank.api.message.LoanApplication;
 import org.fabric3.samples.bigbank.api.message.LoanOption;
 import org.fabric3.samples.bigbank.api.message.LoanStatus;
-import org.fabric3.samples.bigbank.api.domain.LoanRecord;
-import org.fabric3.samples.bigbank.api.domain.TermInfo;
 import org.fabric3.samples.bigbank.loan.monitor.ErrorMonitor;
 import org.fabric3.samples.bigbank.services.appraisal.AppraisalRequest;
 import org.fabric3.samples.bigbank.services.appraisal.AppraisalService;
@@ -53,7 +52,6 @@ import org.fabric3.samples.bigbank.services.appraisal.AppraisalService;
  *
  * @version $Revision$ $Date$
  */
-@Service(names = {AcceptanceCoordinator.class})
 @ManagedTransaction
 public class AcceptanceCoordinatorImpl implements AcceptanceCoordinator {
     private AppraisalService appraisalService;
