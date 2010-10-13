@@ -24,7 +24,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
-import javax.ws.rs.PUT;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -33,9 +33,11 @@ import org.oasisopen.sca.annotation.ManagedTransaction;
 import org.oasisopen.sca.annotation.Scope;
 
 import org.fabric3.api.annotation.Producer;
+import org.fabric3.api.annotation.monitor.Monitor;
 import org.fabric3.samples.bigbank.api.channel.LoanChannel;
 import org.fabric3.samples.bigbank.api.domain.LoanRecord;
 import org.fabric3.samples.bigbank.api.event.ManualRiskAssessmentComplete;
+import org.fabric3.samples.bigbank.api.loan.LoanService;
 
 /**
  * Manages loan applications that have been sent for manual approval.
@@ -51,6 +53,11 @@ import org.fabric3.samples.bigbank.api.event.ManualRiskAssessmentComplete;
 public class RiskAssessmentWorkQueue {
     private EntityManager em;
     private LoanChannel channel;
+    private QueueMonitor monitor;
+
+    public void setMonitor(@Monitor QueueMonitor monitor) {
+        this.monitor = monitor;
+    }
 
     @Producer("loanChannel")
     public void setChannel(LoanChannel channel) {
@@ -69,9 +76,26 @@ public class RiskAssessmentWorkQueue {
         return cast(query.getResultList());
     }
 
-    @PUT
+    @POST
     @Path("assessment")
     public void assess(ManualRiskAssessmentComplete assessment) {
+        LoanRecord record;
+        long id = assessment.getLoanId();
+        record = em.find(LoanRecord.class, id);
+        if (record == null) {
+            monitor.loanRecordNotFound(id);
+            return;
+        }
+
+        if (assessment.isApproved()) {
+            // loan approved, price it
+            record.setStatus(LoanService.PRICING);
+        } else {
+            // loan declined
+            record.setStatus(LoanService.REJECTED);
+        }
+        em.merge(record);
+
         channel.publish(assessment);
     }
 

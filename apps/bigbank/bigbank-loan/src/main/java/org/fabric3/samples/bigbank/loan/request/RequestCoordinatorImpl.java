@@ -149,28 +149,13 @@ public class RequestCoordinatorImpl implements RequestCoordinator, PricingServic
 
     @Consumer("loanChannel")
     public void onRiskAssessment(ManualRiskAssessmentComplete event) {
-        LoanRecord record;
-        long id = event.getLoanId();
-
-        // record that the risk assessment was received
-        monitor.riskAssessmentReceived(id);
-
-        record = em.find(LoanRecord.class, id);
-        if (record == null) {
-            monitor.loanRecordNotFound(id);
-            return;
-        }
-
         if (event.isApproved()) {
             // loan approved, price it
-            record.setStatus(LoanService.PRICING);
-            PricingRequest pricingRequest = new PricingRequest(id, event.getRiskFactor());
+            PricingRequest pricingRequest = new PricingRequest(event.getLoanId(), event.getRiskFactor());
             pricingService.price(pricingRequest);
-        } else {
-            // loan declined
-            record.setStatus(LoanService.REJECTED);
+        }  else {
+            // TODO finish
         }
-        em.merge(record);
     }
 
     public void onPrice(PriceResponse response) {

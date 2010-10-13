@@ -46,6 +46,7 @@
 
     <component name="ApplicationEventRecorder">
         <implementation.java class="org.fabric3.samples.bigbank.loan.statistics.ApplicationEventRecorder"/>
+        <consumer name="loanChannel" source="LoanChannel"/>
     </component>
 
     <component name="ExpirationTimer">

@@ -28,6 +28,9 @@ public class ManualRiskAssessmentComplete extends ApplicationEvent {
     private boolean approved;
     private int factor;
 
+    public ManualRiskAssessmentComplete() {
+    }
+
     public ManualRiskAssessmentComplete(long loanId, boolean approved, int factor) {
         super(loanId);
         this.approved = approved;
@@ -38,8 +41,15 @@ public class ManualRiskAssessmentComplete extends ApplicationEvent {
         return approved;
     }
 
+    public void setApproved(boolean approved) {
+        this.approved = approved;
+    }
 
     public int getRiskFactor() {
         return factor;
+    }
+
+    public void setLoanId(long loanId) {
+        super.setLoanId(loanId);
     }
 }

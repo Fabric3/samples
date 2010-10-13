@@ -16,41 +16,16 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.fabric3.samples.bigbank.api.event;
+package org.fabric3.samples.bigbank.backoffice.risk;
 
-import java.io.Serializable;
+import org.fabric3.api.annotation.monitor.Severe;
 
 /**
- * The root event type.
- *
- * @version $Rev$ $Date$
+ * @version $Revision$ $Date$
  */
-public abstract class ApplicationEvent implements Serializable {
-    private long loanId;
-    private long timestamp;
+public interface QueueMonitor {
 
-    protected ApplicationEvent() {
-    }
+    @Severe("Loan record not found for: {0}")
+    void loanRecordNotFound(long number);
 
-    public ApplicationEvent(long loanId) {
-        this(loanId, System.currentTimeMillis());
-    }
-
-    public ApplicationEvent(long loanId, long timestamp) {
-        this.loanId = loanId;
-        this.timestamp = timestamp;
-    }
-
-    public long getLoanId() {
-        return loanId;
-    }
-
-
-    public long getTimestamp() {
-        return timestamp;
-    }
-
-    protected void setLoanId(long loanId) {
-        this.loanId = loanId;
-    }
 }

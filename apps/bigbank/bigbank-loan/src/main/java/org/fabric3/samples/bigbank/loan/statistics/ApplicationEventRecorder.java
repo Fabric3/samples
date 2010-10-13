@@ -21,6 +21,7 @@ package org.fabric3.samples.bigbank.loan.statistics;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.oasisopen.sca.annotation.EagerInit;
 import org.oasisopen.sca.annotation.ManagedTransaction;
 import org.oasisopen.sca.annotation.Scope;
 
@@ -38,8 +39,9 @@ import org.fabric3.samples.bigbank.api.domain.ApplicationStatistics;
  * @version $Rev: 9526 $ $Date: 2010-10-10 15:32:06 +0200 (Sun, 10 Oct 2010) $
  */
 @Scope("COMPOSITE")
+@EagerInit
 @ManagedTransaction
-public abstract class ApplicationEventRecorder {
+public class ApplicationEventRecorder {
     private EntityManager em;
     private RecorderMonitor monitor;
 
