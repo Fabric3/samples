@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+           name="BackOfficeWebComposite"
+           targetNamespace="urn:fabric3.org:samples">
+
+    <component name="BackOfficeWebComponent">
+        <implementation.web uri="backoffice"/>
+    </component>
+
+</composite>

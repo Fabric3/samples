@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<script type="text/javascript" src="jquery/json2.js"></script>
+<script type="text/javascript" src="jquery/jquery-1.4.2.js"></script>
+<script type="text/javascript" src="jquery/jquery-ui-1.8.5.custom.min.js"></script>
+<script type="text/javascript" src="jquery/jquery.atmosphere.js"></script>
+<script type="text/javascript" src="jquery/flexigrid.js"></script>
+<script type="text/javascript" src="jquery/jquery.form.js"></script>
+<script type="text/javascript" src="jquery/binder-0.3.js"></script>
+<script type="text/javascript" src="js/backoffice.js"></script>
+<link rel="stylesheet" href="css/style.css" type="text/css" media="all">
+<link rel="stylesheet" href="css/cupertino/jquery-ui-1.8.5.custom.css" type="text/css" media="all">
+<link rel="stylesheet" type="text/css" href="css/flexigrid/flexigrid.css">
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Content-Script-Type" content="text/javascript">
+    <meta http-equiv="Content-Style-Type" content="text/css">
+    <title>Welcome to BigBank</title>
+    <link rel="icon" type="image/vnd.microsoft.icon" href="./images/favicon.ico">
+
+</head>
+<body>
+
+<div id="container">
+    <div id="header">
+        <div class="shell">
+            <h1 id="logo"><img alt="Metaform" src="./images/logo.jpg"/> <a href=".">Metaform</a></h1>
+        </div>
+    </div>
+    <div id="tabs">
+        <ul>
+            <li><a href="#inbox_tab"><span>InBox</span></a></li>
+            <li><a href="#risk_tab"><span>Underwriter</span></a></li>
+        </ul>
+        <div id="inbox_tab" class="tabContent">
+            <p>No new messages</p>
+        </div>
+        <div id="risk_tab" class="tabContent">
+            <table id="grid">
+                <tr>
+                    <td>
+                        <table id="applications_table" width="200">
+                            <tbody id="applications_table_body">
+                            </tbody>
+                        </table>
+                    </td>
+                    <td valign="top">
+                        <div id="details_div">
+                            <form action="" id="details_form">
+                                <table id="details_table" cellspacing="15">
+                                    <tr valign="top">
+                                        <td colspan="2" height="30"><span class="form_heading">Loan Application</span></td>
+                                    </tr>
+                                    <tr valign="top">
+                                        <td><label>Name</label></td>
+                                        <td><label id="details_username"></label></td>
+                                    </tr>
+                                    <tr valign="top">
+                                        <td><label>Credit Score</label></td>
+                                        <td><label id="details_credit_score"><label></label></td>
+                                    </tr>
+                                    <tr valign="top">
+                                        <td><label>Amount</label></td>
+                                        <td><label id="details_amount"></label></td>
+                                    </tr>
+                                    <tr valign="top">
+                                        <td><label>Down Payment</label></td>
+                                        <td><label id="details_down_payment"></label></td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="submit" id="accept_btn" title="Accept" value="Accept"/></td>
+                                        <td><input type="submit" id="decline_btn" title="Decline" value="Decline"/></td>
+                                    </tr>
+                                </table>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div id="content">
+        <br><br><br><br><br><br>
+
+        <div id="login">
+            <form name="login_form" action="">
+                <br>
+                <table cellspacing="10">
+                    <tr>
+                        <td><h4>Username</h4></td>
+                        <td><input id="username" type="text"></td>
+                    </tr>
+                    <tr>
+                        <td><h4>Password</h4></td>
+                        <td><input id="password" type="password"></td>
+                        <td>
+                            <input type="submit" name="loginButton" id="login_btn" value="Send"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <div id="login_message" class="message"></div>
+                        </td>
+                    </tr>
+                </table>
+                <br>
+                <br>
+            </form>
+        </div>
+    </div>
+    <div id="footer">
+        <div class="shell">
+            <div class="column">
+                <h2><a href="http://www.fabric3.org" target="_blank">powered by Fabric3</a></h2>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
