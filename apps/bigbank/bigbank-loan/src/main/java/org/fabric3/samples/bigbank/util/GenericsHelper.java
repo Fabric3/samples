@@ -16,15 +16,19 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.fabric3.samples.bigbank.loan.statistics;
-
-import org.fabric3.api.annotation.monitor.Severe;
+package org.fabric3.samples.bigbank.util;
 
 /**
- * @version $Rev: 9526 $ $Date: 2010-10-10 15:32:06 +0200 (Sun, 10 Oct 2010) $
+ * @version $Rev$ $Date$
  */
-public interface RecorderMonitor {
+public class GenericsHelper {
 
-    @Severe("Statistics object not found for loan id: {0}")
-    void statisticsNotFound(long id);
+    private GenericsHelper() {
+    }
+
+    @SuppressWarnings({"unchecked"})
+    public static <T> T cast(Object object) {
+        return (T) object;
+    }
+
 }

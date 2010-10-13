@@ -46,6 +46,9 @@ import org.fabric3.samples.bigbank.api.message.LoanStatus;
 import org.fabric3.samples.bigbank.loan.monitor.ErrorMonitor;
 import org.fabric3.samples.bigbank.services.appraisal.AppraisalRequest;
 import org.fabric3.samples.bigbank.services.appraisal.AppraisalService;
+import org.fabric3.samples.bigbank.util.GenericsHelper;
+
+import static org.fabric3.samples.bigbank.util.GenericsHelper.cast;
 
 /**
  * Default implementation of the AcceptanceCoordinator.
@@ -189,9 +192,5 @@ public class AcceptanceCoordinatorImpl implements AcceptanceCoordinator {
         return application;
     }
 
-    @SuppressWarnings({"unchecked"})
-    private <T> T cast(Object object) {
-        return (T) object;
-    }
 
 }

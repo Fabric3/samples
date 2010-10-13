@@ -19,7 +19,6 @@
 package org.fabric3.samples.bigbank.loan.request;
 
 import org.fabric3.api.annotation.monitor.Info;
-import org.fabric3.api.annotation.monitor.Severe;
 
 /**
  * A monitor for the request processing phase.
@@ -33,8 +32,5 @@ public interface RequestMonitor {
 
     @Info("Risk assessment received for: {0}")
     void riskAssessmentReceived(long number);
-
-    @Severe("Loan record not found for: {0}")
-    void loanRecordNotFound(long number);
 
 }

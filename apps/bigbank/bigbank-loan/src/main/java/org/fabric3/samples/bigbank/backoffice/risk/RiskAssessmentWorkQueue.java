@@ -38,6 +38,9 @@ import org.fabric3.samples.bigbank.api.channel.LoanChannel;
 import org.fabric3.samples.bigbank.api.domain.LoanRecord;
 import org.fabric3.samples.bigbank.api.event.ManualRiskAssessmentComplete;
 import org.fabric3.samples.bigbank.api.loan.LoanService;
+import org.fabric3.samples.bigbank.util.GenericsHelper;
+
+import static org.fabric3.samples.bigbank.util.GenericsHelper.cast;
 
 /**
  * Manages loan applications that have been sent for manual approval.
@@ -97,11 +100,6 @@ public class RiskAssessmentWorkQueue {
         em.merge(record);
 
         channel.publish(assessment);
-    }
-
-    @SuppressWarnings({"unchecked"})
-    private <T> T cast(Object object) {
-        return (T) object;
     }
 
 

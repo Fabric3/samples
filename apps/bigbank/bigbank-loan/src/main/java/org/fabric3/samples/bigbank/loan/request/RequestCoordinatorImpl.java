@@ -162,8 +162,7 @@ public class RequestCoordinatorImpl implements RequestCoordinator, PricingServic
         long id = response.getId();
         LoanRecord record = em.find(LoanRecord.class, id);
         if (record == null) {
-            monitor.loanRecordNotFound(id);
-            return;
+            throw new AssertionError("Statistics was null: " + id);
         }
         List<TermInfo> termInfos = new ArrayList<TermInfo>();
         for (PricingOption pricingOption : response.getOptions()) {

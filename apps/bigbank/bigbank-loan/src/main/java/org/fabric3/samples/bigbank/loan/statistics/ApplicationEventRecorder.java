@@ -20,20 +20,22 @@ package org.fabric3.samples.bigbank.loan.statistics;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.oasisopen.sca.annotation.EagerInit;
 import org.oasisopen.sca.annotation.ManagedTransaction;
 import org.oasisopen.sca.annotation.Scope;
 
 import org.fabric3.api.annotation.Consumer;
-import org.fabric3.api.annotation.monitor.Monitor;
+import org.fabric3.samples.bigbank.api.domain.ApplicationStatistics;
 import org.fabric3.samples.bigbank.api.event.ApplicationEvent;
 import org.fabric3.samples.bigbank.api.event.ApplicationExpired;
 import org.fabric3.samples.bigbank.api.event.ApplicationReady;
 import org.fabric3.samples.bigbank.api.event.ApplicationReceived;
 import org.fabric3.samples.bigbank.api.event.AppraisalScheduled;
 import org.fabric3.samples.bigbank.api.event.ManualRiskAssessmentComplete;
-import org.fabric3.samples.bigbank.api.domain.ApplicationStatistics;
+
+import static org.fabric3.samples.bigbank.util.GenericsHelper.cast;
 
 /**
  * @version $Rev: 9526 $ $Date: 2010-10-10 15:32:06 +0200 (Sun, 10 Oct 2010) $
@@ -43,11 +45,6 @@ import org.fabric3.samples.bigbank.api.domain.ApplicationStatistics;
 @ManagedTransaction
 public class ApplicationEventRecorder {
     private EntityManager em;
-    private RecorderMonitor monitor;
-
-    public ApplicationEventRecorder(@Monitor RecorderMonitor monitor) {
-        this.monitor = monitor;
-    }
 
     @PersistenceContext(unitName = "loanApplication")
     public void setEntityManager(EntityManager em) {
@@ -71,11 +68,7 @@ public class ApplicationEventRecorder {
 
     private void onAppraisalScheduled(AppraisalScheduled event) {
         long id = event.getLoanId();
-        ApplicationStatistics statistics = em.find(ApplicationStatistics.class, id);
-        if (statistics == null) {
-            monitor.statisticsNotFound(id);
-            return;
-        }
+        ApplicationStatistics statistics = find(id);
         statistics.setAppraisalScheduledTimestamp(System.currentTimeMillis());
         em.persist(statistics);
     }
@@ -89,11 +82,7 @@ public class ApplicationEventRecorder {
 
     private void onAssessmentComplete(ManualRiskAssessmentComplete event) {
         long id = event.getLoanId();
-        ApplicationStatistics statistics = em.find(ApplicationStatistics.class, id);
-        if (statistics == null) {
-            monitor.statisticsNotFound(id);
-            return;
-        }
+        ApplicationStatistics statistics = find(id);
         if (event.isApproved()) {
             statistics.setApprovedTimestamp(System.currentTimeMillis());
         } else {
@@ -104,24 +93,26 @@ public class ApplicationEventRecorder {
 
     private void onApplicationReady(ApplicationReady event) {
         long id = event.getLoanId();
-        ApplicationStatistics statistics = em.find(ApplicationStatistics.class, id);
-        if (statistics == null) {
-            monitor.statisticsNotFound(id);
-            return;
-        }
+        ApplicationStatistics statistics = find(id);
         statistics.setReadyTimestamp(System.currentTimeMillis());
         em.persist(statistics);
     }
 
     private void onExpired(ApplicationExpired event) {
         long id = event.getLoanId();
-        ApplicationStatistics statistics = em.find(ApplicationStatistics.class, id);
-        if (statistics == null) {
-            monitor.statisticsNotFound(id);
-            return;
-        }
+        ApplicationStatistics statistics = find(id);
         statistics.setExpiredTimestamp(System.currentTimeMillis());
         em.persist(statistics);
+    }
+
+    private ApplicationStatistics find(long loanId) {
+        Query query = em.createQuery("SELECT l FROM ApplicationStatistics l WHERE l.loanId = :loanId");
+        query.setParameter("loanId", loanId);
+        ApplicationStatistics statistics = cast(query.getSingleResult());
+        if (statistics == null) {
+            throw new AssertionError("Statistics was null: " + loanId);
+        }
+        return statistics;
     }
 
 }
