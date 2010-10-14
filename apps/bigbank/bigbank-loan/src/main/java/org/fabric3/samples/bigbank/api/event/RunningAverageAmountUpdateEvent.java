@@ -18,23 +18,28 @@
  */
 package org.fabric3.samples.bigbank.api.event;
 
-import org.fabric3.samples.bigbank.api.domain.LoanRecord;
-
 /**
- * Denotes a new loan application that has been received.
+ * The root statistics event type.
  *
  * @version $Rev$ $Date$
  */
-public class ApplicationReceived extends ApplicationEvent {
-    private static final long serialVersionUID = -3179786299288877078L;
-    private LoanRecord record;
+public class RunningAverageAmountUpdateEvent extends StatisticsUpdateEvent {
+    private static final long serialVersionUID = 2251838095091160041L;
 
-    public ApplicationReceived(LoanRecord record) {
-        super(record.getId());
-        this.record = record;
+    private double average;
+
+    public RunningAverageAmountUpdateEvent() {
     }
 
-    public LoanRecord getRecord() {
-        return record;
+    public RunningAverageAmountUpdateEvent(double average) {
+        this.average = average;
+    }
+
+    public double getAverage() {
+        return average;
+    }
+
+    public void setAverage(double average) {
+        this.average = average;
     }
 }

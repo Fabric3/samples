@@ -106,7 +106,7 @@ public class RequestCoordinatorImpl implements RequestCoordinator, PricingServic
         LoanRecord record = createLoanRecord(request);
 
         // publish an event that the loan application was received
-        ApplicationReceived event = new ApplicationReceived(record.getId());
+        ApplicationReceived event = new ApplicationReceived(record);
         loanChannel.publish(event);
 
         // pull the applicant's credit score and update the loan record

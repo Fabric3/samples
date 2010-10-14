@@ -49,6 +49,12 @@
         <consumer name="loanChannel" source="LoanChannel"/>
     </component>
 
+    <component name="ApplicationStatisticsComponent">
+        <implementation.java class="org.fabric3.samples.bigbank.loan.statistics.ApplicationStatisticsComponent"/>
+        <consumer name="loanChannel" source="LoanChannel"/>
+        <producer name="statisticsChannel" target="StatisticsChannel"/>
+    </component>
+
     <component name="ExpirationTimer">
         <f3-impl:implementation.timer class="org.fabric3.samples.bigbank.loan.expiration.ExpirationTimer" repeatInterval='60' unit='seconds'/>
     </component>

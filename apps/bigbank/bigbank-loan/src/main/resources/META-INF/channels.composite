@@ -26,7 +26,7 @@
 
     <channel name="LoanChannel"/>
 
-    <channel name="LoanWebChannel">
+    <channel name="StatisticsChannel">
         <f3-binding:binding.web allowed="subscribe"/>
     </channel>
 

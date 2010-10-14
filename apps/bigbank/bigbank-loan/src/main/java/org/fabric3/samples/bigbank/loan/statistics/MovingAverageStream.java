@@ -16,25 +16,38 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.fabric3.samples.bigbank.api.event;
+package org.fabric3.samples.bigbank.loan.statistics;
 
-import org.fabric3.samples.bigbank.api.domain.LoanRecord;
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
- * Denotes a new loan application that has been received.
+ * Calculates the moving average of a data set using a fixed period.
  *
  * @version $Rev$ $Date$
  */
-public class ApplicationReceived extends ApplicationEvent {
-    private static final long serialVersionUID = -3179786299288877078L;
-    private LoanRecord record;
+public class MovingAverageStream {
+    private int period;
+    private double sum;
+    private Queue<Double> window = new ConcurrentLinkedQueue<Double>();
 
-    public ApplicationReceived(LoanRecord record) {
-        super(record.getId());
-        this.record = record;
+    public MovingAverageStream(int period) {
+        this.period = period;
     }
 
-    public LoanRecord getRecord() {
-        return record;
+    public void write(double num) {
+        sum += num;
+        window.add(num);
+        if (window.size() > period) {
+            sum -= window.remove();
+        }
     }
+
+    public double readAverage() {
+        if (window.isEmpty()) {
+            return -1;
+        }
+        return sum / window.size();
+    }
+
 }

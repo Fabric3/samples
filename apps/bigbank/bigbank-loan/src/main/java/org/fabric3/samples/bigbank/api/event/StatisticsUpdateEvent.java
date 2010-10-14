@@ -18,23 +18,13 @@
  */
 package org.fabric3.samples.bigbank.api.event;
 
-import org.fabric3.samples.bigbank.api.domain.LoanRecord;
+import java.io.Serializable;
 
 /**
- * Denotes a new loan application that has been received.
+ * The root statistics event type.
  *
  * @version $Rev$ $Date$
  */
-public class ApplicationReceived extends ApplicationEvent {
-    private static final long serialVersionUID = -3179786299288877078L;
-    private LoanRecord record;
+public abstract class StatisticsUpdateEvent implements Serializable {
 
-    public ApplicationReceived(LoanRecord record) {
-        super(record.getId());
-        this.record = record;
-    }
-
-    public LoanRecord getRecord() {
-        return record;
-    }
 }
