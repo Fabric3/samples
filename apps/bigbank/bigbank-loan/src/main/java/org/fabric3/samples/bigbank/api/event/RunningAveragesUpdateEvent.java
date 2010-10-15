@@ -28,6 +28,8 @@ public class RunningAveragesUpdateEvent extends StatisticsUpdateEvent {
 
     private double requestAmount = -1;
     private double approvalAmount = -1;
+    private long timeToManualApproval = -1;
+    private long timeToAutomatedApproval = -1;
 
     public RunningAveragesUpdateEvent() {
     }
@@ -46,5 +48,21 @@ public class RunningAveragesUpdateEvent extends StatisticsUpdateEvent {
 
     public void setApprovalAmount(double approvalAmount) {
         this.approvalAmount = approvalAmount;
+    }
+
+    public long getTimeToManualApproval() {
+        return timeToManualApproval;
+    }
+
+    public void setTimeToManualApproval(long timeToManualApproval) {
+        this.timeToManualApproval = timeToManualApproval;
+    }
+
+    public long getTimeToAutomatedApproval() {
+        return timeToAutomatedApproval;
+    }
+
+    public void setTimeToAutomatedApproval(long timeToAutomatedApproval) {
+        this.timeToAutomatedApproval = timeToAutomatedApproval;
     }
 }

@@ -23,6 +23,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.oasisopen.sca.annotation.Destroy;
 import org.oasisopen.sca.annotation.EagerInit;
@@ -35,6 +36,7 @@ import org.fabric3.api.annotation.Producer;
 import org.fabric3.api.annotation.Resource;
 import org.fabric3.api.annotation.management.Management;
 import org.fabric3.api.annotation.management.ManagementOperation;
+import org.fabric3.samples.bigbank.api.domain.ApplicationStatistics;
 import org.fabric3.samples.bigbank.api.domain.LoanRecord;
 import org.fabric3.samples.bigbank.api.event.ApplicationEvent;
 import org.fabric3.samples.bigbank.api.event.ApplicationExpired;
@@ -43,6 +45,8 @@ import org.fabric3.samples.bigbank.api.event.ApplicationReceived;
 import org.fabric3.samples.bigbank.api.event.AppraisalScheduled;
 import org.fabric3.samples.bigbank.api.event.ManualRiskAssessmentComplete;
 import org.fabric3.samples.bigbank.api.event.RunningAveragesUpdateEvent;
+
+import static org.fabric3.samples.bigbank.util.GenericsHelper.cast;
 
 /**
  * @version $Rev$ $Date$
@@ -61,7 +65,7 @@ public class ApplicationStatisticsComponent {
 
     private MovingAverage amountAverage;
     private MovingAverage approvalAverage;
-    private MovingAverage timeToCompleteAverage;
+    private MovingAverage timeToCompleteAutomatedAverage;
     private MovingAverage timeToCompleteManualAverage;
 
     @PersistenceContext(unitName = "loanApplication")
@@ -88,6 +92,9 @@ public class ApplicationStatisticsComponent {
     public void init() throws IOException {
         amountAverage = new MovingAverage(4);
         approvalAverage = new MovingAverage(4);
+        timeToCompleteAutomatedAverage = new MovingAverage(4);
+        timeToCompleteManualAverage = new MovingAverage(4);
+
         runnable = new StatisticsRunnable();
         executorService.schedule(runnable, wait, TimeUnit.MILLISECONDS);
     }
@@ -130,6 +137,16 @@ public class ApplicationStatisticsComponent {
         LoanRecord record = getRecord(event);
         double amount = record.getAmount();
         approvalAverage.write(amount);
+
+        ApplicationStatistics statistics = findStatistics(event.getLoanId());
+        long elapsed = event.getTimestamp() - statistics.getReceivedTimestamp();
+        if (LoanRecord.AUTOMATED_APPROVAL == record.getApprovalType()){
+            timeToCompleteAutomatedAverage.write(elapsed);
+        } else {
+            // manual approval
+            timeToCompleteManualAverage.write(elapsed);
+        }
+
     }
 
     private void onExpired(ApplicationExpired event) {
@@ -142,6 +159,16 @@ public class ApplicationStatisticsComponent {
             throw new AssertionError("Loan record not found: " + id);
         }
         return record;
+    }
+
+    private ApplicationStatistics findStatistics(long loanId) {
+        Query query = em.createQuery("SELECT l FROM ApplicationStatistics l WHERE l.loanId = :loanId");
+        query.setParameter("loanId", loanId);
+        ApplicationStatistics statistics = cast(query.getSingleResult());
+        if (statistics == null) {
+            throw new AssertionError("Statistics was null: " + loanId);
+        }
+        return statistics;
     }
 
     /**
@@ -160,6 +187,9 @@ public class ApplicationStatisticsComponent {
             event.setRequestAmount(amount);
             amount = approvalAverage.readAverage();
             event.setApprovalAmount(amount);
+            event.setTimeToAutomatedApproval((long) timeToCompleteAutomatedAverage.readAverage());
+            event.setTimeToManualApproval((long) timeToCompleteManualAverage.readAverage());
+
             statisticsChannel.update(event);
             if (!stop) {
                 // schedule the next read

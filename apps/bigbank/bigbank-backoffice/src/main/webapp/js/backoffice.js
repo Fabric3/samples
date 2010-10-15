@@ -1,3 +1,21 @@
+/*
+ * Copyright (c) 2010 Metaform Systems
+ *
+ * See the NOTICE file distributed with this work for information
+ * regarding copyright ownership.  This file is licensed
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
 $(document).ready(function() {
     var baseUrl = window.location.protocol + "//" + window.location.host;
 
@@ -15,26 +33,15 @@ $(document).ready(function() {
     tabs.hide();
     $("#details_div").hide();
 
-    var amountData = new Array();
-    var amountSeries = new Array();
-    amountData.push(amountSeries);
-    var amountCounter = 0;
-
-    for (var i = 0; i < 20; i++) {
-        amountSeries.push([amountCounter,0]);
-        amountCounter++;
-    }
+    var amountGraph = new GraphModel(1, 20);
+    amountGraph.init();
 
     function tickFormatter(x) {
         return '';
     }
 
     function plot(data) {
-        if (amountSeries.length == 20) {
-            amountSeries.shift();
-        }
-        amountSeries.push([amountCounter, data]);
-        amountCounter++;
+        amountGraph.add(data);
         var options = {
             lines: { show: true },
             points: { show: false },
@@ -43,7 +50,7 @@ $(document).ready(function() {
         };
 
         var placeholder = $("#average_amount_chart");
-        $.plot(placeholder, amountData, options);
+        $.plot(placeholder, amountGraph.data, options);  // amountData, options);
     }
 
     function getElementById() {
@@ -216,7 +223,7 @@ $(document).ready(function() {
                     var message = JSON.parse(data);
                     var requestAmount = message.requestAmount;
                     if (requestAmount > 0) {
-                        plot(requestAmount);
+                        plot([requestAmount]);
                     }
                 }
             }
@@ -252,7 +259,7 @@ $(document).ready(function() {
     tabs.bind('tabsshow', function(event, ui) {
         if (ui.panel.id == "analyst_tab") {
             subscribe();
-            plot();
+            plot([]);
         }
     });
 

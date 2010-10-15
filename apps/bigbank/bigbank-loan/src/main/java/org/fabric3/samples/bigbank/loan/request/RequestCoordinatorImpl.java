@@ -130,6 +130,7 @@ public class RequestCoordinatorImpl implements RequestCoordinator, PricingServic
         if (RiskAssessmentResponse.APPROVED == response.getDecision()) {
             // approved immediately, price the loan
             record.setStatus(LoanService.PRICING);
+            record.setApprovalType(LoanRecord.AUTOMATED_APPROVAL);
             PricingRequest pricingRequest = new PricingRequest(id, response.getRiskFactor());
             pricingService.price(pricingRequest);
         } else if (RiskAssessmentResponse.REJECTED == response.getDecision()) {
@@ -138,6 +139,7 @@ public class RequestCoordinatorImpl implements RequestCoordinator, PricingServic
         } else {
             // manual approval
             record.setStatus(LoanService.AWAITING_ASSESSMENT);
+            record.setApprovalType(LoanRecord.MANUAL_APPROVAL);
             ManualRiskAssessment manualAssessment = new ManualRiskAssessment(id);
             loanChannel.publish(manualAssessment);
         }

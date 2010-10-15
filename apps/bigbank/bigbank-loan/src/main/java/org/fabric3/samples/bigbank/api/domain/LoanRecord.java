@@ -34,6 +34,9 @@ import org.fabric3.samples.bigbank.api.Versionable;
 @Entity
 public class LoanRecord extends Versionable {
     private static final long serialVersionUID = -5710340587799398147L;
+    public static final int NOT_APPROVED = -1;
+    public static final int AUTOMATED_APPROVAL = 0;
+    public static final int MANUAL_APPROVAL = 1;
 
     private String username;
     private long expiration;
@@ -47,6 +50,7 @@ public class LoanRecord extends Versionable {
     private RiskInfo riskInfo;
     private List<TermInfo> terms;
     private int creditScore;
+    private int approvalType = NOT_APPROVED;
 
     public LoanRecord() {
     }
@@ -202,4 +206,11 @@ public class LoanRecord extends Versionable {
         this.typeSelected = typeSelected;
     }
 
+    public int getApprovalType() {
+        return approvalType;
+    }
+
+    public void setApprovalType(int approvalType) {
+        this.approvalType = approvalType;
+    }
 }
