@@ -33,24 +33,47 @@ $(document).ready(function() {
     tabs.hide();
     $("#details_div").hide();
 
-    var amountGraph = new GraphModel(1, 20);
-    amountGraph.init();
+    var requestAmountGraph = new GraphModel(1, 20);
+    requestAmountGraph.init();
+
+    var approvalAmountGraph = new GraphModel(1, 20);
+    approvalAmountGraph.init();
+
+    var timeToCompleteGraph = new GraphModel(2, 20);
+    timeToCompleteGraph.init();
 
     function tickFormatter(x) {
         return '';
     }
 
-    function plot(data) {
-        amountGraph.add(data);
+    function plot(statistics) {
         var options = {
             lines: { show: true },
             points: { show: false },
             xaxis: { tickDecimals: 0, tickSize: 1, tickFormatter: tickFormatter},
             colors:['#2694e8']
         };
+        var requestAmount = statistics.requestAmount;
+        if (requestAmount > 0) {
+            requestAmountGraph.add([requestAmount]);
+            var placeholder = $("#average_request_amount_chart");
+            $.plot(placeholder, requestAmountGraph.data, options);
+        }
+        var approvalAmount = statistics.approvalAmount;
+        if (approvalAmount > 0) {
+            approvalAmountGraph.add([approvalAmount]);
+            placeholder = $("#average_approval_amount_chart");
+            $.plot(placeholder, approvalAmountGraph.data, options);
+        }
 
-        var placeholder = $("#average_amount_chart");
-        $.plot(placeholder, amountGraph.data, options);  // amountData, options);
+        var automated = statistics.timeToAutomatedApproval;
+        var manual = statistics.timeToManualApproval;
+        if (automated > 0 || manual > 0) {
+            timeToCompleteGraph.add([automated, manual]);
+            placeholder = $("#average_time_to_complete_chart");
+            $.plot(placeholder, timeToCompleteGraph.data, options);
+        }
+
     }
 
     function getElementById() {
@@ -220,11 +243,8 @@ $(document).ready(function() {
                         // no data
                         return;
                     }
-                    var message = JSON.parse(data);
-                    var requestAmount = message.requestAmount;
-                    if (requestAmount > 0) {
-                        plot([requestAmount]);
-                    }
+                    var statistics = JSON.parse(data);
+                    plot(statistics);
                 }
             }
         }
@@ -259,7 +279,7 @@ $(document).ready(function() {
     tabs.bind('tabsshow', function(event, ui) {
         if (ui.panel.id == "analyst_tab") {
             subscribe();
-            plot([]);
+            //            plot([]);
         }
     });
 
