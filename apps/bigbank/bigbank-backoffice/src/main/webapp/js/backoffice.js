@@ -37,7 +37,7 @@ $(document).ready(function() {
         amountCounter++;
         var options = {
             lines: { show: true },
-            points: { show: true },
+            points: { show: false },
             xaxis: { tickDecimals: 0, tickSize: 1, tickFormatter: tickFormatter},
             colors:['#2694e8']
         };
