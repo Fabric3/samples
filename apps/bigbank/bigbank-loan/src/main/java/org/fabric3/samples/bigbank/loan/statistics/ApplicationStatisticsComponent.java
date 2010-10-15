@@ -48,7 +48,7 @@ import org.fabric3.samples.bigbank.api.event.RunningAverageAmountUpdateEvent;
 public class ApplicationStatisticsComponent {
     private volatile long wait = 10000;
 
-    private MovingAverageStream amountStream;
+    private MovingAverage amountMovingAverage;
     private ExecutorService executorService;
     private StatisticsChannel statisticsChannel;
     private StatisticsRunnable runnable;
@@ -70,7 +70,7 @@ public class ApplicationStatisticsComponent {
 
     @Init
     public void init() throws IOException {
-        amountStream = new MovingAverageStream(4);
+        amountMovingAverage = new MovingAverage(4);
         runnable = new StatisticsRunnable();
         executorService.execute(runnable);
     }
@@ -102,7 +102,7 @@ public class ApplicationStatisticsComponent {
 
     private void onReceived(ApplicationReceived event) {
         double amount = event.getRecord().getAmount();
-        amountStream.write(amount);
+        amountMovingAverage.write(amount);
     }
 
     private void onAssessmentComplete(ManualRiskAssessmentComplete event) {
@@ -126,7 +126,7 @@ public class ApplicationStatisticsComponent {
         }
 
         public void run() {
-            double average = amountStream.readAverage();
+            double average = amountMovingAverage.readAverage();
             // if the average is less than 0, the read timed out, so only reschedule
             if (average >= 0) {
                 statisticsChannel.update(new RunningAverageAmountUpdateEvent(average));

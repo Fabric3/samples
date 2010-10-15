@@ -23,7 +23,6 @@ import javax.persistence.Entity;
 import org.fabric3.samples.bigbank.api.Versionable;
 
 /**
- * A persistent loan application.
  *
  * @version $Revision$ $Date$
  */

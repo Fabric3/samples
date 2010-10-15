@@ -26,12 +26,12 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  *
  * @version $Rev$ $Date$
  */
-public class MovingAverageStream {
+public class MovingAverage {
     private int period;
     private double sum;
     private Queue<Double> window = new ConcurrentLinkedQueue<Double>();
 
-    public MovingAverageStream(int period) {
+    public MovingAverage(int period) {
         this.period = period;
     }
 
