@@ -118,7 +118,7 @@ public class RequestCoordinatorImpl implements RequestCoordinator, PricingServic
         em.flush();
 
         // publish an event that the loan application was received
-        ApplicationReceived event = new ApplicationReceived(record);
+        ApplicationReceived event = new ApplicationReceived(id);
         loanChannel.publish(event);
         
         // assess the risk

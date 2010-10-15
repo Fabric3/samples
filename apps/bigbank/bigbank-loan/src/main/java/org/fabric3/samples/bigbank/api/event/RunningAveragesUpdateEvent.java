@@ -23,23 +23,28 @@ package org.fabric3.samples.bigbank.api.event;
  *
  * @version $Rev$ $Date$
  */
-public class RunningAverageAmountUpdateEvent extends StatisticsUpdateEvent {
+public class RunningAveragesUpdateEvent extends StatisticsUpdateEvent {
     private static final long serialVersionUID = 2251838095091160041L;
 
-    private double average;
+    private double requestAmount = -1;
+    private double approvalAmount = -1;
 
-    public RunningAverageAmountUpdateEvent() {
+    public RunningAveragesUpdateEvent() {
     }
 
-    public RunningAverageAmountUpdateEvent(double average) {
-        this.average = average;
+    public double getRequestAmount() {
+        return requestAmount;
     }
 
-    public double getAverage() {
-        return average;
+    public void setRequestAmount(double amount) {
+        this.requestAmount = amount;
     }
 
-    public void setAverage(double average) {
-        this.average = average;
+    public double getApprovalAmount() {
+        return approvalAmount;
+    }
+
+    public void setApprovalAmount(double approvalAmount) {
+        this.approvalAmount = approvalAmount;
     }
 }

@@ -27,14 +27,9 @@ import org.fabric3.samples.bigbank.api.domain.LoanRecord;
  */
 public class ApplicationReceived extends ApplicationEvent {
     private static final long serialVersionUID = -3179786299288877078L;
-    private LoanRecord record;
 
-    public ApplicationReceived(LoanRecord record) {
-        super(record.getId());
-        this.record = record;
+    public ApplicationReceived(long loanId) {
+        super(loanId);
     }
 
-    public LoanRecord getRecord() {
-        return record;
-    }
 }

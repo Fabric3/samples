@@ -214,7 +214,10 @@ $(document).ready(function() {
                         return;
                     }
                     var message = JSON.parse(data);
-                    plot(message.average);
+                    var requestAmount = message.requestAmount;
+                    if (requestAmount > 0) {
+                        plot(requestAmount);
+                    }
                 }
             }
         }

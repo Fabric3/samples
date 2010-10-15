@@ -19,11 +19,15 @@
 package org.fabric3.samples.bigbank.loan.statistics;
 
 import java.io.IOException;
-import java.util.concurrent.ExecutorService;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import org.oasisopen.sca.annotation.Destroy;
 import org.oasisopen.sca.annotation.EagerInit;
 import org.oasisopen.sca.annotation.Init;
+import org.oasisopen.sca.annotation.ManagedTransaction;
 import org.oasisopen.sca.annotation.Scope;
 
 import org.fabric3.api.annotation.Consumer;
@@ -31,35 +35,47 @@ import org.fabric3.api.annotation.Producer;
 import org.fabric3.api.annotation.Resource;
 import org.fabric3.api.annotation.management.Management;
 import org.fabric3.api.annotation.management.ManagementOperation;
+import org.fabric3.samples.bigbank.api.domain.LoanRecord;
 import org.fabric3.samples.bigbank.api.event.ApplicationEvent;
 import org.fabric3.samples.bigbank.api.event.ApplicationExpired;
 import org.fabric3.samples.bigbank.api.event.ApplicationReady;
 import org.fabric3.samples.bigbank.api.event.ApplicationReceived;
 import org.fabric3.samples.bigbank.api.event.AppraisalScheduled;
 import org.fabric3.samples.bigbank.api.event.ManualRiskAssessmentComplete;
-import org.fabric3.samples.bigbank.api.event.RunningAverageAmountUpdateEvent;
+import org.fabric3.samples.bigbank.api.event.RunningAveragesUpdateEvent;
 
 /**
  * @version $Rev$ $Date$
  */
 @EagerInit
 @Management
+@ManagedTransaction
 @Scope("COMPOSITE")
 public class ApplicationStatisticsComponent {
+    private ScheduledExecutorService executorService;
+    private StatisticsChannel statisticsChannel;
+    private EntityManager em;
+
+    private StatisticsRunnable runnable;
     private volatile long wait = 10000;
 
-    private MovingAverage amountMovingAverage;
-    private ExecutorService executorService;
-    private StatisticsChannel statisticsChannel;
-    private StatisticsRunnable runnable;
+    private MovingAverage amountAverage;
+    private MovingAverage approvalAverage;
+    private MovingAverage timeToCompleteAverage;
+    private MovingAverage timeToCompleteManualAverage;
+
+    @PersistenceContext(unitName = "loanApplication")
+    public void setEntityManager(EntityManager em) {
+        this.em = em;
+    }
 
     @Producer
     public void setStatisticsChannel(StatisticsChannel channel) {
         this.statisticsChannel = channel;
     }
 
-    @Resource(mappedName = "RuntimeThreadPoolExecutor")
-    public void setExecutorService(ExecutorService executorService) {
+    @Resource
+    public void setExecutorService(ScheduledExecutorService executorService) {
         this.executorService = executorService;
     }
 
@@ -70,9 +86,10 @@ public class ApplicationStatisticsComponent {
 
     @Init
     public void init() throws IOException {
-        amountMovingAverage = new MovingAverage(4);
+        amountAverage = new MovingAverage(4);
+        approvalAverage = new MovingAverage(4);
         runnable = new StatisticsRunnable();
-        executorService.execute(runnable);
+        executorService.schedule(runnable, wait, TimeUnit.MILLISECONDS);
     }
 
     @Destroy
@@ -101,22 +118,34 @@ public class ApplicationStatisticsComponent {
     }
 
     private void onReceived(ApplicationReceived event) {
-        double amount = event.getRecord().getAmount();
-        amountMovingAverage.write(amount);
+        LoanRecord record = getRecord(event);
+        double amount = record.getAmount();
+        amountAverage.write(amount);
     }
 
     private void onAssessmentComplete(ManualRiskAssessmentComplete event) {
     }
 
     private void onApplicationReady(ApplicationReady event) {
+        LoanRecord record = getRecord(event);
+        double amount = record.getAmount();
+        approvalAverage.write(amount);
     }
 
     private void onExpired(ApplicationExpired event) {
     }
 
+    private LoanRecord getRecord(ApplicationEvent event) {
+        long id = event.getLoanId();
+        LoanRecord record = em.find(LoanRecord.class, id);
+        if (record == null) {
+            throw new AssertionError("Loan record not found: " + id);
+        }
+        return record;
+    }
+
     /**
-     * Reads from a moving average stream. Note this implementation reads using a timeout to avoid tying up threads and allowing other work to be
-     * fairly scheduled.
+     * Reads moving average and periodically publishes updates to the statistics channel.
      */
     private class StatisticsRunnable implements Runnable {
         private boolean stop;
@@ -126,20 +155,15 @@ public class ApplicationStatisticsComponent {
         }
 
         public void run() {
-            double average = amountMovingAverage.readAverage();
-            // if the average is less than 0, the read timed out, so only reschedule
-            if (average >= 0) {
-                statisticsChannel.update(new RunningAverageAmountUpdateEvent(average));
-            }
+            RunningAveragesUpdateEvent event = new RunningAveragesUpdateEvent();
+            double amount = amountAverage.readAverage();
+            event.setRequestAmount(amount);
+            amount = approvalAverage.readAverage();
+            event.setApprovalAmount(amount);
+            statisticsChannel.update(event);
             if (!stop) {
-                try {
-                    Thread.sleep(wait);
-                } catch (InterruptedException e) {
-                    Thread.interrupted();
-                    return;
-                }
                 // schedule the next read
-                executorService.execute(this);
+                executorService.schedule(this, wait, TimeUnit.MILLISECONDS);
             }
         }
     }
