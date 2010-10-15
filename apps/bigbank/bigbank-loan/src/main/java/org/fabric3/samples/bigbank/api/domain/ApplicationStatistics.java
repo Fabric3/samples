@@ -31,7 +31,7 @@ import org.fabric3.samples.bigbank.api.Versionable;
 public class ApplicationStatistics extends Versionable {
     private static final long serialVersionUID = -7369816219790607261L;
 
-    private long loanNumber;
+    private long loanId;
     private long receivedTimestamp = -1;
     private long approvedTimestamp = -1;
     private long rejectedTimestamp = -1;
@@ -42,12 +42,12 @@ public class ApplicationStatistics extends Versionable {
     private long fundedTimestamp = -1;
 
 
-    public long getLoanNumber() {
-        return loanNumber;
+    public long getLoanId() {
+        return loanId;
     }
 
-    public void setLoanNumber(long loanNumber) {
-        this.loanNumber = loanNumber;
+    public void setLoanId(long loanId) {
+        this.loanId = loanId;
     }
 
     public long getReceivedTimestamp() {

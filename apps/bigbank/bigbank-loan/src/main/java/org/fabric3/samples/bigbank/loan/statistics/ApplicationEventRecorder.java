@@ -75,7 +75,7 @@ public class ApplicationEventRecorder {
 
     private void onReceived(ApplicationReceived event) {
         ApplicationStatistics statistics = new ApplicationStatistics();
-        statistics.setLoanNumber(event.getLoanId());
+        statistics.setLoanId(event.getLoanId());
         statistics.setReceivedTimestamp(System.currentTimeMillis());
         em.persist(statistics);
     }

@@ -36,7 +36,6 @@ public class LoanRecord extends Versionable {
     private static final long serialVersionUID = -5710340587799398147L;
 
     private String username;
-    private long loanNumber;
     private long expiration;
     private int status;
     private String ssn;
@@ -50,14 +49,6 @@ public class LoanRecord extends Versionable {
     private int creditScore;
 
     public LoanRecord() {
-    }
-
-    public long getLoanNumber() {
-        return loanNumber;
-    }
-
-    public void setLoanNumber(long loanNumber) {
-        this.loanNumber = loanNumber;
     }
 
     public String getSsn() {

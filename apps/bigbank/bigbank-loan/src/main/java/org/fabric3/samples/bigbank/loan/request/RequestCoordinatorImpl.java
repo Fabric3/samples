@@ -105,10 +105,6 @@ public class RequestCoordinatorImpl implements RequestCoordinator, PricingServic
         // create a loan application and process it
         LoanRecord record = createLoanRecord(request);
 
-        // publish an event that the loan application was received
-        ApplicationReceived event = new ApplicationReceived(record);
-        loanChannel.publish(event);
-
         // pull the applicant's credit score and update the loan record
         CreditScore creditScore = creditService.score(record.getSsn());
         int score = creditScore.getScore();
@@ -118,6 +114,13 @@ public class RequestCoordinatorImpl implements RequestCoordinator, PricingServic
         long id = record.getId();
         monitor.received(id);
 
+        // synchronize to avoid race conditions with non-blocking risk assessment
+        em.flush();
+
+        // publish an event that the loan application was received
+        ApplicationReceived event = new ApplicationReceived(record);
+        loanChannel.publish(event);
+        
         // assess the risk
         double amount = record.getAmount();
         double down = record.getDownPayment();
@@ -135,8 +138,6 @@ public class RequestCoordinatorImpl implements RequestCoordinator, PricingServic
         } else {
             // manual approval
             record.setStatus(LoanService.AWAITING_ASSESSMENT);
-            // synchronize to avoid race conditions with non-blocking risk assessment
-            em.flush();
             ManualRiskAssessment manualAssessment = new ManualRiskAssessment(id);
             loanChannel.publish(manualAssessment);
         }
@@ -162,7 +163,7 @@ public class RequestCoordinatorImpl implements RequestCoordinator, PricingServic
         long id = response.getId();
         LoanRecord record = em.find(LoanRecord.class, id);
         if (record == null) {
-            throw new AssertionError("Statistics was null: " + id);
+            throw new AssertionError("Record was null: " + id);
         }
         List<TermInfo> termInfos = new ArrayList<TermInfo>();
         for (PricingOption pricingOption : response.getOptions()) {
