@@ -7,6 +7,10 @@
 <script type="text/javascript" src="jquery/flexigrid.js"></script>
 <script type="text/javascript" src="jquery/jquery.form.js"></script>
 <script type="text/javascript" src="jquery/binder-0.3.js"></script>
+<!--[if IE]>
+<script type="text/javascript" src="jquery/excanvas.min.js"></script><![endif]-->
+<script type="text/javascript" src="jquery/jquery.flot.js"></script>
+<script type="text/javascript" src="js/queue.js"></script>
 <script type="text/javascript" src="js/backoffice.js"></script>
 <link rel="stylesheet" href="css/style.css" type="text/css" media="all">
 <link rel="stylesheet" href="css/cupertino/jquery-ui-1.8.5.custom.css" type="text/css" media="all">
@@ -31,6 +35,7 @@
         <ul>
             <li><a href="#inbox_tab"><span>InBox</span></a></li>
             <li><a href="#risk_tab"><span>Underwriter</span></a></li>
+            <li><a href="#analyst_tab"><span>Analyst</span></a></li>
         </ul>
         <div id="inbox_tab" class="tabContent">
             <p>No new messages</p>
@@ -77,6 +82,9 @@
                     </td>
                 </tr>
             </table>
+        </div>
+        <div id="analyst_tab" class="tabContent">
+            <div id="average_amount_chart" class="chartContent"></div>
         </div>
     </div>
     <div id="content">

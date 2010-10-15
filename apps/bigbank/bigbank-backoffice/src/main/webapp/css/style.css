@@ -40,6 +40,11 @@ a img {
     height: 400px;
 }
 
+.chartContent {
+    width: 300px;
+    height: 200px;
+}
+
 p {
     padding-bottom: 15px;
 }
