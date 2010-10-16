@@ -5,6 +5,7 @@
     <mappings>
         <mapping deployable="samples:ChannelsComposite" zone="zone1"/>
         <mapping deployable="samples:LoanComposite" zone="zone1"/>
+        <mapping deployable="samples:BackOfficeComposite" zone="zone1"/>
         <mapping deployable="samples:ServicesComposite" zone="zone2"/>
     </mappings>
 </plan>
