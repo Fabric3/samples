@@ -32,5 +32,6 @@
         <module>controller</module>  
         <module>zone1</module>
         <module>zone2</module>
+        <module>database</module>
     </modules>
 </project>

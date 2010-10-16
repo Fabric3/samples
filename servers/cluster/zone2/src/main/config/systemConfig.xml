@@ -1,6 +1,7 @@
 <config>
+   <security allow.http.authentication="true"/>
    <web.server>
-       <http port="8182"/>
+       <http port="8282-8292"/>
    </web.server>
    <runtime mode="participant" jmxPort="8000-9000"/>
    <datasources>
