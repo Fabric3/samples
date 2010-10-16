@@ -39,10 +39,14 @@ $(document).ready(function() {
     var approvalAmountGraph = new GraphModel(1, 20);
     approvalAmountGraph.init();
 
-    var timeToCompleteGraph = new GraphModel(2, 20);
+    var timeToCompleteGraph = new GraphModel(1, 20);
     timeToCompleteGraph.init();
 
-    function tickFormatter(x) {
+    function xAxisTickFormatter(x) {
+        return '';
+    }
+
+    function yAxisTickFormatter(x) {
         return '';
     }
 
@@ -50,7 +54,8 @@ $(document).ready(function() {
         var options = {
             lines: { show: true },
             points: { show: false },
-            xaxis: { tickDecimals: 0, tickSize: 1, tickFormatter: tickFormatter},
+            yaxis: { min: 100000 , max: 1000000, tickDecimals:0},
+            xaxis: { tickDecimals: 0, tickSize: 1, tickFormatter: xAxisTickFormatter},
             colors:['#2694e8']
         };
         var requestAmount = statistics.requestAmount;
@@ -66,10 +71,17 @@ $(document).ready(function() {
             $.plot(placeholder, approvalAmountGraph.data, options);
         }
 
-        var automated = statistics.timeToAutomatedApproval;
-        var manual = statistics.timeToManualApproval;
-        if (automated > 0 || manual > 0) {
-            timeToCompleteGraph.add([automated, manual]);
+//        var automated = statistics.timeToAutomatedApproval;
+        var manual = statistics.timeToManualApproval/60000;
+        if (manual > 0) {
+            options = {
+                lines: { show: true },
+                points: { show: false },
+                yaxis: { min: 0 , max: 100, tickDecimals: 2},
+                xaxis: { tickDecimals: 0, tickSize: 1, tickFormatter: xAxisTickFormatter},
+                colors:['#2694e8']
+            };
+            timeToCompleteGraph.add([manual]);
             placeholder = $("#average_time_to_complete_chart");
             $.plot(placeholder, timeToCompleteGraph.data, options);
         }

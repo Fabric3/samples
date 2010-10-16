@@ -67,7 +67,7 @@ $(document).ready(function() {
                 loanAppDialog.dialog('open');
                 var tabWidget = $("#tabs");
                 tabWidget.tabs("enable", "loans_tab");
-                tabWidget.tabs("select", "inbox_tab");
+                tabWidget.tabs("select", "overview_tab");
             }
         });
     }
@@ -118,7 +118,7 @@ $(document).ready(function() {
                 selectionDialog.dialog('open');
                 var tabWidget = $("#tabs");
                 tabWidget.tabs("disable", "loans_tab");
-                tabWidget.tabs("select", "inbox_tab");
+                tabWidget.tabs("select", "overview_tab");
                 content.html("");
             }
         });
