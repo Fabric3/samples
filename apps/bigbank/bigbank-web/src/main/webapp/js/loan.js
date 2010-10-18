@@ -44,19 +44,27 @@ $(document).ready(function() {
         return document.getElementById(arguments[0]);
     }
 
-    function getElementByIdValue() {
-        return document.getElementById(arguments[0]).value;
-    }
-
     /**
      * Creates a loan application
      */
     function createLoanApplication() {
-        // bind the form data to an object and serialize it using JSON
-        var objectJson = new Object();
-        var binder = Binder.FormBinder.bind(document.getElementById("request_form"), objectJson);
-        objectJson = binder.serialize();
-        var formData = JSON.stringify(objectJson);
+        var application = {
+            firstName: $("#firstName").val(),
+            lastName: $("#lastName").val(),
+            ssn: $("#ssn").val(),
+            propertyAddress:{
+                street: $("#propertyAddress.street").val(),
+                city: $("#propertyAddress.city").val(),
+                state: $("#propertyAddress.state").val(),
+                zip: $("#propertyAddress.zip").val()  
+            },
+            amount: $("#amount").val(),
+            downPayment: $("#downPayment").val()
+
+        };
+
+
+        var formData = JSON.stringify(application);
         $.ajax({
             type: "POST",
             contentType: "application/json",
@@ -129,17 +137,17 @@ $(document).ready(function() {
      */
     function login() {
         getElementById("login_message").innerHTML = "Logging in...";
+        var credentials = '{"username":"' + $("#username").val() + '", "password":"' + $("#password").val() + '"}';
         $.ajax({
             type: "POST",
             contentType: "application/json",
             url:  window.location.protocol + "//" + window.location.host + "/fabric/security/token",
             dataType: "json",
-            data: '{"username":"' + getElementByIdValue("username") + '", "password":"' + getElementByIdValue("password") + '"}',
+            data: credentials,
             success: function () {
                 authenticated = true;
                 $('#login').hide("slow");
                 $("#tabs").show();
-
             }
         });
     }
