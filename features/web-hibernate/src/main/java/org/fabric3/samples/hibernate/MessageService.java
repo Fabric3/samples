@@ -21,7 +21,6 @@ package org.fabric3.samples.hibernate;
 import java.net.URI;
 import java.util.List;
 import javax.persistence.PersistenceContext;
-import javax.security.auth.Subject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -34,7 +33,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.hibernate.Session;
-import org.oasisopen.sca.RequestContext;
 import org.oasisopen.sca.annotation.Context;
 import org.oasisopen.sca.annotation.ManagedTransaction;
 
