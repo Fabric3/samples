@@ -10,7 +10,7 @@
     <datasources>
        <datasource name="LoanApplicationDS" 
                 driver="org.h2.Driver"
-                url="jdbc:h2:mem:loadapplication;DB_CLOSE_DELAY=-1" 
+                url="jdbc:h2:tcp://localhost/loanapplication;USER=sa" 
                 type="non_xa">
            <minPoolSize>5</minPoolSize>
            <maxPoolSize>10</maxPoolSize>
