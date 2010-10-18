@@ -24,7 +24,7 @@ import org.oasisopen.sca.annotation.OneWay;
 import org.oasisopen.sca.annotation.Scope;
 
 import org.fabric3.api.annotation.Producer;
-import org.fabric3.samples.bigbank.api.channel.LoanChannel;
+import org.fabric3.samples.bigbank.api.channel.ApplicationEventChannel;
 import org.fabric3.samples.bigbank.api.event.AppraisalResult;
 import org.fabric3.samples.bigbank.api.event.AppraisalScheduled;
 import org.fabric3.samples.bigbank.services.appraisal.AppraisalRequest;
@@ -35,9 +35,9 @@ import org.fabric3.samples.bigbank.services.appraisal.AppraisalService;
  */
 @Scope("COMPOSITE")
 public class AppraisalComponent implements AppraisalService {
-    private LoanChannel loanChannel;
+    private ApplicationEventChannel loanChannel;
 
-    public AppraisalComponent(@Producer("loanChannel") LoanChannel loanChannel) {
+    public AppraisalComponent(@Producer("loanChannel") ApplicationEventChannel loanChannel) {
         this.loanChannel = loanChannel;
     }
 

@@ -49,9 +49,15 @@
         <consumer name="loanChannel" source="LoanChannel"/>
     </component>
 
+    <component name="AnalyticsEventBridge">
+        <implementation.java class="org.fabric3.samples.bigbank.loan.statistics.AnalyticsEventBridge"/>
+        <consumer name="loanChannel" source="LoanChannel"/>
+        <producer name="analyticsChannel" target="AnalyticsChannel"/>
+    </component>
+
     <component name="ApplicationStatisticsComponent">
         <implementation.java class="org.fabric3.samples.bigbank.loan.statistics.ApplicationStatisticsComponent"/>
-        <consumer name="loanChannel" source="LoanChannel"/>
+        <consumer name="analyticsChannel" source="AnalyticsChannel"/>
         <producer name="statisticsChannel" target="StatisticsChannel"/>
     </component>
 

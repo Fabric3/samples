@@ -106,7 +106,7 @@ public class ApplicationStatisticsComponent {
         }
     }
 
-    @Consumer("loanChannel")
+    @Consumer("analyticsChannel")
     public void onEvent(ApplicationEvent event) {
         if (event instanceof ApplicationReceived) {
             onReceived((ApplicationReceived) event);

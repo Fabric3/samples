@@ -91,9 +91,12 @@
           <option name="REPORT_PARAMETER_FOR_PUBLIC_METHODS" value="true" />
           <option name="INJECTION_ANNOS">
             <value>
-              <list size="2">
+              <list size="5">
                 <item index="0" class="java.lang.String" itemvalue="org.fabric3.api.annotation.Consumer" />
-                <item index="1" class="java.lang.String" itemvalue="org.oasisopen.sca.annotation.Reference" />
+                <item index="1" class="java.lang.String" itemvalue="org.oasisopen.sca.annotation.Callback" />
+                <item index="2" class="java.lang.String" itemvalue="org.oasisopen.sca.annotation.Context" />
+                <item index="3" class="java.lang.String" itemvalue="org.oasisopen.sca.annotation.Property" />
+                <item index="4" class="java.lang.String" itemvalue="org.oasisopen.sca.annotation.Reference" />
               </list>
             </value>
           </option>
@@ -160,6 +163,8 @@
     <dictionary name="jim">
       <words>
         <w>bigbank</w>
+        <w>inbox</w>
+        <w>usepager</w>
       </words>
     </dictionary>
   </component>
@@ -168,16 +173,17 @@
   </component>
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/apps/bigbank/bigbank-backoffice/bigbank-backoffice.iml" filepath="$PROJECT_DIR$/apps/bigbank/bigbank-backoffice/bigbank-backoffice.iml" group="bigbank" />
       <module fileurl="file://$PROJECT_DIR$/apps/bigbank/bigbank-client/bigbank-client.iml" filepath="$PROJECT_DIR$/apps/bigbank/bigbank-client/bigbank-client.iml" group="bigbank" />
       <module fileurl="file://$PROJECT_DIR$/apps/bigbank/bigbank-loan/bigbank-loan.iml" filepath="$PROJECT_DIR$/apps/bigbank/bigbank-loan/bigbank-loan.iml" group="bigbank" />
+      <module fileurl="file://$PROJECT_DIR$/apps/bigbank/bigbank-web/bigbank-web.iml" filepath="$PROJECT_DIR$/apps/bigbank/bigbank-web/bigbank-web.iml" group="bigbank" />
       <module fileurl="file://$PROJECT_DIR$/policy/counter/fabric3-samples-counter.iml" filepath="$PROJECT_DIR$/policy/counter/fabric3-samples-counter.iml" group="policy" />
       <module fileurl="file://$PROJECT_DIR$/features/eventing/fabric3-samples-eventing.iml" filepath="$PROJECT_DIR$/features/eventing/fabric3-samples-eventing.iml" group="features" />
-      <module fileurl="file://$PROJECT_DIR$/features/web-hibernate/fabric3-samples-hibernate.iml" filepath="$PROJECT_DIR$/features/web-hibernate/fabric3-samples-hibernate.iml" group="features" />
-      <module fileurl="file://$PROJECT_DIR$/features/hibernate/fabric3-samples-hibernate.iml" filepath="$PROJECT_DIR$/features/hibernate/fabric3-samples-hibernate.iml" group="features" />
-      <module fileurl="file://$PROJECT_DIR$/features/web-hibernate-client/fabric3-samples-hibernate-client.iml" filepath="$PROJECT_DIR$/features/web-hibernate-client/fabric3-samples-hibernate-client.iml" group="features" />
-      <module fileurl="file://$PROJECT_DIR$/features/hibernate-client/fabric3-samples-hibernate-client.iml" filepath="$PROJECT_DIR$/features/hibernate-client/fabric3-samples-hibernate-client.iml" group="features" />
+      <module fileurl="file://$PROJECT_DIR$/features/monitor/fabric3-samples-monitor.iml" filepath="$PROJECT_DIR$/features/monitor/fabric3-samples-monitor.iml" group="features" />
       <module fileurl="file://$PROJECT_DIR$/starter/restcalc/fabric3-samples-restcalc.iml" filepath="$PROJECT_DIR$/starter/restcalc/fabric3-samples-restcalc.iml" group="starter" />
       <module fileurl="file://$PROJECT_DIR$/features/timer/fabric3-samples-timer.iml" filepath="$PROJECT_DIR$/features/timer/fabric3-samples-timer.iml" group="features" />
+      <module fileurl="file://$PROJECT_DIR$/features/web-hibernate/fabric3-samples-web-hibernate.iml" filepath="$PROJECT_DIR$/features/web-hibernate/fabric3-samples-web-hibernate.iml" group="features" />
+      <module fileurl="file://$PROJECT_DIR$/features/web-hibernate-client/fabric3-samples-web-hibernate-client.iml" filepath="$PROJECT_DIR$/features/web-hibernate-client/fabric3-samples-web-hibernate-client.iml" group="features" />
       <module fileurl="file://$PROJECT_DIR$/starter/webcalc/fabric3-samples-webcalc.iml" filepath="$PROJECT_DIR$/starter/webcalc/fabric3-samples-webcalc.iml" group="starter" />
       <module fileurl="file://$PROJECT_DIR$/features/websocket-chat/fabric3-samples-websocket.iml" filepath="$PROJECT_DIR$/features/websocket-chat/fabric3-samples-websocket.iml" group="features" />
       <module fileurl="file://$PROJECT_DIR$/starter/wscalc/fabric3-samples-wscalc.iml" filepath="$PROJECT_DIR$/starter/wscalc/fabric3-samples-wscalc.iml" group="starter" />

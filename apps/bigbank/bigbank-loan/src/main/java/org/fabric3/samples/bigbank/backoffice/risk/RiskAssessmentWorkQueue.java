@@ -34,11 +34,10 @@ import org.oasisopen.sca.annotation.Scope;
 
 import org.fabric3.api.annotation.Producer;
 import org.fabric3.api.annotation.monitor.Monitor;
-import org.fabric3.samples.bigbank.api.channel.LoanChannel;
+import org.fabric3.samples.bigbank.api.channel.ApplicationEventChannel;
 import org.fabric3.samples.bigbank.api.domain.LoanRecord;
 import org.fabric3.samples.bigbank.api.event.ManualRiskAssessmentComplete;
 import org.fabric3.samples.bigbank.api.loan.LoanService;
-import org.fabric3.samples.bigbank.util.GenericsHelper;
 
 import static org.fabric3.samples.bigbank.util.GenericsHelper.cast;
 
@@ -55,7 +54,7 @@ import static org.fabric3.samples.bigbank.util.GenericsHelper.cast;
 @ManagedTransaction
 public class RiskAssessmentWorkQueue {
     private EntityManager em;
-    private LoanChannel channel;
+    private ApplicationEventChannel channel;
     private QueueMonitor monitor;
 
     public void setMonitor(@Monitor QueueMonitor monitor) {
@@ -63,7 +62,7 @@ public class RiskAssessmentWorkQueue {
     }
 
     @Producer("loanChannel")
-    public void setChannel(LoanChannel channel) {
+    public void setChannel(ApplicationEventChannel channel) {
         this.channel = channel;
     }
 

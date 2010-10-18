@@ -25,7 +25,7 @@ import org.fabric3.samples.bigbank.api.event.ApplicationEvent;
  *
  * @version $Rev$ $Date$
  */
-public interface LoanChannel {
+public interface ApplicationEventChannel {
 
     /**
      * Publishes an event.

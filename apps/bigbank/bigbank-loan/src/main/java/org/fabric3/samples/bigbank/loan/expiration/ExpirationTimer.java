@@ -25,7 +25,7 @@ import org.oasisopen.sca.annotation.ManagedTransaction;
 import org.oasisopen.sca.annotation.Scope;
 
 import org.fabric3.api.annotation.Producer;
-import org.fabric3.samples.bigbank.api.channel.LoanChannel;
+import org.fabric3.samples.bigbank.api.channel.ApplicationEventChannel;
 
 /**
  * A clustered singleton that checks loan application expiration.
@@ -35,7 +35,7 @@ import org.fabric3.samples.bigbank.api.channel.LoanChannel;
 @Scope("DOMAIN")
 @ManagedTransaction
 public class ExpirationTimer implements Runnable {
-    private LoanChannel channel;
+    private ApplicationEventChannel channel;
     private EntityManager em;
 
     @PersistenceContext(name = "loanApplicationEmf", unitName = "loanApplication")
@@ -43,7 +43,7 @@ public class ExpirationTimer implements Runnable {
         this.em = em;
     }
 
-    public ExpirationTimer(@Producer("loanChannel") LoanChannel channel) {
+    public ExpirationTimer(@Producer("loanChannel") ApplicationEventChannel channel) {
         this.channel = channel;
     }
 

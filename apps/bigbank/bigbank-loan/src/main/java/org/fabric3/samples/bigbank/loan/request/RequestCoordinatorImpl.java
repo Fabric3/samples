@@ -32,7 +32,7 @@ import org.fabric3.api.Fabric3RequestContext;
 import org.fabric3.api.annotation.Consumer;
 import org.fabric3.api.annotation.Producer;
 import org.fabric3.api.annotation.monitor.Monitor;
-import org.fabric3.samples.bigbank.api.channel.LoanChannel;
+import org.fabric3.samples.bigbank.api.channel.ApplicationEventChannel;
 import org.fabric3.samples.bigbank.api.domain.LoanRecord;
 import org.fabric3.samples.bigbank.api.domain.PropertyInfo;
 import org.fabric3.samples.bigbank.api.domain.TermInfo;
@@ -65,7 +65,7 @@ public class RequestCoordinatorImpl implements RequestCoordinator, PricingServic
     private CreditService creditService;
     private RiskAssessmentService riskService;
     private PricingService pricingService;
-    private LoanChannel loanChannel;
+    private ApplicationEventChannel loanChannel;
     private RequestMonitor monitor;
     private EntityManager em;
     private Fabric3RequestContext context;
@@ -82,7 +82,7 @@ public class RequestCoordinatorImpl implements RequestCoordinator, PricingServic
     public RequestCoordinatorImpl(@Reference CreditService creditService,
                                   @Reference RiskAssessmentService riskService,
                                   @Reference PricingService pricingService,
-                                  @Producer("loanChannel") LoanChannel loanChannel,
+                                  @Producer("loanChannel") ApplicationEventChannel loanChannel,
                                   @Monitor("LoanMonitorChannel") RequestMonitor monitor) {
         this.creditService = creditService;
         this.riskService = riskService;

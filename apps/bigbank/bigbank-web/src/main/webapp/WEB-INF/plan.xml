@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <plan xmlns="urn:fabric3.org:core"
       xmlns:samples="urn:fabric3.org:samples"
-      name="LoanPlan">
+      name="ConsumerPlan">
     <mappings>
         <mapping deployable="samples:ConsumerWebComposite" zone="zone1"/>
     </mappings>

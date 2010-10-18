@@ -26,6 +26,8 @@
 
     <channel name="LoanChannel"/>
 
+    <channel name="AnalyticsChannel" requires="f3:replication"/>
+
     <channel name="StatisticsChannel">
         <f3-binding:binding.web allowed="subscribe"/>
     </channel>
