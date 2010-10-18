@@ -27,12 +27,9 @@ $(document).ready(function() {
 
     function subscribe() {
         function callback(response) {
-            $.atmosphere.log('info', ["response.state: " + response.state]);
-            $.atmosphere.log('info', ["response.transport: " + response.transport]);
             if (response.transport != 'polling' && response.state != 'connected' && response.state != 'closed') {
-                $.atmosphere.log('info', ["response.responseBody: " + response.responseBody]);
                 if (response.status == 200) {
-                    var data = response.responseBody
+                    var data = response.responseBody;
                     var nd = document.createElement('div');
                     nd.setAttribute('class', 'messbody');
                     var message = JSON.parse(data);
