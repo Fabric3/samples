@@ -263,7 +263,7 @@ $(document).ready(function() {
 
         var channelAddress = baseUrl + "/channels/StatisticsChannel";
         var callbackFunction = !callbackAdded ? callback : null;
-        var request = $.atmosphere.request = {transport: 'websocket'};
+        var request = $.atmosphere.request = {headers: ['Accept','application/json'], transport: 'websocket'};
         $.atmosphere.subscribe(channelAddress, callbackFunction, request);
         connectedEndpoint = $.atmosphere.response;
         callbackAdded = true;
