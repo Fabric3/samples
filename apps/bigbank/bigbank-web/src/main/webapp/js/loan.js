@@ -99,7 +99,7 @@ $(document).ready(function() {
                 currentLoanId = application.id;
                 content.html("");
                 $.each(application.options, function(key, option) {
-                    content.append("<input type='radio' id='option_radio' value='" + option.type + "'>   " + option.type + "</input><br>");
+                    content.append("<input type='radio' name='option_radio' id='option_radio' value='" + option.type + "'>   " + option.type + "</input><br>");
                 });
                 content.append("</form>");
             }
