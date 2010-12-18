@@ -20,6 +20,7 @@ import java.util.List;
 
 import org.oasisopen.sca.annotation.Reference;
 
+import org.fabric3.api.annotation.monitor.Monitor;
 import org.fabric3.samples.bigbank.services.credit.CreditBureau;
 import org.fabric3.samples.bigbank.services.credit.CreditScore;
 import org.fabric3.samples.bigbank.services.credit.CreditService;
@@ -28,7 +29,12 @@ import org.fabric3.samples.bigbank.services.credit.CreditService;
  * @version $Rev$ $Date$
  */
 public class ConsolidatedCreditComponent implements CreditService {
+    private CreditMonitor monitor;
     private List<CreditBureau> bureaus;
+
+    public ConsolidatedCreditComponent(@Monitor CreditMonitor monitor) {
+        this.monitor = monitor;
+    }
 
     @Reference
     public void setCreditServices(List<CreditBureau> bureaus) {
@@ -42,7 +48,8 @@ public class ConsolidatedCreditComponent implements CreditService {
             total = bureau.score(ssn);
         }
         int value = total / size;
-        return new CreditScore(ssn, value);
-        // TODO fire audit
+        CreditScore score = new CreditScore(ssn, value);
+        monitor.creditCheck();
+        return score;
     }
 }

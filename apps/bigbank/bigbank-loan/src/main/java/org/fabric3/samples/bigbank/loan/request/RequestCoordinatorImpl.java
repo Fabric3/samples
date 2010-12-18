@@ -83,7 +83,7 @@ public class RequestCoordinatorImpl implements RequestCoordinator, PricingServic
                                   @Reference RiskAssessmentService riskService,
                                   @Reference PricingService pricingService,
                                   @Producer("loanChannel") ApplicationEventChannel loanChannel,
-                                  @Monitor("LoanMonitorChannel") RequestMonitor monitor) {
+                                  @Monitor RequestMonitor monitor) {
         this.creditService = creditService;
         this.riskService = riskService;
         this.pricingService = pricingService;
@@ -117,12 +117,13 @@ public class RequestCoordinatorImpl implements RequestCoordinator, PricingServic
         // synchronize to avoid race conditions with non-blocking risk assessment
         em.flush();
 
+        double amount = record.getAmount();
+
         // publish an event that the loan application was received
-        ApplicationReceived event = new ApplicationReceived(id);
+        ApplicationReceived event = new ApplicationReceived(id, amount);
         loanChannel.publish(event);
         
         // assess the risk
-        double amount = record.getAmount();
         double down = record.getDownPayment();
         RiskAssessmentRequest riskRequest = new RiskAssessmentRequest(id, score, amount, down);
         RiskAssessmentResponse response = riskService.assessRisk(riskRequest);
@@ -133,15 +134,18 @@ public class RequestCoordinatorImpl implements RequestCoordinator, PricingServic
             record.setApprovalType(LoanRecord.AUTOMATED_APPROVAL);
             PricingRequest pricingRequest = new PricingRequest(id, response.getRiskFactor());
             pricingService.price(pricingRequest);
+            monitor.approved(id);
         } else if (RiskAssessmentResponse.REJECTED == response.getDecision()) {
             // loan not approved
             record.setStatus(LoanService.REJECTED);
+            monitor.rejected(id);
         } else {
             // manual approval
             record.setStatus(LoanService.AWAITING_ASSESSMENT);
             record.setApprovalType(LoanRecord.MANUAL_APPROVAL);
             ManualRiskAssessment manualAssessment = new ManualRiskAssessment(id);
             loanChannel.publish(manualAssessment);
+            monitor.manualAssessment(id);
         }
         return id;
     }
@@ -165,7 +169,7 @@ public class RequestCoordinatorImpl implements RequestCoordinator, PricingServic
         long id = response.getId();
         LoanRecord record = em.find(LoanRecord.class, id);
         if (record == null) {
-            throw new AssertionError("Record was null: " + id);
+            throw new AssertionError("Record was not found: " + id);
         }
         List<TermInfo> termInfos = new ArrayList<TermInfo>();
         for (PricingOption pricingOption : response.getOptions()) {
@@ -178,7 +182,9 @@ public class RequestCoordinatorImpl implements RequestCoordinator, PricingServic
         record.setTerms(termInfos);
         record.setStatus(LoanService.AWAITING_ACCEPTANCE);
         em.merge(record);
-        ApplicationReady ready = new ApplicationReady(id);
+        double amount = record.getAmount();
+        int approvalType = record.getApprovalType();
+        ApplicationReady ready = new ApplicationReady(id, amount, approvalType);
         loanChannel.publish(ready);
     }
 

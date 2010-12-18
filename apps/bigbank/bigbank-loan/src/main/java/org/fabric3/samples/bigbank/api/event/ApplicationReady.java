@@ -25,8 +25,20 @@ package org.fabric3.samples.bigbank.api.event;
  */
 public class ApplicationReady extends ApplicationEvent {
     private static final long serialVersionUID = 6913418948989296728L;
+    private double amount;
+    private int approvalType;
 
-    public ApplicationReady(long loanId) {
+    public ApplicationReady(long loanId, double amount, int approvalType) {
         super(loanId);
+        this.amount = amount;
+        this.approvalType = approvalType;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public int getApprovalType() {
+        return approvalType;
     }
 }

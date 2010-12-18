@@ -122,25 +122,43 @@ public class ApplicationStatisticsComponent {
     }
 
     private void onAppraisalScheduled(AppraisalScheduled event) {
+        long id = event.getLoanId();
+        ApplicationStatistics statistics = findStatistics(id);
+        statistics.setAppraisalScheduledTimestamp(System.currentTimeMillis());
+        em.persist(statistics);
     }
 
     private void onReceived(ApplicationReceived event) {
-        LoanRecord record = getRecord(event);
-        double amount = record.getAmount();
+        ApplicationStatistics statistics = new ApplicationStatistics();
+        statistics.setLoanId(event.getLoanId());
+        statistics.setReceivedTimestamp(System.currentTimeMillis());
+        em.persist(statistics);
+        double amount = event.getAmount();
         amountAverage.write(amount);
     }
 
     private void onAssessmentComplete(ManualRiskAssessmentComplete event) {
+        long id = event.getLoanId();
+        ApplicationStatistics statistics = findStatistics(id);
+        if (event.isApproved()) {
+            statistics.setApprovedTimestamp(System.currentTimeMillis());
+        } else {
+            statistics.setRejectedTimestamp(System.currentTimeMillis());
+        }
+        em.persist(statistics);
     }
 
     private void onApplicationReady(ApplicationReady event) {
-        LoanRecord record = getRecord(event);
-        double amount = record.getAmount();
+        long id = event.getLoanId();
+        ApplicationStatistics statistics = findStatistics(id);
+        statistics.setReadyTimestamp(System.currentTimeMillis());
+        em.persist(statistics);
+
+        double amount = event.getAmount();
         approvalAverage.write(amount);
 
-        ApplicationStatistics statistics = findStatistics(event.getLoanId());
         long elapsed = event.getTimestamp() - statistics.getReceivedTimestamp();
-        if (LoanRecord.AUTOMATED_APPROVAL == record.getApprovalType()){
+        if (LoanRecord.AUTOMATED_APPROVAL == event.getApprovalType()) {
             timeToCompleteAutomatedAverage.write(elapsed);
         } else {
             // manual approval
@@ -150,15 +168,10 @@ public class ApplicationStatisticsComponent {
     }
 
     private void onExpired(ApplicationExpired event) {
-    }
-
-    private LoanRecord getRecord(ApplicationEvent event) {
         long id = event.getLoanId();
-        LoanRecord record = em.find(LoanRecord.class, id);
-        if (record == null) {
-            throw new AssertionError("Loan record not found: " + id);
-        }
-        return record;
+        ApplicationStatistics statistics = findStatistics(id);
+        statistics.setExpiredTimestamp(System.currentTimeMillis());
+        em.persist(statistics);
     }
 
     private ApplicationStatistics findStatistics(long loanId) {

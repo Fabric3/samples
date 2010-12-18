@@ -24,7 +24,7 @@
            xmlns:f3-binding="urn:org.fabric3:binding"
            name="ChannelsComposite">
 
-    <channel name="LoanChannel"/>
+    <channel name="LoanChannel" requires="f3:durable f3:nonPersistent"/>
 
     <channel name="AnalyticsChannel" requires="f3:replication"/>
 

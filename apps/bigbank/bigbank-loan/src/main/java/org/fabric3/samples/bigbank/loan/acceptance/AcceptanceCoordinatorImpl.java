@@ -35,6 +35,8 @@ import org.fabric3.api.annotation.Consumer;
 import org.fabric3.api.annotation.monitor.Monitor;
 import org.fabric3.samples.bigbank.api.domain.LoanRecord;
 import org.fabric3.samples.bigbank.api.domain.TermInfo;
+import org.fabric3.samples.bigbank.api.event.ApplicationEvent;
+import org.fabric3.samples.bigbank.api.event.AppraisalEvent;
 import org.fabric3.samples.bigbank.api.event.AppraisalResult;
 import org.fabric3.samples.bigbank.api.event.AppraisalScheduled;
 import org.fabric3.samples.bigbank.api.loan.LoanApplicationNotFoundException;
@@ -43,10 +45,8 @@ import org.fabric3.samples.bigbank.api.loan.LoanService;
 import org.fabric3.samples.bigbank.api.message.LoanApplication;
 import org.fabric3.samples.bigbank.api.message.LoanOption;
 import org.fabric3.samples.bigbank.api.message.LoanStatus;
-import org.fabric3.samples.bigbank.loan.monitor.ErrorMonitor;
 import org.fabric3.samples.bigbank.services.appraisal.AppraisalRequest;
 import org.fabric3.samples.bigbank.services.appraisal.AppraisalService;
-import org.fabric3.samples.bigbank.util.GenericsHelper;
 
 import static org.fabric3.samples.bigbank.util.GenericsHelper.cast;
 
@@ -58,11 +58,11 @@ import static org.fabric3.samples.bigbank.util.GenericsHelper.cast;
 @ManagedTransaction
 public class AcceptanceCoordinatorImpl implements AcceptanceCoordinator {
     private AppraisalService appraisalService;
-    private ErrorMonitor monitor;
+    private AcceptanceMonitor monitor;
     private EntityManager em;
     private Fabric3RequestContext context;
 
-    public AcceptanceCoordinatorImpl(@Reference(name = "appraisalService") AppraisalService appraisalService, @Monitor ErrorMonitor monitor) {
+    public AcceptanceCoordinatorImpl(@Reference(name = "appraisalService") AppraisalService appraisalService, @Monitor AcceptanceMonitor monitor) {
         this.appraisalService = appraisalService;
         this.monitor = monitor;
     }
@@ -133,6 +133,7 @@ public class AcceptanceCoordinatorImpl implements AcceptanceCoordinator {
         em.merge(record);
         AppraisalRequest request = new AppraisalRequest(id, record.getPropertyInfo().getAddress());
         appraisalService.appraise(request);
+        monitor.accepted(id);
     }
 
     public void decline(long id) throws LoanException {
@@ -142,9 +143,19 @@ public class AcceptanceCoordinatorImpl implements AcceptanceCoordinator {
         }
         record.setStatus(LoanService.DECLINED);
         em.merge(record);
+        monitor.declined(id);
     }
 
-    public void schedule(AppraisalScheduled scheduled) {
+    @Consumer("loanChannel")
+    public void onEvent(AppraisalEvent event) {
+        if (event instanceof AppraisalScheduled) {
+            appraisalScheduled((AppraisalScheduled) event);
+        } else if (event instanceof AppraisalResult) {
+            appraisalCompleted((AppraisalResult) event);
+        }
+    }
+
+    private void appraisalScheduled(AppraisalScheduled scheduled) {
         try {
             long id = scheduled.getLoanId();
             LoanRecord record = em.find(LoanRecord.class, id);
@@ -153,26 +164,27 @@ public class AcceptanceCoordinatorImpl implements AcceptanceCoordinator {
             }
             String email = record.getEmail();
             Date date = scheduled.getDate();
+            monitor.appraisalScheduled(id);
             // FIXME notificationService.appraisalScheduled(email, id, date);
         } catch (LoanException e) {
             monitor.onError(e);
         }
     }
 
-    @Consumer("loanChannel")
-    public void appraisalCompleted(AppraisalResult result) {
+    private void appraisalCompleted(AppraisalResult result) {
         if (AppraisalResult.DECLINED == result.getResult()) {
             // just return
             return;
         }
         try {
-            LoanRecord record = em.find(LoanRecord.class, result.getLoanId());
+            long id = result.getLoanId();
+            LoanRecord record = em.find(LoanRecord.class, id);
             if (record == null) {
                 throw new LoanApplicationNotFoundException("Loan record not found");
             }
             Calendar calendar = Calendar.getInstance();
             calendar.add(Calendar.MONTH, 1);
-            // FIXME notificationService.fundingDateScheduled(record.getEmail(), record.getId(), calendar.getTime());
+            monitor.appraisalCompleted(id);
         } catch (LoanException e) {
             monitor.onError(e);
         }

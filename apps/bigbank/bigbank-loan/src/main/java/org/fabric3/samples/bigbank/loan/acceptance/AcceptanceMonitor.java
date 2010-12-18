@@ -16,25 +16,28 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.fabric3.samples.bigbank.services.audit;
+package org.fabric3.samples.bigbank.loan.acceptance;
 
-import org.oasisopen.sca.annotation.Scope;
-
-import org.fabric3.samples.bigbank.services.credit.CreditScore;
+import org.fabric3.api.annotation.monitor.Info;
+import org.fabric3.api.annotation.monitor.Severe;
 
 /**
- * Audits credit scoring operations for legal compliance.
- *
  * @version $Revision$ $Date$
  */
-@Scope("COMPOSITE")
-public class AuditComponent {
+public interface AcceptanceMonitor {
 
-    public void recordCheck(String ssn) {
-        System.out.println("AuditService: Credit check for " + ssn);
-    }
+    @Severe("The following error occurred")
+    void onError(Throwable e);
 
-    public void recordResult(String ssn, CreditScore score) {
-        System.out.println("Credit result received for " + ssn + ". Score was " + score.getScore() + ".");
-    }
+    @Info("Loan application accepted for {0}")
+    void accepted(long id);
+
+    @Info("Loan application declined for {0}")
+    void declined(long id);
+
+    @Info("Appraisal scheduled for {0}")
+    void appraisalScheduled(long id);
+
+    @Info("Appraisal completed for {0}")
+    void appraisalCompleted(long id);
 }

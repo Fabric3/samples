@@ -18,6 +18,7 @@
  */
 package org.fabric3.samples.bigbank.services.pricing.impl;
 
+import org.fabric3.api.annotation.monitor.Monitor;
 import org.fabric3.samples.bigbank.services.pricing.PriceResponse;
 import org.fabric3.samples.bigbank.services.pricing.PricingOption;
 import org.fabric3.samples.bigbank.services.pricing.PricingRequest;
@@ -39,9 +40,11 @@ import org.oasisopen.sca.annotation.Scope;
 public class RiskBasedPricingComponent implements PricingService {
     private RateService rateService;
     private PricingServiceCallback callback;
+    private PricingMonitor monitor;
 
-    public RiskBasedPricingComponent(@Reference(name = "rateService") RateService rateService) {
+    public RiskBasedPricingComponent(@Reference(name = "rateService") RateService rateService, @Monitor PricingMonitor monitor) {
         this.rateService = rateService;
+        this.monitor = monitor;
     }
 
     @Callback
@@ -50,11 +53,13 @@ public class RiskBasedPricingComponent implements PricingService {
     }
 
     public void price(PricingRequest request) {
-        PriceResponse response = new PriceResponse(request.getId());
+        long id = request.getId();
+        PriceResponse response = new PriceResponse(id);
         RateResults rateResults = rateService.calculateRates(request.getRiskFactor());
         for (Rate rate : rateResults.getRates()) {
             response.addOption(new PricingOption(rate.getType(), rate.getRate(), rate.getApr()));
         }
         callback.onPrice(response);
+        monitor.pricingCompleted(id);
     }
 }

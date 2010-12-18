@@ -19,29 +19,12 @@
 package org.fabric3.samples.bigbank.api.event;
 
 /**
- * Issued when an property appraisal has been performed.
+ * Base appraisal event.
  *
- * @version $Revision$ $Date$
+ * @version $Revision: 9533 $ $Date: 2010-10-10 23:30:03 +0200 (Sun, 10 Oct 2010) $
  */
-public class AppraisalResult extends AppraisalEvent {
-    private static final long serialVersionUID = 1094048646709453908L;
-    public static int APPROVED = 1;
-    public static int DECLINED = -1;
-    private int result;
-    private String[] comments;
-
-    public AppraisalResult(long loanId, int result, String[] comments) {
-        super(loanId);
-        this.result = result;
-        this.comments = comments;
+public abstract class AppraisalEvent extends ApplicationEvent {
+    public AppraisalEvent(long id) {
+        super(id);
     }
-
-    public int getResult() {
-        return result;
-    }
-
-    public String[] getComments() {
-        return comments;
-    }
-
 }

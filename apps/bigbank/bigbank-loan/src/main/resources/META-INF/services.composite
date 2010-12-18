@@ -47,9 +47,5 @@
         <producer name="loanChannel" target="LoanChannel"/>
     </component>
 
-    <component name="AuditComponent">
-        <implementation.java class="org.fabric3.samples.bigbank.services.audit.AuditComponent"/>
-    </component>
 
-    
 </composite>

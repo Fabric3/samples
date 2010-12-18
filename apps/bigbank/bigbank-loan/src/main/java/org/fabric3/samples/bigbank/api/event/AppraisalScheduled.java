@@ -25,7 +25,7 @@ import java.util.Date;
  *
  * @version $Revision$ $Date$
  */
-public class AppraisalScheduled extends ApplicationEvent {
+public class AppraisalScheduled extends AppraisalEvent {
     private static final long serialVersionUID = -1913119919081097742L;
     private Date date;
 

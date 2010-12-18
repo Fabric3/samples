@@ -16,30 +16,16 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.fabric3.samples.bigbank.loan.notification;
+package org.fabric3.samples.bigbank.services.appraisal.impl;
 
-import org.oasisopen.sca.annotation.OneWay;
-
-import java.util.Date;
+import org.fabric3.api.annotation.monitor.Info;
 
 /**
- * @version $Revision$ $Date$
+ * @version $Revision: 9566 $ $Date: 2010-10-18 12:14:00 +0200 (Mon, 18 Oct 2010) $
  */
-public interface NotificationService {
+public interface AppraisalMonitor {
 
-    @OneWay
-    void approved(String email, long applicationId);
-
-    @OneWay
-    void rejected(String email, long applicationId);
-
-    @OneWay
-    void appraisalScheduled(String email, long applicationId, Date date);
-
-    @OneWay
-    void appraisalFinished(String email, long applicationId);
-
-    @OneWay
-    void fundingDateScheduled(String email, long applicationId, Date date);
+    @Info("Appraisal completed for {0}")
+    void appraisalComplete(long id);
 
 }

@@ -28,7 +28,7 @@
     <component name="LoanComponent">
         <implementation.java class="org.fabric3.samples.bigbank.loan.loan.LoanComponent"/>
         <service name="LoanService">
-            <binding.ws name="wsBinding" uri="/loanService"/>
+            <binding.ws name="wsBinding" uri="/loanService" requires="sca:clientAuthentication.message"/>
             <f3-binding:binding.rs name="rsBinding" uri="/loans"/>
         </service>
     </component>
@@ -41,11 +41,6 @@
 
     <component name="AcceptanceCoordinator">
         <implementation.java class="org.fabric3.samples.bigbank.loan.acceptance.AcceptanceCoordinatorImpl"/>
-        <consumer name="loanChannel" source="LoanChannel"/>
-    </component>
-
-    <component name="ApplicationEventRecorder">
-        <implementation.java class="org.fabric3.samples.bigbank.loan.statistics.ApplicationEventRecorder"/>
         <consumer name="loanChannel" source="LoanChannel"/>
     </component>
 
@@ -63,10 +58,6 @@
 
     <component name="ExpirationTimer">
         <f3-impl:implementation.timer class="org.fabric3.samples.bigbank.loan.expiration.ExpirationTimer" repeatInterval='60' unit='seconds'/>
-    </component>
-
-    <component name="NotificationComponent">
-        <implementation.java class="org.fabric3.samples.bigbank.loan.notification.NotificationComponent"/>
     </component>
 
 </composite>

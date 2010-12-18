@@ -30,7 +30,12 @@ public interface RequestMonitor {
     @Info("Loan application received and assigned id: {0}")
     void received(long number);
 
-    @Info("Risk assessment received for: {0}")
-    void riskAssessmentReceived(long number);
+    @Info("Application approved for: {0}")
+    void approved(long number);
 
+    @Info("Application was rejected for: {0}")
+    void rejected(long id);
+
+    @Info("Application sent for manual assessment: {0}")
+    void manualAssessment(long id);
 }

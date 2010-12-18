@@ -18,6 +18,7 @@
  */
 package org.fabric3.samples.bigbank.services.rate.impl;
 
+import org.fabric3.api.annotation.monitor.Monitor;
 import org.fabric3.samples.bigbank.services.rate.Rate;
 import org.fabric3.samples.bigbank.services.rate.RateResults;
 import org.fabric3.samples.bigbank.services.rate.RateService;
@@ -28,6 +29,11 @@ import org.oasisopen.sca.annotation.Scope;
  */
 @Scope("COMPOSITE")
 public class RateComponent implements RateService {
+    private RateMonitor monitor;
+
+    public RateComponent(@Monitor RateMonitor monitor) {
+        this.monitor = monitor;
+    }
 
     public RateResults calculateRates(int score) {
         RateResults results = new RateResults();
@@ -46,10 +52,11 @@ public class RateComponent implements RateService {
             Rate arm30 = new Rate("30 Year ARM", 5.2f, 2f);
             results.addRate(fixed30);
             results.addRate(arm30);
-        } else if (score > 30 && score < 50) {
+        } else if (score > 30) {
             Rate fixed30 = new Rate("30 Year FIXED", 6.0f, 4f);
             results.addRate(fixed30);
         }
+        monitor.ratingCompleted();
         return results;
     }
 }

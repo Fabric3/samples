@@ -24,6 +24,7 @@ import java.util.List;
 import org.oasisopen.sca.annotation.Property;
 import org.oasisopen.sca.annotation.Scope;
 
+import org.fabric3.api.annotation.monitor.Monitor;
 import org.fabric3.samples.bigbank.services.risk.RiskAssessmentRequest;
 import org.fabric3.samples.bigbank.services.risk.RiskAssessmentResponse;
 import org.fabric3.samples.bigbank.services.risk.RiskAssessmentService;
@@ -36,6 +37,7 @@ import org.fabric3.samples.bigbank.services.risk.RiskReason;
  */
 @Scope("COMPOSITE")
 public class RiskAssessmentComponent implements RiskAssessmentService {
+    private RiskAssessmentMonitor monitor;
     private double ratioMinimum = .10;
     private double ratioFavorableMinimum = .05;
 
@@ -47,6 +49,10 @@ public class RiskAssessmentComponent implements RiskAssessmentService {
     @Property(required = false)
     public void setRatioFavorableMinimum(double ratioFavorableMinimum) {
         this.ratioFavorableMinimum = ratioFavorableMinimum;
+    }
+
+    public RiskAssessmentComponent(@Monitor RiskAssessmentMonitor monitor) {
+        this.monitor = monitor;
     }
 
     public RiskAssessmentResponse assessRisk(RiskAssessmentRequest request) {
@@ -91,9 +97,10 @@ public class RiskAssessmentComponent implements RiskAssessmentService {
                 decision = RiskAssessmentResponse.APPROVED;
             }
         }
+        monitor.assessmentCompleted();
         long id = request.getId();
-        if (request.getDownPayment() == 3333){
-           return new RiskAssessmentResponse(id, RiskAssessmentResponse.MANUAL_APPROVAL, factor, reasons);
+        if (request.getDownPayment() == 3333) {
+            return new RiskAssessmentResponse(id, RiskAssessmentResponse.MANUAL_APPROVAL, factor, reasons);
         }
         return new RiskAssessmentResponse(id, decision, factor, reasons);
     }

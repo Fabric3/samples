@@ -18,8 +18,6 @@
  */
 package org.fabric3.samples.bigbank.api.event;
 
-import org.fabric3.samples.bigbank.api.domain.LoanRecord;
-
 /**
  * Denotes a new loan application that has been received.
  *
@@ -27,9 +25,14 @@ import org.fabric3.samples.bigbank.api.domain.LoanRecord;
  */
 public class ApplicationReceived extends ApplicationEvent {
     private static final long serialVersionUID = -3179786299288877078L;
+    private double amount;
 
-    public ApplicationReceived(long loanId) {
+    public ApplicationReceived(long loanId, double amount) {
         super(loanId);
+        this.amount = amount;
     }
 
+    public double getAmount() {
+        return amount;
+    }
 }

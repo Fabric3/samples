@@ -16,16 +16,16 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.fabric3.samples.bigbank.loan.monitor;
+package org.fabric3.samples.bigbank.services.rate.impl;
 
-import org.fabric3.api.annotation.monitor.Severe;
+import org.fabric3.api.annotation.monitor.Info;
 
 /**
- * @version $Revision$ $Date$
+ * @version $Revision: 9566 $ $Date: 2010-10-18 12:14:00 +0200 (Mon, 18 Oct 2010) $
  */
-public interface ErrorMonitor {
+public interface RateMonitor {
 
-    @Severe("The following error occurred")
-    void onError(Throwable e);
+    @Info("Rating completed")
+    void ratingCompleted();
 
 }

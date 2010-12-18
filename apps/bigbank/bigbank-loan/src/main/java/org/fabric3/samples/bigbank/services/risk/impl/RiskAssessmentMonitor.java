@@ -16,32 +16,16 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.fabric3.samples.bigbank.api.event;
+package org.fabric3.samples.bigbank.services.risk.impl;
+
+import org.fabric3.api.annotation.monitor.Info;
 
 /**
- * Issued when an property appraisal has been performed.
- *
- * @version $Revision$ $Date$
+ * @version $Revision: 9566 $ $Date: 2010-10-18 12:14:00 +0200 (Mon, 18 Oct 2010) $
  */
-public class AppraisalResult extends AppraisalEvent {
-    private static final long serialVersionUID = 1094048646709453908L;
-    public static int APPROVED = 1;
-    public static int DECLINED = -1;
-    private int result;
-    private String[] comments;
+public interface RiskAssessmentMonitor {
 
-    public AppraisalResult(long loanId, int result, String[] comments) {
-        super(loanId);
-        this.result = result;
-        this.comments = comments;
-    }
-
-    public int getResult() {
-        return result;
-    }
-
-    public String[] getComments() {
-        return comments;
-    }
+    @Info("Risk assessment completed")
+    void assessmentCompleted();
 
 }
