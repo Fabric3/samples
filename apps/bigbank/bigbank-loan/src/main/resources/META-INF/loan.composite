@@ -28,7 +28,6 @@
     <component name="LoanComponent">
         <implementation.java class="org.fabric3.samples.bigbank.loan.loan.LoanComponent"/>
         <service name="LoanService">
-            <binding.ws name="wsBinding" uri="/loanService" requires="sca:clientAuthentication.message"/>
             <f3-binding:binding.rs name="rsBinding" uri="/loans"/>
         </service>
     </component>

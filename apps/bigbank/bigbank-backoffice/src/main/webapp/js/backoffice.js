@@ -71,7 +71,6 @@ $(document).ready(function() {
             $.plot(placeholder, approvalAmountGraph.data, options);
         }
 
-//        var automated = statistics.timeToAutomatedApproval;
         var manual = statistics.timeToManualApproval/60000;
         if (manual > 0) {
             options = {
@@ -291,7 +290,6 @@ $(document).ready(function() {
     tabs.bind('tabsshow', function(event, ui) {
         if (ui.panel.id == "analyst_tab") {
             subscribe();
-            //            plot([]);
         }
     });
 
