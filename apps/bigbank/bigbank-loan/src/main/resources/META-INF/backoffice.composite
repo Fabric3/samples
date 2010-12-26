@@ -19,7 +19,7 @@
 <composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
            xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912"
            xmlns:samples="urn:fabric3.org:samples"
-           xmlns:f3-binding="urn:org.fabric3:binding"
+           xmlns:f3="urn:fabric3.org"
            targetNamespace="urn:fabric3.org:samples"
            name="BackOfficeComposite"
            autowire="true">
@@ -27,7 +27,7 @@
     <component name="RiskAssessmentWorkQueueImpl">
         <implementation.java class="org.fabric3.samples.bigbank.backoffice.risk.RiskAssessmentWorkQueue"/>
         <service name="RiskAssessmentWorkQueue">
-            <f3-binding:binding.rs uri="/riskWorkQueue"/>
+            <f3:binding.rs uri="/riskWorkQueue"/>
         </service>
         <producer name="loanChannel" target="LoanChannel"/>
     </component>

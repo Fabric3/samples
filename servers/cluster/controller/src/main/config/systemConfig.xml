@@ -16,13 +16,13 @@
            <maxPoolSize>10</maxPoolSize>
        </datasource>       
     </datasources>
-    <jms>
+ <!--   <jms>
        <connection.factories>
           <connection.factory name="xaDefault" type="xa"/>
           <connection.factory name="default" type="local"/>
         </connection.factories>
         <binding.sca factory="default" xa.factory="xaDefault"/>
-    </jms>
+    </jms> -->
  
        <!-- 
        <driver>com.mysql.jdbc.Driver</driver>

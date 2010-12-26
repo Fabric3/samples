@@ -3,6 +3,10 @@
     <web.server>
         <http port="8181"/>
     </web.server>
+   <!--  <deploy.directories>
+        <deploy.directory>/Users/jim/workspace/fabric3/codehaus/fabric3/samples/trunk/apps/bigbank/bigbank-loan/target</deploy.directory>
+    </deploy.directories> -->
+ 
     <datasources>
        <datasource name="LoanApplicationDS" 
                 driver="org.h2.Driver"

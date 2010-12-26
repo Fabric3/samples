@@ -33,7 +33,7 @@ import org.oasisopen.sca.annotation.Reference;
  *
  * @version $Rev$ $Date$
  */
-@Path("/")
+@Path("{root}")
 @Consumes(MediaType.TEXT_PLAIN)
 @Produces(MediaType.TEXT_PLAIN)
 public class CalculatorService {

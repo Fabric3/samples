@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
-           xmlns:f3-impl="urn:fabric3.org:implementation"
-           xmlns:f3-binding="urn:org.fabric3:binding"
+           xmlns:f3="urn:fabric3.org"
            name="MonitorComposite"
            targetNamespace="urn:fabric3.org:samples">
 
@@ -10,11 +9,11 @@
     </component>
 
     <component name="TimerComponent">
-        <f3-impl:implementation.timer class="org.fabric3.samples.monitor.TimerComponent" repeatInterval="10000"/>
+        <f3:implementation.timer class="org.fabric3.samples.monitor.TimerComponent" repeatInterval="10000"/>
     </component>
 
     <channel name="MonitorApplicationChannel">
-        <f3-binding:binding.web/>
+        <f3:binding.web/>
     </channel>
 
     <component name="ApplicationMonitor">

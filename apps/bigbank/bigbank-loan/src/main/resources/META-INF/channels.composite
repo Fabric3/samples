@@ -18,10 +18,9 @@
 
 <composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
            xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912"
-           xmlns:f3="urn:fabric3.org:core"
+           xmlns:f3="urn:fabric3.org"
            xmlns:samples="urn:fabric3.org:samples"
            targetNamespace="urn:fabric3.org:samples"
-           xmlns:f3-binding="urn:org.fabric3:binding"
            name="ChannelsComposite">
 
     <channel name="LoanChannel" requires="f3:durable f3:nonPersistent"/>
@@ -29,11 +28,11 @@
     <channel name="AnalyticsChannel" requires="f3:replication"/>
 
     <channel name="StatisticsChannel">
-        <f3-binding:binding.web allowed="subscribe"/>
+        <f3:binding.web allowed="subscribe"/>
     </channel>
 
     <channel name="LoanMonitorChannel" requires="f3:synchronous">
-        <f3-binding:binding.web allowed="subscribe"/>
+        <f3:binding.web allowed="subscribe"/>
     </channel>
 
     <component name="ApplicationMonitor">

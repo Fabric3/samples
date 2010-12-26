@@ -190,7 +190,6 @@ public class RequestCoordinatorImpl implements RequestCoordinator, PricingServic
 
     private LoanRecord createLoanRecord(LoanRequest request) {
         LoanRecord record = new LoanRecord();
-        record.setSsn(request.getSSN());
         record.setEmail(request.getEmail());
         record.setAmount(request.getAmount());
         record.setDownPayment(request.getDownPayment());

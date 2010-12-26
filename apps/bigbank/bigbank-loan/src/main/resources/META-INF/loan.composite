@@ -18,8 +18,7 @@
 
 <composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
            xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912"
-           xmlns:f3-binding="urn:org.fabric3:binding"
-           xmlns:f3-impl="urn:fabric3.org:implementation"
+           xmlns:f3="urn:fabric3.org"
            xmlns:samples="urn:fabric3.org:samples"
            targetNamespace="urn:fabric3.org:samples"
            name="LoanComposite"
@@ -28,7 +27,7 @@
     <component name="LoanComponent">
         <implementation.java class="org.fabric3.samples.bigbank.loan.loan.LoanComponent"/>
         <service name="LoanService">
-            <f3-binding:binding.rs name="rsBinding" uri="/loans"/>
+            <f3:binding.rs name="rsBinding" uri="/loans"/>
         </service>
     </component>
 
@@ -56,7 +55,7 @@
     </component>
 
     <component name="ExpirationTimer">
-        <f3-impl:implementation.timer class="org.fabric3.samples.bigbank.loan.expiration.ExpirationTimer" repeatInterval='60' unit='seconds'/>
+        <f3:implementation.timer class="org.fabric3.samples.bigbank.loan.expiration.ExpirationTimer" repeatInterval='60' unit='seconds'/>
     </component>
 
 </composite>

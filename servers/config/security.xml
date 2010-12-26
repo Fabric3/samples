@@ -14,4 +14,11 @@
             <role>role1</role>
       </roles>
    </user>
+   <user>
+      <username>admin</username>
+      <password>admin</password>
+      <roles>
+            <role>admin</role>
+      </roles>
+   </user>
 </users>

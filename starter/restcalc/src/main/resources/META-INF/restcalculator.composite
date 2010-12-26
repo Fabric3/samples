@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
-           xmlns:f3-binding="urn:org.fabric3:binding"
+           xmlns:f3="urn:fabric3.org"
            name="RESTCalculatorComposite"
            targetNamespace="urn:fabric3.org:samples">
 
     <component name="RSCalculatorService">
         <implementation.java class="org.fabric3.samples.rs.calculator.CalculatorService"/>
         <service name="CalculatorService">
-            <f3-binding:binding.rs uri="/calculator"/>
+            <f3:binding.rs uri="/calculator"/>
         </service>
         <reference name="addService" target="RSAddService"/>
         <reference name="subtractService" target="RSSubtractService"/>
