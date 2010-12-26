@@ -18,7 +18,7 @@
 
     <f3-other:datasources>
         <datasource name="MessageDS" driver="org.h2.jdbcx.JdbcDataSource" type="xa">
-            <URL>jdbc:h2:mem:MessageDS;DB_CLOSE_DELAY=-1</URL>
+            <URL>jdbc:h2:mem:MessageDS;DB_CLOSE_ON_EXIT=FALSE</URL>
             <minPoolSize>5</minPoolSize>
             <maxPoolSize>10</maxPoolSize>
         </datasource>
