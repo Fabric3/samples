@@ -19,8 +19,6 @@
 package org.fabric3.samples.bigbank.loan.acceptance;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -35,7 +33,6 @@ import org.fabric3.api.annotation.Consumer;
 import org.fabric3.api.annotation.monitor.Monitor;
 import org.fabric3.samples.bigbank.api.domain.LoanRecord;
 import org.fabric3.samples.bigbank.api.domain.TermInfo;
-import org.fabric3.samples.bigbank.api.event.ApplicationEvent;
 import org.fabric3.samples.bigbank.api.event.AppraisalEvent;
 import org.fabric3.samples.bigbank.api.event.AppraisalResult;
 import org.fabric3.samples.bigbank.api.event.AppraisalScheduled;
@@ -162,31 +159,18 @@ public class AcceptanceCoordinatorImpl implements AcceptanceCoordinator {
             if (record == null) {
                 throw new LoanApplicationNotFoundException("Loan record not found");
             }
-            String email = record.getEmail();
-            Date date = scheduled.getDate();
             monitor.appraisalScheduled(id);
-            // FIXME notificationService.appraisalScheduled(email, id, date);
         } catch (LoanException e) {
             monitor.onError(e);
         }
     }
 
     private void appraisalCompleted(AppraisalResult result) {
+        long id = result.getLoanId();
         if (AppraisalResult.DECLINED == result.getResult()) {
-            // just return
-            return;
-        }
-        try {
-            long id = result.getLoanId();
-            LoanRecord record = em.find(LoanRecord.class, id);
-            if (record == null) {
-                throw new LoanApplicationNotFoundException("Loan record not found");
-            }
-            Calendar calendar = Calendar.getInstance();
-            calendar.add(Calendar.MONTH, 1);
+            monitor.appraisalDeclined(id);
+        } else {
             monitor.appraisalCompleted(id);
-        } catch (LoanException e) {
-            monitor.onError(e);
         }
     }
 

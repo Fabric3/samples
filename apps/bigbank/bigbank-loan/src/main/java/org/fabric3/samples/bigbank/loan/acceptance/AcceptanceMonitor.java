@@ -40,4 +40,7 @@ public interface AcceptanceMonitor {
 
     @Info("Appraisal completed for {0}")
     void appraisalCompleted(long id);
+
+    @Info("Loan declined based on appraisal results for {0}")
+    void appraisalDeclined(long id);
 }
