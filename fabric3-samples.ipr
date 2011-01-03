@@ -200,17 +200,6 @@
   </component>
   <component name="WebServicesPlugin" addRequiredLibraries="true" />
   <component name="libraryTable">
-    <library name="Maven: org.codehaus.fabric3.spec:sca-api:1.1">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/fabric3/spec/sca-api/1.1/sca-api-1.1.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/fabric3/spec/sca-api/1.1/sca-api-1.1-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/fabric3/spec/sca-api/1.1/sca-api-1.1-sources.jar!/" />
-      </SOURCES>
-    </library>
     <library name="Maven: javax.xml.bind:jaxb-api-osgi:2.2-promoted-b50">
       <CLASSES>
         <root url="jar://$MAVEN_REPOSITORY$/javax/xml/bind/jaxb-api-osgi/2.2-promoted-b50/jaxb-api-osgi-2.2-promoted-b50.jar!/" />
@@ -484,17 +473,6 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/fabric3/spec/sca-api/1.1.1-SNAPSHOT/sca-api-1.1.1-SNAPSHOT-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: org.codehaus.fabric3.samples:bigbank-loan:1.6">
-      <CLASSES>
-        <root url="jar://$PROJECT_DIR$/apps/bigbank/bigbank-loan/pom.xml!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$PROJECT_DIR$/apps/bigbank/bigbank-loan/pom-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$PROJECT_DIR$/apps/bigbank/bigbank-loan/pom-sources.jar!/" />
       </SOURCES>
     </library>
   </component>
