@@ -198,6 +198,8 @@ public class RequestCoordinatorImpl implements RequestCoordinator, PricingServic
         record.setStatus(LoanService.SUBMITTED);
         String username = context.getCurrentSubject().getUsername();
         record.setUsername(username);
+        // simulate an SSN
+        record.setSsn("333333333");
         return record;
     }
 
