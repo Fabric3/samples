@@ -255,61 +255,6 @@
         <root url="jar://$MAVEN_REPOSITORY$/javax/ws/rs/jsr311-api/1.1.1/jsr311-api-1.1.1-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: org.codehaus.fabric3:fabric3-api:1.7-SNAPSHOT">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/fabric3/fabric3-api/1.7-SNAPSHOT/fabric3-api-1.7-SNAPSHOT.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/fabric3/fabric3-api/1.7-SNAPSHOT/fabric3-api-1.7-SNAPSHOT-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/fabric3/fabric3-api/1.7-SNAPSHOT/fabric3-api-1.7-SNAPSHOT-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: org.codehaus.fabric3:fabric3-spi:1.7-SNAPSHOT">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/fabric3/fabric3-spi/1.7-SNAPSHOT/fabric3-spi-1.7-SNAPSHOT.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/fabric3/fabric3-spi/1.7-SNAPSHOT/fabric3-spi-1.7-SNAPSHOT-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/fabric3/fabric3-spi/1.7-SNAPSHOT/fabric3-spi-1.7-SNAPSHOT-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: org.codehaus.fabric3:fabric3-host-api:1.7-SNAPSHOT">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/fabric3/fabric3-host-api/1.7-SNAPSHOT/fabric3-host-api-1.7-SNAPSHOT.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/fabric3/fabric3-host-api/1.7-SNAPSHOT/fabric3-host-api-1.7-SNAPSHOT-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/fabric3/fabric3-host-api/1.7-SNAPSHOT/fabric3-host-api-1.7-SNAPSHOT-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: org.codehaus.fabric3:fabric3-model:1.7-SNAPSHOT">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/fabric3/fabric3-model/1.7-SNAPSHOT/fabric3-model-1.7-SNAPSHOT.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/fabric3/fabric3-model/1.7-SNAPSHOT/fabric3-model-1.7-SNAPSHOT-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/fabric3/fabric3-model/1.7-SNAPSHOT/fabric3-model-1.7-SNAPSHOT-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: org.codehaus.fabric3:fabric3-management-api:1.7-SNAPSHOT">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/fabric3/fabric3-management-api/1.7-SNAPSHOT/fabric3-management-api-1.7-SNAPSHOT.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/fabric3/fabric3-management-api/1.7-SNAPSHOT/fabric3-management-api-1.7-SNAPSHOT-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/fabric3/fabric3-management-api/1.7-SNAPSHOT/fabric3-management-api-1.7-SNAPSHOT-sources.jar!/" />
-      </SOURCES>
-    </library>
     <library name="Maven: com.sun.jersey:jersey-client:1.3">
       <CLASSES>
         <root url="jar://$MAVEN_REPOSITORY$/com/sun/jersey/jersey-client/1.3/jersey-client-1.3.jar!/" />
@@ -464,37 +409,70 @@
         <root url="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/1.5.8/slf4j-api-1.5.8-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: org.codehaus.fabric3.spec:sca-api:1.1.1-SNAPSHOT">
+    <library name="Maven: org.codehaus.fabric3.spec:sca-api:1.1.1">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/fabric3/spec/sca-api/1.1.1-SNAPSHOT/sca-api-1.1.1-SNAPSHOT.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/fabric3/spec/sca-api/1.1.1/sca-api-1.1.1.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/fabric3/spec/sca-api/1.1.1-SNAPSHOT/sca-api-1.1.1-SNAPSHOT-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/fabric3/spec/sca-api/1.1.1/sca-api-1.1.1-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/fabric3/spec/sca-api/1.1.1-SNAPSHOT/sca-api-1.1.1-SNAPSHOT-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/fabric3/spec/sca-api/1.1.1/sca-api-1.1.1-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: org.codehaus.fabric3.samples:bigbank-loan:1.7-SNAPSHOT">
+    <library name="Maven: org.codehaus.fabric3:fabric3-api:1.7">
       <CLASSES>
-        <root url="jar://$PROJECT_DIR$/apps/bigbank/bigbank-loan/pom.xml!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/fabric3/fabric3-api/1.7/fabric3-api-1.7.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$PROJECT_DIR$/apps/bigbank/bigbank-loan/pom-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/fabric3/fabric3-api/1.7/fabric3-api-1.7-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$PROJECT_DIR$/apps/bigbank/bigbank-loan/pom-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/fabric3/fabric3-api/1.7/fabric3-api-1.7-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: org.codehaus.fabric3.spec:sca-api:${sca.api.version}">
+    <library name="Maven: org.codehaus.fabric3:fabric3-spi:1.7">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/fabric3/spec/sca-api/${sca.api.version}/sca-api-${sca.api.version}.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/fabric3/fabric3-spi/1.7/fabric3-spi-1.7.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/fabric3/spec/sca-api/${sca.api.version}/sca-api-${sca.api.version}-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/fabric3/fabric3-spi/1.7/fabric3-spi-1.7-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/fabric3/spec/sca-api/${sca.api.version}/sca-api-${sca.api.version}-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/fabric3/fabric3-spi/1.7/fabric3-spi-1.7-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.codehaus.fabric3:fabric3-host-api:1.7">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/fabric3/fabric3-host-api/1.7/fabric3-host-api-1.7.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/fabric3/fabric3-host-api/1.7/fabric3-host-api-1.7-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/fabric3/fabric3-host-api/1.7/fabric3-host-api-1.7-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.codehaus.fabric3:fabric3-model:1.7">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/fabric3/fabric3-model/1.7/fabric3-model-1.7.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/fabric3/fabric3-model/1.7/fabric3-model-1.7-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/fabric3/fabric3-model/1.7/fabric3-model-1.7-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.codehaus.fabric3:fabric3-management-api:1.7">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/fabric3/fabric3-management-api/1.7/fabric3-management-api-1.7.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/fabric3/fabric3-management-api/1.7/fabric3-management-api-1.7-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/fabric3/fabric3-management-api/1.7/fabric3-management-api-1.7-sources.jar!/" />
       </SOURCES>
     </library>
   </component>
