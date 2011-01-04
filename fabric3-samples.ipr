@@ -475,6 +475,28 @@
         <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/fabric3/spec/sca-api/1.1.1-SNAPSHOT/sca-api-1.1.1-SNAPSHOT-sources.jar!/" />
       </SOURCES>
     </library>
+    <library name="Maven: org.codehaus.fabric3.samples:bigbank-loan:1.7-SNAPSHOT">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/apps/bigbank/bigbank-loan/pom.xml!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$PROJECT_DIR$/apps/bigbank/bigbank-loan/pom-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$PROJECT_DIR$/apps/bigbank/bigbank-loan/pom-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: org.codehaus.fabric3.spec:sca-api:${sca.api.version}">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/fabric3/spec/sca-api/${sca.api.version}/sca-api-${sca.api.version}.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/fabric3/spec/sca-api/${sca.api.version}/sca-api-${sca.api.version}-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/fabric3/spec/sca-api/${sca.api.version}/sca-api-${sca.api.version}-sources.jar!/" />
+      </SOURCES>
+    </library>
   </component>
 </project>
 
