@@ -1,9 +1,6 @@
 <config>
    <security allow.http.authentication="true"/>
-   <web.server>
-       <http port="8282-8292"/>
-   </web.server>
-   <runtime mode="participant" jmxPort="8000-9000"/>
+   <runtime mode="participant" port.range="8282-8382"/>
    <thread.pool size="100"/>
    <datasources>
        <datasource name="LoanApplicationDS" 

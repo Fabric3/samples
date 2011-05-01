@@ -1,4 +1,5 @@
 <config>
+    <spring validating="false"/>
     <security allow.http.authentication="true"/>
     <web.server>
         <http port="8181"/>

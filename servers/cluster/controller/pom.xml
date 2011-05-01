@@ -47,6 +47,16 @@
                     <extensions>
                         <extension>
                             <groupId>org.codehaus.fabric3</groupId>
+                            <artifactId>fabric3-databinding-json</artifactId>
+                            <version>${fabric3.version}</version>
+                        </extension>
+                        <extension>
+                            <groupId>org.codehaus.fabric3</groupId>
+                            <artifactId>fabric3-management-rest</artifactId>
+                            <version>${fabric3.version}</version>
+                        </extension>
+                        <extension>
+                            <groupId>org.codehaus.fabric3</groupId>
                             <artifactId>fabric3-binding-web</artifactId>
                             <version>${fabric3.version}</version>
                         </extension>

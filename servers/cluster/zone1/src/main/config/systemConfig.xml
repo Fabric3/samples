@@ -1,9 +1,6 @@
 <config>
     <security allow.http.authentication="true"/>
-    <web.server>
-        <http port="8181-8191"/>
-    </web.server>
-    <runtime  mode="participant" jmxPort="8000-9000"/>
+    <runtime  mode="participant" port.range="8181-8281"/>
     <thread.pool size="100"/>
     <datasources>
        <datasource name="LoanApplicationDS" 
@@ -21,6 +18,5 @@
        <password>bigbank</password> -->
     <federation>
         <zoneName>zone1</zoneName>
-        <runtimeName>runtime1</runtimeName>
     </federation>
 </config>
