@@ -38,6 +38,7 @@
         <web.services.api.version>2.0-b24</web.services.api.version>
         <servlet.api.version>2.5</servlet.api.version>
         <persistence.api.version>1.0</persistence.api.version>
+        <jackson.version>1.6.4</jackson.version>        
     </properties>
 
     <modules>
