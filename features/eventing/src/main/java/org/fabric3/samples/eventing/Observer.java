@@ -44,7 +44,7 @@ import org.fabric3.api.annotation.Consumer;
 /**
  * A component that listens on the sell and buy channels.
  *
- * @version $Rev: 9129 $ $Date: 2010-06-12 23:08:48 +0200 (Sat, 12 Jun 2010) $
+ * @version $Rev$ $Date$
  */
 @Scope("COMPOSITE")
 public class Observer {

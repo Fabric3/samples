@@ -21,7 +21,7 @@ package org.fabric3.samples.bigbank.api.event;
 /**
  * Base appraisal event.
  *
- * @version $Revision: 9533 $ $Date: 2010-10-10 23:30:03 +0200 (Sun, 10 Oct 2010) $
+ * @version $Revision$ $Date$
  */
 public abstract class AppraisalEvent extends ApplicationEvent {
     public AppraisalEvent(long id) {

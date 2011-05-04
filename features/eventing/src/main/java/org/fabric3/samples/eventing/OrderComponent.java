@@ -52,7 +52,7 @@ import org.fabric3.api.annotation.Resource;
 /**
  * Component that subscribes to the buy and sell channels to match sell and buy orders.
  *
- * @version $Rev: 9129 $ $Date: 2010-06-12 23:08:48 +0200 (Sat, 12 Jun 2010) $
+ * @version $Rev$ $Date$
  */
 @Scope("COMPOSITE")
 public class OrderComponent {

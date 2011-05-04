@@ -5,7 +5,7 @@
  * Dual licensed under the MIT (MIT-LICENSE.txt)
  * and GPL (GPL-LICENSE.txt) licenses.
  *
- * $Date: 2008-07-14 00:09:43 +0800 (Tue, 14 Jul 2008) $
+ * $Date$
  */
  
 (function($){

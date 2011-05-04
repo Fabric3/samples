@@ -43,7 +43,7 @@ import org.fabric3.api.annotation.security.RolesAllowed;
 /**
  * Receives resource representations as JSON or XML and persists them as part of a global transaction using Hibernate.
  *
- * @version $Rev: 8746 $ $Date: 2010-03-27 22:35:03 +0100 (Sat, 27 Mar 2010) $
+ * @version $Rev$ $Date$
  */
 @Path("/")
 @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})

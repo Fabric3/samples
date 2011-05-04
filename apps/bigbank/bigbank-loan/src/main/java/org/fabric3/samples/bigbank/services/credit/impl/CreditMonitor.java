@@ -21,7 +21,7 @@ package org.fabric3.samples.bigbank.services.credit.impl;
 import org.fabric3.api.annotation.monitor.Info;
 
 /**
- * @version $Revision: 9566 $ $Date: 2010-10-18 12:14:00 +0200 (Mon, 18 Oct 2010) $
+ * @version $Revision$ $Date$
  */
 public interface CreditMonitor {
 
