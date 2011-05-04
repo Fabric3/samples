@@ -45,6 +45,7 @@
         <module>apps</module>
         <module>features</module>
         <module>policy</module>
+        <module>operations</module>
         <!-- <module>extensions</module> -->
     </modules>
     <build>
