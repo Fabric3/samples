@@ -4,16 +4,21 @@ I. Introduction
 
 The samples are intended to demonstrate the capabilities of the Fabric3 runtime:
 
-* Starter Applications- These applications demonstrate using specific Fabric3 features. It is recommended users begin with these applications. 
+* Starter Applications- These applications demonstrate how to develop basic distributed applications using Fabric3. It is recommended users begin with
+  these applications.
 
-* BigBank Loan Application - BigBank showcases advanced features of the Fabric3 runtime. It is intended to provide a complete, real-world application that demonstrates SCA and Fabric3 best-practices.
+* Feature Applications- These applications demonstrate using specific Fabric3 features.
+
+* BigBank Loan Application - BigBank showcases advanced features of the Fabric3 runtime. It is intended to provide a complete, real-world application
+  that demonstrates SCA and Fabric3 best-practices.
 
 * Policy Applications - Demonstrate how to create and apply custom policies in Fabric3.
 
 II. Prerequisites
  
 * JDK 6.0 or later
-* The build system requires Maven 2.2.1 or later. It can be downloaded from http://maven.apache.org/download.html.
+
+* Maven 2.2.1 or later to build the samples. Maven can be downloaded from http://maven.apache.org/download.html.
 
 III. Installation
 
@@ -21,7 +26,8 @@ III. Installation
 	
 	mvn clean install
 
-* The samples also contain an automated build for assembling a single-VM runtime as well as a set of runtimes that form a multi-clustered domain. To automatically download and build the runtimes, execute the following command from the /servers directory:
+* The samples also contain an automated build for assembling a single-VM runtime as well as a set of runtimes that form a multi-clustered domain.
+  To automatically download and build the runtimes, execute the following command from the /servers directory:
 	
 	mvn clean install
 
@@ -31,7 +37,8 @@ Documentation can be found at http://docs.fabric3.org.
 
 V. Reporting Issues
 
-* If you experience a problem or would like to suggest improvements, send a note to the user list (http://xircles.codehaus.org/projects/fabric3/lists) or file a JIRA issue (http://jira.codehaus.org/browse/FABRICTHREE). 
+* If you experience a problem or would like to suggest improvements, send a note to the user list (http://xircles.codehaus.org/projects/fabric3/lists)
+  or file a JIRA issue (http://jira.codehaus.org/browse/FABRICTHREE). 
 
 
 
