@@ -1,5 +1,4 @@
 <config>
-    <spring validating="false"/>
     <security allow.http.authentication="true"/>
     <web.server>
         <http port="8181"/>
@@ -17,9 +16,4 @@
            <maxPoolSize>10</maxPoolSize>
        </datasource>       
     </datasources>
-       <!-- 
-       <driver>com.mysql.jdbc.Driver</driver>
-       <url>jdbc:mysql://localhost/bigbank</url>
-       <user>bigbank</user>
-       <password>bigbank</password> -->
 </config>

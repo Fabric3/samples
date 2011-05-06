@@ -11,11 +11,6 @@
            <maxPoolSize>10</maxPoolSize>
        </datasource>       
     </datasources>
-       <!-- 
-       <driver>com.mysql.jdbc.Driver</driver>
-       <url>jdbc:mysql://localhost/bigbank</url>
-       <user>bigbank</user>
-       <password>bigbank</password> -->
     <federation>
         <zoneName>zone1</zoneName>
     </federation>
