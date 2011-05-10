@@ -44,18 +44,6 @@
                 </executions>
                 <configuration>
                     <runtimeVersion>${fabric3.version}</runtimeVersion>
-                    <extensions>
-                        <extension>
-                            <groupId>org.codehaus.fabric3</groupId>
-                            <artifactId>fabric3-binding-web</artifactId>
-                            <version>${fabric3.version}</version>
-                        </extension>
-                        <extension>
-                            <groupId>org.codehaus.fabric3</groupId>
-                            <artifactId>fabric3-management-rest</artifactId>
-                            <version>${fabric3.version}</version>
-                        </extension>
-                    </extensions>
                     <profiles>
                         <profile>
                             <groupId>org.codehaus.fabric3</groupId>
