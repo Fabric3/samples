@@ -45,12 +45,6 @@
                 <configuration>
                     <runtimeVersion>${fabric3.version}</runtimeVersion>
                     <profiles>
-                        <profile>
-                            <groupId>org.codehaus.fabric3</groupId>
-                            <artifactId>profile-spring</artifactId>
-                            <version>${fabric3.version}</version>
-                        </profile>
- 
                         <!-- JPA support -->
                         <profile>
                             <groupId>org.codehaus.fabric3</groupId>
