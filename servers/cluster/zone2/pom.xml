@@ -20,7 +20,7 @@
     <parent>
        <groupId>org.codehaus.fabric3.samples</groupId>
        <artifactId>servers-cluster-parent-pom</artifactId>
-       <version>1.8</version>
+       <version>1.9</version>
     </parent>
     <groupId>org.codehaus.fabric3.samples</groupId>
     <artifactId>servers-zone2</artifactId>
@@ -28,6 +28,12 @@
     <name>Fabric3 Zone2 Setup</name>
     <description>Fabric3 Zone2 Setup.</description>
 
+    <profiles>
+        <profile>
+            <id>default</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
       <build>
         <plugins>
             <plugin>
@@ -80,12 +86,6 @@
                             <artifactId>profile-timer</artifactId>
                             <version>${fabric3.version}</version>
                         </profile>
-                       <!-- HTTP and TCP binding support 
-                        <profile>
-                            <groupId>org.codehaus.fabric3</groupId>
-                            <artifactId>profile-net</artifactId>
-                            <version>${fabric3.version}</version> 
-                        </profile> -->
                     </profiles>
                     <!-- overlay configuration -->
                     <configurationFiles>
@@ -106,4 +106,88 @@
             </plugin>
         </plugins>
     </build>
+    </profile>
+        <profile>
+            <id>zmq</id>
+            <build>
+              <plugins>
+                  <plugin>
+                      <groupId>org.codehaus.fabric3</groupId>
+                      <artifactId>fabric3-assembly-plugin</artifactId>
+                      <version>${fabric3.version}</version>
+                      <executions>
+                          <execution>
+                              <id>fabric3-assembly</id>
+                              <goals>
+                                  <goal>fabric3-assembly</goal>
+                              </goals>
+                          </execution>
+                      </executions>
+                      <configuration>
+                          <runtimeVersion>${fabric3.version}</runtimeVersion>
+                          <profiles>
+                              <!-- JPA support -->
+                              <profile>
+                                  <groupId>org.codehaus.fabric3</groupId>
+                                  <artifactId>profile-jpa</artifactId>
+                                  <version>${fabric3.version}</version>
+                              </profile>
+                              <!-- Web Services support -->
+                              <profile>
+                                  <groupId>org.codehaus.fabric3</groupId>
+                                  <artifactId>profile-ws</artifactId>
+                                  <version>${fabric3.version}</version>
+                              </profile>
+                              <!-- Web App support -->
+                              <profile>
+                                  <groupId>org.codehaus.fabric3</groupId>
+                                  <artifactId>profile-web</artifactId>
+                                  <version>${fabric3.version}</version>
+                              </profile>
+                              <!-- JAX-RS support -->
+                              <profile>
+                                  <groupId>org.codehaus.fabric3</groupId>
+                                  <artifactId>profile-rs</artifactId>
+                                  <version>${fabric3.version}</version>
+                              </profile>
+                               <profile>
+                                  <groupId>org.codehaus.fabric3</groupId>
+                                  <artifactId>profile-timer</artifactId>
+                                  <version>${fabric3.version}</version>
+                              </profile>
+                          </profiles>
+                          <extensions>
+                              <dependency>
+                                  <groupId>org.codehaus.fabric3</groupId>
+                                  <artifactId>fabric3-binding-zeromq-library</artifactId>
+                                   <version>${fabric3.version}</version>
+                              </dependency>
+                              <dependency>
+                                  <groupId>org.codehaus.fabric3</groupId>
+                                  <artifactId>fabric3-binding-zeromq</artifactId>
+                                   <version>${fabric3.version}</version>
+                              </dependency>
+                          </extensions>
+                          <!-- overlay configuration -->
+                          <configurationFiles>
+                              <copy>
+                                  <source>../../../../config/security.xml</source>
+                                  <destination>runtimes/participant/config</destination>
+                              </copy>
+                              <copy>
+                                  <source>../../../../datasource/h2-1.2.140.jar</source>
+                                  <destination>extensions/datasource</destination>
+                              </copy>
+                              <copy>
+                                  <source>config/systemConfig.xml</source>
+                                  <destination>runtimes/participant/config</destination>
+                              </copy>
+                           </configurationFiles>
+                      </configuration>
+                  </plugin>
+              </plugins>
+          </build>
+
+        </profile>
+    </profiles>
 </project>
