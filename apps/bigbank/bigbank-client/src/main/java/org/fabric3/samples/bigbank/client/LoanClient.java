@@ -18,8 +18,6 @@ public class LoanClient {
     private static final QName SERVICE_NAME = new QName("http://loan.api.bigbank.samples.fabric3.org/", "LoanServiceService");
 
     public static void main(String args[]) throws Exception {
-        // URL for the Single VM setup. If the application is deployed to a cluster, the URL must be changed to a runtime in zone1
-        // URL wsdlLocation = new URL("http://localhost:8181/wsloan?wsdl");
         URL wsdlLocation = new URL("http://localhost:8181/wsloan?wsdl");
 
         LoanServiceService service = new LoanServiceService(wsdlLocation, SERVICE_NAME);

@@ -16,9 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.fabric3.samples.bigbank.channel;
-
-import org.fabric3.samples.bigbank.api.event.ApplicationEvent;
+package org.fabric3.samples.bigbank.api.event;
 
 /**
  * A typed interface to the channel where loan events are published.
