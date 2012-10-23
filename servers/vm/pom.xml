@@ -69,7 +69,7 @@
                                     <artifactId>profile-web</artifactId>
                                     <version>${fabric3.version}</version>
                                 </profile>
-                               <!-- JAX-RS support -->
+                                <!-- JAX-RS support -->
                                 <profile>
                                     <groupId>org.codehaus.fabric3</groupId>
                                     <artifactId>profile-rs</artifactId>
@@ -81,6 +81,13 @@
                                     <version>${fabric3.version}</version>
                                 </profile>
                             </profiles>
+                            <extensions>
+                                <dependency>
+                                    <groupId>org.codehaus.fabric3</groupId>
+                                    <artifactId>fabric3-binding-file</artifactId>
+                                    <version>${fabric3.version}</version>
+                                </dependency>
+                            </extensions>
                             <!-- overlay configuration -->
                             <configurationFiles>
                                 <copy>
@@ -153,13 +160,8 @@
                             <extensions>
                                 <dependency>
                                     <groupId>org.codehaus.fabric3</groupId>
-                                    <artifactId>fabric3-binding-zeromq-library</artifactId>
-                                     <version>${fabric3.version}</version>
-                                </dependency>
-                                <dependency>
-                                    <groupId>org.codehaus.fabric3</groupId>
-                                    <artifactId>fabric3-binding-zeromq</artifactId>
-                                     <version>${fabric3.version}</version>
+                                    <artifactId>fabric3-binding-file</artifactId>
+                                    <version>${fabric3.version}</version>
                                 </dependency>
                             </extensions>
                             <!-- overlay configuration -->

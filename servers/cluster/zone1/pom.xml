@@ -88,6 +88,13 @@
                                     <version>${fabric3.version}</version>
                                 </profile>
                             </profiles>
+                            <extensions>
+                                <dependency>
+                                    <groupId>org.codehaus.fabric3</groupId>
+                                    <artifactId>fabric3-binding-file</artifactId>
+                                    <version>${fabric3.version}</version>
+                                </dependency>
+                            </extensions>
                             <!-- overlay configuration -->
                             <configurationFiles>
                                 <copy>
@@ -156,17 +163,17 @@
                                     <artifactId>profile-timer</artifactId>
                                     <version>${fabric3.version}</version>
                                 </profile>
+                                <profile>
+                                    <groupId>org.codehaus.fabric3</groupId>
+                                    <artifactId>profile-zeromq</artifactId>
+                                    <version>${fabric3.version}</version>
+                                </profile>
                             </profiles>
                             <extensions>
                                 <dependency>
                                     <groupId>org.codehaus.fabric3</groupId>
-                                    <artifactId>fabric3-binding-zeromq-library</artifactId>
-                                     <version>${fabric3.version}</version>
-                                </dependency>
-                                <dependency>
-                                    <groupId>org.codehaus.fabric3</groupId>
-                                    <artifactId>fabric3-binding-zeromq</artifactId>
-                                     <version>${fabric3.version}</version>
+                                    <artifactId>fabric3-binding-file</artifactId>
+                                    <version>${fabric3.version}</version>
                                 </dependency>
                             </extensions>
                             <!-- overlay configuration -->
