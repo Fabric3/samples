@@ -17,20 +17,22 @@
 -->
 
 <composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
-           xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912"
-           xmlns:samples="urn:fabric3.org:samples"
            targetNamespace="urn:fabric3.org:samples"
            name="CreditComposite"
            autowire="true">
 
-    <service name="CreditService" promote="ConsolidatedCreditComponent"/>
+    <service name="CreditService" promote="CreditService"/>
 
-    <component name="ConsolidatedCreditComponent">
-        <implementation.java class="org.fabric3.samples.bigbank.services.credit.impl.ConsolidatedCreditComponent"/>
+    <component name="CreditService">
+        <implementation.java class="org.fabric3.samples.bigbank.credit.impl.CreditServiceImpl"/>
     </component>
 
-    <component name="ThirdPartyCreditBureau">
-        <implementation.java class="org.fabric3.samples.bigbank.services.credit.impl.ThirdPartyCreditBureau"/>
+    <component name="BDCreditBureau">
+        <implementation.java class="org.fabric3.samples.bigbank.credit.impl.BDCreditBureau"/>
+    </component>
+
+    <component name="TransContinentalCreditBureau">
+        <implementation.java class="org.fabric3.samples.bigbank.credit.impl.TransContinentalCreditBureau"/>
     </component>
 
 

@@ -15,47 +15,63 @@
  specific language governing permissions and limitations
  under the License.
 -->
-
 <composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
            xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912"
-           xmlns:f3="urn:fabric3.org"
            xmlns:samples="urn:fabric3.org:samples"
            targetNamespace="urn:fabric3.org:samples"
+           xmlns:f3="urn:fabric3.org"
            name="LoanComposite"
            autowire="true">
-    
-    <component name="LoanComponent">
-        <implementation.java class="org.fabric3.samples.bigbank.loan.loan.LoanComponent"/>
+
+    <channel name="LoanChannel" requires="f3:replication"/>
+
+    <channel name="StatisticsChannel"/>
+
+    <component name="LoanGateway">
+        <implementation.java class="org.fabric3.samples.bigbank.loan.gateway.LoanGateway"/>
+        <!--<service name="LoanGateway">-->
+        <!--<f3:binding.file location="deploy"/>-->
+        <!--</service>-->
+    </component>
+
+    <component name="LoanService">
+        <implementation.java class="org.fabric3.samples.bigbank.loan.loan.LoanServiceImpl"/>
         <service name="LoanService">
-            <f3:binding.rs name="rsBinding" uri="/loans"/>
+            <binding.ws uri="wsloan"/>
         </service>
-    </component>
-
-    <component name="RequestCoordinator">
-        <implementation.java class="org.fabric3.samples.bigbank.loan.request.RequestCoordinatorImpl"/>
         <producer name="loanChannel" target="LoanChannel"/>
-        <consumer name="loanChannel" source="LoanChannel"/>
     </component>
 
-    <component name="AcceptanceCoordinator">
-        <implementation.java class="org.fabric3.samples.bigbank.loan.acceptance.AcceptanceCoordinatorImpl"/>
-        <consumer name="loanChannel" source="LoanChannel"/>
+    <component name="RiskService">
+        <implementation.java class="org.fabric3.samples.bigbank.risk.impl.RiskServiceImpl"/>
     </component>
 
-    <component name="AnalyticsEventBridge">
-        <implementation.java class="org.fabric3.samples.bigbank.loan.statistics.AnalyticsEventBridge"/>
-        <consumer name="loanChannel" source="LoanChannel"/>
-        <producer name="analyticsChannel" target="AnalyticsChannel"/>
+
+    <component name="RecoveryManager">
+        <f3:implementation.timer class="org.fabric3.samples.bigbank.loan.recovery.RecoveryManager" repeatInterval='60' unit='seconds'/>
     </component>
+
 
     <component name="ApplicationStatisticsComponent">
         <implementation.java class="org.fabric3.samples.bigbank.loan.statistics.ApplicationStatisticsComponent"/>
-        <consumer name="analyticsChannel" source="AnalyticsChannel"/>
         <producer name="statisticsChannel" target="StatisticsChannel"/>
+        <consumer name="loanChannel" source="LoanChannel"/>
     </component>
 
-    <component name="ExpirationTimer">
-        <f3:implementation.timer class="org.fabric3.samples.bigbank.loan.expiration.ExpirationTimer" repeatInterval='60' unit='seconds'/>
+    <component name="RestLoanService">
+        <implementation.java class="org.fabric3.samples.bigbank.loan.rest.RsLoanService"/>
+        <service name="RsLoanService">
+            <f3:binding.rs uri="/rsloan"/>
+        </service>
     </component>
+
+    <component name="AuditComponent">
+        <implementation.java class="org.fabric3.samples.bigbank.loan.audit.AuditComponent"/>
+        <consumer name="loanChannel" source="LoanChannel"/>
+    </component>
+
 
 </composite>
+
+
+

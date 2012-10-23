@@ -26,6 +26,7 @@ import java.io.Serializable;
  * @version $Rev$ $Date$
  */
 public abstract class ApplicationEvent implements Serializable {
+    private static final long serialVersionUID = 7550992408332724548L;
     private long loanId;
     private long timestamp;
 

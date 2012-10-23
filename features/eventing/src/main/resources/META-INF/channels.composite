@@ -1,8 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912" name="ChannelsComposite" targetNamespace="urn:fabric3.org:samples">
+<composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912" xmlns:f3="urn:fabric3.org" name="ChannelsComposite" targetNamespace="urn:fabric3.org:samples">
 
     <channel name="SellChannel"/>
 
     <channel name="BuyChannel"/>
 
+    <channel name="MonitorApplicationChannel" requires="f3:synchronous"/>
+
+
+    <component name="monitorComponent">
+        <implementation.monitor>
+            <f3:configuration xmlns="urn:fabric3.org">
+                <appender name="OBSERVERFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+                    <file>observer.log</file>
+                    <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+                        <fileNamePattern>observer.%i.log.zip</fileNamePattern>
+                        <minIndex>1</minIndex>
+                        <maxIndex>300</maxIndex>
+                    </rollingPolicy>
+                    <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+                        <maxFileSize>10MB</maxFileSize>
+                    </triggeringPolicy>
+                    <encoder>
+                        <pattern>[%level %thread %d{YY:MM:DD HH:mm:ss.SSS}] %msg%n%ex</pattern>
+                    </encoder>
+                </appender>
+                <appender name="OBSERVERCONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+                    <encoder>
+                        <pattern>[%level %thread %d{YY:MM:DD HH:mm:ss.SSS}] %msg%n%ex</pattern>
+                    </encoder>
+                </appender>
+            </f3:configuration>
+        </implementation.monitor>
+        <consumer name="monitor" source="MonitorApplicationChannel"/>
+    </component>
 </composite>

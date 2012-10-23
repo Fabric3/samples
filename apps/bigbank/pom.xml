@@ -21,7 +21,7 @@
     <parent>
        <groupId>org.codehaus.fabric3.samples</groupId>
        <artifactId>fabric3-samples-apps-parent-pom</artifactId>
-        <version>1.9</version>
+        <version>1.9.6</version>
     </parent>
     <groupId>org.codehaus.fabric3.samples</groupId>
     <artifactId>bigbank-parent-pom</artifactId>
@@ -31,8 +31,7 @@
 
     <modules>
       <module>bigbank-loan</module>  
-      <module>bigbank-web</module>  
-      <module>bigbank-backoffice</module>  
+      <module>bigbank-client</module>
     </modules>
 	
 </project>

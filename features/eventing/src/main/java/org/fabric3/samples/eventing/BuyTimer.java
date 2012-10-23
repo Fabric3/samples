@@ -41,6 +41,8 @@ import java.math.BigDecimal;
 import java.util.Random;
 
 import org.fabric3.api.annotation.Producer;
+import org.fabric3.api.annotation.monitor.Info;
+import org.fabric3.api.annotation.monitor.Monitor;
 
 /**
  * A simple stateless timer component that issues buy orders.
@@ -50,15 +52,18 @@ import org.fabric3.api.annotation.Producer;
 public class BuyTimer implements Runnable {
     private BuyChannel buyChannel;
     private Random generator;
+    private BuyMonitor monitor;
 
-    public BuyTimer(@Producer("buyChannel") BuyChannel buyChannel) {
+    public BuyTimer(@Producer("buyChannel") BuyChannel buyChannel, @Monitor("MonitorApplicationChannel") BuyMonitor monitor) {
         this.buyChannel = buyChannel;
+        this.monitor = monitor;
         generator = new Random();
     }
 
     public void run() {
         double price = generatePrice();
         BuyOrder buyOrder = new BuyOrder(System.currentTimeMillis(), "FOO", price, System.currentTimeMillis() + 10000);
+        monitor.message("Buying");
         buyChannel.buy(buyOrder);
     }
 
@@ -67,5 +72,11 @@ public class BuyTimer implements Runnable {
         BigDecimal bd = new BigDecimal(Double.toString(val));
         return bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
     }
+
+    public interface BuyMonitor {
+        @Info
+        void message(String message);
+    }
+
 
 }

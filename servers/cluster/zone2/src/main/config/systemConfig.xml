@@ -2,6 +2,7 @@
    <security allow.http.authentication="true"/>
    <runtime mode="participant" port.range="8282-8382"/>
    <thread.pool size="100"/>
+    <jms pause.on.start="false"/>
    <datasources>
        <datasource name="LoanApplicationDS" 
                 driver="org.h2.Driver"

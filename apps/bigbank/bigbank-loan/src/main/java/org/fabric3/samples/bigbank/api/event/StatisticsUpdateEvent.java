@@ -26,5 +26,5 @@ import java.io.Serializable;
  * @version $Rev$ $Date$
  */
 public abstract class StatisticsUpdateEvent implements Serializable {
-
+    private static final long serialVersionUID = 4467110377798698946L;
 }

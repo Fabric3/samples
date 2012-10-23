@@ -26,5 +26,5 @@ import org.fabric3.samples.bigbank.api.event.StatisticsUpdateEvent;
 public interface StatisticsChannel {
 
     void update(StatisticsUpdateEvent event);
-    
+
 }

@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="ASCII"?>
 <contribution xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
               xmlns:samples="urn:fabric3.org:samples">
-    <deployable composite="samples:ChannelsComposite"/>
-    <deployable composite="samples:ServicesComposite"/>
+    <deployable composite="samples:RateComposite"/>
     <deployable composite="samples:LoanComposite"/>
-    <deployable composite="samples:BackOfficeComposite"/>
     <import.java package="javax.persistence" version="1.0.0"/>
     <export.java package="org.fabric3.samples.bigbank.api.loan" version="1.9"/>
     <export.java package="org.fabric3.samples.bigbank.api.message" version="1.9"/>
-    <export.java package="org.fabric3.samples.bigbank.api.domain" version="1.9"/>
+    <export.java package="org.fabric3.samples.bigbank.domain" version="1.9"/>
 </contribution>
 
 

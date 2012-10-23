@@ -1,4 +1,4 @@
-<config>
+<config xmlns="urn:fabric3.org">
     <security allow.http.authentication="true"/>
     <runtime  mode="participant" port.range="8181-8281"/>
     <thread.pool size="100"/>

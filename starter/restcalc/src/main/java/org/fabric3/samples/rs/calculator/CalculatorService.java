@@ -27,6 +27,10 @@ import javax.ws.rs.core.MediaType;
 
 import org.oasisopen.sca.annotation.Reference;
 
+import org.fabric3.api.MonitorChannel;
+import org.fabric3.api.annotation.monitor.Info;
+import org.fabric3.api.annotation.monitor.Monitor;
+
 
 /**
  * A REST calculator.
@@ -41,6 +45,12 @@ public class CalculatorService {
     private SubtractService subtractService;
     private MultiplyService multiplyService;
     private DivideService divideService;
+
+    @Monitor("TestChannel")
+    private MonitorChannel monitor;
+
+    @Monitor
+    private MonitorChannel other;
 
     @Reference
     public void setAddService(AddService addService) {
@@ -85,6 +95,17 @@ public class CalculatorService {
         } else {
             throw new IllegalArgumentException("Invalid formula: " + formula);
         }
+
+        this.monitor.info(String.format("%s=%s", formula, String.valueOf(result)));
+        other.info("logging other message: " + result);
+
         return String.valueOf(result);
+    }
+
+
+    private interface TestMonitor {
+
+        @Info
+        void test(String s);
     }
 }

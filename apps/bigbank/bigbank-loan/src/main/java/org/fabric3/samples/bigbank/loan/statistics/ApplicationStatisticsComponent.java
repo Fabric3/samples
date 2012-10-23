@@ -21,44 +21,39 @@ package org.fabric3.samples.bigbank.loan.statistics;
 import java.io.IOException;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
 import org.oasisopen.sca.annotation.Destroy;
 import org.oasisopen.sca.annotation.EagerInit;
 import org.oasisopen.sca.annotation.Init;
-import org.oasisopen.sca.annotation.ManagedTransaction;
 import org.oasisopen.sca.annotation.Scope;
 
 import org.fabric3.api.annotation.Consumer;
 import org.fabric3.api.annotation.Producer;
 import org.fabric3.api.annotation.Resource;
-import org.fabric3.api.annotation.management.Management;
-import org.fabric3.api.annotation.management.ManagementOperation;
-import org.fabric3.samples.bigbank.api.domain.ApplicationStatistics;
-import org.fabric3.samples.bigbank.api.domain.LoanRecord;
 import org.fabric3.samples.bigbank.api.event.ApplicationEvent;
-import org.fabric3.samples.bigbank.api.event.ApplicationExpired;
-import org.fabric3.samples.bigbank.api.event.ApplicationReady;
 import org.fabric3.samples.bigbank.api.event.ApplicationReceived;
-import org.fabric3.samples.bigbank.api.event.AppraisalScheduled;
-import org.fabric3.samples.bigbank.api.event.ManualRiskAssessmentComplete;
 import org.fabric3.samples.bigbank.api.event.RunningAveragesUpdateEvent;
-
-import static org.fabric3.samples.bigbank.util.GenericsHelper.cast;
+import org.fabric3.samples.bigbank.domain.ApplicationStatistics;
 
 /**
+ * A consumer that listens on the loan channel for loan application events and publishes running average events to the statistics channel.
+ * <p/>
+ * This implementation demonstrates how to create an event consumer and producer.
+ * <p/>
+ * This implementation also demonstrates the use of runtime @Resource injection - the ability to access runtime resources such as the pooled
+ * ScheduledExecutorService to schedule a recurring Runnable process.
+ * <p/>
+ *
  * @version $Rev$ $Date$
  */
 @EagerInit
-@Management
-@ManagedTransaction
 @Scope("COMPOSITE")
 public class ApplicationStatisticsComponent {
-    private ScheduledExecutorService executorService;
-    private StatisticsChannel statisticsChannel;
-    private EntityManager em;
+    @Producer
+    protected StatisticsChannel statisticsChannel;
+
+    @Resource
+    protected ScheduledExecutorService executorService;
 
     private StatisticsRunnable runnable;
     private volatile long wait = 10000;
@@ -67,26 +62,6 @@ public class ApplicationStatisticsComponent {
     private MovingAverage approvalAverage;
     private MovingAverage timeToCompleteAutomatedAverage;
     private MovingAverage timeToCompleteManualAverage;
-
-    @PersistenceContext(unitName = "loanApplication")
-    public void setEntityManager(EntityManager em) {
-        this.em = em;
-    }
-
-    @Producer
-    public void setStatisticsChannel(StatisticsChannel channel) {
-        this.statisticsChannel = channel;
-    }
-
-    @Resource
-    public void setExecutorService(ScheduledExecutorService executorService) {
-        this.executorService = executorService;
-    }
-
-    @ManagementOperation(description = "Sets the period to wait between moving average updates")
-    public void setWait(long wait) {
-        this.wait = wait;
-    }
 
     @Init
     public void init() throws IOException {
@@ -106,82 +81,19 @@ public class ApplicationStatisticsComponent {
         }
     }
 
-    @Consumer("analyticsChannel")
+    @Consumer("loanChannel")
     public void onEvent(ApplicationEvent event) {
         if (event instanceof ApplicationReceived) {
             onReceived((ApplicationReceived) event);
-        } else if (event instanceof ManualRiskAssessmentComplete) {
-            onAssessmentComplete((ManualRiskAssessmentComplete) event);
-        } else if (event instanceof ApplicationReady) {
-            onApplicationReady((ApplicationReady) event);
-        } else if (event instanceof AppraisalScheduled) {
-            onAppraisalScheduled((AppraisalScheduled) event);
-        } else if (event instanceof ApplicationExpired) {
-            onExpired((ApplicationExpired) event);
         }
-    }
-
-    private void onAppraisalScheduled(AppraisalScheduled event) {
-        long id = event.getLoanId();
-        ApplicationStatistics statistics = findStatistics(id);
-        statistics.setAppraisalScheduledTimestamp(System.currentTimeMillis());
-        em.persist(statistics);
     }
 
     private void onReceived(ApplicationReceived event) {
         ApplicationStatistics statistics = new ApplicationStatistics();
         statistics.setLoanId(event.getLoanId());
         statistics.setReceivedTimestamp(System.currentTimeMillis());
-        em.persist(statistics);
         double amount = event.getAmount();
         amountAverage.write(amount);
-    }
-
-    private void onAssessmentComplete(ManualRiskAssessmentComplete event) {
-        long id = event.getLoanId();
-        ApplicationStatistics statistics = findStatistics(id);
-        if (event.isApproved()) {
-            statistics.setApprovedTimestamp(System.currentTimeMillis());
-        } else {
-            statistics.setRejectedTimestamp(System.currentTimeMillis());
-        }
-        em.persist(statistics);
-    }
-
-    private void onApplicationReady(ApplicationReady event) {
-        long id = event.getLoanId();
-        ApplicationStatistics statistics = findStatistics(id);
-        statistics.setReadyTimestamp(System.currentTimeMillis());
-        em.persist(statistics);
-
-        double amount = event.getAmount();
-        approvalAverage.write(amount);
-
-        long elapsed = event.getTimestamp() - statistics.getReceivedTimestamp();
-        if (LoanRecord.AUTOMATED_APPROVAL == event.getApprovalType()) {
-            timeToCompleteAutomatedAverage.write(elapsed);
-        } else {
-            // manual approval
-            timeToCompleteManualAverage.write(elapsed);
-        }
-
-    }
-
-    private void onExpired(ApplicationExpired event) {
-        long id = event.getLoanId();
-        ApplicationStatistics statistics = findStatistics(id);
-        statistics.setExpiredTimestamp(System.currentTimeMillis());
-        em.persist(statistics);
-    }
-
-    private ApplicationStatistics findStatistics(long loanId) {
-        Query query = em.createQuery("SELECT l FROM ApplicationStatistics l WHERE l.loanId = :loanId");
-        query.setParameter("loanId", loanId);
-        ApplicationStatistics statistics = cast(query.getSingleResult());
-        if (statistics == null) {
-            throw new AssertionError("Statistics was null: " + loanId);
-        }
-        return statistics;
     }
 
     /**

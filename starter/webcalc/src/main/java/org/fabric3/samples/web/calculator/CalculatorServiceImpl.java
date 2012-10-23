@@ -25,6 +25,8 @@ import org.oasisopen.sca.annotation.Scope;
 
 import org.fabric3.api.annotation.management.Management;
 import org.fabric3.api.annotation.management.ManagementOperation;
+import org.fabric3.api.annotation.monitor.Info;
+import org.fabric3.api.annotation.monitor.Monitor;
 
 
 /**
@@ -48,6 +50,9 @@ public class CalculatorServiceImpl implements CalculatorService {
     private DivideService divideService;
     private AtomicBoolean audit = new AtomicBoolean(false);
 
+    @Monitor
+    protected TestMonitor monitor;
+
     /**
      * Creates a calculator component, taking references to dependent services.
      *
@@ -70,6 +75,7 @@ public class CalculatorServiceImpl implements CalculatorService {
         if (audit.get()) {
             System.out.println("<<Auditing>> " + n1 + " + " + n2);
         }
+        monitor.test(String.format("%s=%s", n1, String.valueOf(122)));
         return addService.add(n1, n2);
     }
 
@@ -103,5 +109,10 @@ public class CalculatorServiceImpl implements CalculatorService {
     @ManagementOperation(description = "Stop auditing")
     public void stopAudit() {
         audit.set(false);
+    }
+
+    private interface TestMonitor {
+        @Info
+        void test(String s);
     }
 }

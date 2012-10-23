@@ -22,33 +22,22 @@ import java.io.Serializable;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * Represents a loan application submitted by a borrower.
+ * Encapsulates information for a new loan application.
  *
  * @version $Rev$ $Date$
  */
 @XmlRootElement
 public class LoanApplication implements Serializable {
-    private static final long serialVersionUID = 8045590944866727036L;
-    private long id;
-    private int status;
+    private static final long serialVersionUID = -6182280155050660264L;
+    private String ein;
     private double amount;
 
-    private LoanOption[] options;
-
-    public long getId() {
-        return id;
+    public String getEin() {
+        return ein;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
+    public void setEin(String ein) {
+        this.ein = ein;
     }
 
     public double getAmount() {
@@ -59,12 +48,5 @@ public class LoanApplication implements Serializable {
         this.amount = amount;
     }
 
-    public LoanOption[] getOptions() {
-        return options;
-    }
-
-    public void setOptions(LoanOption[] options) {
-        this.options = options;
-    }
 
 }
