@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.fabric3.samples.bigbank.loan.loan;
+package org.fabric3.samples.bigbank.loan.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +42,7 @@ import org.fabric3.samples.bigbank.domain.RiskDecision;
 import org.fabric3.samples.bigbank.domain.RiskInfo;
 import org.fabric3.samples.bigbank.domain.RiskReasonInfo;
 import org.fabric3.samples.bigbank.loan.gateway.LoanResponseGateway;
+import org.fabric3.samples.bigbank.loan.recovery.LoanRecovery;
 import org.fabric3.samples.bigbank.rate.Rating;
 import org.fabric3.samples.bigbank.rate.RatingRequest;
 import org.fabric3.samples.bigbank.rate.RatingService;

@@ -16,21 +16,24 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.fabric3.samples.bigbank.loan.loan;
+package org.fabric3.samples.bigbank.loan.impl;
 
-import org.fabric3.samples.bigbank.domain.LoanRecord;
+import org.fabric3.api.annotation.monitor.Info;
 
 /**
- * Service used to initiate recovery of a failed loan application.
+ * A monitor for the request processing phase.
  *
  * @version $Revision$ $Date$
  */
-public interface LoanRecovery {
+public interface RequestMonitor {
 
-    /**
-     * Recover the given loan record
-     *
-     * @param record the loan record to recover
-     */
-    void recover(LoanRecord record);
+    @Info("Loan application received and assigned id: {0}")
+    void received(String ein);
+
+    @Info("Application approved for: {0}")
+    void approved(String ein);
+
+    @Info("Application was rejected for: {0}")
+    void rejected(String ein);
+
 }

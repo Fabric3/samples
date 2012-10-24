@@ -29,7 +29,6 @@ import org.oasisopen.sca.annotation.Scope;
 
 import org.fabric3.samples.bigbank.domain.LoanRecord;
 import org.fabric3.samples.bigbank.domain.LoanStatus;
-import org.fabric3.samples.bigbank.loan.loan.LoanRecovery;
 import org.fabric3.samples.bigbank.util.GenericsHelper;
 
 /**

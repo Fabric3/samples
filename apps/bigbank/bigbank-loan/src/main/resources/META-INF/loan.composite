@@ -40,7 +40,7 @@
     </component>
 
     <component name="LoanService">
-        <implementation.java class="org.fabric3.samples.bigbank.loan.loan.LoanServiceImpl"/>
+        <implementation.java class="org.fabric3.samples.bigbank.loan.impl.LoanServiceImpl"/>
         <service name="LoanService">
             <binding.ws uri="wsloan"/>
         </service>
