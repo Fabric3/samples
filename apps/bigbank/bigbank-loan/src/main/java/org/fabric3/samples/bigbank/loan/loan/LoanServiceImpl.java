@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -35,6 +36,7 @@ import org.fabric3.samples.bigbank.api.event.ApplicationReceived;
 import org.fabric3.samples.bigbank.api.event.LoanChannel;
 import org.fabric3.samples.bigbank.api.loan.LoanService;
 import org.fabric3.samples.bigbank.api.message.LoanApplication;
+import org.fabric3.samples.bigbank.api.message.LoanApplicationSubmission;
 import org.fabric3.samples.bigbank.api.message.LoanApplicationStatus;
 import org.fabric3.samples.bigbank.domain.LoanRecord;
 import org.fabric3.samples.bigbank.domain.LoanStatus;
@@ -91,7 +93,7 @@ public class LoanServiceImpl implements LoanService, LoanRecovery, RatingService
         this.monitor = monitor;
     }
 
-    public String apply(LoanApplication application) {
+    public LoanApplicationSubmission apply(LoanApplication application) {
         // create a loan application and persist it - note a JTA transaction is now active and will commit when the results are returned
         LoanRecord record = createLoanRecord(application);
         em.persist(record);
@@ -107,18 +109,20 @@ public class LoanServiceImpl implements LoanService, LoanRecovery, RatingService
         // rate the application
         rate(record);
 
-        // return a tracking number to the client
-        return record.getTrackingNumber();
+        // return the result to the client
+        String trackingNumber = record.getTrackingNumber();
+        return new LoanApplicationSubmission(trackingNumber);
     }
 
     public LoanApplicationStatus getStatus(String trackingNumber) {
         Query query = em.createQuery("SELECT l FROM LoanRecord l WHERE l.trackingNumber = :number");
         query.setParameter("number", trackingNumber);
-        LoanRecord record = GenericsHelper.cast(query.getSingleResult());
-        if (record == null) {
+        try {
+            LoanRecord record = GenericsHelper.cast(query.getSingleResult());
+            return new LoanApplicationStatus(trackingNumber, record.getStatus().toString());
+        } catch (NoResultException e) {
             return new LoanApplicationStatus(trackingNumber, LoanApplicationStatus.INVALID);
         }
-        return new LoanApplicationStatus(trackingNumber, record.getStatus().toString());
     }
 
     public void recover(LoanRecord record) {

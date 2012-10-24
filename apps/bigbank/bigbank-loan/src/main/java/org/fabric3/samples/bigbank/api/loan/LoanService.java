@@ -20,6 +20,7 @@ package org.fabric3.samples.bigbank.api.loan;
 
 import org.fabric3.samples.bigbank.api.message.LoanApplication;
 import org.fabric3.samples.bigbank.api.message.LoanApplicationStatus;
+import org.fabric3.samples.bigbank.api.message.LoanApplicationSubmission;
 
 /**
  * Service responsible for receiving a loan application.
@@ -32,9 +33,9 @@ public interface LoanService {
      * Submits a loan application.
      *
      * @param application the loan application
-     * @return the tracking number
+     * @return the application submission containing the tracking number
      */
-    String apply(LoanApplication application);
+    LoanApplicationSubmission apply(LoanApplication application);
 
     /**
      * Returns the current status of a loan application.
