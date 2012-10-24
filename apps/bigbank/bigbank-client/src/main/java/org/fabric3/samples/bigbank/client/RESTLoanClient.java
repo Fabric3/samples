@@ -24,11 +24,9 @@ public class RESTLoanClient {
     public static void main(String args[]) throws Exception {
         RESTLoanClient client = new RESTLoanClient();
         client.submitApplication();
-
     }
 
     public void submitApplication() throws Exception {
-
         URL applicationUrl = new URL(BASE_URL);
         LoanApplication application = new LoanApplication();
         application.setAmount(1);
