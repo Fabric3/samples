@@ -39,7 +39,8 @@ public class LoanRecord extends Versionable {
     private String ein;
     private double amount;
     private RiskInfo riskInfo;
-    private String trackingNumber;
+    private String clientCorrelation;
+    private String notificationAddress;
 
     public String getEin() {
         return ein;
@@ -114,11 +115,19 @@ public class LoanRecord extends Versionable {
     }
 
 
-    public void setTrackingNumber(String trackingNumber) {
-        this.trackingNumber = trackingNumber;
+    public void setClientCorrelation(String clientCorrelation) {
+        this.clientCorrelation = clientCorrelation;
     }
 
-    public String getTrackingNumber() {
-        return trackingNumber;
+    public String getClientCorrelation() {
+        return clientCorrelation;
+    }
+
+    public String getNotificationAddress() {
+        return notificationAddress;
+    }
+
+    public void setNotificationAddress(String notificationAddress) {
+        this.notificationAddress = notificationAddress;
     }
 }

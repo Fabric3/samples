@@ -16,8 +16,6 @@
  under the License.
 -->
 <composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
-           xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912"
-           xmlns:samples="urn:fabric3.org:samples"
            targetNamespace="urn:fabric3.org:samples"
            xmlns:f3="urn:fabric3.org"
            name="LoanComposite"
@@ -28,10 +26,17 @@
     <channel name="StatisticsChannel"/>
 
     <component name="LoanGateway">
-        <implementation.java class="org.fabric3.samples.bigbank.loan.gateway.LoanGateway"/>
-        <!--<service name="LoanGateway">-->
-        <!--<f3:binding.file location="deploy"/>-->
-        <!--</service>-->
+        <implementation.java class="org.fabric3.samples.bigbank.loan.gateway.LoanGatewayImpl"/>
+        <service name="LoanGateway">
+            <f3:binding.file location="receive.queue" error.location="error.queue" pattern=".*\.xml"/>
+        </service>
+    </component>
+
+    <component name="LoanResponseGateway">
+        <implementation.java class="org.fabric3.samples.bigbank.loan.gateway.LoanResponseGatewayImpl"/>
+        <reference name="responseQueue">
+            <f3:binding.file location="response.queue" error.location="error.queue"/>
+        </reference>
     </component>
 
     <component name="LoanService">

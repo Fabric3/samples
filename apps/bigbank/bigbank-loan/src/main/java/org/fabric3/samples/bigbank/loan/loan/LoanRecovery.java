@@ -18,7 +18,6 @@
  */
 package org.fabric3.samples.bigbank.loan.loan;
 
-import org.fabric3.samples.bigbank.api.message.LoanApplication;
 import org.fabric3.samples.bigbank.domain.LoanRecord;
 
 /**

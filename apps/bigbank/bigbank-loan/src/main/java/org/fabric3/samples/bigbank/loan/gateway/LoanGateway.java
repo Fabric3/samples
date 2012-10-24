@@ -19,38 +19,15 @@
 package org.fabric3.samples.bigbank.loan.gateway;
 
 import java.io.InputStream;
-
-import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
-
-import org.oasisopen.sca.annotation.Reference;
-import org.oasisopen.sca.annotation.Scope;
-
-import org.fabric3.samples.bigbank.api.loan.LoanService;
-import org.fabric3.samples.bigbank.api.message.LoanApplication;
 
 /**
  * Receives loan applications from a batch source such as the file system binding (binding.file).
  *
- * @version $Rev$ $Date$
+ * @version $Rev: 11193 $ $Date: 2012-10-24 11:30:17 +0200 (Wed, 24 Oct 2012) $
  */
-@Scope("COMPOSITE")
-public class LoanGateway {
+public interface LoanGateway {
 
-    @Reference
-    protected LoanService loanService;
-
-    private JAXBContext context;
-
-    public LoanGateway() throws JAXBException {
-        context = JAXBContext.newInstance(LoanApplication.class);
-    }
-
-    public void process(InputStream stream) throws JAXBException {
-        Unmarshaller unmarshaller = context.createUnmarshaller();
-        LoanApplication application = (LoanApplication) unmarshaller.unmarshal(stream);
-        loanService.apply(application);
-    }
+    public void process(InputStream stream) throws JAXBException;
 
 }

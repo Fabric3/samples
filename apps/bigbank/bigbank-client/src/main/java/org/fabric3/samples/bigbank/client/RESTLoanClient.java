@@ -4,12 +4,12 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.UUID;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
 import org.fabric3.samples.bigbank.api.loan.LoanApplication;
 import org.fabric3.samples.bigbank.api.loan.LoanApplicationStatus;
-import org.fabric3.samples.bigbank.api.rest.LoanApplicationSubmission;
 
 /**
  * Invokes the loan service using HTTP.
@@ -33,22 +33,27 @@ public class RESTLoanClient {
         application.setAmount(100000);
         application.setEin("111111");
         // application.setEin("111123");  // id that will fail credit check
+        String correlationId = UUID.randomUUID().toString();
+        application.setClientCorrelation(correlationId);
+        application.setNotificationAddress("none");
 
         HttpURLConnection connection = createConnection(applicationUrl, "POST");
         connection.connect();
         OutputStream stream = connection.getOutputStream();
         mapper.writeValue(stream, application);
 
-        LoanApplicationSubmission submission = mapper.readValue(connection.getInputStream(), LoanApplicationSubmission.class);
-
+        int code = connection.getResponseCode();
+        if (code != 200 && code != 204) {
+            System.out.println("Error submitting loan application: " + code);
+            return;
+        }
         connection.disconnect();
 
         // display the tracking number
-        String trackingNumber = submission.getTrackingNumber();
-        System.out.println("Submitted loan and received tracking number: " + trackingNumber);
+        System.out.println("Submitted loan: " + correlationId);
 
         // check the status
-        URL statusUrl = new URL(BASE_URL + trackingNumber);
+        URL statusUrl = new URL(BASE_URL + correlationId);
         connection = createConnection(statusUrl, "GET");
         connection.connect();
 

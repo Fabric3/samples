@@ -39,19 +39,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Apply }
+     * Create an instance of {@link LoanApplicationStatus }
      * 
      */
-    public Apply createApply() {
-        return new Apply();
-    }
-
-    /**
-     * Create an instance of {@link LoanApplication }
-     * 
-     */
-    public LoanApplication createLoanApplication() {
-        return new LoanApplication();
+    public LoanApplicationStatus createLoanApplicationStatus() {
+        return new LoanApplicationStatus();
     }
 
     /**
@@ -63,6 +55,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link LoanApplication }
+     * 
+     */
+    public LoanApplication createLoanApplication() {
+        return new LoanApplication();
+    }
+
+    /**
      * Create an instance of {@link ApplyResponse }
      * 
      */
@@ -71,19 +71,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link LoanApplicationStatus }
-     * 
-     */
-    public LoanApplicationStatus createLoanApplicationStatus() {
-        return new LoanApplicationStatus();
-    }
-
-    /**
      * Create an instance of {@link GetStatusResponse }
      * 
      */
     public GetStatusResponse createGetStatusResponse() {
         return new GetStatusResponse();
+    }
+
+    /**
+     * Create an instance of {@link Apply }
+     * 
+     */
+    public Apply createApply() {
+        return new Apply();
     }
 
     /**

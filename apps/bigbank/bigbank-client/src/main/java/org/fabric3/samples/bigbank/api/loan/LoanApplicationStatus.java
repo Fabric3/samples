@@ -16,8 +16,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
+ *         &lt;element name="clientCorrelation" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="status" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="trackingNumber" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -28,13 +28,37 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "loanApplicationStatus", propOrder = {
-    "status",
-    "trackingNumber"
+    "clientCorrelation",
+    "status"
 })
 public class LoanApplicationStatus {
 
+    protected String clientCorrelation;
     protected String status;
-    protected String trackingNumber;
+
+    /**
+     * Gets the value of the clientCorrelation property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getClientCorrelation() {
+        return clientCorrelation;
+    }
+
+    /**
+     * Sets the value of the clientCorrelation property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setClientCorrelation(String value) {
+        this.clientCorrelation = value;
+    }
 
     /**
      * Gets the value of the status property.
@@ -58,30 +82,6 @@ public class LoanApplicationStatus {
      */
     public void setStatus(String value) {
         this.status = value;
-    }
-
-    /**
-     * Gets the value of the trackingNumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getTrackingNumber() {
-        return trackingNumber;
-    }
-
-    /**
-     * Sets the value of the trackingNumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setTrackingNumber(String value) {
-        this.trackingNumber = value;
     }
 
 }

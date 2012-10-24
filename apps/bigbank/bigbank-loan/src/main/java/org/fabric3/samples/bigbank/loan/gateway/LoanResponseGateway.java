@@ -16,37 +16,17 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.fabric3.samples.bigbank.api.message;
+package org.fabric3.samples.bigbank.loan.gateway;
 
-import java.io.Serializable;
-import javax.xml.bind.annotation.XmlRootElement;
+import org.fabric3.samples.bigbank.domain.LoanRecord;
 
 /**
- * Encapsulates information for a new loan application.
  *
- * @version $Rev$ $Date$
+ *
+ * @version $Rev: 11193 $ $Date: 2012-10-24 11:30:17 +0200 (Wed, 24 Oct 2012) $
  */
-@XmlRootElement
-public class LoanApplication implements Serializable {
-    private static final long serialVersionUID = -6182280155050660264L;
-    private String ein;
-    private double amount;
+public interface LoanResponseGateway {
 
-    public String getEin() {
-        return ein;
-    }
-
-    public void setEin(String ein) {
-        this.ein = ein;
-    }
-
-    public double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
-
+    public void completed(LoanRecord record);
 
 }

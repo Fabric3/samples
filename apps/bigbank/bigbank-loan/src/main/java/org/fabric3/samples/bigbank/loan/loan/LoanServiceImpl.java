@@ -20,7 +20,6 @@ package org.fabric3.samples.bigbank.loan.loan;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -34,15 +33,15 @@ import org.fabric3.api.annotation.Producer;
 import org.fabric3.api.annotation.monitor.Monitor;
 import org.fabric3.samples.bigbank.api.event.ApplicationReceived;
 import org.fabric3.samples.bigbank.api.event.LoanChannel;
+import org.fabric3.samples.bigbank.api.loan.LoanApplication;
+import org.fabric3.samples.bigbank.api.loan.LoanApplicationStatus;
 import org.fabric3.samples.bigbank.api.loan.LoanService;
-import org.fabric3.samples.bigbank.api.message.LoanApplication;
-import org.fabric3.samples.bigbank.api.message.LoanApplicationSubmission;
-import org.fabric3.samples.bigbank.api.message.LoanApplicationStatus;
 import org.fabric3.samples.bigbank.domain.LoanRecord;
 import org.fabric3.samples.bigbank.domain.LoanStatus;
 import org.fabric3.samples.bigbank.domain.RiskDecision;
 import org.fabric3.samples.bigbank.domain.RiskInfo;
 import org.fabric3.samples.bigbank.domain.RiskReasonInfo;
+import org.fabric3.samples.bigbank.loan.gateway.LoanResponseGateway;
 import org.fabric3.samples.bigbank.rate.Rating;
 import org.fabric3.samples.bigbank.rate.RatingRequest;
 import org.fabric3.samples.bigbank.rate.RatingService;
@@ -79,21 +78,21 @@ public class LoanServiceImpl implements LoanService, LoanRecovery, RatingService
 
     @PersistenceContext(unitName = "loanApplication")
     protected EntityManager em;
+    private LoanResponseGateway responseGateway;
 
-    /**
-     * Constructor.
-     */
     public LoanServiceImpl(@Reference RatingService ratingService,
                            @Reference RiskService riskService,
+                           @Reference LoanResponseGateway responseGateway,
                            @Producer("loanChannel") LoanChannel channel,
                            @Monitor RequestMonitor monitor) {
         this.ratingService = ratingService;
         this.riskService = riskService;
+        this.responseGateway = responseGateway;
         this.channel = channel;
         this.monitor = monitor;
     }
 
-    public LoanApplicationSubmission apply(LoanApplication application) {
+    public void apply(LoanApplication application) {
         // create a loan application and persist it - note a JTA transaction is now active and will commit when the results are returned
         LoanRecord record = createLoanRecord(application);
         em.persist(record);
@@ -108,20 +107,16 @@ public class LoanServiceImpl implements LoanService, LoanRecovery, RatingService
 
         // rate the application
         rate(record);
-
-        // return the result to the client
-        String trackingNumber = record.getTrackingNumber();
-        return new LoanApplicationSubmission(trackingNumber);
     }
 
-    public LoanApplicationStatus getStatus(String trackingNumber) {
-        Query query = em.createQuery("SELECT l FROM LoanRecord l WHERE l.trackingNumber = :number");
-        query.setParameter("number", trackingNumber);
+    public LoanApplicationStatus getStatus(String correlation) {
+        Query query = em.createQuery("SELECT l FROM LoanRecord l WHERE l.clientCorrelation = :number");
+        query.setParameter("number", correlation);
         try {
             LoanRecord record = GenericsHelper.cast(query.getSingleResult());
-            return new LoanApplicationStatus(trackingNumber, record.getStatus().toString());
+            return new LoanApplicationStatus(correlation, record.getStatus().toString());
         } catch (NoResultException e) {
-            return new LoanApplicationStatus(trackingNumber, LoanApplicationStatus.INVALID);
+            return new LoanApplicationStatus(correlation, LoanApplicationStatus.INVALID);
         }
     }
 
@@ -134,6 +129,7 @@ public class LoanServiceImpl implements LoanService, LoanRecovery, RatingService
         LoanRecord record = em.find(LoanRecord.class, rating.getCorrelationId());
         record.setStatus(LoanStatus.RATED);
         assesRisk(record, rating);
+        responseGateway.completed(record);
     }
 
     private LoanRecord createLoanRecord(LoanApplication application) {
@@ -141,7 +137,8 @@ public class LoanServiceImpl implements LoanService, LoanRecovery, RatingService
         record.setAmount(application.getAmount());
         record.setStatus(LoanStatus.SUBMITTED);
         record.setEin(application.getEin());
-        record.setTrackingNumber(UUID.randomUUID().toString());
+        record.setClientCorrelation(application.getClientCorrelation());
+        record.setNotificationAddress(application.getNotificationAddress());
         return record;
     }
 

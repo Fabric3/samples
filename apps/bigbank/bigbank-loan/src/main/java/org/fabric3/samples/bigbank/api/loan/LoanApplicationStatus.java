@@ -1,4 +1,4 @@
-package org.fabric3.samples.bigbank.api.message;
+package org.fabric3.samples.bigbank.api.loan;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 /**
  * @version $Rev$ $Date$
  */
-@XmlRootElement
+@XmlRootElement(namespace = "http://loan.api.bigbank.samples.fabric3.org/")
 public class LoanApplicationStatus implements Serializable {
     private static final long serialVersionUID = 3464383487403179368L;
 
@@ -15,27 +15,27 @@ public class LoanApplicationStatus implements Serializable {
     public static final String FINAL = "FINAL";
     public static final String INVALID = "INVALID";
 
-    private String trackingNumber;
+    private String clientCorrelation;
     private String status;
 
     public LoanApplicationStatus() {
     }
 
-    public LoanApplicationStatus(String trackingNumber, String status) {
-        this.trackingNumber = trackingNumber;
+    public LoanApplicationStatus(String clientCorrelation, String status) {
+        this.clientCorrelation = clientCorrelation;
         this.status = status;
     }
 
-    public String getTrackingNumber() {
-        return trackingNumber;
+    public String getClientCorrelation() {
+        return clientCorrelation;
     }
 
     public String getStatus() {
         return status;
     }
 
-    public void setTrackingNumber(String trackingNumber) {
-        this.trackingNumber = trackingNumber;
+    public void setClientCorrelation(String clientCorrelation) {
+        this.clientCorrelation = clientCorrelation;
     }
 
     public void setStatus(String status) {

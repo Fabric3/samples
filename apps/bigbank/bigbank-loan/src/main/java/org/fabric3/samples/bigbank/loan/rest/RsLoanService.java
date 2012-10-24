@@ -12,9 +12,9 @@ import javax.ws.rs.core.MediaType;
 import org.oasisopen.sca.annotation.Reference;
 
 import org.fabric3.samples.bigbank.api.loan.LoanService;
-import org.fabric3.samples.bigbank.api.message.LoanApplication;
-import org.fabric3.samples.bigbank.api.message.LoanApplicationStatus;
-import org.fabric3.samples.bigbank.api.message.LoanApplicationSubmission;
+import org.fabric3.samples.bigbank.api.loan.LoanApplication;
+import org.fabric3.samples.bigbank.api.loan.LoanApplicationStatus;
+import org.fabric3.samples.bigbank.api.loan.LoanApplicationSubmission;
 
 /**
  * Maps the {@link LoanService} to REST/HTTP using JAX-RS.
@@ -30,14 +30,14 @@ public class RsLoanService {
 
     @POST
     @Path("application")
-    public LoanApplicationSubmission apply(LoanApplication application) {
-        return loanService.apply(application);
+    public void apply(LoanApplication application) {
+        loanService.apply(application);
     }
 
     @GET
-    @Path("application/{tracking}")
-    public LoanApplicationStatus getStatus(@PathParam("tracking") String trackingNumber) {
-        LoanApplicationStatus status = loanService.getStatus(trackingNumber);
+    @Path("application/{correlation}")
+    public LoanApplicationStatus getStatus(@PathParam("correlation") String correlation) {
+        LoanApplicationStatus status = loanService.getStatus(correlation);
         if (LoanApplicationStatus.INVALID.equals(status.getStatus())) {
             throw new WebApplicationException(404);
         }

@@ -26,14 +26,11 @@ public interface LoanService {
     /**
      * 
      * @param arg0
-     * @return
-     *     returns java.lang.String
      */
     @WebMethod
-    @WebResult(targetNamespace = "")
     @RequestWrapper(localName = "apply", targetNamespace = "http://loan.api.bigbank.samples.fabric3.org/", className = "org.fabric3.samples.bigbank.api.loan.Apply")
     @ResponseWrapper(localName = "applyResponse", targetNamespace = "http://loan.api.bigbank.samples.fabric3.org/", className = "org.fabric3.samples.bigbank.api.loan.ApplyResponse")
-    public String apply(
+    public void apply(
         @WebParam(name = "arg0", targetNamespace = "")
         LoanApplication arg0);
 
