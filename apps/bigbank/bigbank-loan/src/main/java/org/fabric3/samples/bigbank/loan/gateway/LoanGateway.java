@@ -33,7 +33,7 @@ import org.fabric3.samples.bigbank.api.message.LoanApplication;
 /**
  * Receives loan applications from a batch source such as the file system binding (binding.file).
  *
- * @version $Rev: 9526 $ $Date: 2010-10-10 15:32:06 +0200 (Sun, 10 Oct 2010) $
+ * @version $Rev$ $Date$
  */
 @Scope("COMPOSITE")
 public class LoanGateway {

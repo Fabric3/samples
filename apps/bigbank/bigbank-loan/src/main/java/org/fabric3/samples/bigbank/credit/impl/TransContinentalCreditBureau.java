@@ -22,7 +22,7 @@ import org.fabric3.samples.bigbank.credit.CreditBureau;
  * Simulates a third-party credit service. In a real production system, this would be replaced by a bound reference pointing to an external third-party
  * service on the credit service.
  *
- * @version $Rev: 9529 $ $Date: 2010-10-10 17:06:13 +0200 (Sun, 10 Oct 2010) $
+ * @version $Rev$ $Date$
  */
 public class TransContinentalCreditBureau implements CreditBureau {
 

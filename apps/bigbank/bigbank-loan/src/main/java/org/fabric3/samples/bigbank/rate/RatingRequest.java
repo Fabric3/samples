@@ -23,7 +23,7 @@ import java.io.Serializable;
 /**
  *
  *
- * @version $Rev: 9526 $ $Date: 2010-10-10 15:32:06 +0200 (Sun, 10 Oct 2010) $
+ * @version $Rev$ $Date$
  */
 public class RatingRequest implements Serializable {
     private static final long serialVersionUID = -8117214455334146925L;
