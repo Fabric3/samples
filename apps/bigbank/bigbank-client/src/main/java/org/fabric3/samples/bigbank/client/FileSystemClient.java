@@ -14,6 +14,9 @@ import org.fabric3.samples.bigbank.api.loan.LoanApplicationStatus;
 import org.fabric3.samples.bigbank.api.loan.ObjectFactory;
 
 /**
+ * Demonstrates connecting to the loan service using an asynchronous file exchange. A loan application is placed in an inbox directory on disk and the
+ * client monitors an outbox directory for a response.
+ *
  * @version $Rev$ $Date$
  */
 public class FileSystemClient {
@@ -35,9 +38,9 @@ public class FileSystemClient {
 
         String RUNTIME_LOCATION = "";
         File inboxLocation =
-                new File(RUNTIME_LOCATION + File.separator+"data" + File.separator + "inbox" + File.separator + "receive.queue" + File.separator);
+                new File(RUNTIME_LOCATION + File.separator + "data" + File.separator + "inbox" + File.separator + "receive.queue" + File.separator);
         File outboxLocation =
-                new File(RUNTIME_LOCATION + File.separator+ "data" + File.separator + "outbox" + File.separator + "response.queue" + File.separator);
+                new File(RUNTIME_LOCATION + File.separator + "data" + File.separator + "outbox" + File.separator + "response.queue" + File.separator);
 
 
         if (!inboxLocation.exists()) {
