@@ -18,12 +18,24 @@
  */
 package org.fabric3.samples.bigbank.loan.impl;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.WebApplicationException;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 
 import org.oasisopen.sca.annotation.ManagedTransaction;
 import org.oasisopen.sca.annotation.Reference;
@@ -41,8 +53,10 @@ import org.fabric3.samples.bigbank.domain.LoanStatus;
 import org.fabric3.samples.bigbank.domain.RiskDecision;
 import org.fabric3.samples.bigbank.domain.RiskInfo;
 import org.fabric3.samples.bigbank.domain.RiskReasonInfo;
-import org.fabric3.samples.bigbank.loan.gateway.LoanResponseGateway;
+import org.fabric3.samples.bigbank.loan.gateway.LoanGateway;
+import org.fabric3.samples.bigbank.loan.gateway.ResponseQueue;
 import org.fabric3.samples.bigbank.loan.recovery.LoanRecovery;
+import org.fabric3.samples.bigbank.loan.rest.RsLoanService;
 import org.fabric3.samples.bigbank.rate.Rating;
 import org.fabric3.samples.bigbank.rate.RatingRequest;
 import org.fabric3.samples.bigbank.rate.RatingService;
@@ -70,27 +84,30 @@ import org.fabric3.samples.bigbank.util.GenericsHelper;
  * @version $Revision$ $Date$
  */
 @ManagedTransaction
-@Service(names = {LoanService.class, LoanRecovery.class, RatingServiceCallback.class})
-public class LoanServiceImpl implements LoanService, LoanRecovery, RatingServiceCallback {
+@Service(names = {LoanService.class, LoanRecovery.class, LoanGateway.class, RsLoanService.class, RatingServiceCallback.class})
+public class LoanServiceImpl implements LoanService, LoanGateway, RsLoanService, LoanRecovery, RatingServiceCallback {
     private RatingService ratingService;
     private RiskService riskService;
     private LoanChannel channel;
-    private RequestMonitor monitor;
+    private ResponseQueue responseQueue;
+    private JAXBContext context;
+
+    private LoanMonitor monitor;
 
     @PersistenceContext(unitName = "loanApplication")
     protected EntityManager em;
-    private LoanResponseGateway responseGateway;
 
     public LoanServiceImpl(@Reference RatingService ratingService,
                            @Reference RiskService riskService,
-                           @Reference LoanResponseGateway responseGateway,
+                           @Reference(name = "responseQueue") ResponseQueue responseQueue,
                            @Producer("loanChannel") LoanChannel channel,
-                           @Monitor RequestMonitor monitor) {
+                           @Monitor LoanMonitor monitor) throws JAXBException {
         this.ratingService = ratingService;
         this.riskService = riskService;
-        this.responseGateway = responseGateway;
+        this.responseQueue = responseQueue;
         this.channel = channel;
         this.monitor = monitor;
+        context = JAXBContext.newInstance("org.fabric3.samples.bigbank.api.loan");
     }
 
     public void apply(LoanApplication application) {
@@ -121,6 +138,21 @@ public class LoanServiceImpl implements LoanService, LoanRecovery, RatingService
         }
     }
 
+    public LoanApplicationStatus getRSStatus(String correlation) {
+        LoanApplicationStatus status = getStatus(correlation);
+        if (LoanApplicationStatus.INVALID.equals(status.getStatus())) {
+            throw new WebApplicationException(404);
+        }
+        return status;
+
+    }
+
+    public void process(InputStream stream) throws JAXBException {
+        Unmarshaller unmarshaller = context.createUnmarshaller();
+        JAXBElement<LoanApplication> element = GenericsHelper.cast(unmarshaller.unmarshal(stream));
+        apply(element.getValue());
+    }
+
     public void recover(LoanRecord record) {
         rate(record);
     }
@@ -130,7 +162,7 @@ public class LoanServiceImpl implements LoanService, LoanRecovery, RatingService
         LoanRecord record = em.find(LoanRecord.class, rating.getCorrelationId());
         record.setStatus(LoanStatus.RATED);
         assesRisk(record, rating);
-        responseGateway.completed(record);
+        completed(record);
     }
 
     private LoanRecord createLoanRecord(LoanApplication application) {
@@ -169,6 +201,24 @@ public class LoanServiceImpl implements LoanService, LoanRecovery, RatingService
         RiskInfo info = new RiskInfo(riskDecision, reasons);
         record.setRiskInfo(info);
         record.setStatus(LoanStatus.FINAL);
+    }
+
+    private void completed(LoanRecord record) {
+        if ("file".equals(record.getNotificationAddress())) {
+            try {
+                Marshaller marshaller = context.createMarshaller();
+                LoanApplicationStatus status = new LoanApplicationStatus(record.getClientCorrelation(), record.getStatus().toString());
+                OutputStream stream = responseQueue.openStream(record.getClientCorrelation() + ".xml");
+                marshaller.marshal(status, stream);
+                stream.close();
+            } catch (JAXBException e) {
+                monitor.error("Error sending notification: " + record.getId(), e);
+            } catch (IOException e) {
+                monitor.error("Error closing stream: " + record.getId(), e);
+            }
+
+        }
+
     }
 
 

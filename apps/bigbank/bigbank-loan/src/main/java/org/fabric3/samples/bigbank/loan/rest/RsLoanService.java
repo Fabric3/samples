@@ -24,25 +24,13 @@ import org.fabric3.samples.bigbank.api.loan.LoanApplicationSubmission;
 @Path("/")
 @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-public class RsLoanService {
-    @Reference
-    protected LoanService loanService;
-
+public interface RsLoanService {
     @POST
     @Path("application")
-    public void apply(LoanApplication application) {
-        loanService.apply(application);
-    }
+    public void apply(LoanApplication application);
 
     @GET
     @Path("application/{correlation}")
-    public LoanApplicationStatus getStatus(@PathParam("correlation") String correlation) {
-        LoanApplicationStatus status = loanService.getStatus(correlation);
-        if (LoanApplicationStatus.INVALID.equals(status.getStatus())) {
-            throw new WebApplicationException(404);
-        }
-        return status;
-
-    }
+    public LoanApplicationStatus getRSStatus(@PathParam("correlation") String correlation);
 
 }

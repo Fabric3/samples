@@ -25,25 +25,20 @@
 
     <channel name="StatisticsChannel"/>
 
-    <component name="LoanGateway">
-        <implementation.java class="org.fabric3.samples.bigbank.loan.gateway.LoanGatewayImpl"/>
-        <service name="LoanGateway">
-            <f3:binding.file location="receive.queue" error.location="error.queue" pattern=".*\.xml"/>
-        </service>
-    </component>
-
-    <component name="LoanResponseGateway">
-        <implementation.java class="org.fabric3.samples.bigbank.loan.gateway.LoanResponseGatewayImpl"/>
-        <reference name="responseQueue">
-            <f3:binding.file location="response.queue" error.location="error.queue"/>
-        </reference>
-    </component>
-
     <component name="LoanService">
         <implementation.java class="org.fabric3.samples.bigbank.loan.impl.LoanServiceImpl"/>
         <service name="LoanService">
             <binding.ws uri="wsloan"/>
         </service>
+        <service name="RsLoanService">
+            <f3:binding.rs uri="/rsloan"/>
+        </service>
+        <service name="LoanGateway">
+            <f3:binding.file location="receive.queue" error.location="error.queue" pattern=".*\.xml"/>
+        </service>
+        <reference name="responseQueue">
+            <f3:binding.file location="response.queue" error.location="error.queue"/>
+        </reference>
         <producer name="loanChannel" target="LoanChannel"/>
     </component>
 
@@ -61,13 +56,6 @@
         <implementation.java class="org.fabric3.samples.bigbank.loan.statistics.ApplicationStatisticsComponent"/>
         <producer name="statisticsChannel" target="StatisticsChannel"/>
         <consumer name="loanChannel" source="LoanChannel"/>
-    </component>
-
-    <component name="RestLoanService">
-        <implementation.java class="org.fabric3.samples.bigbank.loan.rest.RsLoanService"/>
-        <service name="RsLoanService">
-            <f3:binding.rs uri="/rsloan"/>
-        </service>
     </component>
 
     <component name="AuditComponent">

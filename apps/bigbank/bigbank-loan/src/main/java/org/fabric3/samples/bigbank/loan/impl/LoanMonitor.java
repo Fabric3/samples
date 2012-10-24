@@ -16,17 +16,28 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.fabric3.samples.bigbank.loan.gateway;
+package org.fabric3.samples.bigbank.loan.impl;
 
-import org.fabric3.samples.bigbank.domain.LoanRecord;
+import org.fabric3.api.annotation.monitor.Info;
+import org.fabric3.api.annotation.monitor.Severe;
 
 /**
+ * A monitor for the loan service.
  *
- *
- * @version $Rev: 11193 $ $Date: 2012-10-24 11:30:17 +0200 (Wed, 24 Oct 2012) $
+ * @version $Revision$ $Date$
  */
-public interface LoanResponseGateway {
+public interface LoanMonitor {
 
-    public void completed(LoanRecord record);
+    @Severe
+    void error(String message, Throwable e);
+
+    @Info("Loan application received and assigned id: {0}")
+    void received(String ein);
+
+    @Info("Application approved for: {0}")
+    void approved(String ein);
+
+    @Info("Application was rejected for: {0}")
+    void rejected(String ein);
 
 }
