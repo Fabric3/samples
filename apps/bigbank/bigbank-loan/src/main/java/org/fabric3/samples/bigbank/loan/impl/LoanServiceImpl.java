@@ -144,7 +144,6 @@ public class LoanServiceImpl implements LoanService, LoanGateway, RsLoanService,
             throw new WebApplicationException(404);
         }
         return status;
-
     }
 
     public void process(InputStream stream) throws JAXBException {

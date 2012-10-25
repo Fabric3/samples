@@ -15,7 +15,6 @@ import org.fabric3.samples.bigbank.api.loan.LoanServiceService;
  * @version $Rev$ $Date$
  */
 public class WebServiceLoanClient {
-
     private static final QName SERVICE_NAME = new QName("http://loan.api.bigbank.samples.fabric3.org/", "LoanServiceService");
 
     public static void main(String args[]) throws Exception {

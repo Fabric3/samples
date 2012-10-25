@@ -28,6 +28,12 @@ import javax.xml.bind.JAXBException;
  */
 public interface LoanGateway {
 
+    /**
+     * Invoked by the file system binding when a file has been received.
+     *
+     * @param stream the input stream for reading the file
+     * @throws JAXBException if there is an exception parsing the file
+     */
     public void process(InputStream stream) throws JAXBException;
 
 }

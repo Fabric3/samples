@@ -22,7 +22,7 @@
            name="RateComposite"
            autowire="false">
 
-    <component name="RatingComponent">
+    <component name="RatingService">
         <implementation.java class="org.fabric3.samples.bigbank.rate.impl.RatingComponent"/>
         <reference name="CreditService" target="CreditService"/>
     </component>

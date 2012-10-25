@@ -2,12 +2,12 @@ Fabric3 Samples
 
 I. Introduction
 
-The samples are intended to demonstrate the capabilities of the Fabric3 runtime:
+The samples are intended to demonstrate capabilities of the Fabric3 runtime:
 
-* Starter Applications- These applications demonstrate how to develop basic distributed applications using Fabric3. It is recommended users begin with
+* Starter Applications - These applications demonstrate how to develop basic distributed applications using Fabric3. It is recommended users begin with
   these applications.
 
-* Feature Applications- These applications demonstrate using specific Fabric3 features.
+* Feature Applications - These applications demonstrate using specific Fabric3 features.
 
 * BigBank Loan Application - BigBank showcases advanced features of the Fabric3 runtime. It is intended to provide a complete, real-world application
   that demonstrates SCA and Fabric3 best-practices.
@@ -18,7 +18,7 @@ II. Prerequisites
  
 * JDK 6.0 or later
 
-* Maven 2.2.1 or later to build the samples. Maven can be downloaded from http://maven.apache.org/download.html.
+* Maven 3.0.4 or later to build the samples. Maven can be downloaded from http://maven.apache.org/download.html.
 
 III. Installation
 
@@ -33,7 +33,7 @@ III. Installation
 
 IV. Documentation
 
-Documentation can be found at http://docs.fabric3.org.
+* The samples documentation can be found at http://docs.fabric3.org/display/fabric3/Getting+Started. 
 
 V. Reporting Issues
 
