@@ -33,8 +33,8 @@ public class CreditScore implements Serializable {
     public CreditScore() {
     }
 
-    public CreditScore(String ssn, int score) {
-        this.ein = ssn;
+    public CreditScore(String ein, int score) {
+        this.ein = ein;
         this.score = score;
     }
 
