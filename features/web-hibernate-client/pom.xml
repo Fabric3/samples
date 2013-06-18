@@ -45,10 +45,6 @@
             <artifactId>jackson-xc</artifactId>
             <version>1.5.5</version>
         </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-        </dependency>
      </dependencies>
 	 <build>
 		<plugins>
