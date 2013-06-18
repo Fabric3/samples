@@ -21,7 +21,7 @@ package org.fabric3.samples.bigbank.api.event;
 /**
  * Denotes a new loan application that has been received.
  *
- * @version $Rev$ $Date$
+ *
  */
 public class ApplicationReceived extends ApplicationEvent {
     private static final long serialVersionUID = -3179786299288877078L;

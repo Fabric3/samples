@@ -25,7 +25,7 @@ import javax.xml.namespace.QName;
 import java.net.URL;
 
 /**
- * @version $Rev$ $Date$
+ *
  */
 public class WsCalcClient {
 

@@ -18,13 +18,13 @@
  */
 package org.fabric3.samples.policy.counter;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 import org.fabric3.spi.invocation.Message;
 import org.fabric3.spi.wire.Interceptor;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 /**
- * @version $Rev$ $Date$
+ *
  */
 public class CounterInterceptor implements Interceptor {
     private Interceptor next;

@@ -34,7 +34,7 @@ import java.util.Map;
  * <strong>Note that the client is configured to use the default single-VM runtime HTTP port (8181). When using the client with the samples
  * distributed domain, the {@link #BASE_URL} must be changed to {@link #DISTRIBUTED_URL}.
  *
- * @version $Rev$ $Date$
+ *
  */
 public class OperationsClient {
     private static final String VM_URL = "http://localhost:8181/management/";

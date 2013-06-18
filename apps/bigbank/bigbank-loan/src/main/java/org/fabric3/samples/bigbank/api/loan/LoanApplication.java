@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 /**
  * Encapsulates information for a new loan application.
  *
- * @version $Rev$ $Date$
+ *
  */
 @XmlRootElement(namespace = "http://loan.api.bigbank.samples.fabric3.org/")
 public class LoanApplication implements Serializable {

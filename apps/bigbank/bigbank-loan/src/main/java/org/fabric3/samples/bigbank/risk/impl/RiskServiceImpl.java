@@ -32,7 +32,7 @@ import org.fabric3.samples.bigbank.risk.RiskReason;
 /**
  * Implementation that performs risk assessment based on an applicant's credit score and loan amount.
  *
- * @version $Rev$ $Date$
+ *
  */
 @Scope("COMPOSITE")
 public class RiskServiceImpl implements RiskService {

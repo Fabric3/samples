@@ -39,7 +39,7 @@ import org.fabric3.api.annotation.monitor.Monitor;
  * <p/>
  * Navigate to fabric3/domain/component/CalculatorService and invoke the audit operation.
  *
- * @version $Rev$ $Date$
+ *
  */
 @Scope("COMPOSITE")
 @Management(description = "A calculator component")

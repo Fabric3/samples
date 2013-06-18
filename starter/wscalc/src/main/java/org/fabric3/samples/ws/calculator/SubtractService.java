@@ -21,7 +21,7 @@ package org.fabric3.samples.ws.calculator;
 /**
  * Service that subtracts two operands
  *
- * @version $Rev$ $Date$
+ *
  */
 public interface SubtractService {
 

@@ -21,7 +21,7 @@ package org.fabric3.samples.bigbank.api.event;
 /**
  * A typed interface to the channel where loan events are published.
  *
- * @version $Rev$ $Date$
+ *
  */
 public interface LoanChannel {
 

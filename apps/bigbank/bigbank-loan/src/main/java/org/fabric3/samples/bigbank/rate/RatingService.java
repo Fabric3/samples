@@ -24,7 +24,7 @@ import org.oasisopen.sca.annotation.OneWay;
 /**
  * Service that returns a rating based on external credit score checks.
  *
- * @version $Rev$ $Date$
+ *
  */
 @Callback(RatingServiceCallback.class)
 public interface RatingService {

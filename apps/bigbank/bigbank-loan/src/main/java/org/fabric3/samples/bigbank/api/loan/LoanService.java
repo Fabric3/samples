@@ -21,7 +21,7 @@ package org.fabric3.samples.bigbank.api.loan;
 /**
  * Service responsible for receiving a loan application.
  *
- * @version $Rev$ $Date$
+ *
  */
 public interface LoanService {
 

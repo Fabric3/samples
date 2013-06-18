@@ -1,23 +1,21 @@
 package org.fabric3.samples.bigbank.client;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.util.UUID;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.util.UUID;
 
 import org.fabric3.samples.bigbank.api.loan.LoanApplication;
 import org.fabric3.samples.bigbank.api.loan.LoanApplicationStatus;
 import org.fabric3.samples.bigbank.api.loan.ObjectFactory;
 
 /**
- * Demonstrates connecting to the loan service using an asynchronous file exchange. A loan application is placed in an inbox directory on disk and the
- * client monitors an outbox directory for a response.
- *
- * @version $Rev$ $Date$
+ * Demonstrates connecting to the loan service using an asynchronous file exchange. A loan application is placed in an inbox directory on disk and the client
+ * monitors an outbox directory for a response.
  */
 public class FileSystemClient {
     private JAXBContext context;
@@ -37,19 +35,18 @@ public class FileSystemClient {
         //             <runtime dir>/image/runtimes/<server>/data/inbox/receive.queue   **********
 
         String RUNTIME_LOCATION = "";
-        File inboxLocation =
-                new File(RUNTIME_LOCATION + File.separator + "data" + File.separator + "inbox" + File.separator + "receive.queue" + File.separator);
-        File outboxLocation =
-                new File(RUNTIME_LOCATION + File.separator + "data" + File.separator + "outbox" + File.separator + "response.queue" + File.separator);
-
+        File inboxLocation = new File(
+                RUNTIME_LOCATION + File.separator + "data" + File.separator + "inbox" + File.separator + "receive.queue" + File.separator);
+        File outboxLocation = new File(
+                RUNTIME_LOCATION + File.separator + "data" + File.separator + "outbox" + File.separator + "response.queue" + File.separator);
 
         if (!inboxLocation.exists()) {
-            throw new AssertionError("The location of the inbox directory is not set properly. It must be an absolute directory pointing to " +
-                                             "image/runtimes/<server>/data/inbox/receive.queue");
+            throw new AssertionError("The location of the inbox directory is not set properly. It must be an absolute directory pointing to "
+                                     + "image/runtimes/<server>/data/inbox/receive.queue");
         }
         if (!outboxLocation.exists()) {
-            throw new AssertionError("The location of the outbox directory is not set properly. It must be an absolute directory pointing to " +
-                                             "image/runtimes/<server>/data/inbox/receive.queue");
+            throw new AssertionError("The location of the outbox directory is not set properly. It must be an absolute directory pointing to "
+                                     + "image/runtimes/<server>/data/inbox/receive.queue");
         }
 
         LoanApplication application = new LoanApplication();

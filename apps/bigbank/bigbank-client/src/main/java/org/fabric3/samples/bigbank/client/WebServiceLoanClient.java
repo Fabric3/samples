@@ -12,7 +12,7 @@ import org.fabric3.samples.bigbank.api.loan.LoanServiceService;
 /**
  * Invokes the loan service using Web Services (WS-*).
  *
- * @version $Rev$ $Date$
+ *
  */
 public class WebServiceLoanClient {
     private static final QName SERVICE_NAME = new QName("http://loan.api.bigbank.samples.fabric3.org/", "LoanServiceService");

@@ -7,7 +7,7 @@ import org.oasisopen.sca.annotation.Scope;
 import org.fabric3.api.annotation.monitor.Monitor;
 
 /**
- * @version $Rev$ $Date$
+ *
  */
 @Scope("COMPOSITE")
 public class TimerComponent implements Runnable {

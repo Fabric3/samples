@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- * @version $Rev$ $Date$
+ *
  */
 @XmlRootElement
 public class Message {

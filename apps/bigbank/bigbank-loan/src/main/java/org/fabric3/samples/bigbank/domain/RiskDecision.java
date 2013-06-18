@@ -19,7 +19,7 @@
 package org.fabric3.samples.bigbank.domain;
 
 /**
- * @version $Rev$ $Date$
+ *
  */
 public enum RiskDecision {
     APPROVED,

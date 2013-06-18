@@ -19,7 +19,7 @@ import org.fabric3.samples.bigbank.api.loan.LoanApplicationSubmission;
 /**
  * Maps the {@link LoanService} to REST/HTTP using JAX-RS.
  *
- * @version $Rev$ $Date$
+ *
  */
 @Path("/")
 @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})

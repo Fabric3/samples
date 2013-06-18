@@ -30,7 +30,7 @@ import org.fabric3.samples.bigbank.credit.CreditService;
  * <p/>
  * Demonstrates the use of multiplicity references - i.e. a collection of injected services
  *
- * @version $Rev$ $Date$
+ *
  */
 public class CreditServiceImpl implements CreditService {
     private CreditMonitor monitor;

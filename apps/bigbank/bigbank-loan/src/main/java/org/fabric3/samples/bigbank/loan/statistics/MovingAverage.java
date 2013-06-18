@@ -24,7 +24,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 /**
  * Calculates the moving average of a data set using a fixed period.
  *
- * @version $Rev$ $Date$
+ *
  */
 public class MovingAverage {
     private int period;

@@ -11,7 +11,7 @@ import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.map.ObjectMapper;
 
 /**
- * @version $Rev$ $Date$
+ *
  */
 public class OperationsHelper {
     private ObjectMapper mapper;

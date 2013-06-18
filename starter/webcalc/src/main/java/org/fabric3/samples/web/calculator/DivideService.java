@@ -21,7 +21,7 @@ package org.fabric3.samples.web.calculator;
 /**
  * Service that divides two operands
  *
- * @version $Rev$ $Date$
+ *
  */
 public interface DivideService {
 

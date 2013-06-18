@@ -21,7 +21,7 @@ package org.fabric3.samples.bigbank.loan.statistics;
 import org.fabric3.samples.bigbank.api.event.StatisticsUpdateEvent;
 
 /**
- * @version $Rev$ $Date$
+ *
  */
 public interface StatisticsChannel {
 

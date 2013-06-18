@@ -4,7 +4,7 @@ import java.io.Serializable;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * @version $Rev$ $Date$
+ *
  */
 @XmlRootElement(namespace = "http://loan.api.bigbank.samples.fabric3.org/")
 public class LoanApplicationStatus implements Serializable {

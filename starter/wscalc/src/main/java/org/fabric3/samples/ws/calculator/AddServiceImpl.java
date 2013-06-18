@@ -21,7 +21,7 @@ package org.fabric3.samples.ws.calculator;
 /**
  * An implementation of the Add service.
  *
- * @version $Rev$ $Date$
+ *
  */
 public class AddServiceImpl implements AddService {
 

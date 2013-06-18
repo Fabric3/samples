@@ -39,7 +39,7 @@ import org.fabric3.samples.bigbank.util.GenericsHelper;
  * <p/>
  * This implementation demonstrates how to create transactional event consumers.
  *
- * @version $Rev$ $Date$
+ *
  */
 @EagerInit
 @ManagedTransaction

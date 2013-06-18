@@ -19,7 +19,7 @@
 package org.fabric3.samples.bigbank.util;
 
 /**
- * @version $Rev$ $Date$
+ *
  */
 public class GenericsHelper {
 

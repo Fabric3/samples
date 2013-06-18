@@ -41,7 +41,7 @@ import org.oasisopen.sca.annotation.Scope;
  * setup where zone1 and zone2 composites are provisioned to different runtime instances, communications will be performed over JMS or ZeroMQ
  * depending on the cluster setup. Note, however, application code remains unchanged as remote communications are abstracted
  *
- * @version $Rev$ $Date$
+ *
  */
 @Scope("COMPOSITE")
 public class RatingComponent implements RatingService {

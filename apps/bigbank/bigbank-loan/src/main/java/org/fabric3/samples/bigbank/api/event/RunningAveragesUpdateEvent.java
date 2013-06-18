@@ -21,7 +21,7 @@ package org.fabric3.samples.bigbank.api.event;
 /**
  * The root statistics event type.
  *
- * @version $Rev$ $Date$
+ *
  */
 public class RunningAveragesUpdateEvent extends StatisticsUpdateEvent {
     private static final long serialVersionUID = 2251838095091160041L;

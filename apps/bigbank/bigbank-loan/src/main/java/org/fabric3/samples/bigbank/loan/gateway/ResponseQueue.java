@@ -5,7 +5,7 @@ import java.io.OutputStream;
 import org.oasisopen.sca.ServiceRuntimeException;
 
 /**
- * @version $Rev$ $Date$
+ *
  */
 public interface ResponseQueue {
 

@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * @version $Rev$ $Date$
+ *
  */
 @XmlRootElement
 public class MessageList {

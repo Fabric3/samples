@@ -23,7 +23,7 @@ import org.oasisopen.sca.annotation.Remotable;
 /**
  * Performs risk assessment against a loan application.
  *
- * @version $Rev$ $Date$
+ *
  */
 @Remotable
 public interface RiskService {

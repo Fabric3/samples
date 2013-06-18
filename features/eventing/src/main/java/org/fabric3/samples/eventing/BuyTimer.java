@@ -47,7 +47,7 @@ import org.fabric3.api.annotation.monitor.Monitor;
 /**
  * A simple stateless timer component that issues buy orders.
  *
- * @version $Rev$ $Date$
+ *
  */
 public class BuyTimer implements Runnable {
     private BuyChannel buyChannel;

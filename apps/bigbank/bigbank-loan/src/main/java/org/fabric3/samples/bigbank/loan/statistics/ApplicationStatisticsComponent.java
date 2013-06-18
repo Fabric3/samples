@@ -44,7 +44,7 @@ import org.fabric3.samples.bigbank.domain.ApplicationStatistics;
  * ScheduledExecutorService to schedule a recurring Runnable process.
  * <p/>
  *
- * @version $Rev$ $Date$
+ *
  */
 @EagerInit
 @Scope("COMPOSITE")

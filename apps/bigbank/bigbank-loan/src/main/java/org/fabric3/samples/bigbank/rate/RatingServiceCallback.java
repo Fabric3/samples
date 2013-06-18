@@ -21,7 +21,7 @@ package org.fabric3.samples.bigbank.rate;
 import org.oasisopen.sca.annotation.OneWay;
 
 /**
- * @version $Rev$ $Date$
+ *
  */
 public interface RatingServiceCallback {
 

@@ -3,7 +3,7 @@ package org.fabric3.samples.operations.java;
 /**
  * A port name/number pair.
  *
- * @version $Rev$ $Date$
+ *
  */
 public class Pair {
     private String name;

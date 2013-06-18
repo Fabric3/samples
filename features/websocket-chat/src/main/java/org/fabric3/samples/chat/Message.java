@@ -1,7 +1,7 @@
 package org.fabric3.samples.chat;
 
 /**
- * @version $Rev$ $Date$
+ *
  */
 public class Message {
     private String name;

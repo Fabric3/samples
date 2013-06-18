@@ -21,7 +21,7 @@ package org.fabric3.samples.web.calculator;
 /**
  * Service that adds two operands.
  *
- * @version $Rev$ $Date$
+ *
  */
 public interface AddService {
 

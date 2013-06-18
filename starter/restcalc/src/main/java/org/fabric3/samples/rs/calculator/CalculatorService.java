@@ -35,7 +35,7 @@ import org.fabric3.api.annotation.monitor.Monitor;
 /**
  * A REST calculator.
  *
- * @version $Rev$ $Date$
+ *
  */
 @Path("/")
 @Consumes(MediaType.TEXT_PLAIN)

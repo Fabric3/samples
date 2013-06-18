@@ -19,7 +19,7 @@
 package org.fabric3.samples.bigbank.credit;
 
 /**
- * @version $Rev$ $Date$
+ *
  */
 public interface CreditBureau {
 

@@ -23,7 +23,7 @@ import org.oasisopen.sca.annotation.Remotable;
 /**
  * Implementations perform a credit check for a loan applicant against a third-party credit bureau.
  *
- * @version $Rev$ $Date$
+ *
  */
 @Remotable
 public interface CreditService {

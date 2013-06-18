@@ -46,7 +46,7 @@ import org.fabric3.samples.bigbank.util.GenericsHelper;
  * Finally, this implementation also demonstrates the use of transactional timer components. The {@link ManagedTransaction} annotation instructs
  * Fabric3 to execute {@link #run()} in the context of a global (JTA) managed transaction.
  *
- * @version $Rev$ $Date$
+ *
  */
 @Scope("DOMAIN")
 @ManagedTransaction

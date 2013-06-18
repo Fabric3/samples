@@ -23,7 +23,7 @@ import java.io.Serializable;
 /**
  * The root event type.
  *
- * @version $Rev$ $Date$
+ *
  */
 public abstract class ApplicationEvent implements Serializable {
     private static final long serialVersionUID = 7550992408332724548L;

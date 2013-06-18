@@ -40,7 +40,7 @@ package org.fabric3.samples.timer;
 /**
  * A simple stateless timer component.
  *
- * @version $Rev$ $Date$
+ *
  */
 public class TimerComponent implements Runnable {
 

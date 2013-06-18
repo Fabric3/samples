@@ -21,7 +21,7 @@ package org.fabric3.samples.ws.calculator;
 /**
  * An implementation of the Divide service.
  *
- * @version $Rev$ $Date$
+ *
  */
 public class DivideServiceImpl implements DivideService {
 

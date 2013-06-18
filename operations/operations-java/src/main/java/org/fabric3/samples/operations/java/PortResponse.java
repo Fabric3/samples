@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  * Binds a port query response.
  *
- * @version $Rev$ $Date$
+ *
  */
 public class PortResponse {
     Map<String, List<Pair>> value;

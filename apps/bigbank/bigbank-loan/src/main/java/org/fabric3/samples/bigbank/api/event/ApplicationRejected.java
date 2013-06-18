@@ -21,7 +21,7 @@ package org.fabric3.samples.bigbank.api.event;
 /**
  * Denotes a new loan application that has been rejected.
  *
- * @version $Rev$ $Date$
+ *
  */
 public class ApplicationRejected extends ApplicationEvent {
     private static final long serialVersionUID = -60303817744905723L;

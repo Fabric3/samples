@@ -14,7 +14,7 @@ import org.fabric3.samples.bigbank.api.loan.LoanApplicationStatus;
 /**
  * Invokes the loan service using HTTP.
  *
- * @version $Rev$ $Date$
+ *
  */
 public class RESTLoanClient {
     private static final String BASE_URL = "http://localhost:8181/rsloan/application/";

@@ -29,7 +29,7 @@ import javax.persistence.Version;
 /**
  * Root persistent type.
  *
- * @version $Rev$ $Date$
+ *
  */
 @Entity
 public abstract class Versionable implements Serializable {

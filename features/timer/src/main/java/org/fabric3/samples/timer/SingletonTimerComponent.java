@@ -43,7 +43,7 @@ import org.fabric3.api.annotation.scope.Domain;
  * A clustered singleton timer. Only one instance will exist in a zone (cluster) at a given time. If the host process fails, the timer will be
  * migrated to another runtime in the zone.
  *
- * @version $Rev$ $Date$
+ *
  */
 @Domain
 public class SingletonTimerComponent implements Runnable {

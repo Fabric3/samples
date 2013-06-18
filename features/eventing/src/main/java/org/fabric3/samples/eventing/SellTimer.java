@@ -47,7 +47,7 @@ import org.fabric3.api.annotation.Producer;
 /**
  * A simple stateless timer component that issues sell orders.
  *
- * @version $Rev$ $Date$
+ *
  */
 @Scope("COMPOSITE")
 public class SellTimer implements Runnable {

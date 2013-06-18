@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * A sell order.
  *
- * @version $Rev$ $Date$
+ *
  */
 public class SellOrder implements Serializable {
     private static final long serialVersionUID = 3752564464816023570L;
