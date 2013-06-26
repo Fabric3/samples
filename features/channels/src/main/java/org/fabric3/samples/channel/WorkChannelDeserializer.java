@@ -44,7 +44,7 @@ import org.fabric3.api.annotation.scope.Scopes;
 import org.oasisopen.sca.annotation.Scope;
 
 /**
- * Consumer that deserializes an event. Is the first
+ * Consumer that deserializes an event. This consumer is the first in the sequence of consumers to receive events from the channel.
  */
 @Scope(Scopes.COMPOSITE)
 public class WorkChannelDeserializer {

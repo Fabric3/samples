@@ -44,7 +44,7 @@ import org.fabric3.api.annotation.scope.Scopes;
 import org.oasisopen.sca.annotation.Scope;
 
 /**
- * Consumer that deserializes an event.
+ * Consumer that processes an event. Is called after the deserializing consumer.
  */
 @Scope(Scopes.COMPOSITE)
 public class WorkChannelProcessor {
