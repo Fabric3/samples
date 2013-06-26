@@ -30,6 +30,7 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>channels</module>
         <module>timer</module>
         <module>web-hibernate</module>
         <module>web-hibernate-client</module>

@@ -16,7 +16,7 @@ The samples are intended to demonstrate capabilities of the Fabric3 runtime:
 
 II. Prerequisites
  
-* JDK 6.0 or later
+* JDK 7.0 or later
 
 * Maven 3.0.4 or later to build the samples. Maven can be downloaded from http://maven.apache.org/download.html.
 

@@ -8,8 +8,8 @@ import org.fabric3.api.annotation.monitor.Severe;
  */
 public interface TimerMonitor {
 
-    @Severe
-    void error(ErrorEvent error);
+    @Severe ("The following error was encountered")
+    void error(Throwable error);
 
     @Info("A message was sent: {0}")
     void message(String message);

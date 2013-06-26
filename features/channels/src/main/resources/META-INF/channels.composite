@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+           xmlns:f3="urn:fabric3.org"
+           name="ChannelsComposite"
+           targetNamespace="urn:fabric3.org:samples">
+
+    <channel name="WorkChannel" type="ring.buffer"/>
+
+    <channel name="TypedChannel" type="ring.buffer"/>
+
+    <component name="Producer">
+        <f3:implementation.timer class="org.fabric3.samples.channel.ChannelProducer" repeatInterval="3000"/>
+        <producer name="workChannel" target="WorkChannel"/>
+        <producer name="typedChannel" target="TypedChannel"/>
+    </component>
+
+    <component name="WorkChannelDeserializer">
+        <implementation.java class="org.fabric3.samples.channel.WorkChannelDeserializer"/>
+        <consumer name="onEvent" source="WorkChannel"/>
+    </component>
+
+    <component name="WorkChannelProcessor">
+        <implementation.java class="org.fabric3.samples.channel.WorkChannelProcessor"/>
+        <consumer name="onEvent" source="WorkChannel"/>
+    </component>
+
+    <component name="TypedChannelProcessor">
+        <implementation.java class="org.fabric3.samples.channel.TypedChannelProcessor"/>
+        <consumer name="onEvent" source="TypedChannel"/>
+    </component>
+
+</composite>

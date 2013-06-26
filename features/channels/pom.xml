@@ -23,10 +23,10 @@
         <version>2.0.0</version>
     </parent>
     <groupId>org.codehaus.fabric3.samples</groupId>
-    <artifactId>fabric3-samples-monitor</artifactId>
+    <artifactId>fabric3-samples-channels</artifactId>
     <packaging>jar</packaging>
-    <name>Fabric3 Monitor Sample</name>
-    <description>Demonstrates Fabric3 Monitoring.</description>
+    <name>Fabric3 Channels Sample</name>
+    <description>Demonstrates Fabric3 Channels.</description>
 
     <dependencies>
         <dependency>

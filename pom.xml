@@ -20,10 +20,10 @@
 
     <modelVersion>4.0.0</modelVersion>
     <parent>
-   		<groupId>org.codehaus.fabric3</groupId>
-   		<artifactId>parent</artifactId>
-   		<version>9</version>
-   	</parent>
+        <groupId>org.codehaus.fabric3</groupId>
+        <artifactId>parent</artifactId>
+        <version>10</version>
+    </parent>
     <groupId>org.codehaus.fabric3.samples</groupId>
     <artifactId>fabric3-samples-parent-pom</artifactId>
     <version>2.0.0</version>
@@ -46,26 +46,8 @@
         <module>features</module>
         <module>policy</module>
         <module>operations</module>
-        <!-- <module>extensions</module> -->
     </modules>
-    <build>
-        <defaultGoal>install</defaultGoal>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-release-plugin</artifactId>
-                    <version>2.0</version>
-                    <configuration>
-                        <tagBase>https://svn.codehaus.org/fabric3/samples/tags</tagBase>
-                        <remoteTagging>true</remoteTagging>
-                        <preparationGoals>clean install</preparationGoals>
-                        <autoVersionSubmodules>true</autoVersionSubmodules>
-                    </configuration>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-    </build>
+
     <repositories>
         <repository>
             <id>repository.codehaus.org</id>
@@ -91,34 +73,12 @@
         </repository>
     </repositories>
 
-    <pluginRepositories>
-        <pluginRepository>
-            <id>repository.codehaus.org</id>
-            <name>Fabric3 Releases</name>
-            <url>http://repository.codehaus.org/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </pluginRepository>
-        <pluginRepository>
-            <id>snapshots.repository.codehaus.org</id>
-            <name>Fabric3 Snapshots</name>
-            <url>http://snapshots.repository.codehaus.org/</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </pluginRepository>
-    </pluginRepositories>
     <scm>
-        <connection>scm:svn:http://svn.codehaus.org/fabric3/samples/trunk</connection>
-        <developerConnection>scm:svn:https://svn.codehaus.org/fabric3/samples/trunk</developerConnection>
-        <url>http://svn.fabric3.codehaus.org/browse/fabric3/samples/trunk</url>
+        <connection>scm:git:git@github.com:Fabric3/samples.git</connection>
+        <developerConnection>scm:git:git@github.com:Fabric3/samples.git</developerConnection>
+        <url>http://github.com/Fabric3/samples</url>
+        <tag>HEAD</tag>
     </scm>
+
 
 </project>

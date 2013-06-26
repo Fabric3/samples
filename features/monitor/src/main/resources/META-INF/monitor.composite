@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+           xmlns:f3="urn:fabric3.org"
+           name="MonitorComposite"
+           targetNamespace="urn:fabric3.org:samples">
+
+    <component name="TimerComponent">
+        <f3:implementation.timer class="org.fabric3.samples.monitor.TimerComponent" repeatInterval="3000"/>
+    </component>
+
+    <f3:monitor name="ApplicationDestination" mode="asynchronous" capacity="3000" proxy="bytecode" timestamp="formatted">
+        <appenders>
+            <appender.file file="application.log"/>
+            <appender.console/>
+        </appenders>
+    </f3:monitor>
+
+</composite>
