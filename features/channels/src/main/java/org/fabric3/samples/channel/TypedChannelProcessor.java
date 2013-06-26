@@ -50,7 +50,7 @@ public class TypedChannelProcessor {
     @Monitor
     protected SystemMonitor monitor;
 
-    @Consumer(sequence = 1)
+    @Consumer
     public void onEvent(Event event) {
         monitor.processTyped(event);
     }
