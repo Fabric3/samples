@@ -8,6 +8,9 @@
         <f3:implementation.timer class="org.fabric3.samples.monitor.TimerComponent" repeatInterval="3000"/>
     </component>
 
+    <!-- Demonstrates configuring an application-specific destination that records events asynchronously via an internal ring buffer.
+         Global destinations can be configured in the runtime systemConfig.xml.  -->
+
     <f3:monitor name="ApplicationDestination" mode="asynchronous" capacity="3000" proxy="bytecode" timestamp="formatted">
         <appenders>
             <appender.file file="application.log"/>
