@@ -139,9 +139,7 @@ public class OperationsClient {
         InputStream stream = connection.getInputStream();
         Map<String, List<Map<String, String>>> response = helper.parse(Object.class, stream);
         System.out.println("   Thread pool statistics");
-        System.out.println("      Completed work: " + response.get("completedworkcount"));
         System.out.println("      Core size: " + response.get("corepoolsize"));
-        System.out.println("      Active count: " + response.get("activecount"));
         System.out.println("\n");
     }
 
