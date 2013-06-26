@@ -38,7 +38,7 @@
 package org.fabric3.samples.channel;
 
 /**
- *
+ * A typed event sent through a channel.
  */
 public class Event {
     private String message;

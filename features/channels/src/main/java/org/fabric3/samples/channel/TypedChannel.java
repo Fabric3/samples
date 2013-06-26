@@ -38,9 +38,14 @@
 package org.fabric3.samples.channel;
 
 /**
- *
+ * A channel that streams typed events.
  */
 public interface TypedChannel {
 
+    /**
+     * Publish the event.
+     *
+     * @param event the event
+     */
     void publish(Event event);
 }

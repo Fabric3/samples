@@ -37,21 +37,17 @@
 */
 package org.fabric3.samples.channel;
 
-import org.fabric3.api.ChannelEvent;
-
 /**
- * Demonstrates the following channel capabilities:
- * <pre>
- *     - Using high-performance ring-buffer channels based on the Disruptor (http://lmax-exchange.github.io/disruptor/)
- *     - Using ordered consumers to first deserializing a message and store its value for subsequent processing in {@link ChannelEvent}
- *     - Receiving end batch notifications from {@link ChannelEvent#isEndOfBatch()}
- *
- * </pre>
- * <p/>
- * using a raw channel event to update a value and
+ * A channel that receives a serialized message publishes it to consumers. In a full-featured application, this channel would typically be bound using ZeroMQ or
+ * another transport. Received messages could be a protocol buffer or other serialization technology.
  */
 public interface WorkChannel {
 
+    /**
+     * Send the serialized event.
+     *
+     * @param event the event
+     */
     void send(byte[] event);
 
 }

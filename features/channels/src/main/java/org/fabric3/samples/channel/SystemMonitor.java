@@ -40,7 +40,7 @@ package org.fabric3.samples.channel;
 import org.fabric3.api.annotation.monitor.Info;
 
 /**
- *
+ * Outputs monitor events.
  */
 public interface SystemMonitor {
 
