@@ -49,10 +49,7 @@ import org.oasisopen.sca.annotation.Scope;
  *     - Using high-performance ring-buffer channels based on the Disruptor (http://lmax-exchange.github.io/disruptor/)
  *     - Using ordered (sequenced) consumers to first deserializing a message and store its value for subsequent processing in {@link ChannelEvent}
  *     - Receiving end batch notifications from {@link ChannelEvent#isEndOfBatch()}
- *
  * </pre>
- * <p/>
- * using a raw channel event to update a value and
  */
 @Scope(Scopes.COMPOSITE)
 public class ChannelProducer implements Runnable {
