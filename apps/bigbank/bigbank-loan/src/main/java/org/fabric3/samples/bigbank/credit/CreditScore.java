@@ -22,8 +22,6 @@ import java.io.Serializable;
 
 /**
  * A loan applicant credit score.
- *
- * @version $Revision$ $Date$
  */
 public class CreditScore implements Serializable {
     private static final long serialVersionUID = -452032042185332788L;

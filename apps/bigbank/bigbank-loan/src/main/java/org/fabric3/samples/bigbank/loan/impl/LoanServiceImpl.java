@@ -18,28 +18,21 @@
  */
 package org.fabric3.samples.bigbank.loan.impl;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.WebApplicationException;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-
-import org.oasisopen.sca.annotation.ManagedTransaction;
-import org.oasisopen.sca.annotation.Reference;
-import org.oasisopen.sca.annotation.Service;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.fabric3.api.annotation.Producer;
 import org.fabric3.api.annotation.monitor.Monitor;
@@ -66,22 +59,23 @@ import org.fabric3.samples.bigbank.risk.RiskAssessmentResponse;
 import org.fabric3.samples.bigbank.risk.RiskReason;
 import org.fabric3.samples.bigbank.risk.RiskService;
 import org.fabric3.samples.bigbank.util.GenericsHelper;
+import org.oasisopen.sca.annotation.ManagedTransaction;
+import org.oasisopen.sca.annotation.Reference;
+import org.oasisopen.sca.annotation.Service;
 
 /**
- * Receives loan applications and manages the approval process. This service delegates to a {@link RatingService} in order to tier the application
- * based on scores obtained from third-part credit bureaus. When a rating is received, this service delegates to a {@link RiskService} to either
- * approve or reject the application.
+ * Receives loan applications and manages the approval process. This service delegates to a {@link RatingService} in order to tier the application based on
+ * scores obtained from third-part credit bureaus. When a rating is received, this service delegates to a {@link RiskService} to either approve or reject the
+ * application.
  * <p/>
  * This service is exposed over multiple transports, including REST/HTTP, WS-* and a file system batch import.
  * <p/>
- * This implementation demonstrates the use of distributed asynchronous (non-blocking) service invocations, which are useful for applications
- * requiring high-throughput and where responses may take an extended period of time to generate. Specifically, the {@link RatingService} is called
- * asynchronously over JMS or ZeroMQ when deployed to a distributed environment (in a single VM environment the call will be conducted in-process on a
- * separate thread). A response is received via the {@link #onResults(Rating)} callback.
+ * This implementation demonstrates the use of distributed asynchronous (non-blocking) service invocations, which are useful for applications requiring
+ * high-throughput and where responses may take an extended period of time to generate. Specifically, the {@link RatingService} is called asynchronously over
+ * JMS or ZeroMQ when deployed to a distributed environment (in a single VM environment the call will be conducted in-process on a separate thread). A response
+ * is received via the {@link #onResults(Rating)} callback.
  * <p/>
  * Note this implementation also demonstrates the use of JPA and global managed (JTA) transactions.
- *
- * @version $Revision$ $Date$
  */
 @ManagedTransaction
 @Service(names = {LoanService.class, LoanRecovery.class, LoanGateway.class, RsLoanService.class, RatingServiceCallback.class})
@@ -219,6 +213,5 @@ public class LoanServiceImpl implements LoanService, LoanGateway, RsLoanService,
         }
 
     }
-
 
 }

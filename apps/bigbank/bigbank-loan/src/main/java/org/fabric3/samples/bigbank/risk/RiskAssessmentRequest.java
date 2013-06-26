@@ -21,7 +21,7 @@ package org.fabric3.samples.bigbank.risk;
 import java.io.Serializable;
 
 /**
- * @version $Revision$ $Date$
+ *
  */
 public class RiskAssessmentRequest implements Serializable {
     private static final long serialVersionUID = -5185791927524383209L;

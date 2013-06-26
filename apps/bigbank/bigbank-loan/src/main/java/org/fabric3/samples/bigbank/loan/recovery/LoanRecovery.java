@@ -22,8 +22,6 @@ import org.fabric3.samples.bigbank.domain.LoanRecord;
 
 /**
  * Service used to initiate recovery of a failed loan application.
- *
- * @version $Revision$ $Date$
  */
 public interface LoanRecovery {
 

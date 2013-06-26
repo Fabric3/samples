@@ -24,8 +24,6 @@ import java.util.List;
 
 /**
  * Represents the risk associated with a loan application calculated by the {@link RiskService}.
- *
- * @version $Revision$ $Date$
  */
 public class RiskAssessmentResponse implements Serializable {
     private static final long serialVersionUID = 1427555176373119897L;
@@ -56,6 +54,5 @@ public class RiskAssessmentResponse implements Serializable {
     public List<RiskReason> getReasons() {
         return reasons;
     }
-
 
 }

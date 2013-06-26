@@ -22,7 +22,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- * @version $Revision$ $Date$
+ *
  */
 @Entity
 public class TermInfo implements Serializable {

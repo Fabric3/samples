@@ -26,8 +26,6 @@ import org.fabric3.samples.bigbank.api.Versionable;
 
 /**
  * A persistent loan application.
- *
- * @version $Revision$ $Date$
  */
 @Entity
 public class LoanRecord extends Versionable {
@@ -113,7 +111,6 @@ public class LoanRecord extends Versionable {
     public void setRiskInfo(RiskInfo assessment) {
         this.riskInfo = assessment;
     }
-
 
     public void setClientCorrelation(String clientCorrelation) {
         this.clientCorrelation = clientCorrelation;

@@ -23,8 +23,6 @@ import org.fabric3.api.annotation.monitor.Severe;
 
 /**
  * A monitor for the loan service.
- *
- * @version $Revision$ $Date$
  */
 public interface LoanMonitor {
 

@@ -31,8 +31,6 @@ import org.fabric3.samples.web.calculator.CalculatorService;
 
 /**
  * Accepts a calculator form submission and forwards the request to the CalculatorService.
- *
- * @version $Revision$ $Date$
  */
 public class CalculatorServlet extends HttpServlet {
     private static final long serialVersionUID = -2731185078362675240L;

@@ -18,14 +18,15 @@
  */
 package org.fabric3.samples.bigbank.domain;
 
-import javax.persistence.*;
-import java.io.Serializable;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import java.util.List;
 
 import org.fabric3.samples.bigbank.api.Versionable;
 
 /**
- * @version $Revision$ $Date$
+ *
  */
 @Entity
 public class RiskInfo extends Versionable {

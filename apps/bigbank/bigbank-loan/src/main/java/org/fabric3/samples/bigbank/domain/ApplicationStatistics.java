@@ -24,7 +24,6 @@ import org.fabric3.samples.bigbank.api.Versionable;
 
 /**
  *
- * @version $Revision$ $Date$
  */
 @Entity
 public class ApplicationStatistics extends Versionable {
@@ -34,7 +33,6 @@ public class ApplicationStatistics extends Versionable {
     private long receivedTimestamp = -1;
     private long approvedTimestamp = -1;
     private long rejectedTimestamp = -1;
-
 
     public long getLoanId() {
         return loanId;
