@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entries xmlns="urn:fabric3.org">
+    <order.entry id="1" product="batteries"/>
+    <order.entry id="2" product="tv"/>
+    <order.entry id="3" product="computer"/>
+    <order.entry id="4" product="batteries"/>
+</entries>

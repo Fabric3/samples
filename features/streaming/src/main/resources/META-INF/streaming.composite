@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+           xmlns:f3="urn:fabric3.org"
+           name="StreamingComposite"
+           targetNamespace="urn:fabric3.org:samples"
+           autowire="true">
+
+    <!-- Autowire is used in this composite to wire entry handlers to the gateway service. Wiring is dynamic: if additional handlers are deployed
+         in another composite, the gateway service will be re-injected with the new handlers -->
+
+    <component name="GatewayService">
+        <implementation.java class="org.fabric3.samples.streaming.server.GatewayServiceImpl"/>
+        <service name="GatewayService">
+            <f3:binding.rs uri="/streaming"/>
+            <f3:binding.file location="streaming.queue" error.location="streaming.error.queue" pattern=".*\.xml"/>
+        </service>
+    </component>
+
+    <!-- the key attribute is used as a Map key when the handler is injected on the gateway service -->
+
+    <component name="OrderEntryHandler" f3:key="{urn:fabric3.org}order.entry">
+        <implementation.java class="org.fabric3.samples.streaming.server.OrderEntryHandler"/>
+    </component>
+
+</composite>

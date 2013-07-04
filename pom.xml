@@ -37,7 +37,9 @@
         <jaxb.version>2.2-promoted-b50</jaxb.version>
         <web.services.api.version>2.0.1</web.services.api.version>
         <servlet.api.version>2.5</servlet.api.version>
-        <jackson.version>1.6.4</jackson.version>
+        <jax.rs.version>2.0</jax.rs.version>
+        <jersey.version>2.0</jersey.version>
+        <jackson.version>2.2.0</jackson.version>
     </properties>
 
     <modules>
