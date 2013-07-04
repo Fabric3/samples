@@ -7,8 +7,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import org.codehaus.jackson.JsonParser;
-import org.codehaus.jackson.map.ObjectMapper;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  *
@@ -32,7 +32,7 @@ public class OperationsHelper {
 
     @SuppressWarnings({"unchecked"})
     public <T> T parse(Class<?> type, InputStream stream) throws IOException {
-        JsonParser jp = mapper.getJsonFactory().createJsonParser(stream);
+        JsonParser jp = mapper.getFactory().createParser(stream);
         return (T) mapper.readValue(jp, type);
     }
 

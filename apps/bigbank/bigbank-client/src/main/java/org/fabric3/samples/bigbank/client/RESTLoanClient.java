@@ -6,15 +6,12 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.UUID;
 
-import org.codehaus.jackson.map.ObjectMapper;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.fabric3.samples.bigbank.api.loan.LoanApplication;
 import org.fabric3.samples.bigbank.api.loan.LoanApplicationStatus;
 
 /**
  * Invokes the loan service using HTTP.
- *
- *
  */
 public class RESTLoanClient {
     private static final String BASE_URL = "http://localhost:8181/rsloan/application/";
