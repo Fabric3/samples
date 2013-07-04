@@ -48,6 +48,7 @@ import org.oasisopen.sca.annotation.Scope;
  * <pre>
  *     - Using high-performance ring-buffer channels based on the Disruptor (http://lmax-exchange.github.io/disruptor/)
  *     - Using ordered (sequenced) consumers to first deserializing a message and store its value for subsequent processing in {@link ChannelEvent}
+ *     - Worker pools (an event is processed by one consumer)
  *     - Receiving end batch notifications from {@link ChannelEvent#isEndOfBatch()}
  * </pre>
  */
@@ -64,13 +65,19 @@ public class ChannelProducer implements Runnable {
     @Producer
     protected TypedChannel typedChannel;
 
+    @Producer
+    WorkerPoolChannel workerPoolChannel;
+
     public void run() {
         monitor.send();
 
         String message = "This is an event: " + counter++;
-        workChannel.send(message.getBytes());
+        workChannel.send(message.getBytes());  // serialized messages example with ordered processing
 
-        Event event = new Event(message);
+        workerPoolChannel.publish(message);    // worker pool example
+
+        Event event = new Event(message);      // typed messages example
         typedChannel.publish(event);
+
     }
 }

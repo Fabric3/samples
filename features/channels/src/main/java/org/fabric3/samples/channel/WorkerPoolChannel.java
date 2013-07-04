@@ -37,26 +37,15 @@
 */
 package org.fabric3.samples.channel;
 
-import org.fabric3.api.annotation.monitor.Info;
-
 /**
- * Outputs monitor events.
+ * Demonstrates creating pooled consumers.
  */
-public interface SystemMonitor {
+public interface WorkerPoolChannel {
 
-    @Info("Sending event")
-    void send();
-
-    @Info("Deserializing event")
-    void deserialize();
-
-    @Info("Processed event: {0}. End of batch {1}.")
-    void process(String event, boolean endOfBatch);
-
-    @Info("Pooled consumer {0} processed event: {1}.")
-    void process(int ordinal, String event);
-
-    @Info("Processed typed event: {0}")
-    void processTyped(Event event);
-
+    /**
+     * Publish the message.
+     *
+     * @param message the message
+     */
+    void publish(String message);
 }

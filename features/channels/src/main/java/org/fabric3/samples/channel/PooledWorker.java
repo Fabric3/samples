@@ -37,26 +37,34 @@
 */
 package org.fabric3.samples.channel;
 
-import org.fabric3.api.annotation.monitor.Info;
+import org.fabric3.api.ChannelEvent;
+import org.fabric3.api.annotation.Consumer;
+import org.fabric3.api.annotation.monitor.Monitor;
+import org.fabric3.api.annotation.scope.Scopes;
+import org.oasisopen.sca.annotation.Property;
+import org.oasisopen.sca.annotation.Scope;
 
 /**
- * Outputs monitor events.
+ * Consumer that demonstrates how to implement worker pools (i.e. one consumer processes an event) with ring buffer channels and a modulo operation.
  */
-public interface SystemMonitor {
+@Scope(Scopes.COMPOSITE)
+public class PooledWorker {
+    @Monitor
+    protected SystemMonitor monitor;
 
-    @Info("Sending event")
-    void send();
+    @Property
+    protected int ordinal;
 
-    @Info("Deserializing event")
-    void deserialize();
+    @Property
+    protected int numberOfConsumers;
 
-    @Info("Processed event: {0}. End of batch {1}.")
-    void process(String event, boolean endOfBatch);
-
-    @Info("Pooled consumer {0} processed event: {1}.")
-    void process(int ordinal, String event);
-
-    @Info("Processed typed event: {0}")
-    void processTyped(Event event);
-
+    @Consumer
+    public void onEvent(ChannelEvent event) {
+        if ((event.getSequence() % numberOfConsumers) != ordinal) {
+            // ignore the event if it is not for this consumer
+            return;
+        }
+        String message = event.getEvent(String.class);
+        monitor.process(ordinal, message);
+    }
 }

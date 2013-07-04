@@ -8,10 +8,13 @@
 
     <channel name="TypedChannel" type="ring.buffer"/>
 
+    <channel name="WorkerPoolChannel" type="ring.buffer"/>
+
     <component name="Producer">
         <f3:implementation.timer class="org.fabric3.samples.channel.ChannelProducer" repeatInterval="3000"/>
         <producer name="workChannel" target="WorkChannel"/>
         <producer name="typedChannel" target="TypedChannel"/>
+        <producer name="workerPoolChannel" target="WorkerPoolChannel"/>
     </component>
 
     <component name="WorkChannelDeserializer">
@@ -27,6 +30,20 @@
     <component name="TypedChannelProcessor">
         <implementation.java class="org.fabric3.samples.channel.TypedChannelProcessor"/>
         <consumer name="onEvent" source="TypedChannel"/>
+    </component>
+
+    <component name="PooledWorker0">
+        <implementation.java class="org.fabric3.samples.channel.PooledWorker"/>
+        <property name="ordinal">0</property>
+        <property name="numberOfConsumers">2</property>
+        <consumer name="onEvent" source="WorkerPoolChannel"/>
+    </component>
+
+    <component name="PooledWorker1">
+        <implementation.java class="org.fabric3.samples.channel.PooledWorker"/>
+        <property name="ordinal">1</property>
+        <property name="numberOfConsumers">2</property>
+        <consumer name="onEvent" source="WorkerPoolChannel"/>
     </component>
 
 </composite>
