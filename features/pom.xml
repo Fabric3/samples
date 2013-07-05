@@ -39,5 +39,6 @@
         <module>monitor</module>
         <module>websocket-chat</module>
         <module>wiring</module>
+        <module>integration-test</module>
     </modules>
 </project>

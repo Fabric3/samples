@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ See the NOTICE file distributed with this work for information
+ regarding copyright ownership.  This file is licensed
+ to you under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance
+ with the License.  You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied.  See the License for the
+ specific language governing permissions and limitations
+ under the License.
+-->
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.codehaus.fabric3.samples</groupId>
+        <artifactId>fabric3-samples-features-parent-pom</artifactId>
+        <version>2.0.0</version>
+    </parent>
+    <groupId>org.codehaus.fabric3.samples</groupId>
+    <artifactId>fabric3-integration-test</artifactId>
+    <packaging>jar</packaging>
+    <name>Fabric3 Integration iTest Plugin Sample</name>
+    <description>Demonstrates the Fabric3 iTest Plugin and Mock Services.</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.codehaus.fabric3.spec</groupId>
+            <artifactId>sca-api</artifactId>
+            <version>${sca.api.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.fabric3</groupId>
+            <artifactId>fabric3-api</artifactId>
+            <version>${fabric3.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.easymock</groupId>
+            <artifactId>easymock</artifactId>
+            <version>${easy.mock.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <defaultGoal>verify</defaultGoal>
+        <plugins>
+            <plugin>
+                <!-- the Fabric3 iTest runtime -->
+                <groupId>org.codehaus.fabric3</groupId>
+                <artifactId>fabric3-itest-plugin</artifactId>
+                <version>${fabric3.version}</version>
+                <configuration>
+                    <runtimeVersion>${fabric3.version}</runtimeVersion>
+                    <!-- configure the test fixture composite -->
+                    <compositeNamespace>urn:fabric3.org:samples</compositeNamespace>
+                    <compositeName>TestComposite</compositeName>
+                    <!-- configure the Fabric3 runtime with support for web services-->
+                    <extensions>
+                        <dependency>
+                            <groupId>org.codehaus.fabric3</groupId>
+                            <artifactId>fabric3-mock</artifactId>
+                            <version>${fabric3.version}</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.codehaus.fabric3</groupId>
+                            <artifactId>fabric3-security-impl</artifactId>
+                            <version>${fabric3.version}</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.codehaus.fabric3</groupId>
+                            <artifactId>fabric3-jetty</artifactId>
+                            <version>${fabric3.version}</version>
+                        </dependency>
+                    </extensions>
+                    <profiles>
+                        <profile>
+                            <groupId>org.codehaus.fabric3</groupId>
+                            <artifactId>profile-ws</artifactId>
+                            <version>${fabric3.version}</version>
+                        </profile>
+                    </profiles>
+                    <shared>
+                        <dependency>
+                            <groupId>org.easymock</groupId>
+                            <artifactId>easymock</artifactId>
+                            <version>${easy.mock.version}</version>
+                        </dependency>
+                    </shared>
+
+                    <!-- configures the Fabric3 runtime with a binding for the ExternalServiceBinding templare -->
+                    <systemConfig>
+                        <![CDATA[
+                        <config xmlns="urn:fabric3.org" xmlns:f3="urn:fabric3.org" xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912">
+                            <templates>
+                               <template name="ExternalServiceBinding">
+                                  <sca:binding.ws uri="http://localhost:8080/externalService"/>
+                               </template>
+                            </templates>
+                        </config>
+                        ]]>
+                    </systemConfig>
+
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+
+

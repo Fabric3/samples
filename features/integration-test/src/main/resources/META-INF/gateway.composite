@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+           xmlns:f3="urn:fabric3.org"
+           name="GatewayComposite"
+           targetNamespace="urn:fabric3.org:samples">
+
+    <!-- Use a binding template which can be overridden in various environments, e.g. testing, staging, production -->
+    <component name="GatewayService">
+        <implementation.java class="org.fabric3.samples.itest.GatewayServiceImpl"/>
+        <reference name="externalService">
+            <binding.template name="ExternalServiceBinding"/>
+        </reference>
+    </component>
+
+</composite>

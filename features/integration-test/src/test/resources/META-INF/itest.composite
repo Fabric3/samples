@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+           xmlns:f3="urn:fabric3.org"
+           xmlns:samples="urn:fabric3.org:samples"
+           name="TestComposite"
+           targetNamespace="urn:fabric3.org:samples"
+           autowire="true">
+
+    <!-- Include the composite to be tested -->
+    <include name="samples:GatewayComposite"/>
+
+    <component name="TestComponent">
+        <f3:junit class="org.fabric3.samples.itest.TestClient"/>
+    </component>
+
+    <!-- Configure a mock for an external service used by the composite -->
+    <component name="ExternalService">
+        <f3:implementation.mock>
+            org.fabric3.samples.itest.ExternalService
+        </f3:implementation.mock>
+        <service name="ExternalService">
+            <binding.ws uri="externalService"/>
+        </service>
+    </component>
+
+</composite>
