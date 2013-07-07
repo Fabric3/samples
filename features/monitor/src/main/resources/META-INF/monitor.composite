@@ -15,6 +15,9 @@
         <appenders>
             <appender.file file="application.log"/>
             <appender.console/>
+            <!-- uncomment the following line to use the sample monitor extension. The fabric3-samples-monitor-extension jar produced by the monitor-extension
+                 module must be deployed to the runtime as an extension. -->
+            <!--<appender.component name="SampleFileAppender"/>-->
         </appenders>
     </f3:monitor>
 

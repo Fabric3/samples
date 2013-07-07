@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+           xmlns:f3="urn:fabric3.org"
+           name="MonitorExtensionComposite"
+           targetNamespace="urn:fabric3.org:samples">
+
+    <!-- Configures the extension component -->
+    <component name="SampleFileAppender">
+        <f3:implementation.system class="org.fabric3.samples.extension.monitor.SampleFileAppender"/>
+    </component>
+
+</composite>

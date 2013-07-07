@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<contribution xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+              xmlns:f3="urn:fabric3.org"
+              xmlns:samples="urn:fabric3.org:samples"
+              f3:extension="true"
+              f3:description="Sample monitor appender extension">
+
+    <!-- Imports the extension packages -->
+    <import.java package="org.fabric3.spi.*" version="2.0.0"/>
+
+    <import.java package="org.fabric3.monitor.spi.*" version="2.0.0"/>
+
+    <!-- exposes a runtime capability -->
+    <f3:provides.capability name="monitor.appender"/>
+
+    <deployable composite="samples:MonitorExtensionComposite"/>
+
+</contribution>
