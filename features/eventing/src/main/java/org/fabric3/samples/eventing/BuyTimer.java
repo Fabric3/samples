@@ -46,15 +46,13 @@ import org.fabric3.api.annotation.monitor.Monitor;
 
 /**
  * A simple stateless timer component that issues buy orders.
- *
- *
  */
 public class BuyTimer implements Runnable {
     private BuyChannel buyChannel;
     private Random generator;
     private BuyMonitor monitor;
 
-    public BuyTimer(@Producer("buyChannel") BuyChannel buyChannel, @Monitor("MonitorApplicationChannel") BuyMonitor monitor) {
+    public BuyTimer(@Producer("buyChannel") BuyChannel buyChannel, @Monitor BuyMonitor monitor) {
         this.buyChannel = buyChannel;
         this.monitor = monitor;
         generator = new Random();
@@ -77,6 +75,5 @@ public class BuyTimer implements Runnable {
         @Info
         void message(String message);
     }
-
 
 }
