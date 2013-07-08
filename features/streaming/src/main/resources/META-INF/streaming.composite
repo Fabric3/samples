@@ -10,6 +10,7 @@
 
     <component name="GatewayService">
         <implementation.java class="org.fabric3.samples.streaming.server.GatewayServiceImpl"/>
+        <!-- bind the service to two transports: the filesystem and JAX-RS -->
         <service name="GatewayService">
             <f3:binding.rs uri="/streaming"/>
             <f3:binding.file location="streaming.queue" error.location="streaming.error.queue" pattern=".*\.xml"/>
