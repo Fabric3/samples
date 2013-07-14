@@ -1,0 +1,5 @@
+<contribution xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+              xmlns:f3="urn:fabric3.org"
+              f3:description="Protocol Buffers library module">
+    <export.java package="com.google.protobuf" version="2.5.0"/>
+</contribution>

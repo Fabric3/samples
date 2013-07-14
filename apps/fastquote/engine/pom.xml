@@ -30,8 +30,10 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>api</module>
         <module>protobuf</module>
+        <module>api</module>
+        <module>aggregation</module>
+        <module>pricing</module>
     </modules>
 	
 </project>
