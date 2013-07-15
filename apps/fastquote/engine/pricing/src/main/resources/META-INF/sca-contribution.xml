@@ -5,5 +5,6 @@
     <deployable composite="samples:PricingComposite"/>
 
     <import.java package="org.fabric3.samples.fastquote.price" version="2.0.0"/>
+    <import.java package="org.fabric3.samples.fastquote.provider.api" version="2.0.0"/>
     <export.java package="org.fabric3.samples.fastquote.pricing.api" version="2.0.0"/>
 </contribution>
