@@ -35,19 +35,15 @@
  * GNU General Public License along with Fabric3.
  * If not, see <http://www.gnu.org/licenses/>.
 */
-package org.fabric3.samples.fastquote.aggregation;
+package org.fabric3.samples.fastquote.provider.api;
 
-import org.fabric3.api.annotation.Consumer;
-import org.fabric3.api.annotation.scope.Composite;
+import org.fabric3.samples.fastquote.price.Price;
 
 /**
  *
  */
-@Composite
-public class Replicator {
+public interface ProviderService {
 
-    @Consumer(sequence = 1)
-    public void onPrice(byte[] serialized) {
+    void send(Price price);
 
-    }
 }

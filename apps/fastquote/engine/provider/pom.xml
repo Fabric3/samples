@@ -25,9 +25,9 @@
         <version>2.0.0</version>
     </parent>
     <groupId>org.codehaus.fabric3.samples</groupId>
-    <artifactId>fastquote-pricing</artifactId>
-    <name>Fabric3 FastQuote Pricing</name>
-    <description>Fabric3 Pricing Module.</description>
+    <artifactId>fastquote-provider</artifactId>
+    <name>Fabric3 FastQuote Provider</name>
+    <description>Fabric3 Provider Module.</description>
     <packaging>jar</packaging>
 
 
@@ -52,11 +52,6 @@
             <version>${project.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.codehaus.fabric3.samples</groupId>
-            <artifactId>fastquote-provider</artifactId>
-            <version>${project.version}</version>
-        </dependency>
 
     </dependencies>
 

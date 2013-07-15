@@ -35,37 +35,15 @@
  * GNU General Public License along with Fabric3.
  * If not, see <http://www.gnu.org/licenses/>.
 */
-package org.fabric3.samples.fastquote.aggregation;
+package org.fabric3.samples.fastquote.provider.impl;
 
-import com.google.protobuf.InvalidProtocolBufferException;
-import org.fabric3.api.annotation.Consumer;
-import org.fabric3.api.annotation.scope.Composite;
 import org.fabric3.samples.fastquote.price.Price;
-import org.fabric3.samples.fastquote.price.PriceProtos;
-import org.fabric3.samples.fastquote.pricing.api.PricingService;
-import org.oasisopen.sca.annotation.Reference;
 
 /**
- * Receives base incoming prices from liquidity providers such as a bank or electronic communication network (ECN).
+ *
  */
-@Composite
-public class Gateway {
+public interface VenueChannel {
 
-    @Reference
-    protected PricingService pricingService;
+    void publish(Price price);
 
-    @Consumer(value = "providerChannel", sequence = 1)
-    public void onPrice(byte[] serialized) {
-        try {
-            PriceProtos.Price protoPrice = PriceProtos.Price.parseFrom(serialized);
-
-            Price price = new Price();
-            pricingService.marginAndSend(price);
-
-        } catch (InvalidProtocolBufferException e) {
-            // TODO fixme
-            e.printStackTrace();
-        }
-
-    }
 }

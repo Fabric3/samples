@@ -46,7 +46,7 @@ import org.fabric3.api.annotation.scope.Composite;
 @Composite
 public class Journaler {
 
-    @Consumer(sequence = 0)
+    @Consumer(value = "providerChannel", sequence = 0)
     public void onPrice(byte[] serialized) {
 
     }

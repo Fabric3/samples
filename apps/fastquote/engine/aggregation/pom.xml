@@ -53,6 +53,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.codehaus.fabric3.samples</groupId>
+            <artifactId>fastquote-pricing</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.google.protobuf</groupId>
             <artifactId>protobuf-java</artifactId>
             <version>${protobuf.version}</version>
