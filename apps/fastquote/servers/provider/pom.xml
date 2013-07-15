@@ -23,10 +23,10 @@
         <version>2.0.0</version>
     </parent>
     <groupId>org.codehaus.fabric3.samples</groupId>
-    <artifactId>fastquote-servers-pe</artifactId>
+    <artifactId>fastquote-servers-provider</artifactId>
     <packaging>pom</packaging>
-    <name>Fabric3 Fastquote Price Engine Server Setup</name>
-    <description>Fabric3 Fastquote Price Engine Server Setup</description>
+    <name>Fabric3 Fastquote Provider Server Setup</name>
+    <description>Fabric3 Fastquote Provider Server Setup</description>
 
     <build>
         <plugins>
@@ -48,6 +48,11 @@
                         <profile>
                             <groupId>org.codehaus.fabric3</groupId>
                             <artifactId>profile-zeromq</artifactId>
+                            <version>${fabric3.version}</version>
+                        </profile>
+                        <profile>
+                            <groupId>org.codehaus.fabric3</groupId>
+                            <artifactId>profile-timer</artifactId>
                             <version>${fabric3.version}</version>
                         </profile>
                     </profiles>
@@ -73,19 +78,7 @@
 
                         <dependency>
                             <groupId>org.codehaus.fabric3.samples</groupId>
-                            <artifactId>fastquote-pricing</artifactId>
-                            <version>${project.version}</version>
-                        </dependency>
-
-                        <dependency>
-                            <groupId>org.codehaus.fabric3.samples</groupId>
-                            <artifactId>fastquote-publication</artifactId>
-                            <version>${project.version}</version>
-                        </dependency>
-
-                        <dependency>
-                            <groupId>org.codehaus.fabric3.samples</groupId>
-                            <artifactId>fastquote-aggregation</artifactId>
+                            <artifactId>fastquote-provider</artifactId>
                             <version>${project.version}</version>
                         </dependency>
 

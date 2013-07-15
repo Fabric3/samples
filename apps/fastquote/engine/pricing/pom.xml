@@ -54,7 +54,7 @@
 
         <dependency>
             <groupId>org.codehaus.fabric3.samples</groupId>
-            <artifactId>fastquote-provider</artifactId>
+            <artifactId>fastquote-publication</artifactId>
             <version>${project.version}</version>
         </dependency>
 

@@ -35,14 +35,14 @@
  * GNU General Public License along with Fabric3.
  * If not, see <http://www.gnu.org/licenses/>.
 */
-package org.fabric3.samples.fastquote.provider.api;
+package org.fabric3.samples.fastquote.publication.api;
 
 import org.fabric3.samples.fastquote.price.Price;
 
 /**
  *
  */
-public interface ProviderService {
+public interface VenuePublicationService {
 
     void send(Price price);
 

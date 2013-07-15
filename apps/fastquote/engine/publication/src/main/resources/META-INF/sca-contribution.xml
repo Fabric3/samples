@@ -2,8 +2,8 @@
               xmlns:f3="urn:fabric3.org"
               xmlns:samples="urn:fabric3.org:samples"
               f3:description="FastQuote provider module">
-    <deployable composite="samples:ProviderComposite"/>
+    <deployable composite="samples:PublicationComposite"/>
 
-    <import.java package="com.google.protobuf" version="2.5.0"/>
     <import.java package="org.fabric3.samples.fastquote.price" version="2.0.0"/>
+    <export.java package="org.fabric3.samples.fastquote.publication.api" version="2.0.0"/>
 </contribution>

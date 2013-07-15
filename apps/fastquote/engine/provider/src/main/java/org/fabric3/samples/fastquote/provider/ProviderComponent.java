@@ -35,22 +35,16 @@
  * GNU General Public License along with Fabric3.
  * If not, see <http://www.gnu.org/licenses/>.
 */
-package org.fabric3.samples.fastquote.provider.impl;
+package org.fabric3.samples.fastquote.provider;
 
-import org.fabric3.api.annotation.Producer;
 import org.fabric3.api.annotation.scope.Composite;
-import org.fabric3.samples.fastquote.provider.api.ProviderService;
-import org.fabric3.samples.fastquote.price.Price;
 
 /**
  *
  */
 @Composite
-public class ProviderServiceImpl implements ProviderService {
-    @Producer
-    protected VenueChannel venueChannel;
+public class ProviderComponent implements Runnable {
 
-    public void send(Price price) {
-        venueChannel.publish(price);
+    public void run() {
     }
 }

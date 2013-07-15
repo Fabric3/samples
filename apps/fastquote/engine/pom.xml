@@ -35,6 +35,7 @@
         <module>aggregation</module>
         <module>pricing</module>
         <module>provider</module>
+        <module>publication</module>
     </modules>
 	
 </project>

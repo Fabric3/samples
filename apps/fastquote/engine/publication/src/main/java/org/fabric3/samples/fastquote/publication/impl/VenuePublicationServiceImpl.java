@@ -35,24 +35,22 @@
  * GNU General Public License along with Fabric3.
  * If not, see <http://www.gnu.org/licenses/>.
 */
-package org.fabric3.samples.fastquote.pricing.impl;
+package org.fabric3.samples.fastquote.publication.impl;
 
+import org.fabric3.api.annotation.Producer;
 import org.fabric3.api.annotation.scope.Composite;
-import org.fabric3.samples.fastquote.price.Price;
-import org.fabric3.samples.fastquote.pricing.api.PricingService;
 import org.fabric3.samples.fastquote.publication.api.VenuePublicationService;
-import org.oasisopen.sca.annotation.Reference;
+import org.fabric3.samples.fastquote.price.Price;
 
 /**
  *
  */
 @Composite
-public class PricingServiceImpl implements PricingService {
+public class VenuePublicationServiceImpl implements VenuePublicationService {
+    @Producer
+    protected VenueChannel venueChannel;
 
-    @Reference
-    protected VenuePublicationService publicationService;
-
-    public void marginAndSend(Price price) {
-        publicationService.send(price);
+    public void send(Price price) {
+        venueChannel.publish(price);
     }
 }
