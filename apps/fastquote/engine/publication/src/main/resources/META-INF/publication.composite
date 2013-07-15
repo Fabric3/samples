@@ -21,7 +21,7 @@
            name="PublicationComposite"
            autowire="true">
 
-    <channel name="VenueChannel"/>
+    <channel name="VenueChannel" type="ring.buffer"/>
 
     <component name="VenuePublicationService">
         <implementation.java class="org.fabric3.samples.fastquote.publication.impl.VenuePublicationServiceImpl"/>

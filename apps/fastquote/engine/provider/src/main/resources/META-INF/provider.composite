@@ -22,7 +22,7 @@
            name="ProviderComposite"
            autowire="true">
 
-    <channel name="ProviderChannel">
+    <channel name="ProviderChannel" type="ring.buffer">
         <binding.template name="ProviderChannelBinding"/>
     </channel>
 
