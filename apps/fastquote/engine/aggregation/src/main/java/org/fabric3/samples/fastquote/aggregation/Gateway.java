@@ -57,6 +57,7 @@ public class Gateway {
     @Consumer(value = "providerChannel", sequence = 1)
     public void onPrice(byte[] serialized) {
         try {
+            System.out.println("Received");
             PriceProtos.Price protoPrice = PriceProtos.Price.parseFrom(serialized);
 
             Price price = new Price();

@@ -22,8 +22,13 @@
            name="ProviderComposite"
            autowire="true">
 
+    <channel name="ProviderChannel">
+        <binding.template name="ProviderChannelBinding"/>
+    </channel>
+
     <component name="ProviderComponent">
         <f3:implementation.timer class="org.fabric3.samples.fastquote.provider.ProviderComponent" repeatInterval="10"/>
+        <producer name="providerChannel" target="ProviderChannel"/>
     </component>
 
 

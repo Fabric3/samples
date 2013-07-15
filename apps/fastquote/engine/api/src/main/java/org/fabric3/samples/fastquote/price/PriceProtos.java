@@ -36,43 +36,43 @@ public final class PriceProtos {
     com.google.protobuf.ByteString
         getSymbolBytes();
 
-    // required double bid_size = 3;
+    // optional double bid_size = 3;
     /**
-     * <code>required double bid_size = 3;</code>
+     * <code>optional double bid_size = 3;</code>
      */
     boolean hasBidSize();
     /**
-     * <code>required double bid_size = 3;</code>
+     * <code>optional double bid_size = 3;</code>
      */
     double getBidSize();
 
-    // required double bid_price = 4;
+    // optional double bid_price = 4;
     /**
-     * <code>required double bid_price = 4;</code>
+     * <code>optional double bid_price = 4;</code>
      */
     boolean hasBidPrice();
     /**
-     * <code>required double bid_price = 4;</code>
+     * <code>optional double bid_price = 4;</code>
      */
     double getBidPrice();
 
-    // required double ask_size = 5;
+    // optional double ask_size = 5;
     /**
-     * <code>required double ask_size = 5;</code>
+     * <code>optional double ask_size = 5;</code>
      */
     boolean hasAskSize();
     /**
-     * <code>required double ask_size = 5;</code>
+     * <code>optional double ask_size = 5;</code>
      */
     double getAskSize();
 
-    // required double ask_price = 6;
+    // optional double ask_price = 6;
     /**
-     * <code>required double ask_price = 6;</code>
+     * <code>optional double ask_price = 6;</code>
      */
     boolean hasAskPrice();
     /**
-     * <code>required double ask_price = 6;</code>
+     * <code>optional double ask_price = 6;</code>
      */
     double getAskPrice();
 
@@ -350,65 +350,65 @@ public final class PriceProtos {
       }
     }
 
-    // required double bid_size = 3;
+    // optional double bid_size = 3;
     public static final int BID_SIZE_FIELD_NUMBER = 3;
     private double bidSize_;
     /**
-     * <code>required double bid_size = 3;</code>
+     * <code>optional double bid_size = 3;</code>
      */
     public boolean hasBidSize() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>required double bid_size = 3;</code>
+     * <code>optional double bid_size = 3;</code>
      */
     public double getBidSize() {
       return bidSize_;
     }
 
-    // required double bid_price = 4;
+    // optional double bid_price = 4;
     public static final int BID_PRICE_FIELD_NUMBER = 4;
     private double bidPrice_;
     /**
-     * <code>required double bid_price = 4;</code>
+     * <code>optional double bid_price = 4;</code>
      */
     public boolean hasBidPrice() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
-     * <code>required double bid_price = 4;</code>
+     * <code>optional double bid_price = 4;</code>
      */
     public double getBidPrice() {
       return bidPrice_;
     }
 
-    // required double ask_size = 5;
+    // optional double ask_size = 5;
     public static final int ASK_SIZE_FIELD_NUMBER = 5;
     private double askSize_;
     /**
-     * <code>required double ask_size = 5;</code>
+     * <code>optional double ask_size = 5;</code>
      */
     public boolean hasAskSize() {
       return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
-     * <code>required double ask_size = 5;</code>
+     * <code>optional double ask_size = 5;</code>
      */
     public double getAskSize() {
       return askSize_;
     }
 
-    // required double ask_price = 6;
+    // optional double ask_price = 6;
     public static final int ASK_PRICE_FIELD_NUMBER = 6;
     private double askPrice_;
     /**
-     * <code>required double ask_price = 6;</code>
+     * <code>optional double ask_price = 6;</code>
      */
     public boolean hasAskPrice() {
       return ((bitField0_ & 0x00000020) == 0x00000020);
     }
     /**
-     * <code>required double ask_price = 6;</code>
+     * <code>optional double ask_price = 6;</code>
      */
     public double getAskPrice() {
       return askPrice_;
@@ -449,22 +449,6 @@ public final class PriceProtos {
         return false;
       }
       if (!hasSymbol()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasBidSize()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasBidPrice()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasAskSize()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasAskPrice()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -775,22 +759,6 @@ public final class PriceProtos {
           
           return false;
         }
-        if (!hasBidSize()) {
-          
-          return false;
-        }
-        if (!hasBidPrice()) {
-          
-          return false;
-        }
-        if (!hasAskSize()) {
-          
-          return false;
-        }
-        if (!hasAskPrice()) {
-          
-          return false;
-        }
         if (!hasType()) {
           
           return false;
@@ -924,22 +892,22 @@ public final class PriceProtos {
         return this;
       }
 
-      // required double bid_size = 3;
+      // optional double bid_size = 3;
       private double bidSize_ ;
       /**
-       * <code>required double bid_size = 3;</code>
+       * <code>optional double bid_size = 3;</code>
        */
       public boolean hasBidSize() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>required double bid_size = 3;</code>
+       * <code>optional double bid_size = 3;</code>
        */
       public double getBidSize() {
         return bidSize_;
       }
       /**
-       * <code>required double bid_size = 3;</code>
+       * <code>optional double bid_size = 3;</code>
        */
       public Builder setBidSize(double value) {
         bitField0_ |= 0x00000004;
@@ -948,7 +916,7 @@ public final class PriceProtos {
         return this;
       }
       /**
-       * <code>required double bid_size = 3;</code>
+       * <code>optional double bid_size = 3;</code>
        */
       public Builder clearBidSize() {
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -957,22 +925,22 @@ public final class PriceProtos {
         return this;
       }
 
-      // required double bid_price = 4;
+      // optional double bid_price = 4;
       private double bidPrice_ ;
       /**
-       * <code>required double bid_price = 4;</code>
+       * <code>optional double bid_price = 4;</code>
        */
       public boolean hasBidPrice() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>required double bid_price = 4;</code>
+       * <code>optional double bid_price = 4;</code>
        */
       public double getBidPrice() {
         return bidPrice_;
       }
       /**
-       * <code>required double bid_price = 4;</code>
+       * <code>optional double bid_price = 4;</code>
        */
       public Builder setBidPrice(double value) {
         bitField0_ |= 0x00000008;
@@ -981,7 +949,7 @@ public final class PriceProtos {
         return this;
       }
       /**
-       * <code>required double bid_price = 4;</code>
+       * <code>optional double bid_price = 4;</code>
        */
       public Builder clearBidPrice() {
         bitField0_ = (bitField0_ & ~0x00000008);
@@ -990,22 +958,22 @@ public final class PriceProtos {
         return this;
       }
 
-      // required double ask_size = 5;
+      // optional double ask_size = 5;
       private double askSize_ ;
       /**
-       * <code>required double ask_size = 5;</code>
+       * <code>optional double ask_size = 5;</code>
        */
       public boolean hasAskSize() {
         return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
-       * <code>required double ask_size = 5;</code>
+       * <code>optional double ask_size = 5;</code>
        */
       public double getAskSize() {
         return askSize_;
       }
       /**
-       * <code>required double ask_size = 5;</code>
+       * <code>optional double ask_size = 5;</code>
        */
       public Builder setAskSize(double value) {
         bitField0_ |= 0x00000010;
@@ -1014,7 +982,7 @@ public final class PriceProtos {
         return this;
       }
       /**
-       * <code>required double ask_size = 5;</code>
+       * <code>optional double ask_size = 5;</code>
        */
       public Builder clearAskSize() {
         bitField0_ = (bitField0_ & ~0x00000010);
@@ -1023,22 +991,22 @@ public final class PriceProtos {
         return this;
       }
 
-      // required double ask_price = 6;
+      // optional double ask_price = 6;
       private double askPrice_ ;
       /**
-       * <code>required double ask_price = 6;</code>
+       * <code>optional double ask_price = 6;</code>
        */
       public boolean hasAskPrice() {
         return ((bitField0_ & 0x00000020) == 0x00000020);
       }
       /**
-       * <code>required double ask_price = 6;</code>
+       * <code>optional double ask_price = 6;</code>
        */
       public double getAskPrice() {
         return askPrice_;
       }
       /**
-       * <code>required double ask_price = 6;</code>
+       * <code>optional double ask_price = 6;</code>
        */
       public Builder setAskPrice(double value) {
         bitField0_ |= 0x00000020;
@@ -1047,7 +1015,7 @@ public final class PriceProtos {
         return this;
       }
       /**
-       * <code>required double ask_price = 6;</code>
+       * <code>optional double ask_price = 6;</code>
        */
       public Builder clearAskPrice() {
         bitField0_ = (bitField0_ & ~0x00000020);
@@ -1119,8 +1087,8 @@ public final class PriceProtos {
     String[] descriptorData = {
       "\n\013price.proto\022\tfastquote\"\260\001\n\005Price\022\020\n\010ve" +
       "nue_id\030\001 \002(\017\022\016\n\006symbol\030\002 \002(\t\022\020\n\010bid_size" +
-      "\030\003 \002(\001\022\021\n\tbid_price\030\004 \002(\001\022\020\n\010ask_size\030\005 " +
-      "\002(\001\022\021\n\task_price\030\006 \002(\001\022)\n\004type\030\007 \002(\0162\025.f" +
+      "\030\003 \001(\001\022\021\n\tbid_price\030\004 \001(\001\022\020\n\010ask_size\030\005 " +
+      "\001(\001\022\021\n\task_price\030\006 \001(\001\022)\n\004type\030\007 \002(\0162\025.f" +
       "astquote.Price.Type:\004SPOT\"\020\n\004Type\022\010\n\004SPO" +
       "T\020\000B2\n#org.fabric3.samples.fastquote.pri" +
       "ceB\013PriceProtos"

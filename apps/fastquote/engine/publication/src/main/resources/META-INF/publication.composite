@@ -25,7 +25,7 @@
 
     <component name="VenuePublicationService">
         <implementation.java class="org.fabric3.samples.fastquote.publication.impl.VenuePublicationServiceImpl"/>
-        <producer name="venueChannel" target="ProviderChannel"/>
+        <producer name="venueChannel" target="VenueChannel"/>
     </component>
 
 </composite>

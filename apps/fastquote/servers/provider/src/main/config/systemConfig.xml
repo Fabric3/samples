@@ -5,5 +5,10 @@
         <http port="8182"/>
     </web.server>
     <scanner production="true"/>
+    <templates>
+        <template name="ProviderChannelBinding">
+            <binding.zeromq addresses="127.0.0.1:12001"/>
+        </template>
+    </templates>
 
 </config>

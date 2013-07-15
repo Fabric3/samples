@@ -21,7 +21,9 @@
            name="AggregationComposite"
            autowire="true">
 
-    <channel name="ProviderChannel"/>
+    <channel name="ProviderChannel">
+        <binding.template name="ProviderChannelBinding"/>
+    </channel>
 
     <component name="GatewayJournaler">
         <implementation.java class="org.fabric3.samples.fastquote.aggregation.Journaler"/>

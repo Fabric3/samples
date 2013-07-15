@@ -37,24 +37,11 @@
 */
 package org.fabric3.samples.fastquote.provider;
 
-import org.fabric3.api.annotation.Producer;
-import org.fabric3.api.annotation.scope.Composite;
-import org.fabric3.samples.fastquote.price.PriceProtos;
-
 /**
  *
  */
-@Composite
-public class ProviderComponent implements Runnable {
+public interface ProviderChanel {
 
-    @Producer
-    protected ProviderChanel providerChannel;
+    void send(byte[] price);
 
-    public void run() {
-        System.out.println("Sending");
-        PriceProtos.Price.Builder builder = PriceProtos.Price.newBuilder();
-        builder.setVenueId(0);
-        builder.setType(PriceProtos.Price.Type.SPOT).setBidPrice(10).setBidSize(100).setSymbol("USD");
-        providerChannel.send(builder.build().toByteArray());
-    }
 }
