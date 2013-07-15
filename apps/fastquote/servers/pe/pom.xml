@@ -92,12 +92,12 @@
 
                     </contributions>
                     <!-- overlay configuration -->
-                    <!--<configurationFiles>-->
-                    <!--<copy>-->
-                    <!--<source>config/systemConfig.xml</source>-->
-                    <!--<destination>runtimes/vm/config</destination>-->
-                    <!--</copy>-->
-                    <!--</configurationFiles>-->
+                    <configurationFiles>
+                        <copy>
+                            <source>config/systemConfig.xml</source>
+                            <destination>runtimes/vm/config</destination>
+                        </copy>
+                    </configurationFiles>
                 </configuration>
             </plugin>
         </plugins>
