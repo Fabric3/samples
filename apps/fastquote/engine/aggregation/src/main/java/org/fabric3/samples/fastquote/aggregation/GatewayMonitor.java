@@ -37,19 +37,21 @@
 */
 package org.fabric3.samples.fastquote.aggregation;
 
-/**
- * Writes incoming prices to the journal for replication and recording.
- * <p/>
- * Note this service must be called by a single thread.
- */
-public interface Journaler {
+import org.fabric3.api.annotation.monitor.Info;
+import org.fabric3.api.annotation.monitor.Severe;
 
-    /**
-     * Write the price.
-     *
-     * @param price the price
-     * @return the correlation id assigned to the price
-     */
-    long record(byte[] price);
+/**
+ *
+ */
+public interface GatewayMonitor {
+
+    @Severe
+    void error(Throwable throwable);
+
+    @Info("Gateway service started")
+    void started();
+
+    @Info("Gateway service shutdown")
+    void shutdown();
 
 }

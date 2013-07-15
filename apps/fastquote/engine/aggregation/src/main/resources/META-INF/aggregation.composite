@@ -25,14 +25,13 @@
         <binding.template name="ProviderChannelBinding"/>
     </channel>
 
-    <component name="GatewayJournaler">
-        <implementation.java class="org.fabric3.samples.fastquote.aggregation.Journaler"/>
-        <consumer name="providerChannel" source="ProviderChannel"/>
-    </component>
-
     <component name="FXGateway">
         <implementation.java class="org.fabric3.samples.fastquote.aggregation.Gateway"/>
         <consumer name="providerChannel" source="ProviderChannel"/>
+    </component>
+
+    <component name="GatewayJournaler">
+        <implementation.java class="org.fabric3.samples.fastquote.aggregation.JournalerImpl"/>
     </component>
 
 </composite>

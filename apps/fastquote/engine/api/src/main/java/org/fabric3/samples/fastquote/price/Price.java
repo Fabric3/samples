@@ -41,4 +41,9 @@ package org.fabric3.samples.fastquote.price;
  *
  */
 public class Price {
+    private long correlationId;
+
+    public Price(long correlationId) {
+        this.correlationId = correlationId;
+    }
 }

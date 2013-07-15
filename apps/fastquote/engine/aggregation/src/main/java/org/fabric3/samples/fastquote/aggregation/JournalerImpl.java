@@ -37,19 +37,15 @@
 */
 package org.fabric3.samples.fastquote.aggregation;
 
+import org.fabric3.api.annotation.scope.Composite;
+
 /**
- * Writes incoming prices to the journal for replication and recording.
- * <p/>
- * Note this service must be called by a single thread.
+ *
  */
-public interface Journaler {
+@Composite
+public class JournalerImpl implements Journaler {
 
-    /**
-     * Write the price.
-     *
-     * @param price the price
-     * @return the correlation id assigned to the price
-     */
-    long record(byte[] price);
-
+    public long record(byte[] price) {
+        return 1;
+    }
 }
