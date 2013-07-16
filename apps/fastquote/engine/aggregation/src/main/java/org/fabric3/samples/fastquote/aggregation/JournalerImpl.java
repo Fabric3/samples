@@ -37,15 +37,53 @@
 */
 package org.fabric3.samples.fastquote.aggregation;
 
+import java.io.File;
+import java.io.IOException;
+
+import com.higherfrequencytrading.chronicle.Excerpt;
+import com.higherfrequencytrading.chronicle.impl.IndexedChronicle;
+import org.fabric3.api.Fabric3ComponentContext;
 import org.fabric3.api.annotation.scope.Composite;
+import org.oasisopen.sca.annotation.Context;
+import org.oasisopen.sca.annotation.Destroy;
+import org.oasisopen.sca.annotation.Init;
 
 /**
  *
  */
 @Composite
 public class JournalerImpl implements Journaler {
+    private IndexedChronicle chronicle;
+
+    @Context
+    protected Fabric3ComponentContext context;
+
+    @Init
+    public void init() throws IOException {
+        File journalDir = new File(context.getDataDirectory(), "journal");
+        journalDir.mkdirs();
+        File journal = new File(journalDir, "pe");
+        chronicle = new IndexedChronicle(journal.getPath());
+        chronicle.useUnsafe(true);
+    }
+
+    @Destroy
+    public void destroy() {
+        if (chronicle != null) {
+            chronicle.close();
+        }
+    }
 
     public long record(byte[] price) {
-        return 1;
+        Excerpt excerpt = chronicle.createExcerpt();
+
+        excerpt.startExcerpt(price.length + 8);
+
+        long index = excerpt.index();
+        excerpt.writeLong(System.nanoTime());
+        excerpt.write(price);
+        excerpt.finish();
+
+        return index;
     }
 }

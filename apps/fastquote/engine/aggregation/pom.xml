@@ -28,7 +28,7 @@
     <artifactId>fastquote-aggregation</artifactId>
     <name>Fabric3 FastQuote Aggregation</name>
     <description>Fabric3 Aggregation Module.</description>
-    <packaging>jar</packaging>
+    <packaging>sca-contribution-jar</packaging>
 
 
     <dependencies>
@@ -50,12 +50,14 @@
             <groupId>org.codehaus.fabric3.samples</groupId>
             <artifactId>fastquote-api</artifactId>
             <version>${project.version}</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>org.codehaus.fabric3.samples</groupId>
             <artifactId>fastquote-pricing</artifactId>
             <version>${project.version}</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -65,7 +67,22 @@
             <scope>provided</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.higherfrequencytrading</groupId>
+            <artifactId>chronicle</artifactId>
+            <version>1.7.2</version>
+        </dependency>
 
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.fabric3</groupId>
+                <artifactId>fabric3-contribution-plugin</artifactId>
+                <version>${fabric3.version}</version>
+                <extensions>true</extensions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

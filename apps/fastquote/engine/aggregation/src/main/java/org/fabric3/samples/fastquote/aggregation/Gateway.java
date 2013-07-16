@@ -37,6 +37,8 @@
 */
 package org.fabric3.samples.fastquote.aggregation;
 
+import java.util.concurrent.TimeUnit;
+
 import com.google.protobuf.InvalidProtocolBufferException;
 import org.fabric3.api.annotation.Consumer;
 import org.fabric3.api.annotation.monitor.Monitor;
@@ -51,6 +53,7 @@ import org.oasisopen.sca.annotation.Reference;
  */
 @Composite
 public class Gateway {
+    private long received;
 
     @Monitor
     GatewayMonitor monitor;
@@ -64,13 +67,16 @@ public class Gateway {
     @Consumer("providerChannel")
     public void onPrice(byte[] serialized) {
         try {
+            long start = System.nanoTime();
             long correlationId = journaler.record(serialized);
 
             PriceProtos.Price protoPrice = PriceProtos.Price.parseFrom(serialized);
             Price price = new Price(correlationId);
 
             pricingService.marginAndSend(price);
-
+            long end = System.nanoTime() - start;
+            System.out.println("Processed: " + ++received);
+            System.out.println("Latency: " + TimeUnit.MICROSECONDS.convert(end, TimeUnit.NANOSECONDS) + "us");
         } catch (InvalidProtocolBufferException e) {
             monitor.error(e);
         }

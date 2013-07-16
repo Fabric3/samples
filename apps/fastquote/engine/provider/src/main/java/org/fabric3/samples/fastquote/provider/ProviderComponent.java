@@ -37,24 +37,89 @@
 */
 package org.fabric3.samples.fastquote.provider;
 
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import org.fabric3.api.annotation.Producer;
 import org.fabric3.api.annotation.scope.Composite;
 import org.fabric3.samples.fastquote.price.PriceProtos;
+import org.oasisopen.sca.annotation.Destroy;
+import org.oasisopen.sca.annotation.Property;
 
 /**
  *
  */
 @Composite
 public class ProviderComponent implements Runnable {
+    private static final int NUMBER_CURRENCY_PAIRS = 4;
+    private int sequence = 0;
+    private AtomicBoolean shutdown = new AtomicBoolean();
+    private Random random = new Random();
+
+    @Property(required = false)
+    protected int waitTime = 1;
 
     @Producer
     protected ProviderChanel providerChannel;
 
-    public void run() {
-        System.out.println("Sending");
-        PriceProtos.Price.Builder builder = PriceProtos.Price.newBuilder();
-        builder.setVenueId(0);
-        builder.setType(PriceProtos.Price.Type.SPOT).setBidPrice(10).setBidSize(100).setSymbol("USD");
-        providerChannel.send(builder.build().toByteArray());
+    @Destroy
+    public void destroy() {
+        shutdown.set(true);
     }
+
+    public void run() {
+        while (!shutdown.get()) {
+            PriceProtos.Price.Builder builder = PriceProtos.Price.newBuilder();
+            builder.setVenueId(0);
+            builder.setType(PriceProtos.Price.Type.SPOT).setBidPrice(10).setBidSize(100);
+            int modulo = sequence % NUMBER_CURRENCY_PAIRS;
+            generatePrice(builder, modulo);
+            generateSize(builder, modulo);
+            if (sequence == Integer.MAX_VALUE) {
+                sequence = 0;
+            } else {
+                sequence++;
+            }
+            System.out.println("Sending: " + builder.getBidSize() + "@" + builder.getBidPrice());
+            providerChannel.send(builder.build().toByteArray());
+            try {
+                Thread.sleep(waitTime);
+            } catch (InterruptedException e) {
+                Thread.interrupted();
+            }
+        }
+    }
+
+    private void generatePrice(PriceProtos.Price.Builder builder, int modulo) {
+        double seed = random.nextDouble();
+        double price;
+        if (modulo == 0) {
+            builder.setSymbol("USD/GBP");
+            price = .640000000 + (seed * (.640000000 - .660000000));
+        } else if (modulo == 1) {
+            builder.setSymbol("USD/EUR");
+            price = .740000000 + (seed * (.740000000 - .760000000));
+        } else if (modulo == 2) {
+            builder.setSymbol("EUR/CHF");
+            price = 1.24000000 + (seed * (1.24000000 - 1.26000000));
+        } else {
+            builder.setSymbol("EUR/JPY");
+            price = 130.590000 + (seed * (130.590000 - 130.610000));
+        }
+        builder.setBidPrice(price);
+    }
+
+    private void generateSize(PriceProtos.Price.Builder builder, int modulo) {
+        if (modulo == 0) {
+            builder.setBidSize(100000);
+        } else if (modulo == 1) {
+            builder.setBidSize(1000000);
+        } else if (modulo == 2) {
+            builder.setBidSize(10000000);
+        } else {
+            builder.setBidSize(20000000);
+        }
+    }
+
 }
+

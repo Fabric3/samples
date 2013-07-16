@@ -46,4 +46,8 @@ public class Price {
     public Price(long correlationId) {
         this.correlationId = correlationId;
     }
+
+    public long getCorrelationId() {
+        return correlationId;
+    }
 }
