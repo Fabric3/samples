@@ -38,16 +38,74 @@
 package org.fabric3.samples.fastquote.price;
 
 /**
- *
+ * Represents a price in the system.
  */
 public class Price {
     private long correlationId;
 
-    public Price(long correlationId) {
+    private PriceLadder bidLadder;
+    private PriceLadder askLadder;
+    private MarginGroup marginGroup;
+
+    private double[] bidPrices = null;
+    private double[] askPrices = null;
+    private String symbol;
+    private double basePrice;
+
+    public Price(String symbol, double basePrice, long correlationId) {
+        this.symbol = symbol;
         this.correlationId = correlationId;
     }
 
     public long getCorrelationId() {
         return correlationId;
+    }
+
+    public String getSymbol() {
+        return symbol;
+    }
+
+    public void setBidLadder(PriceLadder bidLadder) {
+        this.bidLadder = bidLadder;
+    }
+
+    public PriceLadder getBidLadder() {
+        return bidLadder;
+    }
+
+    public void setAskLadder(PriceLadder askLadder) {
+        this.askLadder = askLadder;
+    }
+
+    public PriceLadder getAskLadder() {
+        return askLadder;
+    }
+
+    public MarginGroup getMarginGroup() {
+        return marginGroup;
+    }
+
+    public void setMarginGroup(MarginGroup marginGroup) {
+        this.marginGroup = marginGroup;
+    }
+
+    public double[] getBidPrices() {
+        return bidPrices;
+    }
+
+    public void setBidPrices(double[] bidPrices) {
+        this.bidPrices = bidPrices;
+    }
+
+    public double[] getAskPrices() {
+        return askPrices;
+    }
+
+    public void setAskPrices(double[] askPrices) {
+        this.askPrices = askPrices;
+    }
+
+    public double getBasePrice() {
+        return basePrice;
     }
 }

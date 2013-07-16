@@ -40,10 +40,15 @@ package org.fabric3.samples.fastquote.pricing.api;
 import org.fabric3.samples.fastquote.price.Price;
 
 /**
- *
+ * Processes a price by applying margins and sending the results to connected venues.
  */
 public interface PricingService {
 
+    /**
+     * Margin and send the price.
+     *
+     * @param price the price
+     */
     void marginAndSend(Price price);
 
 }

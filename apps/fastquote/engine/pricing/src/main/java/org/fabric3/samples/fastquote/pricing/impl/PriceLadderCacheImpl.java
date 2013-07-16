@@ -35,20 +35,54 @@
  * GNU General Public License along with Fabric3.
  * If not, see <http://www.gnu.org/licenses/>.
 */
-package org.fabric3.samples.fastquote.publication.impl;
+package org.fabric3.samples.fastquote.pricing.impl;
 
-import org.fabric3.samples.fastquote.price.Price;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicReference;
+
+import org.fabric3.api.annotation.scope.Composite;
+import org.fabric3.samples.fastquote.price.PriceLadder;
+import org.fabric3.samples.fastquote.price.PriceRung;
+import org.oasisopen.sca.annotation.EagerInit;
+import org.oasisopen.sca.annotation.Init;
 
 /**
- * A channel to publish margined prices.
+ *
  */
-public interface VenueChannel {
+@Composite
+@EagerInit
+public class PriceLadderCacheImpl implements PriceLadderCache {
+    private AtomicReference<Map<String, PriceLadderPair>> ladders = new AtomicReference<Map<String, PriceLadderPair>>();
 
-    /**
-     * Publish the price.
-     *
-     * @param price the price
-     */
-    void publish(Price price);
+    @Init
+    public void init() {
+        // initialize data
+        PriceRung[] rungs = new PriceRung[101];
+        int step = 5000000;
+        int increment = 50000;
+        for (int i = 0, n = 0; i < step; i = i + increment, n++) {
+            PriceRung rung = new PriceRung(i + 1, i + increment, 0.001);
+            rungs[n] = rung;
+        }
+        rungs[100] = new PriceRung(step + 1, Double.MAX_VALUE, 2.00);
 
+        PriceLadder bidLadder = new PriceLadder(rungs);
+        PriceLadder askLadder = new PriceLadder(rungs);
+        PriceLadderPair pair = new PriceLadderPair(bidLadder, askLadder);
+
+        Map<String, PriceLadderPair> pairs = new HashMap<String, PriceLadderPair>();
+
+        pairs.put("USD/GBP", pair);
+        pairs.put("USD/EUR", pair);
+        pairs.put("EUR/CHF", pair);
+        pairs.put("EUR/JPY", pair);
+
+        // update atomically
+        ladders.set(pairs);
+    }
+
+    public PriceLadderPair getLadders(String symbol) {
+        return ladders.get().get(symbol);
+    }
 }

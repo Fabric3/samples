@@ -9,6 +9,9 @@
         <template name="ProviderChannelBinding">
             <binding.zeromq addresses="127.0.0.1:12001"/>
         </template>
+        <template name="ReplicationChannelBinding">
+            <binding.zeromq addresses="127.0.0.1:13001"/>
+        </template>
     </templates>
 
 </config>

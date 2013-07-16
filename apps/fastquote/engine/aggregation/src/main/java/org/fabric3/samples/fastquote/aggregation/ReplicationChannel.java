@@ -35,20 +35,18 @@
  * GNU General Public License along with Fabric3.
  * If not, see <http://www.gnu.org/licenses/>.
 */
-package org.fabric3.samples.fastquote.publication.impl;
-
-import org.fabric3.samples.fastquote.price.Price;
+package org.fabric3.samples.fastquote.aggregation;
 
 /**
- * A channel to publish margined prices.
+ * Channel for replicating received prices.
  */
-public interface VenueChannel {
+public interface ReplicationChannel {
 
     /**
-     * Publish the price.
+     * Replicates the price.
      *
      * @param price the price
      */
-    void publish(Price price);
+    void replicate(byte[] price);
 
 }

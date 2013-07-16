@@ -35,20 +35,56 @@
  * GNU General Public License along with Fabric3.
  * If not, see <http://www.gnu.org/licenses/>.
 */
-package org.fabric3.samples.fastquote.publication.impl;
+package org.fabric3.samples.fastquote.pricing.impl;
 
+import org.fabric3.api.annotation.scope.Composite;
 import org.fabric3.samples.fastquote.price.Price;
+import org.fabric3.samples.fastquote.price.PriceLadder;
 
 /**
- * A channel to publish margined prices.
+ *
  */
-public interface VenueChannel {
+@Composite
+public class MarginServiceImpl implements MarginService {
+
+    public void applyMargins(Price price) {
+        applyBidMargins(price);
+        applyAskMargins(price);
+    }
 
     /**
-     * Publish the price.
+     * Apply the bid price margins.
      *
      * @param price the price
      */
-    void publish(Price price);
+    private void applyBidMargins(Price price) {
+        PriceLadder bidLadder = price.getBidLadder();
+        double[] bidPrices = new double[bidLadder.getRungs().length];
+
+        double basePrice = price.getBasePrice();
+        for (int i = 0; i < bidLadder.getRungs().length; i++) {
+            double rungMargin = bidLadder.getRungs()[i].getMargin();
+            bidPrices[i] = basePrice + rungMargin;
+        }
+        price.setBidPrices(bidPrices);
+    }
+
+    /**
+     * Apply the ask price margins.
+     *
+     * @param price the price
+     */
+    private void applyAskMargins(Price price) {
+        PriceLadder askLadder = price.getAskLadder();
+        double[] askPrices = new double[askLadder.getRungs().length];
+
+        double basePrice = price.getBasePrice();
+        for (int i = 0; i < askLadder.getRungs().length; i++) {
+            double rungMargin = askLadder.getRungs()[i].getMargin();
+
+            askPrices[i] = basePrice + rungMargin;
+        }
+        price.setAskPrices(askPrices);
+    }
 
 }

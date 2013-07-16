@@ -48,11 +48,24 @@ import org.oasisopen.sca.annotation.Reference;
  */
 @Composite
 public class PricingServiceImpl implements PricingService {
+    @Reference
+    protected PriceLadderCache cache;
+
+    @Reference
+    protected MarginService marginService;
 
     @Reference
     protected VenuePublicationService publicationService;
 
     public void marginAndSend(Price price) {
+        String symbol = price.getSymbol();
+
+        PriceLadderPair pair = cache.getLadders(symbol);
+        price.setBidLadder(pair.getBidLadder());
+        price.setAskLadder(pair.getAskLadder());
+
+        marginService.applyMargins(price);
+
         publicationService.send(price);
     }
 }

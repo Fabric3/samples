@@ -35,20 +35,33 @@
  * GNU General Public License along with Fabric3.
  * If not, see <http://www.gnu.org/licenses/>.
 */
-package org.fabric3.samples.fastquote.publication.impl;
-
-import org.fabric3.samples.fastquote.price.Price;
+package org.fabric3.samples.fastquote.price;
 
 /**
- * A channel to publish margined prices.
+ * A category for applying margins to prices.
  */
-public interface VenueChannel {
+public class MarginGroup {
+    private String groupId;
+    private String groupName;
 
-    /**
-     * Publish the price.
-     *
-     * @param price the price
-     */
-    void publish(Price price);
+    public MarginGroup(String groupId, String groupName) {
+        this.groupId = groupId;
+        this.groupName = groupName;
+    }
 
+    public String getGroupName() {
+        return groupName;
+    }
+
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
+    }
+
+    public String getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(String groupId) {
+        this.groupId = groupId;
+    }
 }

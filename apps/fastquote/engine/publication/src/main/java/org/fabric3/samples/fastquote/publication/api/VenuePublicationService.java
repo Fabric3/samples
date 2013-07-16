@@ -40,10 +40,15 @@ package org.fabric3.samples.fastquote.publication.api;
 import org.fabric3.samples.fastquote.price.Price;
 
 /**
- *
+ * Publishes margined prices to connected venues.
  */
 public interface VenuePublicationService {
 
+    /**
+     * Send the price.
+     *
+     * @param price the price
+     */
     void send(Price price);
 
 }

@@ -47,7 +47,7 @@ import org.oasisopen.sca.annotation.Destroy;
 import org.oasisopen.sca.annotation.Property;
 
 /**
- *
+ * Simulates a liquidity provider by generating prices that are published to a price channel.
  */
 @Composite
 public class ProviderComponent implements Runnable {

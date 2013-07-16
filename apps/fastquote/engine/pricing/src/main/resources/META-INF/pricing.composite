@@ -25,5 +25,12 @@
         <implementation.java class="org.fabric3.samples.fastquote.pricing.impl.PricingServiceImpl"/>
     </component>
 
+    <component name="PriceLadderCache">
+        <implementation.java class="org.fabric3.samples.fastquote.pricing.impl.PriceLadderCacheImpl"/>
+    </component>
+
+    <component name="MarginService">
+        <implementation.java class="org.fabric3.samples.fastquote.pricing.impl.MarginServiceImpl"/>
+    </component>
 
 </composite>

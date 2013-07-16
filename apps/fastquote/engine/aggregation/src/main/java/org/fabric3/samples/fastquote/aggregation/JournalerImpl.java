@@ -49,7 +49,9 @@ import org.oasisopen.sca.annotation.Destroy;
 import org.oasisopen.sca.annotation.Init;
 
 /**
- *
+ * Uses Java Chronicle (https://github.com/peter-lawrey/Java-Chronicle) to write incoming prices to persistent storage.
+ * <p/>
+ * In a production system, the journal can be used to replay prices for debugging/problem resolution.
  */
 @Composite
 public class JournalerImpl implements Journaler {

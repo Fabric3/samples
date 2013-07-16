@@ -35,20 +35,24 @@
  * GNU General Public License along with Fabric3.
  * If not, see <http://www.gnu.org/licenses/>.
 */
-package org.fabric3.samples.fastquote.publication.impl;
+package org.fabric3.samples.fastquote.aggregation;
 
-import org.fabric3.samples.fastquote.price.Price;
+import org.fabric3.api.annotation.Consumer;
+import org.fabric3.api.annotation.Producer;
+import org.fabric3.api.annotation.scope.Composite;
 
 /**
- * A channel to publish margined prices.
+ * Replicates prices to a channel. Listeners may be warm backups or other consumers.
  */
-public interface VenueChannel {
+@Composite
+public class Replicator {
 
-    /**
-     * Publish the price.
-     *
-     * @param price the price
-     */
-    void publish(Price price);
+    @Producer
+    protected ReplicationChannel replicationChannel;
+
+    @Consumer(value = "providerChannel", sequence = 0)
+    public void onPrice(byte[] price) {
+        replicationChannel.replicate(price);
+    }
 
 }

@@ -25,9 +25,19 @@
         <binding.template name="ProviderChannelBinding"/>
     </channel>
 
+    <channel name="ReplicationChannel" type="ring.buffer">
+        <binding.template name="ReplicationChannelBinding"/>
+    </channel>
+
     <component name="FXGateway">
         <implementation.java class="org.fabric3.samples.fastquote.aggregation.Gateway"/>
         <consumer name="providerChannel" source="ProviderChannel"/>
+    </component>
+
+    <component name="Replicator">
+        <implementation.java class="org.fabric3.samples.fastquote.aggregation.Replicator"/>
+        <consumer name="providerChannel" source="ProviderChannel"/>
+        <producer name="replicationChannel" target="ReplicationChannel"/>
     </component>
 
     <component name="GatewayJournaler">

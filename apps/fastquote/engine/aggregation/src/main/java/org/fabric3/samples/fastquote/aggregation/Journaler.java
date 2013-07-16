@@ -38,7 +38,7 @@
 package org.fabric3.samples.fastquote.aggregation;
 
 /**
- * Writes incoming prices to the journal for replication and recording.
+ * Writes incoming prices to a journal for recording.
  * <p/>
  * Note this service must be called by a single thread.
  */

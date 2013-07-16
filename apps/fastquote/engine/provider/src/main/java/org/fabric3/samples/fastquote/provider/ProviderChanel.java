@@ -38,10 +38,15 @@
 package org.fabric3.samples.fastquote.provider;
 
 /**
- *
+ * Channel for publishing prices.
  */
 public interface ProviderChanel {
 
+    /**
+     * Publishes a price.
+     *
+     * @param price the serialized price
+     */
     void send(byte[] price);
 
 }

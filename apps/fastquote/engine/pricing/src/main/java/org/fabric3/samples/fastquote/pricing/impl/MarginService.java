@@ -35,20 +35,20 @@
  * GNU General Public License along with Fabric3.
  * If not, see <http://www.gnu.org/licenses/>.
 */
-package org.fabric3.samples.fastquote.publication.impl;
+package org.fabric3.samples.fastquote.pricing.impl;
 
 import org.fabric3.samples.fastquote.price.Price;
 
 /**
- * A channel to publish margined prices.
+ * Applies margins to a price.
  */
-public interface VenueChannel {
+public interface MarginService {
 
     /**
-     * Publish the price.
+     * Apply margins to the price.
      *
      * @param price the price
      */
-    void publish(Price price);
+    void applyMargins(Price price);
 
 }

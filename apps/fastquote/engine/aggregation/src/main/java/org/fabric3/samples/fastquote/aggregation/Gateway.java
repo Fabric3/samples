@@ -49,7 +49,9 @@ import org.fabric3.samples.fastquote.pricing.api.PricingService;
 import org.oasisopen.sca.annotation.Reference;
 
 /**
- * Receives base incoming prices from liquidity providers such as a bank or electronic communication network (ECN).
+ * Receives incoming prices from liquidity providers such as a bank or electronic communication network (ECN).
+ * <p/>
+ * Prices are recorded in a journal and sent to the {@link PricingService} for processing.
  */
 @Composite
 public class Gateway {
@@ -64,14 +66,15 @@ public class Gateway {
     @Reference
     protected PricingService pricingService;
 
-    @Consumer("providerChannel")
+    @Consumer(value = "providerChannel", sequence = 1)
     public void onPrice(byte[] serialized) {
         try {
             long start = System.nanoTime();
             long correlationId = journaler.record(serialized);
 
             PriceProtos.Price protoPrice = PriceProtos.Price.parseFrom(serialized);
-            Price price = new Price(correlationId);
+            double value = protoPrice.hasBidPrice() ? protoPrice.getBidPrice() : protoPrice.getAskPrice();
+            Price price = new Price(protoPrice.getSymbol(), value, correlationId);
 
             pricingService.marginAndSend(price);
             long end = System.nanoTime() - start;
