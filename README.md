@@ -13,6 +13,9 @@ The samples are intended to demonstrate capabilities of the Fabric3 runtime:
 * BigBank Loan Application - BigBank showcases advanced features of the Fabric3 runtime. It is intended to provide a complete, real-world application
   that demonstrates SCA and Fabric3 best-practices.
 
+* FastQuote FX Trading Application - FastQuote demonstrates how to build low-latency applications with Fabric3 and makes use of features such as ZeroMQ
+pub/sub communications and Disruptor integration.
+
 * Policy Applications - Demonstrate how to create and apply custom policies in Fabric3.
 
 Prerequisites
