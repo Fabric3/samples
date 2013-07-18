@@ -224,7 +224,7 @@ public class OperationsClient {
         for (Map.Entry<String, List<Pair>> entry : response.getValue().entrySet()) {
             System.out.println("      " + entry.getKey());
             for (Pair pair : entry.getValue()) {
-                System.out.println("         Name: " + pair.getName() + " Port: " + pair.getPort());
+                System.out.println("         Name: " + pair.getName() + " Port: " + pair.getNumber());
 
             }
 

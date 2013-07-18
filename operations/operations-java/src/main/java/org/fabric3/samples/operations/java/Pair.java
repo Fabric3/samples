@@ -7,7 +7,7 @@ package org.fabric3.samples.operations.java;
  */
 public class Pair {
     private String name;
-    private String port;
+    private String number;
 
     public String getName() {
         return name;
@@ -17,11 +17,11 @@ public class Pair {
         this.name = name;
     }
 
-    public String getPort() {
-        return port;
+    public String getNumber() {
+        return number;
     }
 
-    public void setPort(String port) {
-        this.port = port;
+    public void setNumber(String number) {
+        this.number = number;
     }
 }
