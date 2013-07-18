@@ -12,9 +12,14 @@ import org.fabric3.samples.bigbank.api.loan.LoanApplicationStatus;
 
 /**
  * Invokes the loan service using HTTP.
+ * <p/>
+ * Note in a clustered environment, set {@link #BASE_URL} to the correct zone1 HTTP port.
  */
 public class RESTLoanClient {
-    private static final String BASE_URL = "http://localhost:8181/rsloan/application/";
+    // Note: When using clustered deployment, the port must be set to the zone1 runtime, which is dynamically allocated at startup
+    // Please see the monitor logs for the HTTP port
+
+    private static final String BASE_URL = "http://localhost:8182/rsloan/application/";
 
     private ObjectMapper mapper = new ObjectMapper();
 
@@ -66,6 +71,7 @@ public class RESTLoanClient {
         connection.setDoOutput(true);
         connection.setRequestMethod(verb);
         connection.setRequestProperty("Content-type", "application/json");
+        connection.setRequestProperty("Accept", "application/json");
         return connection;
     }
 
