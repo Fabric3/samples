@@ -34,8 +34,8 @@
         <module>channels</module>
         <module>streaming</module>
         <module>timer</module>
-        <module>web-hibernate</module>
-        <module>web-hibernate-client</module>
+        <module>hibernate</module>
+        <module>hibernate-client</module>
         <module>eventing</module>
         <module>monitor</module>
         <module>monitor-extension</module>
