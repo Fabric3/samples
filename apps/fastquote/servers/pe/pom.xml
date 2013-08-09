@@ -99,6 +99,21 @@
                     </configurationFiles>
                 </configuration>
             </plugin>
+            <!-- Uncomment to build an runtime image archive
+                        <plugin>
+                            <artifactId>maven-assembly-plugin</artifactId>
+                            <version>2.4</version>
+                            <executions>
+                                <execution>
+                                    <id>make-assembly</id>
+                                    <phase>package</phase>
+                                    <goals>
+                                        <goal>single</goal>
+                                    </goals>
+                                </execution>
+                            </executions>
+                        </plugin>
+            -->
         </plugins>
     </build>
 </project>
