@@ -53,31 +53,6 @@
         <module>operations</module>
     </modules>
 
-    <repositories>
-        <repository>
-            <id>repository.codehaus.org</id>
-            <name>Fabric3 Releases</name>
-            <url>http://repository.codehaus.org/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>snapshots.repository.codehaus.org</id>
-            <name>Fabric3 Snapshots</name>
-            <url>http://snapshots.repository.codehaus.org/</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
-
     <scm>
         <connection>scm:git:git@github.com:Fabric3/samples.git</connection>
         <developerConnection>scm:git:git@github.com:Fabric3/samples.git</developerConnection>
