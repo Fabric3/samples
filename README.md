@@ -40,13 +40,13 @@ Installation
 Documentation
 ----------------
 
-* The samples documentation can be found at http://docs.fabric3.org/display/fabric3/Getting+Started.
+* The samples documentation can be found at https://fabric3.atlassian.net/wiki/display/FABRIC/Getting+Started.
 
 Reporting Issues
 ----------------
 
 * If you experience a problem or would like to suggest improvements, send a note to the user list (http://xircles.codehaus.org/projects/fabric3/lists)
-  or file a JIRA issue (http://jira.codehaus.org/browse/FABRICTHREE).
+  or file a JIRA issue.
 
 
 
