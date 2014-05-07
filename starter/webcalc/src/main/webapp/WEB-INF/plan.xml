@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="ASCII"?>
-<plan xmlns="urn:fabric3.org"
-      xmlns:calc="urn:fabric3.org:samples"
-      name="WebCalcPlan">
-    <mappings>
-        <mapping deployable="calc:WebCalculator" zone="zone1"/>
-    </mappings>
-</plan>

@@ -23,7 +23,6 @@
        <artifactId>fabric3-samples-apps-parent-pom</artifactId>
         <version>2.0.0</version>
     </parent>
-    <groupId>org.codehaus.fabric3.samples</groupId>
     <artifactId>bigbank-parent-pom</artifactId>
     <name>Fabric3 BigBank Parent POM</name>
     <description>Fabric3 BigBank Parent POM.</description>

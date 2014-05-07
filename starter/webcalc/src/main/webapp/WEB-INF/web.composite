@@ -21,11 +21,6 @@
            name="WebCalculator"
            targetNamespace="urn:fabric3.org:samples">
 
-    <component name="calculator">
-        <implementation.web/>
-        <reference name="calculatorService" target="CalculatorService"/>
-    </component>
-
     <component name="CalculatorService">
         <implementation.java class="org.fabric3.samples.web.calculator.CalculatorServiceImpl"/>
         <reference name="addService" target="AddService"/>

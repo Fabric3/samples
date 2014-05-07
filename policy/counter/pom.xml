@@ -22,7 +22,6 @@
         <artifactId>fabric3-samples-policy-parent-pom</artifactId>
         <version>2.0.0</version>
     </parent>
-    <groupId>org.codehaus.fabric3.samples</groupId>
     <artifactId>fabric3-samples-counter</artifactId>
     <packaging>jar</packaging>
     <name>Fabric3 Counter Interceptor Policy</name>
@@ -33,6 +32,12 @@
             <groupId>org.codehaus.fabric3.spec</groupId>
             <artifactId>sca-api</artifactId>
             <version>${sca.api.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.fabric3</groupId>
+            <artifactId>fabric3-api</artifactId>
+            <version>${fabric3.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

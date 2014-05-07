@@ -22,7 +22,6 @@
         <artifactId>fabric3-samples-features-parent-pom</artifactId>
         <version>2.0.0</version>
     </parent>
-    <groupId>org.codehaus.fabric3.samples</groupId>
     <artifactId>fabric3-samples-monitor</artifactId>
     <packaging>jar</packaging>
     <name>Fabric3 Monitor Sample</name>

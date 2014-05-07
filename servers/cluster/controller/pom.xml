@@ -22,7 +22,6 @@
         <artifactId>servers-cluster-parent-pom</artifactId>
         <version>2.0.0</version>
     </parent>
-    <groupId>org.codehaus.fabric3.samples</groupId>
     <artifactId>servers-controller</artifactId>
     <packaging>pom</packaging>
     <name>Fabric3 Controller Setup</name>
@@ -87,14 +86,12 @@
                                     <artifactId>profile-timer</artifactId>
                                     <version>${fabric3.version}</version>
                                 </profile>
-                            </profiles>
-                            <extensions>
-                                <dependency>
+                                <profile>
                                     <groupId>org.codehaus.fabric3</groupId>
-                                    <artifactId>fabric3-binding-file</artifactId>
+                                    <artifactId>profile-file</artifactId>
                                     <version>${fabric3.version}</version>
-                                </dependency>
-                            </extensions>
+                                </profile>
+                            </profiles>
                             <!-- overlay configuration -->
                             <configurationFiles>
                                 <copy>
@@ -161,14 +158,12 @@
                                     <artifactId>profile-zeromq</artifactId>
                                     <version>${fabric3.version}</version>
                                 </profile>
-                            </profiles>
-                            <extensions>
-                                <dependency>
+                                <profile>
                                     <groupId>org.codehaus.fabric3</groupId>
-                                    <artifactId>fabric3-binding-file</artifactId>
+                                    <artifactId>profile-file</artifactId>
                                     <version>${fabric3.version}</version>
-                                </dependency>
-                            </extensions>
+                                </profile>
+                            </profiles>
                             <!-- overlay configuration -->
                             <configurationFiles>
                                 <copy>

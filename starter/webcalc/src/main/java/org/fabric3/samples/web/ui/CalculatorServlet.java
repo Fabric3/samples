@@ -18,24 +18,27 @@
  */
 package org.fabric3.samples.web.ui;
 
-import java.io.IOException;
-import java.io.Writer;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.Writer;
 
-import org.oasisopen.sca.annotation.Reference;
-
+import org.fabric3.api.annotation.Target;
 import org.fabric3.samples.web.calculator.CalculatorService;
+import org.oasisopen.sca.annotation.Reference;
 
 /**
  * Accepts a calculator form submission and forwards the request to the CalculatorService.
  */
+@WebServlet("calculatorServlet")
 public class CalculatorServlet extends HttpServlet {
     private static final long serialVersionUID = -2731185078362675240L;
 
     @Reference
+    @Target("CalculatorService")
     protected CalculatorService calculatorService;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -44,20 +47,25 @@ public class CalculatorServlet extends HttpServlet {
         double operand2 = Double.valueOf(request.getParameter("operand2"));
         String operation;
         double result;
-        if ("add".equals(operationParam)) {
-            operation = " + ";
-            result = calculatorService.add(operand1, operand2);
-        } else if ("subtract".equals(operationParam)) {
-            operation = " - ";
-            result = calculatorService.subtract(operand1, operand2);
-        } else if ("multiply".equals(operationParam)) {
-            operation = " * ";
-            result = calculatorService.multiply(operand1, operand2);
-        } else if ("divide".equals(operationParam)) {
-            operation = " / ";
-            result = calculatorService.divide(operand1, operand2);
-        } else {
-            throw new ServletException("Unknown operation type");
+        switch (operationParam) {
+            case "add":
+                operation = " + ";
+                result = calculatorService.add(operand1, operand2);
+                break;
+            case "subtract":
+                operation = " - ";
+                result = calculatorService.subtract(operand1, operand2);
+                break;
+            case "multiply":
+                operation = " * ";
+                result = calculatorService.multiply(operand1, operand2);
+                break;
+            case "divide":
+                operation = " / ";
+                result = calculatorService.divide(operand1, operand2);
+                break;
+            default:
+                throw new ServletException("Unknown operation type");
         }
         Writer out = response.getWriter();
         out.write("<html><head><title>Fabric3 Web Calculator</title></head><body>");
