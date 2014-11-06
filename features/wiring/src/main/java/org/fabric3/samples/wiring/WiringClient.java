@@ -37,7 +37,9 @@
 */
 package org.fabric3.samples.wiring;
 
+import org.fabric3.api.annotation.model.Component;
 import org.fabric3.api.annotation.scope.Scopes;
+import org.fabric3.api.implementation.timer.annotation.Timer;
 import org.fabric3.samples.wiring.pipeline.Pipeline;
 import org.fabric3.samples.wiring.pipeline.PipelineMessage;
 import org.fabric3.samples.wiring.registry.IntMessage;
@@ -51,6 +53,8 @@ import org.oasisopen.sca.annotation.Scope;
  * references.
  */
 @Scope(Scopes.COMPOSITE)
+@Component
+@Timer(repeatInterval = 3000)
 public class WiringClient implements Runnable {
     private int counter;
 

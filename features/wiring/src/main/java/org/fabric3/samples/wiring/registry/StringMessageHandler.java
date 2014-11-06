@@ -37,6 +37,7 @@
 */
 package org.fabric3.samples.wiring.registry;
 
+import org.fabric3.api.annotation.model.Component;
 import org.fabric3.api.annotation.monitor.Monitor;
 import org.fabric3.api.annotation.scope.Scopes;
 import org.fabric3.api.annotation.wire.Key;
@@ -47,7 +48,8 @@ import org.oasisopen.sca.annotation.Scope;
  */
 @Key(StringMessage.TYPE)
 @Scope(Scopes.COMPOSITE)
-public class StringMessageHandler<M extends Message> implements MessageHandler<StringMessage> {
+@Component
+public class StringMessageHandler implements MessageHandler<StringMessage> {
 
     @Monitor
     protected MessageHandlerMonitor monitor;

@@ -39,6 +39,7 @@ package org.fabric3.samples.wiring.registry;
 
 import java.util.Map;
 
+import org.fabric3.api.annotation.model.Component;
 import org.fabric3.api.annotation.scope.Scopes;
 import org.oasisopen.sca.annotation.Reference;
 import org.oasisopen.sca.annotation.Scope;
@@ -47,6 +48,7 @@ import org.oasisopen.sca.annotation.Scope;
  *
  */
 @Scope(Scopes.COMPOSITE)
+@Component
 public class RegistryImpl implements Registry {
 
     /**

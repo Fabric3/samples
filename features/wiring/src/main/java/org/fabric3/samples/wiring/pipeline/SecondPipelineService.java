@@ -37,6 +37,7 @@
 */
 package org.fabric3.samples.wiring.pipeline;
 
+import org.fabric3.api.annotation.model.Component;
 import org.fabric3.api.annotation.monitor.Monitor;
 import org.fabric3.api.annotation.scope.Scopes;
 import org.fabric3.api.annotation.wire.Order;
@@ -47,6 +48,7 @@ import org.oasisopen.sca.annotation.Scope;
  */
 @Order(1)
 @Scope(Scopes.COMPOSITE)
+@Component
 public class SecondPipelineService implements PipelineService {
     @Monitor
     protected PipelineMonitor monitor;
