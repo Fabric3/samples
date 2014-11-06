@@ -20,8 +20,6 @@ package org.fabric3.samples.web.calculator;
 
 /**
  * Service that subtracts two operands
- *
- *
  */
 public interface SubtractService {
 

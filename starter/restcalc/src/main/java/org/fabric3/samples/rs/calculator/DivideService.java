@@ -20,8 +20,6 @@ package org.fabric3.samples.rs.calculator;
 
 /**
  * Service that divides two operands
- *
- *
  */
 public interface DivideService {
 

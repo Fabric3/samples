@@ -16,14 +16,9 @@
  */
 package org.fabric3.samples.web.calculator;
 
-import org.oasisopen.sca.annotation.Remotable;
-
 /**
  * The Calculator service interface.
- *
- *
  */
-@Remotable
 public interface CalculatorService {
 
     double add(double n1, double n2);

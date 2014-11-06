@@ -39,7 +39,7 @@ public class CalculatorServlet extends HttpServlet {
 
     @Reference
     @Target("CalculatorService")
-    protected CalculatorService calculatorService;
+    protected transient CalculatorService calculatorService;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String operationParam = request.getParameter("operation");

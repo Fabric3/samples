@@ -20,8 +20,6 @@ package org.fabric3.samples.web.calculator;
 
 /**
  * Service that multiplies two operands
- *
- *
  */
 public interface MultiplyService {
 
