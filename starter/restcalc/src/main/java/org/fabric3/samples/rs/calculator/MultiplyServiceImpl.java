@@ -18,11 +18,14 @@
  */
 package org.fabric3.samples.rs.calculator;
 
+import org.fabric3.api.annotation.model.Component;
+import org.fabric3.api.annotation.scope.Composite;
+
 /**
  * An implementation of the Multiply service.
- *
- *
  */
+@Component
+@Composite
 public class MultiplyServiceImpl implements MultiplyService {
 
     public double multiply(double n1, double n2) {

@@ -25,53 +25,33 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.fabric3.api.annotation.model.Component;
+import org.fabric3.api.annotation.model.EndpointUri;
+import org.fabric3.api.annotation.scope.Composite;
 import org.oasisopen.sca.annotation.Reference;
-
-import org.fabric3.api.MonitorChannel;
-import org.fabric3.api.annotation.monitor.Info;
-import org.fabric3.api.annotation.monitor.Monitor;
-
 
 /**
  * A REST calculator.
- *
- *
  */
 @Path("/")
+@EndpointUri("calculator")
 @Consumes(MediaType.TEXT_PLAIN)
 @Produces(MediaType.TEXT_PLAIN)
+@Component
+@Composite
 public class CalculatorService {
-    private AddService addService;
-    private SubtractService subtractService;
-    private MultiplyService multiplyService;
-    private DivideService divideService;
-
-    @Monitor("TestChannel")
-    private MonitorChannel monitor;
-
-    @Monitor
-    private MonitorChannel other;
 
     @Reference
-    public void setAddService(AddService addService) {
-        this.addService = addService;
-    }
+    protected AddService addService;
 
     @Reference
-    public void setSubtractService(SubtractService subtractService) {
-        this.subtractService = subtractService;
-    }
+    protected SubtractService subtractService;
 
     @Reference
-    public void setMultiplyService(MultiplyService multiplyService) {
-        this.multiplyService = multiplyService;
-    }
+    protected MultiplyService multiplyService;
 
     @Reference
-    public void setDivideService(DivideService divideService) {
-        this.divideService = divideService;
-    }
-
+    protected DivideService divideService;
 
     @GET
     @Path("/{formula}")
@@ -96,16 +76,9 @@ public class CalculatorService {
             throw new IllegalArgumentException("Invalid formula: " + formula);
         }
 
-        this.monitor.info(String.format("%s=%s", formula, String.valueOf(result)));
-        other.info("logging other message: " + result);
-
-        return String.valueOf(result);
+        String resultString = String.valueOf(result);
+        System.out.println(String.format("%s=%s", formula, result));
+        return resultString;
     }
 
-
-    private interface TestMonitor {
-
-        @Info
-        void test(String s);
-    }
 }

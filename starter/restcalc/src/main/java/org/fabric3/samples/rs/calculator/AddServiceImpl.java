@@ -18,11 +18,14 @@
  */
 package org.fabric3.samples.rs.calculator;
 
+import org.fabric3.api.annotation.model.Component;
+import org.fabric3.api.annotation.scope.Composite;
+
 /**
  * An implementation of the Add service.
- *
- *
  */
+@Component
+@Composite
 public class AddServiceImpl implements AddService {
 
     public double add(double n1, double n2) {
