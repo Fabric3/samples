@@ -42,10 +42,8 @@
 
     <modules>
         <module>starter</module>
-        <module>apps</module>
         <module>features</module>
-        <module>policy</module>
-        <module>operations</module>
+        <module>server</module>
     </modules>
 
     <build>

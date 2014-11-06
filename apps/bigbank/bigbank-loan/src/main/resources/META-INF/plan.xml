@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="ASCII"?>
-<plan xmlns="urn:fabric3.org"
-      xmlns:samples="urn:fabric3.org:samples"
-      name="LoanPlan">
-    <mappings>
-        <mapping deployable="samples:LoanComposite" zone="zone1"/>
-        <mapping deployable="samples:RateComposite" zone="zone2"/>
-    </mappings>
-</plan>

@@ -1,9 +1,0 @@
-<contribution xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
-              xmlns:f3="urn:fabric3.org"
-              xmlns:samples="urn:fabric3.org:samples"
-              f3:description="FastQuote publication module">
-    <deployable composite="samples:PublicationComposite"/>
-
-    <import.java package="org.fabric3.samples.fastquote.price" version="2.0.0"/>
-    <export.java package="org.fabric3.samples.fastquote.publication.api" version="2.0.0"/>
-</contribution>
