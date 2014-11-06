@@ -9,10 +9,6 @@
     <!-- Include the composite to be tested -->
     <include name="samples:GatewayComposite"/>
 
-    <component name="TestComponent">
-        <f3:junit class="org.fabric3.samples.itest.TestClient"/>
-    </component>
-
     <!-- Configure a mock for an external service used by the composite -->
     <component name="ExternalService">
         <f3:implementation.mock>

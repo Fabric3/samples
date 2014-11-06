@@ -20,9 +20,9 @@
 
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.codehaus.fabric3.samples</groupId>
+        <groupId>org.fabric3.samples</groupId>
         <artifactId>fastquote-engine-parent-pom</artifactId>
-        <version>2.0.0</version>
+        <version>2.5.0</version>
     </parent>
     <artifactId>fastquote-aggregation</artifactId>
     <name>Fabric3 FastQuote Aggregation</name>
@@ -39,21 +39,21 @@
         </dependency>
 
         <dependency>
-            <groupId>org.codehaus.fabric3</groupId>
+            <groupId>org.fabric3</groupId>
             <artifactId>fabric3-api</artifactId>
             <version>${fabric3.version}</version>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
-            <groupId>org.codehaus.fabric3.samples</groupId>
+            <groupId>org.fabric3.samples</groupId>
             <artifactId>fastquote-api</artifactId>
             <version>${project.version}</version>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
-            <groupId>org.codehaus.fabric3.samples</groupId>
+            <groupId>org.fabric3.samples</groupId>
             <artifactId>fastquote-pricing</artifactId>
             <version>${project.version}</version>
             <scope>provided</scope>
@@ -77,7 +77,7 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.codehaus.fabric3</groupId>
+                <groupId>org.fabric3</groupId>
                 <artifactId>fabric3-contribution-plugin</artifactId>
                 <version>${fabric3.version}</version>
                 <extensions>true</extensions>

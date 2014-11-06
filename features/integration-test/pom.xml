@@ -18,9 +18,9 @@
 <project>
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.codehaus.fabric3.samples</groupId>
+        <groupId>org.fabric3.samples</groupId>
         <artifactId>fabric3-samples-features-parent-pom</artifactId>
-        <version>2.0.0</version>
+        <version>2.5.0</version>
     </parent>
     <artifactId>fabric3-integration-test</artifactId>
     <packaging>jar</packaging>
@@ -35,10 +35,15 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.codehaus.fabric3</groupId>
+            <groupId>org.fabric3</groupId>
             <artifactId>fabric3-api</artifactId>
             <version>${fabric3.version}</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.fabric3</groupId>
+            <artifactId>fabric3-junit-api</artifactId>
+            <version>${fabric3.version}</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -59,7 +64,7 @@
         <plugins>
             <plugin>
                 <!-- the Fabric3 iTest runtime -->
-                <groupId>org.codehaus.fabric3</groupId>
+                <groupId>org.fabric3</groupId>
                 <artifactId>fabric3-itest-plugin</artifactId>
                 <version>${fabric3.version}</version>
                 <configuration>
@@ -70,24 +75,24 @@
                     <!-- configure the Fabric3 runtime with support for web services-->
                     <extensions>
                         <dependency>
-                            <groupId>org.codehaus.fabric3</groupId>
+                            <groupId>org.fabric3</groupId>
                             <artifactId>fabric3-mock</artifactId>
                             <version>${fabric3.version}</version>
                         </dependency>
                         <dependency>
-                            <groupId>org.codehaus.fabric3</groupId>
+                            <groupId>org.fabric3</groupId>
                             <artifactId>fabric3-security-impl</artifactId>
                             <version>${fabric3.version}</version>
                         </dependency>
                         <dependency>
-                            <groupId>org.codehaus.fabric3</groupId>
+                            <groupId>org.fabric3</groupId>
                             <artifactId>fabric3-jetty</artifactId>
                             <version>${fabric3.version}</version>
                         </dependency>
                     </extensions>
                     <profiles>
                         <profile>
-                            <groupId>org.codehaus.fabric3</groupId>
+                            <groupId>org.fabric3</groupId>
                             <artifactId>profile-ws</artifactId>
                             <version>${fabric3.version}</version>
                         </profile>
@@ -100,10 +105,11 @@
                         </dependency>
                     </shared>
 
-                    <!-- configures the Fabric3 runtime with a binding for the ExternalServiceBinding templare -->
+                    <!-- configures the Fabric3 runtime with a binding for the ExternalServiceBinding template -->
                     <systemConfig>
                         <![CDATA[
                         <config xmlns="urn:fabric3.org" xmlns:f3="urn:fabric3.org" xmlns:sca="http://docs.oasis-open.org/ns/opencsa/sca/200912">
+                            <domain autowire="on"/>
                             <templates>
                                <template name="ExternalServiceBinding">
                                   <sca:binding.ws uri="http://localhost:8080/externalService"/>

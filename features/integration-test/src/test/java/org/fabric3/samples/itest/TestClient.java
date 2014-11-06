@@ -39,13 +39,18 @@ package org.fabric3.samples.itest;
 
 import org.easymock.EasyMock;
 import org.easymock.IMocksControl;
+import org.fabric3.api.annotation.model.Component;
+import org.fabric3.api.implementation.junit.Fabric3Runner;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.oasisopen.sca.annotation.Reference;
 
 /**
  * The client test component. All methods annotated with the {@link Test} annotation will be invoked by the runtime.
  */
+@RunWith(Fabric3Runner.class)
+@Component(composite = "{urn:fabric3.org:samples}TestComposite")
 public class TestClient {
 
     // Inject the EasyMock control

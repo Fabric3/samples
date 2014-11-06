@@ -18,9 +18,9 @@
 <project>
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.codehaus.fabric3.samples</groupId>
+        <groupId>org.fabric3.samples</groupId>
         <artifactId>servers-cluster-parent-pom</artifactId>
-        <version>2.0.0</version>
+        <version>2.5.0</version>
     </parent>
     <artifactId>servers-controller</artifactId>
     <packaging>pom</packaging>
@@ -36,7 +36,7 @@
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>org.codehaus.fabric3</groupId>
+                        <groupId>org.fabric3</groupId>
                         <artifactId>fabric3-assembly-plugin</artifactId>
                         <version>${fabric3.version}</version>
                         <executions>
@@ -52,42 +52,42 @@
                             <profiles>
                                 <!-- JPA support -->
                                 <profile>
-                                    <groupId>org.codehaus.fabric3</groupId>
+                                    <groupId>org.fabric3</groupId>
                                     <artifactId>profile-jpa</artifactId>
                                     <version>${fabric3.version}</version>
                                 </profile>
                                 <!-- Web Services support -->
                                 <profile>
-                                    <groupId>org.codehaus.fabric3</groupId>
+                                    <groupId>org.fabric3</groupId>
                                     <artifactId>profile-ws</artifactId>
                                     <version>${fabric3.version}</version>
                                 </profile>
                                 <!-- Web App support -->
                                 <profile>
-                                    <groupId>org.codehaus.fabric3</groupId>
+                                    <groupId>org.fabric3</groupId>
                                     <artifactId>profile-web</artifactId>
                                     <version>${fabric3.version}</version>
                                 </profile>
                                 <!-- JMS support -->
                                 <profile>
-                                    <groupId>org.codehaus.fabric3</groupId>
+                                    <groupId>org.fabric3</groupId>
                                     <artifactId>profile-jms</artifactId>
                                     <version>${fabric3.version}</version>
                                 </profile>
                                 <!-- JAX-RS support -->
                                 <profile>
-                                    <groupId>org.codehaus.fabric3</groupId>
+                                    <groupId>org.fabric3</groupId>
                                     <artifactId>profile-rs</artifactId>
                                     <version>${fabric3.version}</version>
                                 </profile>
                                 <!-- Timer support -->
                                 <profile>
-                                    <groupId>org.codehaus.fabric3</groupId>
+                                    <groupId>org.fabric3</groupId>
                                     <artifactId>profile-timer</artifactId>
                                     <version>${fabric3.version}</version>
                                 </profile>
                                 <profile>
-                                    <groupId>org.codehaus.fabric3</groupId>
+                                    <groupId>org.fabric3</groupId>
                                     <artifactId>profile-file</artifactId>
                                     <version>${fabric3.version}</version>
                                 </profile>
@@ -109,7 +109,7 @@
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>org.codehaus.fabric3</groupId>
+                        <groupId>org.fabric3</groupId>
                         <artifactId>fabric3-assembly-plugin</artifactId>
                         <version>${fabric3.version}</version>
                         <executions>
@@ -125,41 +125,41 @@
                             <profiles>
                                 <!-- JPA support -->
                                 <profile>
-                                    <groupId>org.codehaus.fabric3</groupId>
+                                    <groupId>org.fabric3</groupId>
                                     <artifactId>profile-jpa</artifactId>
                                     <version>${fabric3.version}</version>
                                 </profile>
                                 <!-- Web Services support -->
                                 <profile>
-                                    <groupId>org.codehaus.fabric3</groupId>
+                                    <groupId>org.fabric3</groupId>
                                     <artifactId>profile-ws</artifactId>
                                     <version>${fabric3.version}</version>
                                 </profile>
                                 <!-- Web App support -->
                                 <profile>
-                                    <groupId>org.codehaus.fabric3</groupId>
+                                    <groupId>org.fabric3</groupId>
                                     <artifactId>profile-web</artifactId>
                                     <version>${fabric3.version}</version>
                                 </profile>
                                 <!-- JAX-RS support -->
                                 <profile>
-                                    <groupId>org.codehaus.fabric3</groupId>
+                                    <groupId>org.fabric3</groupId>
                                     <artifactId>profile-rs</artifactId>
                                     <version>${fabric3.version}</version>
                                 </profile>
                                 <!-- Timer support -->
                                 <profile>
-                                    <groupId>org.codehaus.fabric3</groupId>
+                                    <groupId>org.fabric3</groupId>
                                     <artifactId>profile-timer</artifactId>
                                     <version>${fabric3.version}</version>
                                 </profile>
                                 <profile>
-                                    <groupId>org.codehaus.fabric3</groupId>
+                                    <groupId>org.fabric3</groupId>
                                     <artifactId>profile-zeromq</artifactId>
                                     <version>${fabric3.version}</version>
                                 </profile>
                                 <profile>
-                                    <groupId>org.codehaus.fabric3</groupId>
+                                    <groupId>org.fabric3</groupId>
                                     <artifactId>profile-file</artifactId>
                                     <version>${fabric3.version}</version>
                                 </profile>
