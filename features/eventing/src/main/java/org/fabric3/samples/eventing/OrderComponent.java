@@ -43,18 +43,19 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import org.oasisopen.sca.annotation.Init;
-import org.oasisopen.sca.annotation.Scope;
-
 import org.fabric3.api.annotation.Consumer;
 import org.fabric3.api.annotation.Resource;
+import org.fabric3.api.annotation.model.Component;
+import org.fabric3.api.annotation.scope.Composite;
+import org.oasisopen.sca.annotation.Init;
 
 /**
  * Component that subscribes to the buy and sell channels to match sell and buy orders.
  *
  *
  */
-@Scope("COMPOSITE")
+@Composite
+@Component
 public class OrderComponent {
     private Queue<BuyOrder> buyOrders = new ConcurrentLinkedQueue<BuyOrder>();
 
@@ -83,7 +84,7 @@ public class OrderComponent {
      *
      * @param sellOrder a received offer
      */
-    @Consumer("sellChannel")
+    @Consumer(source = "SellChannel")
     public void onSell(SellOrder sellOrder) {
         System.out.println("Received a sell order:" + sellOrder.getSymbol() + " @ " + sellOrder.getPrice() + " [" + sellOrder.getId() + "]");
         for (Iterator<BuyOrder> iterator = buyOrders.iterator(); iterator.hasNext();) {
@@ -101,7 +102,7 @@ public class OrderComponent {
      *
      * @param buyOrder a received buy request
      */
-    @Consumer("buyChannel")
+    @Consumer(source = "BuyChannel")
     public void onBuy(BuyOrder buyOrder) {
         System.out.println("Received an buy order:" + buyOrder.getSymbol() + " @ " + buyOrder.getMaxPrice() + " [" + buyOrder.getId() + "]");
         buyOrders.add(buyOrder);

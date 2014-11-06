@@ -40,21 +40,25 @@ package org.fabric3.samples.eventing;
 import java.math.BigDecimal;
 import java.util.Random;
 
-import org.oasisopen.sca.annotation.Scope;
-
 import org.fabric3.api.annotation.Producer;
+import org.fabric3.api.annotation.model.Component;
+import org.fabric3.api.annotation.scope.Composite;
+import org.fabric3.api.implementation.timer.annotation.Timer;
+import org.fabric3.api.implementation.timer.model.TimerType;
 
 /**
  * A simple stateless timer component that issues sell orders.
  *
  *
  */
-@Scope("COMPOSITE")
+@Component
+@Composite
+@Timer(type = TimerType.RECURRING)
 public class SellTimer implements Runnable {
     private SellChannel sellChannel;
     private Random generator;
 
-    public SellTimer(@Producer("sellChannel") SellChannel sellChannel) {
+    public SellTimer(@Producer(target = "SellChannel") SellChannel sellChannel) {
         this.sellChannel = sellChannel;
         generator = new Random();
     }
@@ -64,6 +68,10 @@ public class SellTimer implements Runnable {
         SellOrder sellOrder = new SellOrder(System.currentTimeMillis(), "FOO", price);
         System.out.println("Sending sell order: " + sellOrder.getSymbol() + " @ " + sellOrder.getPrice());
         sellChannel.sell(sellOrder);
+    }
+
+    public long nextInterval() {
+        return 3000 + (int) (Math.random() * 5000);
     }
 
     private double generatePrice() {

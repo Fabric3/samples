@@ -41,18 +41,25 @@ import java.math.BigDecimal;
 import java.util.Random;
 
 import org.fabric3.api.annotation.Producer;
+import org.fabric3.api.annotation.model.Component;
 import org.fabric3.api.annotation.monitor.Info;
 import org.fabric3.api.annotation.monitor.Monitor;
+import org.fabric3.api.annotation.scope.Composite;
+import org.fabric3.api.implementation.timer.annotation.Timer;
+import org.fabric3.api.implementation.timer.model.TimerType;
 
 /**
  * A simple stateless timer component that issues buy orders.
  */
+@Component
+@Composite
+@Timer(type = TimerType.RECURRING)
 public class BuyTimer implements Runnable {
     private BuyChannel buyChannel;
     private Random generator;
     private BuyMonitor monitor;
 
-    public BuyTimer(@Producer("buyChannel") BuyChannel buyChannel, @Monitor BuyMonitor monitor) {
+    public BuyTimer(@Producer(target = "BuyChannel") BuyChannel buyChannel, @Monitor BuyMonitor monitor) {
         this.buyChannel = buyChannel;
         this.monitor = monitor;
         generator = new Random();
@@ -63,6 +70,10 @@ public class BuyTimer implements Runnable {
         BuyOrder buyOrder = new BuyOrder(System.currentTimeMillis(), "FOO", price, System.currentTimeMillis() + 10000);
         monitor.message("Buying");
         buyChannel.buy(buyOrder);
+    }
+
+    public long nextInterval() {
+        return 3000 + (int) (Math.random() * 5000);
     }
 
     private double generatePrice() {

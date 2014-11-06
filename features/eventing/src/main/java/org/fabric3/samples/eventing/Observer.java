@@ -37,24 +37,21 @@
 */
 package org.fabric3.samples.eventing;
 
-import org.oasisopen.sca.annotation.Scope;
-
 import org.fabric3.api.annotation.Consumer;
+import org.fabric3.api.annotation.scope.Composite;
 
 /**
  * A component that listens on the sell and buy channels.
- *
- *
  */
-@Scope("COMPOSITE")
+@Composite
 public class Observer {
 
-    @Consumer("sellChannel")
+    @Consumer(source = "SellChannel")
     public void onOffer(SellOrder sellOrder) {
         System.out.println("Observed a sell request:" + sellOrder.getSymbol() + " @ " + sellOrder.getPrice() + " ["+sellOrder.getId() + "]");
     }
 
-    @Consumer("buyChannel")
+    @Consumer(source = "BuyChannel")
     public void onOrder(BuyOrder buyOrder) {
         System.out.println("Observed a buy request:" + buyOrder.getSymbol() + " @ " + buyOrder.getMaxPrice() + " [" + buyOrder.getId() + "]");
     }

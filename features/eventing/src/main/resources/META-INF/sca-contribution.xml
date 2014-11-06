@@ -2,6 +2,4 @@
 <contribution xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
               xmlns:samples="urn:fabric3.org:samples">
     <deployable composite="samples:ChannelsComposite"/>
-    <deployable composite="samples:SellComposite"/>
-    <deployable composite="samples:BuyComposite"/>
 </contribution>

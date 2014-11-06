@@ -4,8 +4,6 @@ import java.io.Serializable;
 
 /**
  * A buy order.
- *
- *
  */
 public class BuyOrder implements Serializable {
     private static final long serialVersionUID = 1889173891755437967L;
