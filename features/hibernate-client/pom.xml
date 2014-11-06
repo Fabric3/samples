@@ -19,13 +19,13 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.fabric3.samples</groupId>
-        <artifactId>fabric3-samples-features-parent-pom</artifactId>
+        <artifactId>fabric3-samples</artifactId>
         <version>2.5.0</version>
+        <relativePath>../../pom.xml</relativePath>
     </parent>
-    <artifactId>fabric3-samples-hibernate-client</artifactId>
+    <artifactId>hibernate-client</artifactId>
     <packaging>jar</packaging>
     <name>Fabric3 Web Application and Hibernate Client Sample</name>
-    <description>Demonstrates using Fabric3 to expose a Spring bean as a REST resource that persists data using Hibernate ORM.</description>
 
     <dependencies>
         <dependency>

@@ -20,7 +20,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.fabric3.samples</groupId>
-    <artifactId>fabric3-samples-parent-pom</artifactId>
+    <artifactId>fabric3-samples</artifactId>
     <version>2.5.0</version>
     <name>Fabric3 Samples Parent POM</name>
     <description>Fabric3 Samples Parent POM.</description>
@@ -41,8 +41,22 @@
     </properties>
 
     <modules>
-        <module>starter</module>
-        <module>features</module>
+        <module>starter/restcalc</module>
+        <module>starter/webcalc</module>
+        <module>starter/wscalc</module>
+        <module>starter/wscalc-client</module>
+
+        <module>features/channels</module>
+        <module>features/streaming</module>
+        <module>features/timer</module>
+        <module>features/hibernate</module>
+        <module>features/hibernate-client</module>
+        <module>features/eventing</module>
+        <module>features/monitor</module>
+        <module>features/monitor-extension</module>
+        <module>features/wiring</module>
+        <module>features/integration-test</module>
+
         <module>server</module>
     </modules>
 
@@ -55,6 +69,7 @@
                     <source>1.7</source>
                     <target>1.7</target>
                 </configuration>
+                <version>3.1</version>
             </plugin>
         </plugins>
     </build>

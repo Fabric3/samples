@@ -19,10 +19,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
        <groupId>org.fabric3.samples</groupId>
-       <artifactId>fabric3-samples-starter-parent-pom</artifactId>
+       <artifactId>fabric3-samples</artifactId>
        <version>2.5.0</version>
+        <relativePath>../../pom.xml</relativePath>
     </parent>
-    <artifactId>fabric3-samples-starter-wscalc-client</artifactId>
+    <artifactId>wscalc-client</artifactId>
     <packaging>jar</packaging>
     <name>Fabric3 Web Services Calculator Client</name>
     <description>JAX-WS Client for invoking the Sample Web Services Calculator.</description>

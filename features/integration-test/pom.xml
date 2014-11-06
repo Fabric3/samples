@@ -19,10 +19,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.fabric3.samples</groupId>
-        <artifactId>fabric3-samples-features-parent-pom</artifactId>
+        <artifactId>fabric3-samples</artifactId>
         <version>2.5.0</version>
+        <relativePath>../../pom.xml</relativePath>
     </parent>
-    <artifactId>fabric3-integration-test</artifactId>
+    <artifactId>integration-test</artifactId>
     <packaging>jar</packaging>
     <name>Fabric3 Integration iTest Plugin Sample</name>
     <description>Demonstrates the Fabric3 iTest Plugin and Mock Services.</description>

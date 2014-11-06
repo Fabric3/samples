@@ -19,13 +19,14 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.fabric3.samples</groupId>
-        <artifactId>fabric3-samples-features-parent-pom</artifactId>
+        <artifactId>fabric3-samples</artifactId>
         <version>2.5.0</version>
+        <relativePath>../../pom.xml</relativePath>
     </parent>
-    <artifactId>fabric3-samples-hibernate</artifactId>
+    <artifactId>hibernate</artifactId>
     <packaging>jar</packaging>
     <name>Fabric3 Web Application and Hibernate Sample</name>
-    <description>Demonstrates using JQuery to connect to a REST resource and persisting data using Hibernate ORM.</description>
+    <description>Demonstrates connecting to a REST resource and persisting data using Hibernate ORM.</description>
 
     <dependencies>
         <dependency>
