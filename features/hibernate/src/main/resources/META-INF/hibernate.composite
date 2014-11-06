@@ -4,13 +4,6 @@
            name="HibernateComposite"
            targetNamespace="urn:fabric3.org:samples">
 
-    <component name="MessageService">
-        <implementation.java class="org.fabric3.samples.hibernate.MessageService"/>
-        <service name="MessageService">
-            <f3:binding.rs uri="/messages"/>
-        </service>
-    </component>
-
     <f3:datasources>
         <datasource name="MessageDS" driver="org.h2.jdbcx.JdbcDataSource" type="xa">
             <URL>jdbc:h2:mem:MessageDS;DB_CLOSE_ON_EXIT=FALSE</URL>

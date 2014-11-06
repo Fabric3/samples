@@ -9,7 +9,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 
 import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
-import org.glassfish.jersey.client.filter.HttpBasicAuthFilter;
+import org.glassfish.jersey.client.authentication.HttpAuthenticationFeature;
 
 /**
  *
@@ -25,8 +25,8 @@ public class HibernateClient {
         client.register(JacksonJaxbJsonProvider.class);
 
         // set basic auth filter
-        HttpBasicAuthFilter filter = new HttpBasicAuthFilter("foo", "bar");
-        client.register(filter);
+        HttpAuthenticationFeature feature = HttpAuthenticationFeature.basic("foo", "bar");
+        client.register(feature);
 
         UriBuilder uri = UriBuilder.fromUri(BASE_URI);
         WebTarget target = client.target(uri.path("message").build());
@@ -35,7 +35,7 @@ public class HibernateClient {
         Response r = target.request(MediaType.APPLICATION_JSON).post(Entity.entity(message, MediaType.APPLICATION_JSON));
         String location = (String) r.getHeaders().get("location").get(0);
 
-        target = client.target(BASE_URI + "/message/" + location);
+        target = client.target(location);
 
         Message response = target.request(MediaType.APPLICATION_JSON).get(Message.class);
 

@@ -1,7 +1,5 @@
 package org.fabric3.samples.hibernate;
 
-import javax.xml.bind.annotation.XmlElement;
-
 /**
  *
  */
@@ -11,8 +9,6 @@ public class Message {
     private String text;
     private String creator;
 
-
-    @XmlElement
     public Long getId() {
         return id;
     }
@@ -29,7 +25,6 @@ public class Message {
         this.version = version;
     }
 
-    @XmlElement
     public String getText() {
         return text;
     }
@@ -45,5 +40,5 @@ public class Message {
     public void setCreator(String creator) {
         this.creator = creator;
     }
-    
+
 }

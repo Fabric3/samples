@@ -18,8 +18,6 @@
  */
 package org.fabric3.samples.hibernate;
 
-import java.net.URI;
-import java.util.List;
 import javax.persistence.PersistenceContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -31,25 +29,30 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.net.URI;
+import java.util.List;
 
+import org.fabric3.api.Fabric3RequestContext;
+import org.fabric3.api.SecuritySubject;
+import org.fabric3.api.annotation.model.Component;
+import org.fabric3.api.annotation.model.EndpointUri;
+import org.fabric3.api.annotation.scope.Composite;
+import org.fabric3.api.annotation.security.RolesAllowed;
 import org.hibernate.Session;
 import org.oasisopen.sca.annotation.Context;
 import org.oasisopen.sca.annotation.ManagedTransaction;
 
-import org.fabric3.api.Fabric3RequestContext;
-import org.fabric3.api.SecuritySubject;
-import org.fabric3.api.annotation.security.RolesAllowed;
-
 /**
- * Receives resource representations as JSON or XML and persists them as part of a global transaction using Hibernate.
- *
- *
+ * Receives resource representations as JSON and persists them as part of a global transaction using Hibernate.
  */
 @Path("/")
-@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+@EndpointUri("messages")
+@Consumes({MediaType.APPLICATION_JSON})
+@Produces({MediaType.APPLICATION_JSON})
 @ManagedTransaction
 @RolesAllowed("role1")
+@Composite
+@Component(composite = "{urn:fabric3.org:samples}MessageService")
 public class MessageService {
     private Session session;
     private Fabric3RequestContext context;
@@ -75,7 +78,7 @@ public class MessageService {
     }
 
     @GET
-    @Path("message/{id}")
+    @Path("/{id}")
     public Message retrieve(@PathParam("id") Long id) {
         Message message = (Message) session.get(Message.class, id);
         if (message == null) {

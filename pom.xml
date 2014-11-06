@@ -33,7 +33,7 @@
         <web.services.api.version>2.0.1</web.services.api.version>
         <servlet.api.version>3.1.0</servlet.api.version>
         <jax.rs.version>2.0</jax.rs.version>
-        <jersey.version>2.0</jersey.version>
+        <jersey.version>2.13</jersey.version>
         <jackson.version>2.2.0</jackson.version>
         <protobuf.version>2.5.0</protobuf.version>
         <junit.version>4.11</junit.version>
@@ -55,7 +55,6 @@
         <module>features/hibernate</module>
         <module>features/hibernate-client</module>
         <module>features/eventing</module>
-        <module>features/monitor</module>
         <module>features/monitor-extension</module>
         <module>features/wiring</module>
         <module>features/integration-test</module>

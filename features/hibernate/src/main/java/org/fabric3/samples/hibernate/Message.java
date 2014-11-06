@@ -5,14 +5,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Version;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  */
 @Entity
-@XmlRootElement
 public class Message {
     private Long id;
     private int version;
@@ -38,7 +35,6 @@ public class Message {
         this.version = version;
     }
 
-    @XmlElement
     public String getText() {
         return text;
     }
@@ -47,7 +43,6 @@ public class Message {
         this.text = text;
     }
 
-    @XmlElement
     public String getCreator() {
         return creator;
     }
