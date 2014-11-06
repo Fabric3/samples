@@ -76,6 +76,11 @@
                             <artifactId>profile-timer</artifactId>
                             <version>${fabric3.version}</version>
                         </profile>
+                        <profile>
+                            <groupId>org.fabric3</groupId>
+                            <artifactId>profile-file</artifactId>
+                            <version>${fabric3.version}</version>
+                        </profile>
                     </profiles>
                     <datasources>
                         <dependency>

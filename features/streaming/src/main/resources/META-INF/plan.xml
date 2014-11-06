@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="ASCII"?>
-<plan xmlns="urn:fabric3.org"
-      xmlns:ns="urn:fabric3.org:samples"
-      name="StreamingPlan">
-    <mappings>
-        <mapping deployable="ns:StreamingComposite" zone="zone1"/>
-    </mappings>
-</plan>
