@@ -37,15 +37,27 @@
 */
 package org.fabric3.samples.timer;
 
+import org.fabric3.api.annotation.model.Component;
+import org.fabric3.api.implementation.timer.annotation.Timer;
+import org.fabric3.api.implementation.timer.model.TimerType;
+
 /**
  * A simple stateless timer component.
- *
- *
  */
+@Timer(type = TimerType.RECURRING)
+@Component
 public class TimerComponent implements Runnable {
 
     public void run() {
         System.out.println("Timer fired...");
     }
 
+    /**
+     * Called by the runtime to determine when to schedule the next fire event.
+     *
+     * @return the interval to the next fire event in milliseconds
+     */
+    public long nextInterval() {
+        return 1000;
+    }
 }

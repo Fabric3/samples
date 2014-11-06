@@ -37,15 +37,17 @@
 */
 package org.fabric3.samples.timer;
 
+import org.fabric3.api.annotation.model.Component;
 import org.fabric3.api.annotation.scope.Domain;
+import org.fabric3.api.implementation.timer.annotation.Timer;
 
 /**
- * A clustered singleton timer. Only one instance will exist in a zone (cluster) at a given time. If the host process fails, the timer will be
- * migrated to another runtime in the zone.
- *
- *
+ * A clustered singleton timer. Only one instance will exist in a zone (cluster) at a given time. If the host process fails, the timer will be migrated to
+ * another runtime in the zone.
  */
 @Domain
+@Timer(repeatInterval = 1000)
+@Component
 public class SingletonTimerComponent implements Runnable {
 
     public void run() {

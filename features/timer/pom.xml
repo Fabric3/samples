@@ -41,5 +41,11 @@
             <version>${fabric3.version}</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.fabric3</groupId>
+            <artifactId>fabric3-timer-api</artifactId>
+            <version>${fabric3.version}</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 </project>
