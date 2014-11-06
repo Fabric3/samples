@@ -20,8 +20,6 @@ package org.fabric3.samples.ws.calculator;
 
 /**
  * Service that adds two operands.
- *
- *
  */
 public interface AddService {
 

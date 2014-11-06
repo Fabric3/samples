@@ -29,15 +29,23 @@ import org.fabric3.api.annotation.management.ManagementOperation;
 
 /**
  * Implementation of the CalculatorService.
- * <p/>
- * This implementation also demonstrates the use of Fabric3 management extensions. To turn on auditing, use a JMX client such as JConsole and connect
- * to the runtime hosting the component:
- * <p/>
- * service:jmx:rmi:///jndi/rmi://<ip address of server>:<JMX port>/server
- * <p/>
+ *
+ * This implementation also demonstrates the use of Fabric3 management extensions. Management operations can be performed using JMX or the REST-based management
+ * framework.
+ *
+ * To turn on auditing with JMX, use a JMX client such as JConsole and connect to the runtime hosting the component:
+ *
+ * <code> service:jmx:rmi:///jndi/rmi://<ip address of server>:<JMX port>/server </code>
+ *
  * Navigate to fabric3/domain/component/CalculatorService and invoke the audit operation.
  *
+ * To turn on auditing using the REST management framework, go to:
  *
+ * <code>http://localhost:8181/management/CalculatorService/startaudit</code>
+ *
+ * The management framework supports hyperlinking. To view available operations for the CalculatorService, go to:
+ *
+ * <code>http://localhost:8181/management/CalculatorService</code>
  */
 @Scope("COMPOSITE")
 @Management(description = "A calculator component")

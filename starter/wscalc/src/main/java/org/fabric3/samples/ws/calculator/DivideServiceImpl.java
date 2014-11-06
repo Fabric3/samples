@@ -20,8 +20,6 @@ package org.fabric3.samples.ws.calculator;
 
 /**
  * An implementation of the Divide service.
- *
- *
  */
 public class DivideServiceImpl implements DivideService {
 

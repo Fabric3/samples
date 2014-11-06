@@ -20,8 +20,6 @@ import org.oasisopen.sca.annotation.Remotable;
 
 /**
  * The Calculator service interface.
- *
- *
  */
 @Remotable
 public interface CalculatorService {

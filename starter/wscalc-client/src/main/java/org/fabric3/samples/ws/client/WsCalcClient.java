@@ -18,11 +18,11 @@
  */
 package org.fabric3.samples.ws.client;
 
-import org.fabric3.samples.ws.calculator.CalculatorService;
-import org.fabric3.samples.ws.calculator.CalculatorServiceService;
-
 import javax.xml.namespace.QName;
 import java.net.URL;
+
+import org.fabric3.samples.ws.calculator.CalculatorService;
+import org.fabric3.samples.ws.calculator.CalculatorServiceService;
 
 /**
  *
@@ -30,9 +30,6 @@ import java.net.URL;
 public class WsCalcClient {
 
     public static void main(String[] args) throws Exception {
-        // URL when the calculator is deployed to the single-VM runtime
-        // URL url = new URL("http://localhost:8080/calculator?wsdl");
-        // URL when calculator deployed in the cluster without a load-balancer
         URL url = new URL("http://localhost:8181/calculator?wsdl");
         QName name = new QName("http://calculator.ws.samples.fabric3.org/", "CalculatorServiceService");
         CalculatorServiceService service = new CalculatorServiceService(url, name);
