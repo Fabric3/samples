@@ -38,49 +38,30 @@
 package org.fabric3.samples.channel;
 
 import org.fabric3.api.ChannelEvent;
-import org.fabric3.api.annotation.Producer;
+import org.fabric3.api.annotation.Consumer;
 import org.fabric3.api.annotation.model.Component;
 import org.fabric3.api.annotation.monitor.Monitor;
 import org.fabric3.api.annotation.scope.Composite;
-import org.fabric3.api.implementation.timer.annotation.Timer;
 
 /**
- * Demonstrates the following channel capabilities:
- * <pre>
- *     - Using high-performance ring-buffer channels based on the Disruptor (http://lmax-exchange.github.io/disruptor/)
- *     - Using ordered (sequenced) consumers to first deserializing a message and store its value for subsequent processing in {@link ChannelEvent}
- *     - Worker pools (an event is processed by one consumer)
- *     - Receiving end batch notifications from {@link ChannelEvent#isEndOfBatch()}
- * </pre>
+ * Consumer that demonstrates how to implement worker pools (i.e. one consumer processes an event) with ring buffer channels and a modulo operation.
  */
 @Composite
-@Timer(repeatInterval = 3000)
 @Component
-public class ChannelProducer implements Runnable {
+public class PooledWorker1 {
+    private static final int ORDINAL = 1;
+    private static final int NUMBER_OF_CONSUMERS = 2;
+
     @Monitor
     protected SystemMonitor monitor;
 
-    private int counter;
-
-    @Producer(target = "WorkChannel")
-    protected WorkChannel workChannel;
-
-    @Producer(target = "TypedChannel")
-    protected TypedChannel typedChannel;
-
-    @Producer(target = "WorkerPoolChannel")
-    WorkerPoolChannel workerPoolChannel;
-
-    public void run() {
-        monitor.send();
-
-        String message = "This is an event: " + counter++;
-        workChannel.send(message.getBytes());  // serialized messages example with ordered processing
-
-        workerPoolChannel.publish(message);    // worker pool example
-
-        Event event = new Event(message);      // typed messages example
-        typedChannel.publish(event);
-
+    @Consumer (source = "WorkerPoolChannel")
+    public void onEvent(ChannelEvent event) {
+        if ((event.getSequence() % NUMBER_OF_CONSUMERS) != ORDINAL) {
+            // ignore the event if it is not for this consumer
+            return;
+        }
+        String message = event.getEvent(String.class);
+        monitor.process(ORDINAL, message);
     }
 }

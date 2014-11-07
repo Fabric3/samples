@@ -39,19 +39,20 @@ package org.fabric3.samples.channel;
 
 import org.fabric3.api.ChannelEvent;
 import org.fabric3.api.annotation.Consumer;
+import org.fabric3.api.annotation.model.Component;
 import org.fabric3.api.annotation.monitor.Monitor;
-import org.fabric3.api.annotation.scope.Scopes;
-import org.oasisopen.sca.annotation.Scope;
+import org.fabric3.api.annotation.scope.Composite;
 
 /**
  * Consumer that processes an event. Is called after the deserializing consumer.
  */
-@Scope(Scopes.COMPOSITE)
+@Composite
+@Component
 public class WorkChannelProcessor {
     @Monitor
     protected SystemMonitor monitor;
 
-    @Consumer(sequence = 1)
+    @Consumer(sequence = 1, source = "WorkChannel")
     public void onEvent(ChannelEvent event) {
         String message = event.getParsed(String.class);
         boolean endOfBatch = event.isEndOfBatch();

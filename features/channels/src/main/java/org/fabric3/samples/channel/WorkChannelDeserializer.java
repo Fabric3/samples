@@ -39,19 +39,20 @@ package org.fabric3.samples.channel;
 
 import org.fabric3.api.ChannelEvent;
 import org.fabric3.api.annotation.Consumer;
+import org.fabric3.api.annotation.model.Component;
 import org.fabric3.api.annotation.monitor.Monitor;
-import org.fabric3.api.annotation.scope.Scopes;
-import org.oasisopen.sca.annotation.Scope;
+import org.fabric3.api.annotation.scope.Composite;
 
 /**
  * Consumer that deserializes an event. This consumer is the first in the sequence of consumers to receive events from the channel.
  */
-@Scope(Scopes.COMPOSITE)
+@Composite
+@Component
 public class WorkChannelDeserializer {
     @Monitor
     protected SystemMonitor monitor;
 
-    @Consumer(sequence = 0)
+    @Consumer(sequence = 0, source = "WorkChannel")
     public void onEvent(ChannelEvent event) {
         monitor.deserialize();
 

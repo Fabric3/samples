@@ -38,19 +38,20 @@
 package org.fabric3.samples.channel;
 
 import org.fabric3.api.annotation.Consumer;
+import org.fabric3.api.annotation.model.Component;
 import org.fabric3.api.annotation.monitor.Monitor;
-import org.fabric3.api.annotation.scope.Scopes;
-import org.oasisopen.sca.annotation.Scope;
+import org.fabric3.api.annotation.scope.Composite;
 
 /**
  * Consumer that processes a typed event.
  */
-@Scope(Scopes.COMPOSITE)
+@Composite
+@Component
 public class TypedChannelProcessor {
     @Monitor
     protected SystemMonitor monitor;
 
-    @Consumer
+    @Consumer(source = "TypedChannel")
     public void onEvent(Event event) {
         monitor.processTyped(event);
     }

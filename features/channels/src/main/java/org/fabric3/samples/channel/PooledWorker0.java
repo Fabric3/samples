@@ -39,32 +39,29 @@ package org.fabric3.samples.channel;
 
 import org.fabric3.api.ChannelEvent;
 import org.fabric3.api.annotation.Consumer;
+import org.fabric3.api.annotation.model.Component;
 import org.fabric3.api.annotation.monitor.Monitor;
-import org.fabric3.api.annotation.scope.Scopes;
-import org.oasisopen.sca.annotation.Property;
-import org.oasisopen.sca.annotation.Scope;
+import org.fabric3.api.annotation.scope.Composite;
 
 /**
  * Consumer that demonstrates how to implement worker pools (i.e. one consumer processes an event) with ring buffer channels and a modulo operation.
  */
-@Scope(Scopes.COMPOSITE)
-public class PooledWorker {
+@Composite
+@Component
+public class PooledWorker0 {
+    private static final int ORDINAL = 0;
+    private static final int NUMBER_OF_CONSUMERS = 2;
+
     @Monitor
     protected SystemMonitor monitor;
 
-    @Property
-    protected int ordinal;
-
-    @Property
-    protected int numberOfConsumers;
-
-    @Consumer
+    @Consumer (source = "WorkerPoolChannel")
     public void onEvent(ChannelEvent event) {
-        if ((event.getSequence() % numberOfConsumers) != ordinal) {
+        if ((event.getSequence() % NUMBER_OF_CONSUMERS) != ORDINAL) {
             // ignore the event if it is not for this consumer
             return;
         }
         String message = event.getEvent(String.class);
-        monitor.process(ordinal, message);
+        monitor.process(ORDINAL, message);
     }
 }
