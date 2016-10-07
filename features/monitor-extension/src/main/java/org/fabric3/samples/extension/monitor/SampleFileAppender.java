@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
+import org.fabric3.api.host.Fabric3Exception;
 import org.fabric3.api.host.runtime.HostInfo;
 import org.fabric3.monitor.spi.appender.Appender;
 import org.oasisopen.sca.annotation.Destroy;
@@ -59,25 +60,37 @@ public class SampleFileAppender implements Appender {
     }
 
     @Init
-    public void start() throws FileNotFoundException {
+    public void start() {
         this.file = new File(info.getDataDir(), fileName);
         initializeChannel();
     }
 
     @Destroy
-    public void stop() throws IOException {
+    public void stop() {
         if (stream != null) {
-            stream.close();
+            try {
+                stream.close();
+            } catch (IOException e) {
+                throw new Fabric3Exception(e);
+            }
             stream = null;
         }
     }
 
-    public void write(ByteBuffer buffer) throws IOException {
-        fileChannel.write(buffer);
+    public void write(ByteBuffer buffer) {
+        try {
+            fileChannel.write(buffer);
+        } catch (IOException e) {
+            throw new Fabric3Exception(e);
+        }
     }
 
-    private void initializeChannel() throws FileNotFoundException {
-        stream = new FileOutputStream(file, true);
+    private void initializeChannel() {
+        try {
+            stream = new FileOutputStream(file, true);
+        } catch (FileNotFoundException e) {
+            throw new Fabric3Exception(e);
+        }
         fileChannel = stream.getChannel();
     }
 
